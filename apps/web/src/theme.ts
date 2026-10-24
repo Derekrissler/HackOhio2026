@@ -11,6 +11,8 @@ export const themeVars = {
   '--border': c.grey1424,
   '--surface': c.white1010,
   '--surface-muted': c.grey1111,
+  '--success': c.green4570,
+  '--success-bg': c.green1212,
   '--font': canvas.typography.fontFamily,
 } as CSSProperties
 

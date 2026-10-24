@@ -1,4 +1,4 @@
-import { Spinner, View } from '@instructure/ui'
+import { Heading, Spinner, View } from '@instructure/ui'
 
 import { useAnalyticsSummary } from '../api/hooks'
 import ApiErrorAlert from '../shell/ApiErrorAlert'
@@ -18,6 +18,13 @@ export default function InstructorAnalytics() {
       </View>
     )
   }
-  if (error) return <ApiErrorAlert error={error} />
+  if (error) {
+    return (
+      <>
+        <Heading level="h1" margin="0 0 medium">Instructor Analytics</Heading>
+        <ApiErrorAlert error={error} />
+      </>
+    )
+  }
   return <PlaceholderPage title="Instructor Analytics" phase={7} />
 }

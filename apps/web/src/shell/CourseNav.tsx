@@ -9,7 +9,8 @@ export default function CourseNav({ course }: { course: Course }) {
       <ul>
         {getCourseNavItems(course.role).map((tab) => (
           <li key={tab.path}>
-            <NavLink to={`/courses/${course.id}/${tab.path}`.replace(/\/$/, '')} end>
+            {/* Only Home needs an exact match; detail pages (assignments/12) keep their tab lit. */}
+            <NavLink to={`/courses/${course.id}/${tab.path}`.replace(/\/$/, '')} end={tab.path === ''}>
               {tab.label}
             </NavLink>
           </li>

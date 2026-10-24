@@ -7,6 +7,7 @@ import type { Course } from '../api/types'
 import ApiErrorAlert from './ApiErrorAlert'
 import Breadcrumbs from './Breadcrumbs'
 import CourseNav from './CourseNav'
+import { CrumbProvider } from './crumbs'
 
 export default function CourseLayout() {
   const { courseId = '' } = useParams()
@@ -29,7 +30,7 @@ export default function CourseLayout() {
   }
 
   return (
-    <>
+    <CrumbProvider>
       <header className="course-header">
         <IconButton
           screenReaderLabel={navOpen ? 'Hide course navigation' : 'Show course navigation'}
@@ -49,7 +50,7 @@ export default function CourseLayout() {
           <Outlet context={course} />
         </div>
       </div>
-    </>
+    </CrumbProvider>
   )
 }
 
