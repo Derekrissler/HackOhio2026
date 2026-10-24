@@ -12,16 +12,21 @@ export default function Breadcrumbs({ course }: { course: Course }) {
   const tab = segment ? COURSE_TABS.find((t) => t.path === segment) : undefined
   const home = `/courses/${course.id}`
 
-  return (
-    <Breadcrumb label="You are here:">
-      {tab ? (
-        <BreadcrumbLink href={home} onClick={link(home)}>
+  // Breadcrumb draws a separator after every child but the last, so pass no `false` children.
+  const crumbs = tab
+    ? [
+        <BreadcrumbLink key="course" href={home} onClick={link(home)}>
           {course.code}
-        </BreadcrumbLink>
-      ) : (
-        <BreadcrumbLink isCurrentPage>{course.code}</BreadcrumbLink>
-      )}
-      {tab && <BreadcrumbLink isCurrentPage>{tab.label}</BreadcrumbLink>}
-    </Breadcrumb>
-  )
+        </BreadcrumbLink>,
+        <BreadcrumbLink key="tab" isCurrentPage>
+          {tab.label}
+        </BreadcrumbLink>,
+      ]
+    : [
+        <BreadcrumbLink key="course" isCurrentPage>
+          {course.code}
+        </BreadcrumbLink>,
+      ]
+
+  return <Breadcrumb label="You are here:">{crumbs}</Breadcrumb>
 }
