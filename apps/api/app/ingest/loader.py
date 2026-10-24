@@ -142,6 +142,10 @@ def rebuild(engine: Engine, seed_dir: Path) -> None:
     """Drop and recreate every table, then load the seed. Works while the API holds the file open."""
     from app import models  # noqa: F401  (registers tables)
 
+    # drop_all matches tables by name; on the shared Supabase database that would hit the
+    # pipeline's courses/feedback/questions tables. The Canvas shell is SQLite only.
+    if engine.dialect.name != "sqlite":
+        raise RuntimeError(f"rebuild() drops tables; refusing to run on {engine.dialect.name}. Unset DATABASE_URL.")
     bundles = read_seed(seed_dir)  # parse first: a bad seed leaves the old database intact
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
