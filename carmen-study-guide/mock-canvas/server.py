@@ -193,11 +193,14 @@ def assignment_json(c: dict, a: dict) -> dict:
 
 @app.get("/api/v1/courses/{course_id}/users")
 def list_users(course_id: str, request: Request):
-    # Only the mock student is enrolled; teacher/TA enrollments aren't modeled.
     c = course(course_id)
     types = request.query_params.getlist("enrollment_type[]") or ["student"]
-    user = self_user(c)
-    users = [{"id": user["id"], "name": user["name"], "sortable_name": user["name"]}] if "student" in types else []
+    type_roles = {"student": "Student", "teacher": "Teacher", "ta": "Teaching Assistant"}
+    users = []
+    for person in c.get("users", []):
+        if person.get("role", "Student") not in [type_roles.get(t, t) for t in types]:
+            continue
+        users.append({**person, "sortable_name": person.get("sortable_name", person["name"])})
     return paginate(request, users)
 
 
@@ -239,9 +242,16 @@ def submission_json(c: dict, a: dict, request: Request) -> dict:
 
 @app.get("/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions")
 def list_submissions(course_id: str, assignment_id: str, request: Request):
-    # Instructor view: every student's submission. The mock has one student.
     c = course(course_id)
-    return paginate(request, [submission_json(c, assignment(c, assignment_id), request)])
+    a = assignment(c, assignment_id)
+    if "online_quiz" in (a.get("submission_types") or []):
+        attempts = c.get("quiz_results", {}).get(str(a["id"]), {}).values()
+        submissions = [{"id": int(f"{a['id']}{attempt['user_id']}"), "assignment_id": a["id"],
+                        "attempt": 1, "submission_type": "online_quiz", "attachments": [],
+                        "submission_comments": [], "rubric_assessment": {}, **attempt}
+                       for attempt in attempts]
+        return paginate(request, submissions)
+    return paginate(request, [submission_json(c, a, request)])
 
 
 @app.get("/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/self")
