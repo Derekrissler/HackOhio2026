@@ -76,7 +76,7 @@
       const download = el("a", "Download JSON");
       download.href = d.download_url;
       download.className = "btn";
-      const parts = [el("h3", "Export ready"), el("div", d.export_id, "muted small"), counts];
+      const parts = [el("h3", d.database?.status === "stored" ? "Exported and stored" : "Export ready"), el("div", d.export_id, "muted small"), counts];
       if (d.warnings.length) {
         const ul = el("ul");
         d.warnings.forEach((w) => ul.append(el("li", w)));
@@ -84,7 +84,18 @@
       }
       const saved = el("p", "Saved to ", "small muted");
       saved.append(el("code", `mock-canvas/${d.path}`));
-      parts.push(saved, download);
+      const db = d.database || {};
+      let dbLine;
+      if (db.status === "stored") {
+        const n = Object.entries(db.rows_written).filter(([k]) => k !== "files_uploaded")
+          .reduce((sum, [, v]) => sum + v, 0);
+        dbLine = el("p", `Synced to database: ${n} rows checked or updated, ${db.rows_written.files_uploaded || 0} files stored. Re-exporting doesn't create duplicates.`, "small");
+      } else if (db.status === "skipped") {
+        dbLine = el("p", `Database: skipped (${db.reason}).`, "small muted");
+      } else {
+        dbLine = el("p", `Database write failed: ${db.error}`, "small err");
+      }
+      parts.push(dbLine, saved, download);
       exportPanel.replaceChildren(...parts);
     } catch (err) {
       exportPanel.replaceChildren(el("h3", "Export failed"), el("p", String(err), "err"));

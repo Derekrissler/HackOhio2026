@@ -32,7 +32,13 @@ Every course page has an **Export for analytics** button at the top right. It pu
 Canvas API: outcomes, modules, assignments and rubrics, every submission's grades, rubric notes and comments,
 pages, and slide PDFs. It writes one JSON bundle to `mock-canvas/exports/<export_id>/bundle.json`, with the
 original files in `files/`, for the analytics pipeline. The format is in
-[mock-canvas/INGEST_CONTRACT.md](mock-canvas/INGEST_CONTRACT.md). To run the same export against real Canvas:
+[mock-canvas/INGEST_CONTRACT.md](mock-canvas/INGEST_CONTRACT.md).
+
+When `SUPABASE_SERVICE_ROLE_KEY` is set in `mock-canvas/.env`, the button also stores the export in the team's
+Supabase Postgres (`db_store.py`), and re-clicking is safe. It writes the course, learners, outcomes, documents
+(with the originals uploaded to the `course-materials` bucket), chunks, assessments, questions, attempts,
+responses, evidence and feedback, and logs an `ingestion_jobs` row. To store an existing export by hand, run
+`.venv/bin/python db_store.py exports/<export_id>/bundle.json`. To run the same export against real Canvas:
 `CANVAS_BASE_URL=https://osu.instructure.com CANVAS_TOKEN=<token> .venv/bin/python ingest.py <course_id>`.
 
 ## Where things live

@@ -210,9 +210,12 @@ class Exporter:
                            "deep_link": link})
 
         def add_html_doc(doc_id, title, doc_type, html, source_type, canvas_id, url, module, status):
+            data = (html or "").encode()
+            self.files_dir.mkdir(parents=True, exist_ok=True)
+            (self.files_dir / f"{doc_id}.html").write_bytes(data)  # keep the original, like the PDFs
             doc = {"document_id": doc_id, "source_type": source_type, "canvas_id": canvas_id, "title": title,
                    "document_type": doc_type, "module": module, "content_type": "text/html",
-                   "size_bytes": len((html or "").encode()), "sha256": sha256(html or ""), "stored_path": None,
+                   "size_bytes": len(data), "sha256": sha256(data), "stored_path": f"files/{doc_id}.html",
                    "source_url": url, "page_count": None, "publication_status": status,
                    "access_roles": ["student", "instructor"]}
             docs.append(doc)

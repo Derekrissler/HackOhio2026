@@ -16,6 +16,7 @@ from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
+import db_store
 import ingest
 import ui
 from data import assignment, course, load_courses, self_user, submission
@@ -257,9 +258,14 @@ def analytics_export(course_id: str, request: Request):
     course(course_id)  # 404 for an unknown course
     bundle, path = ingest.export_course(base(request), "mock", course_id)
     export_id = bundle["export"]["export_id"]
+    try:
+        database = db_store.store_export(bundle, path.parent)
+    except Exception as e:  # the export file is still saved; report the database error
+        database = {"status": "failed", "error": str(e)[:500]}
     return {"export_id": export_id, "path": str(path.relative_to(HERE)),
             "download_url": f"/analytics/exports/{export_id}/bundle.json",
-            "counts": bundle["quality"]["counts"], "warnings": bundle["quality"]["warnings"]}
+            "counts": bundle["quality"]["counts"], "warnings": bundle["quality"]["warnings"],
+            "database": database}
 
 
 @app.get("/analytics/exports/{export_id}/bundle.json")
