@@ -1,8 +1,6 @@
 import pytest
-from sqlalchemy.orm import Session
 
-from app.models import Course, Enrollment
-from tests.conftest import STUDENT, TEACHER
+from tests.conftest import ISE_COURSE, JORDAN_ID, STAT_COURSE, STUDENT, TEACHER, as_user
 
 
 def test_health_needs_no_auth(client):
@@ -17,27 +15,24 @@ def test_me_rejects_missing_invalid_or_unknown_user(client, headers):
 def test_me_returns_user_and_enrollments(client):
     body = client.get("/api/me", headers=STUDENT).json()
     assert body["name"] == "Alex Kim"
-    assert body["enrollments"] == [{"course_id": 1, "role": "student"}]
+    assert sorted(e["course_id"] for e in body["enrollments"]) == [STAT_COURSE, ISE_COURSE]
+    assert {e["role"] for e in body["enrollments"]} == {"student"}
 
 
 def test_demo_users_lists_everyone_without_auth(client):
     users = client.get("/api/demo/users").json()
-    assert [u["id"] for u in users] == [1, 2, 3, 4]
-    assert users[0]["role_summary"] == "Teacher"
-    assert users[1]["role_summary"] == "Student"
+    assert len(users) == 21
+    assert users[0]["id"] == 1 and users[0]["role_summary"] == "Teacher"
+    assert {u["role_summary"] for u in users[1:]} == {"Student"}
 
 
 def test_courses_lists_callers_courses_with_role(client):
-    assert client.get("/api/courses", headers=TEACHER).json() == [
-        {
-            "id": 1,
-            "code": "STAT 1450",
-            "name": "Introduction to Statistical Reasoning",
-            "term": "Autumn 2026",
-            "role": "teacher",
-        }
+    courses = client.get("/api/courses", headers=TEACHER).json()
+    assert [(c["id"], c["code"], c["role"]) for c in courses] == [
+        (STAT_COURSE, "STAT 1450", "teacher"),
+        (ISE_COURSE, "ISE 3200", "teacher"),
     ]
-    assert client.get("/api/courses", headers=STUDENT).json()[0]["role"] == "student"
+    assert {c["role"] for c in client.get("/api/courses", headers=STUDENT).json()} == {"student"}
 
 
 def test_course_detail(client):
@@ -50,12 +45,10 @@ def test_unknown_course_is_404(client):
     assert client.get("/api/courses/999", headers=TEACHER).status_code == 404
 
 
-def test_course_user_is_not_enrolled_in_is_403(client, db: Session):
-    db.add(Course(id=2, code="OTHR 1000", name="Other", term=None))
-    db.add(Enrollment(course_id=2, user_id=1, role="teacher"))
-    db.commit()
-    assert client.get("/api/courses/2", headers=STUDENT).status_code == 403
-    assert all(c["id"] != 2 for c in client.get("/api/courses", headers=STUDENT).json())
+def test_course_user_is_not_enrolled_in_is_403(client):
+    jordan = as_user(JORDAN_ID)  # enrolled in ISE 3200 only
+    assert client.get(f"/api/courses/{STAT_COURSE}", headers=jordan).status_code == 403
+    assert [c["id"] for c in client.get("/api/courses", headers=jordan).json()] == [ISE_COURSE]
 
 
 def test_analytics_is_teacher_only(client):

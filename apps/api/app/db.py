@@ -4,11 +4,13 @@ import os
 from collections.abc import Iterator
 from pathlib import Path
 
-from sqlalchemy import create_engine, select
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-DEFAULT_DB_PATH = REPO_ROOT / "data" / "app.db"
+DATA_DIR = REPO_ROOT / "data"
+SEED_DIR = DATA_DIR / "seed"
+DEFAULT_DB_PATH = DATA_DIR / "app.db"
 DATABASE_URL = os.environ.get("DATABASE_URL", f"sqlite:///{DEFAULT_DB_PATH.as_posix()}")
 
 
@@ -26,13 +28,12 @@ def get_db() -> Iterator[Session]:
 
 
 def init_db() -> None:
-    """Create tables and load the demo seed if the database is empty."""
-    from app import models
-    from app.seed import seed
+    """Load the seed when the database is missing, empty or from an older schema version."""
+    from app.ingest.loader import SCHEMA_VERSION, rebuild
 
     if DATABASE_URL.startswith("sqlite:///"):
         Path(DATABASE_URL.removeprefix("sqlite:///")).parent.mkdir(parents=True, exist_ok=True)
-    Base.metadata.create_all(engine)
-    with SessionLocal() as session:
-        if session.scalar(select(models.User).limit(1)) is None:
-            seed(session)
+    with engine.connect() as conn:
+        version = conn.execute(text("PRAGMA user_version")).scalar()
+    if version != SCHEMA_VERSION:
+        rebuild(engine, SEED_DIR)
