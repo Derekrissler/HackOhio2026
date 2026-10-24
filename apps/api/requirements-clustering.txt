@@ -1,0 +1,6 @@
+-r requirements-analytics.txt
+# Run the published Sentence Transformers ONNX artifact without torch/transformers.
+scikit-learn==1.9.1
+onnxruntime==1.31.0
+tokenizers==0.23.3
+huggingface-hub==1.33.0

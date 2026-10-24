@@ -1,8 +1,10 @@
-# Analytics boundary contract (Phase 2)
+# Analytics contracts and pipeline (Phases 2–5)
 
-This package is independent of the mock Canvas SQLAlchemy database. It makes no
-network requests and does not generate LERs, compute aggregates, or persist ARRs.
-Use Supabase UUIDs, not local SQLite integer IDs. No schema migration is needed.
+This package is independent of the mock Canvas SQLAlchemy database. It validates
+evidence, prepares features and calculates descriptive statistics. Phase 5 adds
+optional local semantic grouping; only explicitly opted-in public model downloads
+use the network. It does not generate LERs or persist ARRs. Use Supabase UUIDs, not
+local SQLite integer IDs. No schema migration is needed.
 
 ## Input adapter
 
@@ -224,8 +226,10 @@ policies, not validated mastery thresholds. Core calculations are Phase 3/4 work
 Clustering remains optional at runtime: minimum six observations, DBSCAN cosine
 epsilon 0.25, minimum samples three are proposed starting settings, not evaluated
 model quality claims. No embedding packages or models are installed in Phase 2.
-Resolve Sentence Transformers' dependency footprint against the PyTorch exclusion
-before adding the optional embedding environment.
+Phase 5 resolves the PyTorch exclusion by running the model's published ONNX
+artifact directly, without installing the Sentence Transformers Python package.
+See [analytics-clustering.md](analytics-clustering.md) for the runtime decision,
+approved-excerpt input, provenance, synthetic evaluation and optional requirements.
 
 ## Verification
 

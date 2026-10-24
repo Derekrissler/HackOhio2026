@@ -23,3 +23,4 @@ class AnalyticsConfig(BaseModel):
     clustering_min_observations: int = Field(default=6, ge=3, strict=True)
     clustering_eps: float = Field(default=0.25, gt=0, le=2)
     clustering_min_samples: int = Field(default=3, ge=2, strict=True)
+    clustering_max_observations: int = Field(default=2000, ge=6, strict=True)
