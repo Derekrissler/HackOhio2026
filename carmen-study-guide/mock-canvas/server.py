@@ -18,6 +18,7 @@ from fastapi.staticfiles import StaticFiles
 
 import db_store
 import ingest
+import tutor_host
 import ui
 from data import assignment, course, load_courses, self_user, submission
 
@@ -379,6 +380,8 @@ def export_download(export_id: str):
         raise HTTPException(404, "export not found")
     return FileResponse(path, media_type="application/json", filename=f"{export_id}.json")
 
+
+app.include_router(tutor_host.router)
 
 # HTML pages last, so the API routes above win on any overlap.
 app.include_router(ui.router)

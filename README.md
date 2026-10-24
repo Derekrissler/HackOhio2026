@@ -22,8 +22,12 @@ the same, except for the venv path.
 
 ```powershell
 py -3 -m venv apps/api/.venv          # macOS/Linux: python3 -m venv apps/api/.venv
-npm run setup                         # root tools, web packages, API + dev packages
+py -3 -m venv carmen-study-guide/mock-canvas/.venv
+npm run setup                         # root tools, web packages, API + Carmen packages
 ```
+
+Carmen (the mock Canvas with the Study Tutor) also needs `carmen-study-guide/mock-canvas/.env`; see
+`carmen-study-guide/mock-canvas/.env.example`. Without its venv, `npm run dev` skips it and runs the rest.
 
 ## Run
 
@@ -34,6 +38,10 @@ npm run dev
 - Web: <http://localhost:5173>
 - API: <http://127.0.0.1:8000> (interactive docs at <http://127.0.0.1:8000/docs>), reached by
   the web app through Vite's `/api` proxy.
+- Carmen mock Canvas: <http://localhost:8001/courses/1001>, with the Study Tutor at
+  <http://localhost:8001/courses/1001/tutor>.
+
+One `Ctrl+C` stops all three. To run only Carmen and the tutor, use `npm run carmen`.
 
 The API builds `data/app.db` from the seed on first start, and again whenever the schema version
 changes.
