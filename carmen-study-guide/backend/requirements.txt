@@ -1,6 +1,0 @@
-fastapi>=0.110
-uvicorn>=0.29
-anthropic>=0.40
-requests>=2.31
-pypdf>=4.0
-python-dotenv>=1.0
