@@ -8,14 +8,12 @@ import re
 from datetime import datetime
 from html import escape as esc, unescape
 from math import cos, pi, sin
-from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Request
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import HTMLResponse
 
 from data import assignment, course, load_courses, self_user, submission
 
-EXTENSION = Path(__file__).resolve().parent.parent / "extension"
 router = APIRouter()
 
 
@@ -200,6 +198,10 @@ def course_page(c: dict, section: str, crumbs: list[str], main: str, right: str 
 <header class="course-header">
   <button class="hamburger" id="course-nav-toggle" aria-label="Hide course navigation">{ICONS["hamburger"]}</button>
   <nav class="breadcrumbs">{' <span class="sep">&rsaquo;</span> '.join(trail)}</nav>
+  <div class="export-wrap">
+    <button class="btn btn-primary" id="export-btn" data-course="{cid}">{ICONS["export"]} Export for analytics</button>
+    <div class="export-panel" id="export-panel" role="status" hidden></div>
+  </div>
 </header>
 <div class="course-body{' has-right' if right else ''}">
   <nav class="course-nav" aria-label="Course"><div class="term muted small">{esc(c["course"].get("term", "Autumn 2026"))}</div><ul>{nav}</ul></nav>
@@ -354,22 +356,6 @@ def syllabus(course_id: str):
            f'<h2>Course Summary:</h2><table class="table"><thead><tr><th>Date</th><th>Details</th>' \
            f'</tr></thead><tbody>{rows}</tbody></table>'
     return course_page(c, "syllabus", ["Syllabus"], main)
-
-
-SHIM = """
-<script>
-  // Stand-in for the extension runtime: content.js sends {type: "analyze"} here,
-  // and this posts it to the backend just as background.js would.
-  window.chrome = { runtime: { sendMessage: async (msg) => {
-    try {
-      const res = await fetch("http://localhost:8000/analyze", {
-        method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(msg.payload) });
-      if (!res.ok) throw new Error(`Backend returned ${res.status}: ${await res.text()}`);
-      return { ok: true, data: await res.json() };
-    } catch (err) { return { ok: false, error: String(err) }; }
-  } } };
-</script>
-<script src="/extension/content.js"></script>"""
 
 
 SUBMITTING = {"online_upload": "a file upload", "online_text_entry": "a text entry box",
@@ -552,7 +538,7 @@ def assignment_page(course_id: str, assignment_id: str):
 {f'<ul class="comments">{comments}</ul>' if comments else '<p class="muted">No comments</p>'}"""
     else:
         right = '<h2 class="side-h">Submission</h2><p class="muted">Not submitted yet.</p>'
-    return course_page(c, "assignments", ["Assignments", a["name"]], main, right, scripts=SHIM)
+    return course_page(c, "assignments", ["Assignments", a["name"]], main, right)
 
 
 @router.get("/courses/{course_id}/quizzes/{quiz_id}", response_class=HTMLResponse)
@@ -712,11 +698,3 @@ def placeholder_global(request: Request):
     body = f'<header class="page-header"><h1>{name}</h1></header><main class="content padded">' \
            f'<p class="muted">Not part of the mock yet.</p></main>'
     return shell(name, body, active_global=name.lower())
-
-
-@router.get("/extension/{name}")
-def extension_file(name: str):
-    path = (EXTENSION / name).resolve()
-    if path.parent != EXTENSION or not path.is_file():
-        raise HTTPException(404)
-    return FileResponse(path, media_type="text/javascript")

@@ -12,8 +12,8 @@ Re-run after editing the markdown. Mapping:
   written feedback-> graded submissions for the mock student (rubric notes + comment)
   schedule table  -> modules: Start Here, Week 1..14, Finals
 
-Answer keys and the TA comment bank are instructor-only and are NOT copied into the course:
-everything in the course is indexed and sent to the model, which must never show answers.
+Answer keys and the TA comment bank are instructor-only and are NOT copied into the course,
+which is the student's view.
 """
 
 import json

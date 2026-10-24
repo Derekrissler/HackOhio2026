@@ -1,24 +1,24 @@
 """
-Mock Canvas: a local stand-in for the slice of Canvas this project uses.
+Mock Canvas: a local stand-in for Canvas (Carmen).
 
 - JSON API (this file): same shapes and Link-header pagination as osu.instructure.com,
   served from the JSON files in fixtures/ (one course per file). Any bearer token works.
-- HTML pages (ui.py): Canvas-styled dashboard, modules, assignments, grades. Assignment
-  pages load the real extension/content.js, so you can work on the extension without Carmen.
+- HTML pages (ui.py): Canvas-styled dashboard, modules, assignments, grades, pages, files.
 
-Run (from this folder):  uvicorn server:app --reload --port 8001
-Then in backend/.env:    CANVAS_BASE_URL=http://localhost:8001  and  CANVAS_TOKEN=dev
+Run (from this folder):  .venv/bin/uvicorn server:app --reload --port 8001
 """
 
+import re
 from pathlib import Path
 from urllib.parse import urlencode
 
 from fastapi import FastAPI, HTTPException, Request, Response
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
+import ingest
 import ui
-from data import assignment, course, load_courses, submission
+from data import assignment, course, load_courses, self_user, submission
 
 HERE = Path(__file__).resolve().parent
 
@@ -103,6 +103,8 @@ def file_json(request: Request, c: dict, f: dict) -> dict:
         "content-type": f.get("content_type", "application/pdf"),
         "size": len(pdf_bytes(c, f)),
         "url": f"{base(request)}/files/{f['id']}/download",
+        "locked": False,
+        "hidden": False,
     }
 
 
@@ -176,31 +178,96 @@ def download_file(file_id: int, course_id: str | None = None):
     raise HTTPException(404, "file not found")
 
 
+def group_ids(c: dict) -> dict[str, int]:
+    """Canvas gives assignment groups numeric ids; the fixture names them, so number them in order."""
+    names = [g["name"] for g in c.get("assignment_groups", [])]
+    names += [a.get("assignment_group", "Assignments") for a in c.get("assignments", [])]
+    return {n: 100 + i for i, n in enumerate(dict.fromkeys(names))}
+
+
+def assignment_json(c: dict, a: dict) -> dict:
+    return {**a, "assignment_group_id": group_ids(c)[a.get("assignment_group", "Assignments")],
+            "course_id": c["course"]["id"], "published": True}
+
+
+@app.get("/api/v1/courses/{course_id}/users")
+def list_users(course_id: str, request: Request):
+    # Only the mock student is enrolled; teacher/TA enrollments aren't modeled.
+    c = course(course_id)
+    types = request.query_params.getlist("enrollment_type[]") or ["student"]
+    user = self_user(c)
+    users = [{"id": user["id"], "name": user["name"], "sortable_name": user["name"]}] if "student" in types else []
+    return paginate(request, users)
+
+
+@app.get("/api/v1/courses/{course_id}/assignment_groups")
+def list_assignment_groups(course_id: str, request: Request):
+    c = course(course_id)
+    weights = {g["name"]: g.get("group_weight") for g in c.get("assignment_groups", [])}
+    return paginate(request, [{"id": gid, "name": name, "position": i + 1, "group_weight": weights.get(name, 0)}
+                              for i, (name, gid) in enumerate(group_ids(c).items())])
+
+
 @app.get("/api/v1/courses/{course_id}/assignments")
 def list_assignments(course_id: str, request: Request):
-    return paginate(request, course(course_id).get("assignments", []))
+    c = course(course_id)
+    return paginate(request, [assignment_json(c, a) for a in c.get("assignments", [])])
 
 
 @app.get("/api/v1/courses/{course_id}/assignments/{assignment_id}")
 def get_assignment(course_id: str, assignment_id: str):
-    return assignment(course(course_id), assignment_id)
-
-
-@app.get("/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/self")
-def own_submission(course_id: str, assignment_id: str, request: Request):
     c = course(course_id)
-    a = assignment(c, assignment_id)
-    sub = submission(c, assignment_id) or {"user_id": c.get("self_user_id", 1), "score": None,
-                                           "workflow_state": "unsubmitted"}
-    sub = {"assignment_id": a["id"], "submission_comments": [], "rubric_assessment": {}, **sub}
+    return assignment_json(c, assignment(c, assignment_id))
+
+
+def submission_json(c: dict, a: dict, request: Request) -> dict:
+    sub = submission(c, a["id"]) or {"user_id": c.get("self_user_id", 1), "score": None,
+                                     "workflow_state": "unsubmitted"}
+    sub = {"id": int(f"{a['id']}{sub['user_id']}"), "assignment_id": a["id"], "attempt": 1 if sub.get("submitted_at") else None,
+           "submission_type": (a.get("submission_types") or [None])[0], "body": None, "attachments": [],
+           "submission_comments": [], "rubric_assessment": {}, **sub}
     includes = request.query_params.getlist("include[]")
     if "submission_comments" not in includes:
         sub.pop("submission_comments")
     if "rubric_assessment" not in includes:
         sub.pop("rubric_assessment")
     if "assignment" in includes:
-        sub["assignment"] = a
+        sub["assignment"] = assignment_json(c, a)
     return sub
+
+
+@app.get("/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions")
+def list_submissions(course_id: str, assignment_id: str, request: Request):
+    # Instructor view: every student's submission. The mock has one student.
+    c = course(course_id)
+    return paginate(request, [submission_json(c, assignment(c, assignment_id), request)])
+
+
+@app.get("/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/self")
+def own_submission(course_id: str, assignment_id: str, request: Request):
+    c = course(course_id)
+    return submission_json(c, assignment(c, assignment_id), request)
+
+
+# ---------------------------------------------------------------- analytics export (ingest.py)
+
+@app.post("/analytics/export/{course_id}")
+def analytics_export(course_id: str, request: Request):
+    """The 'Export for analytics' button. Runs the Canvas adapter against this server's own API."""
+    course(course_id)  # 404 for an unknown course
+    bundle, path = ingest.export_course(base(request), "mock", course_id)
+    export_id = bundle["export"]["export_id"]
+    return {"export_id": export_id, "path": str(path.relative_to(HERE)),
+            "download_url": f"/analytics/exports/{export_id}/bundle.json",
+            "counts": bundle["quality"]["counts"], "warnings": bundle["quality"]["warnings"]}
+
+
+@app.get("/analytics/exports/{export_id}/bundle.json")
+def export_download(export_id: str):
+    path = ingest.EXPORTS / export_id / "bundle.json"
+    if not re.fullmatch(r"EXP-[\w-]+", export_id) or not path.is_file():
+        raise HTTPException(404, "export not found")
+    return FileResponse(path, media_type="application/json", filename=f"{export_id}.json")
 
 
 # HTML pages last, so the API routes above win on any overlap.

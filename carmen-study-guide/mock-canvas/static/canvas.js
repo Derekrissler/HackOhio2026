@@ -52,6 +52,51 @@
     box.addEventListener("change", toggle);
   });
 
+  // ---- "Export for analytics": builds the ingestion bundle server-side (ingest.py)
+  const exportBtn = document.getElementById("export-btn");
+  const exportPanel = document.getElementById("export-panel");
+  function el(tag, text, cls) {
+    const e = document.createElement(tag);
+    if (text != null) e.textContent = text;
+    if (cls) e.className = cls;
+    return e;
+  }
+  exportBtn?.addEventListener("click", async () => {
+    const label = exportBtn.lastChild.textContent;
+    exportBtn.disabled = true;
+    exportBtn.lastChild.textContent = " Exporting…";
+    exportPanel.replaceChildren(el("p", "Pulling course data, comments and files from Canvas…", "muted"));
+    exportPanel.hidden = false;
+    try {
+      const res = await fetch(`/analytics/export/${exportBtn.dataset.course}`, { method: "POST" });
+      if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
+      const d = await res.json();
+      const counts = el("dl");
+      for (const [k, v] of Object.entries(d.counts)) counts.append(el("dt", k.replace(/_/g, " ")), el("dd", String(v)));
+      const download = el("a", "Download JSON");
+      download.href = d.download_url;
+      download.className = "btn";
+      const parts = [el("h3", "Export ready"), el("div", d.export_id, "muted small"), counts];
+      if (d.warnings.length) {
+        const ul = el("ul");
+        d.warnings.forEach((w) => ul.append(el("li", w)));
+        parts.push(el("div", "Notes", "small"), ul);
+      }
+      const saved = el("p", "Saved to ", "small muted");
+      saved.append(el("code", `mock-canvas/${d.path}`));
+      parts.push(saved, download);
+      exportPanel.replaceChildren(...parts);
+    } catch (err) {
+      exportPanel.replaceChildren(el("h3", "Export failed"), el("p", String(err), "err"));
+    } finally {
+      exportBtn.disabled = false;
+      exportBtn.lastChild.textContent = label;
+    }
+  });
+  document.addEventListener("click", (e) => {
+    if (exportPanel && !exportPanel.hidden && !e.target.closest(".export-wrap")) exportPanel.hidden = true;
+  });
+
   // ---- modules
   document.querySelectorAll(".module .mod-header:not(.static)").forEach((h) => {
     h.addEventListener("click", () => {

@@ -3,10 +3,10 @@ Pull a real Canvas course's materials into a mock-canvas fixture.
 
     python snapshot.py <COURSE_ID>
 
-Reads CANVAS_TOKEN / CANVAS_BASE_URL from the environment or ../backend/.env and writes
+Reads CANVAS_TOKEN / CANVAS_BASE_URL from the environment or mock-canvas/.env and writes
 fixtures/local/course_<id>.json plus its PDFs. Only course material is copied (modules,
-pages, PDFs, assignments with rubrics). No student submissions or grades, so add a
-"submissions" block by hand to test the extension. fixtures/local/ is gitignored.
+pages, PDFs, assignments with rubrics). No student submissions or grades; add a
+"submissions" block by hand if you need them. fixtures/local/ is gitignored.
 """
 
 import json
@@ -18,7 +18,7 @@ import requests
 from dotenv import load_dotenv
 
 HERE = Path(__file__).resolve().parent
-load_dotenv(HERE.parent / "backend" / ".env")
+load_dotenv(HERE / ".env")
 
 BASE = os.environ.get("CANVAS_BASE_URL", "https://osu.instructure.com").rstrip("/")
 TOKEN = os.environ.get("CANVAS_TOKEN", "")
@@ -47,7 +47,7 @@ def try_get_all(path: str, params: dict | None = None) -> list:
 
 def main(course_id: str) -> None:
     if not TOKEN or TOKEN == "dev":
-        sys.exit("Set a real CANVAS_TOKEN in backend/.env (or the environment) first.")
+        sys.exit("Set a real CANVAS_TOKEN in mock-canvas/.env (or the environment) first.")
 
     out_dir = HERE / "fixtures" / "local"
     pdf_dir = out_dir / f"course_{course_id}_files"
