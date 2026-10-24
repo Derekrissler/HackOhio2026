@@ -62,13 +62,14 @@
     return e;
   }
   exportBtn?.addEventListener("click", async () => {
-    const label = exportBtn.lastChild.textContent;
+    const labelEl = exportBtn.querySelector("span");
+    const label = labelEl.textContent;
     exportBtn.disabled = true;
-    exportBtn.lastChild.textContent = " Exporting…";
-    exportPanel.replaceChildren(el("p", "Pulling course data, comments and files from Canvas…", "muted"));
+    labelEl.textContent = " Exporting…";
+    exportPanel.replaceChildren(el("p", "Pulling this assessment's grades, feedback and related material from Canvas…", "muted"));
     exportPanel.hidden = false;
     try {
-      const res = await fetch(`/analytics/export/${exportBtn.dataset.course}`, { method: "POST" });
+      const res = await fetch(exportBtn.dataset.url, { method: "POST" });
       if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
       const d = await res.json();
       const counts = el("dl");
@@ -76,7 +77,17 @@
       const download = el("a", "Download JSON");
       download.href = d.download_url;
       download.className = "btn";
-      const parts = [el("h3", d.database?.status === "stored" ? "Exported and stored" : "Export ready"), el("div", d.export_id, "muted small"), counts];
+      const parts = [el("h3", d.database?.status === "stored" ? "Exported and stored" : "Export ready"),
+                     el("div", d.scope?.assessment_name || d.export_id, "muted small"), counts];
+      if (d.related.length) {
+        const ul = el("ul", null, "related");
+        d.related.forEach((r) => {
+          const li = el("li", r.title);
+          if (r.why.length) li.append(el("div", r.why.join(" · "), "why"));
+          ul.append(li);
+        });
+        parts.push(el("div", `Related material (${d.related.length})`, "small"), ul);
+      }
       if (d.warnings.length) {
         const ul = el("ul");
         d.warnings.forEach((w) => ul.append(el("li", w)));
@@ -101,7 +112,7 @@
       exportPanel.replaceChildren(el("h3", "Export failed"), el("p", String(err), "err"));
     } finally {
       exportBtn.disabled = false;
-      exportBtn.lastChild.textContent = label;
+      labelEl.textContent = label;
     }
   });
   document.addEventListener("click", (e) => {

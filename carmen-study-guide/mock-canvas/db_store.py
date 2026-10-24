@@ -154,9 +154,10 @@ class Store:
 
     def outcomes(self):
         syllabus = self.doc.get(self.b["course"].get("syllabus_document_id"))
+        # An assessment-scoped export has no syllabus document: leave the stored link alone rather than null it.
+        link = {"source_document_id": syllabus["id"]} if syllabus else {}
         rows = self.upsert("outcomes", [{"course_id": self.cid, "code": o["outcome_id"], "syllabus_text": o["text"],
-                                         "source_document_id": syllabus["id"] if syllabus else None,
-                                         "instructor_verified": o["instructor_verified"]}
+                                         "instructor_verified": o["instructor_verified"], **link}
                                         for o in self.b["outcomes"]], "course_id,code")
         self.outcome = {r["code"]: r["id"] for r in rows}
 
@@ -283,6 +284,7 @@ class Store:
         job = self.db.table("ingestion_jobs").insert({
             "course_id": self.cid, "source": self.source, "kind": "ingest", "status": "running", "attempts": 1,
             "input": {"export_id": exp["export_id"], "content_hash": exp["content_hash"],
+                      "scope": self.b.get("scope", {"level": "course"}),
                       "base_url": exp["source"]["base_url"], "schema_version": self.b["schema_version"]},
         }).execute().data[0]
         try:

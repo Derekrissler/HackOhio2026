@@ -8,7 +8,8 @@ Pulls one course through the Canvas REST API and writes:
 
 The same calls work against this mock and real Canvas, so the mock and real adapters emit the same contract:
 
-    .venv/bin/python ingest.py 1001                      # mock at http://localhost:8001
+    .venv/bin/python ingest.py 1001                      # whole course, mock at http://localhost:8001
+    .venv/bin/python ingest.py 1001 2003                 # one assessment + the material related to it
     CANVAS_BASE_URL=https://osu.instructure.com CANVAS_TOKEN=<token> .venv/bin/python ingest.py <course_id>
 
 The bundle is evidence, not inference: identities are pseudonymous, anything Canvas doesn't return is null and
@@ -32,7 +33,7 @@ from pypdf import PdfReader
 
 HERE = Path(__file__).resolve().parent
 EXPORTS = HERE / "exports"
-SCHEMA_VERSION = "ingest-1.0"
+SCHEMA_VERSION = "ingest-1.1"
 ADAPTER = "canvas_rest_v1"
 PDF_EXTRACTOR = "pypdf-text-1"
 HTML_EXTRACTOR = "html-sections-1"
@@ -128,8 +129,9 @@ def published(obj: dict) -> str:
 # ---------------------------------------------------------------- exporter
 
 class Exporter:
-    def __init__(self, canvas: Canvas, course_id: str, out_dir: Path):
+    def __init__(self, canvas: Canvas, course_id: str, out_dir: Path, assessment_id: str | None = None):
         self.cv, self.cid, self.out_dir = canvas, str(course_id), out_dir
+        self.only = str(assessment_id) if assessment_id else None  # scope the export to one assessment
         self.files_dir = out_dir / "files"
         self.evidence: list[dict] = []
         self.warnings: list[str] = []
@@ -190,8 +192,56 @@ class Exporter:
 
     # ---- documents + resource chunks
 
-    def documents(self, course: dict, where: dict) -> tuple[list[dict], list[dict]]:
+    def related(self, a: dict, modules: list[dict]) -> tuple[dict, list[dict], list[int]]:
+        """Course material tied to one assessment, each with the rule that matched:
+        same_module       - pages/files in the module where the assessment is assigned
+        chapter_reference - textbook chapters named in its title, description or its module's headings
+        taught_with       - slide decks in the module where a referenced chapter is first taught
+        """
+        include: dict = {}
+
+        def add(key, rule, detail):
+            reason = {"rule": rule, "detail": detail}
+            if reason not in include.setdefault(key, []):
+                include[key].append(reason)
+
+        ref = {"kind": "assignment", "canvas_id": a["canvas_id"]}
+        home = [m for m in modules if any(it["ref"] == ref for it in m["items"])][:1]
+        text = " ".join([a["name"], a["description_text"] or ""] +
+                        [it["title"] for m in home for it in m["items"] if it["type"] == "SubHeader"])
+        chapters = chapter_refs(text)
+
+        for m in home:
+            for it in m["items"]:
+                if it["ref"] and it["ref"]["kind"] in ("page", "file"):
+                    add((it["ref"]["kind"], it["ref"]["canvas_id"]), "same_module", m["name"])
+
+        first_taught: dict = {}  # chapter page -> (title, first module it appears in)
+        for m in modules:
+            for it in m["items"]:
+                n = chapter_number(it["title"]) if it["ref"] and it["ref"]["kind"] == "page" else None
+                if n is not None:
+                    first_taught.setdefault(it["ref"]["canvas_id"], (it["title"], m))
+                    if n in chapters:
+                        add(("page", it["ref"]["canvas_id"]), "chapter_reference", f"Chapter {n}")
+
+        for key in [k for k in include if k[0] == "page" and k[1] in first_taught]:
+            title, m = first_taught[key[1]]
+            for it in m["items"]:
+                if it["ref"] and it["ref"]["kind"] == "file" and re.search(r"slide|lecture", it["title"], re.I):
+                    add(("file", it["ref"]["canvas_id"]), "taught_with", f"{title} ({m['name']})")
+
+        if not include:
+            self.warnings.append(f"No course material is linked to {a['name']} by module or chapter reference; "
+                                 "the export has its grades and feedback but no resources.")
+        return include, home, chapters
+
+    def documents(self, course: dict, where: dict, include: dict | None = None) -> tuple[list[dict], list[dict]]:
+        """include=None exports everything; otherwise only the keys in include (from related())."""
         docs, chunks, seen = [], [], set()
+
+        def wanted(key) -> bool:
+            return include is None or key in include
 
         def add_chunk(doc, n, locator, content, method):
             h = sha256(content)
@@ -209,7 +259,7 @@ class Exporter:
                            "version": PDF_EXTRACTOR if method == "pdf_text" else HTML_EXTRACTOR},
                            "deep_link": link})
 
-        def add_html_doc(doc_id, title, doc_type, html, source_type, canvas_id, url, module, status):
+        def add_html_doc(doc_id, title, doc_type, html, source_type, canvas_id, url, module, status, key=None):
             data = (html or "").encode()
             self.files_dir.mkdir(parents=True, exist_ok=True)
             (self.files_dir / f"{doc_id}.html").write_bytes(data)  # keep the original, like the PDFs
@@ -217,16 +267,18 @@ class Exporter:
                    "document_type": doc_type, "module": module, "content_type": "text/html",
                    "size_bytes": len(data), "sha256": sha256(data), "stored_path": f"files/{doc_id}.html",
                    "source_url": url, "page_count": None, "publication_status": status,
-                   "access_roles": ["student", "instructor"]}
+                   "access_roles": ["student", "instructor"], "relevance": (include or {}).get(key, [])}
             docs.append(doc)
             for i, (heading, content) in enumerate(html_sections(html), 1):
                 add_chunk(doc, i, {"section": heading, "section_index": i}, content, "html")
 
-        if course["syllabus_html"]:
+        if course["syllabus_html"] and wanted(("syllabus", None)):
             add_html_doc("DOC-SYLLABUS", "Syllabus", "syllabus", course["syllabus_html"], "canvas_syllabus",
                          course["canvas_id"], f"{self.cv.base}/courses/{self.cid}/assignments/syllabus", None, "published")
 
         for p in self.cv.get_all(f"/courses/{self.cid}/pages", optional=True) or []:
+            if not wanted(("page", p["url"])):
+                continue
             full = self.cv.get_one(f"/courses/{self.cid}/pages/{p['url']}", optional=True)
             if not full:
                 self.warnings.append(f"Page '{p['url']}' could not be read.")
@@ -236,12 +288,14 @@ class Exporter:
                 "textbook_section" if re.search(r"textbook|chapter|glossary", title, re.I) else "course_page"
             add_html_doc(f"DOC-PAGE-{p['url']}", title, doc_type, full.get("body"), "canvas_page",
                          full.get("page_id") or p["url"], full.get("html_url"), where.get(("page", p["url"])),
-                         published(full))
+                         published(full), key=("page", p["url"]))
 
         files = self.cv.get_all(f"/courses/{self.cid}/files", optional=True)
         if files is None:
             self.warnings.append("Course files are not listable with this token; slides and PDFs were skipped.")
         for f in files or []:
+            if not wanted(("file", f["id"])):
+                continue
             ctype = f.get("content-type") or f.get("content_type") or ""
             module = where.get(("file", f["id"]))
             label = f"{(module or {}).get('item_title', '')} {f['display_name']}"
@@ -251,7 +305,7 @@ class Exporter:
                    "module": module, "content_type": ctype, "size_bytes": f.get("size"), "sha256": None,
                    "stored_path": None, "source_url": f"{self.cv.base}/courses/{self.cid}/files/{f['id']}",
                    "page_count": None, "publication_status": published(f),
-                   "access_roles": ["student", "instructor"]}
+                   "access_roles": ["student", "instructor"], "relevance": (include or {}).get(("file", f["id"]), [])}
             docs.append(doc)
             if (f.get("size") or 0) > MAX_FILE_BYTES:
                 self.warnings.append(f"{f['display_name']}: larger than {MAX_FILE_BYTES // 2**20} MB, not downloaded.")
@@ -289,7 +343,9 @@ class Exporter:
     def assessments(self, outcomes: list[dict], where: dict) -> list[dict]:
         groups = {g["id"]: g for g in self.cv.get_all(f"/courses/{self.cid}/assignment_groups", optional=True) or []}
         out = []
-        for a in self.cv.get_all(f"/courses/{self.cid}/assignments") or []:
+        source = [self.cv.get_one(f"/courses/{self.cid}/assignments/{self.only}")] if self.only else \
+            self.cv.get_all(f"/courses/{self.cid}/assignments") or []
+        for a in source:
             group = groups.get(a.get("assignment_group_id"), {})
             desc_text = text_of(a.get("description"))
             out.append({
@@ -374,12 +430,23 @@ class Exporter:
         course = self.course()
         outcomes, outcome_source = self.outcomes(course["syllabus_html"])
         modules, where = self.modules()
-        documents, chunks = self.documents(course, where)
         assessments = self.assessments(outcomes, where)
+        scope = {"level": "course"}
+        include = None
+        if self.only:
+            a = assessments[0]
+            include, home, chapters = self.related(a, modules)
+            modules = home
+            scope = {"level": "assessment", "assessment_id": a["assessment_id"], "assessment_name": a["name"],
+                     "assessment_type": a["type"], "home_module": home[0]["name"] if home else None,
+                     "chapters_referenced": chapters,
+                     "rules": ["same_module", "chapter_reference", "taught_with"]}
+        documents, chunks = self.documents(course, where, include)
         students, instructor_view = self.students()
         submissions = self.submissions(assessments, instructor_view)
-        if not students:
-            students = [{"student_id": sid, "enrollment_state": None}
+        if self.only or not students:  # scoped: only the students with work on this assessment
+            students = [{"student_id": sid, "enrollment_state": next(
+                            (s["enrollment_state"] for s in students if s["student_id"] == sid), None)}
                         for sid in dict.fromkeys(s["student_id"] for s in submissions)]
 
         if os.environ.get("ANON_SALT", DEV_SALT) == DEV_SALT:
@@ -393,8 +460,9 @@ class Exporter:
         bundle = {
             "schema_version": SCHEMA_VERSION,
             "export": None,  # filled below, after hashing the content
+            "scope": scope,
             "course": {k: v for k, v in course.items() if k != "syllabus_html"} | {"syllabus_document_id":
-                       "DOC-SYLLABUS" if course["syllabus_html"] else None},
+                       "DOC-SYLLABUS" if any(d["document_id"] == "DOC-SYLLABUS" for d in documents) else None},
             "outcomes": outcomes,
             "modules": modules,
             "assessments": assessments,
@@ -444,20 +512,37 @@ def stated_outcomes(desc_text: str, outcomes: list[dict]) -> list[dict]:
             for i in ids if i in known]
 
 
-def export_course(base_url: str, token: str, course_id: str) -> tuple[dict, Path]:
-    export_id = f"EXP-{course_id}-{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}"
+def chapter_refs(text: str) -> list[int]:
+    """Chapter numbers named in text: 'Chapter 5', 'Chapters 1–4', 'Ch. 2', 'Chapters 3 to 6'."""
+    found: set[int] = set()
+    for m in re.finditer(r"\b(?:Chapters?|Ch\.)\s*(\d+)(?:\s*(?:[–—-]|to|through)\s*(\d+))?", text or "", flags=re.I):
+        lo, hi = sorted((int(m.group(1)), int(m.group(2) or m.group(1))))
+        if hi - lo <= 30:
+            found.update(range(lo, hi + 1))
+    return sorted(found)
+
+
+def chapter_number(title: str) -> int | None:
+    m = re.search(r"\bChapter\s+(\d+)\b", title or "", flags=re.I)
+    return int(m.group(1)) if m else None
+
+
+def export_course(base_url: str, token: str, course_id: str, assessment_id: str | None = None) -> tuple[dict, Path]:
+    """Export a whole course, or (with assessment_id) one assessment and the material related to it."""
+    scope = f"-A{assessment_id}" if assessment_id else ""
+    export_id = f"EXP-{course_id}{scope}-{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}"
     out_dir = EXPORTS / export_id
     out_dir.mkdir(parents=True, exist_ok=True)
-    bundle = Exporter(Canvas(base_url, token), course_id, out_dir).run()
+    bundle = Exporter(Canvas(base_url, token), course_id, out_dir, assessment_id).run()
     path = out_dir / "bundle.json"
     path.write_text(json.dumps(bundle, indent=2, ensure_ascii=False))
     return bundle, path
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) not in (2, 3):
         sys.exit(__doc__)
     b, p = export_course(os.environ.get("CANVAS_BASE_URL", "http://localhost:8001"),
-                         os.environ.get("CANVAS_TOKEN", "dev"), sys.argv[1])
+                         os.environ.get("CANVAS_TOKEN", "dev"), sys.argv[1], (sys.argv[2:] or [None])[0])
     print(f"Wrote {p}")
     print(json.dumps(b["quality"], indent=2))

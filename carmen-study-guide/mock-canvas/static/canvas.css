@@ -134,6 +134,9 @@ body.course-nav-hidden .course-body.has-right { grid-template-columns: minmax(0,
 .export-panel dd { margin: 0; text-align: right; font-weight: 700; }
 .export-panel ul { margin: 6px 0; padding-left: 18px; color: var(--muted); }
 .export-panel .err { color: #b00; }
+.export-panel ul.related { color: var(--text); max-height: 220px; overflow-y: auto; }
+.export-panel .related li { margin: 0 0 6px; }
+.export-panel .why { color: var(--muted); font-size: .8rem; }
 .export-panel code { font-size: .8rem; word-break: break-all; }
 
 /* ---------- buttons ---------- */

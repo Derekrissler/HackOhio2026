@@ -28,10 +28,12 @@ API endpoints include courses, modules (`include[]=items`), pages, files and dow
 `submissions/self` (`include[]=submission_comments`, `rubric_assessment`, `assignment`).
 
 ## Export for analytics
-Every course page has an **Export for analytics** button at the top right. It pulls the course through the
-Canvas API: outcomes, modules, assignments and rubrics, every submission's grades, rubric notes and comments,
-pages, and slide PDFs. It writes one JSON bundle to `mock-canvas/exports/<export_id>/bundle.json`, with the
-original files in `files/`, for the analytics pipeline. The format is in
+Every assignment, quiz and exam page has a button at the top right labeled with that assessment, e.g.
+**Export Quiz 1 for analytics**. It pulls that assessment through the Canvas API: its rubric, every submission's
+grades, rubric notes and comments, and only the course material related to it. That means the pages and slides in
+the module where it's assigned, textbook chapters it names ("Chapters 1–2"), and the lecture slides taught with
+those chapters. Each document records why it was included. It writes one JSON bundle to
+`mock-canvas/exports/<export_id>/bundle.json`, with the original files in `files/`, for the analytics pipeline. The format is in
 [mock-canvas/INGEST_CONTRACT.md](mock-canvas/INGEST_CONTRACT.md).
 
 When `SUPABASE_SERVICE_ROLE_KEY` is set in `mock-canvas/.env`, the button also stores the export in the team's

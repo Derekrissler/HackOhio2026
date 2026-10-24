@@ -262,20 +262,35 @@ def own_submission(course_id: str, assignment_id: str, request: Request):
 
 # ---------------------------------------------------------------- analytics export (ingest.py)
 
-@app.post("/analytics/export/{course_id}")
-def analytics_export(course_id: str, request: Request):
-    """The 'Export for analytics' button. Runs the Canvas adapter against this server's own API."""
-    course(course_id)  # 404 for an unknown course
-    bundle, path = ingest.export_course(base(request), "mock", course_id)
+def run_export(request: Request, course_id: str, assignment_id: str | None = None) -> dict:
+    """Run the Canvas adapter against this server's own API, then store the bundle in Supabase."""
+    bundle, path = ingest.export_course(base(request), "mock", course_id, assignment_id)
     export_id = bundle["export"]["export_id"]
     try:
         database = db_store.store_export(bundle, path.parent)
     except Exception as e:  # the export file is still saved; report the database error
         database = {"status": "failed", "error": str(e)[:500]}
-    return {"export_id": export_id, "path": str(path.relative_to(HERE)),
+    return {"export_id": export_id, "path": str(path.relative_to(HERE)), "scope": bundle["scope"],
             "download_url": f"/analytics/exports/{export_id}/bundle.json",
+            "related": [{"title": d["title"], "type": d["document_type"],
+                         "why": [f"{r['rule'].replace('_', ' ')}: {r['detail']}" for r in d.get("relevance", [])]}
+                        for d in bundle["documents"]],
             "counts": bundle["quality"]["counts"], "warnings": bundle["quality"]["warnings"],
             "database": database}
+
+
+@app.post("/analytics/export/{course_id}/assignments/{assignment_id}")
+def analytics_export_assessment(course_id: str, assignment_id: str, request: Request):
+    """The button on an assignment/quiz page: that assessment plus the material related to it."""
+    assignment(course(course_id), assignment_id)  # 404 for an unknown course or assignment
+    return run_export(request, course_id, assignment_id)
+
+
+@app.post("/analytics/export/{course_id}")
+def analytics_export(course_id: str, request: Request):
+    """Whole-course export (no button; for scripts)."""
+    course(course_id)
+    return run_export(request, course_id)
 
 
 @app.get("/analytics/exports/{export_id}/bundle.json")

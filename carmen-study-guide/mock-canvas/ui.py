@@ -188,7 +188,20 @@ def shell(title: str, body: str, *, active_global="courses", head="", scripts=""
 </body></html>""")
 
 
-def course_page(c: dict, section: str, crumbs: list[str], main: str, right: str = "", **kw) -> HTMLResponse:
+def export_button(cid: str, a: dict) -> str:
+    """Export button for one assessment, labeled with it ('Export Quiz 1 for analytics')."""
+    short = a["name"].split(":")[0].strip()
+    return f"""
+  <div class="export-wrap">
+    <button class="btn btn-primary" id="export-btn" data-url="/analytics/export/{cid}/assignments/{a['id']}"
+            title="Export {esc(a['name'])}, its grades and feedback, and the course material related to it">
+      {ICONS["export"]}<span> Export {esc(short)} for analytics</span></button>
+    <div class="export-panel" id="export-panel" role="status" hidden></div>
+  </div>"""
+
+
+def course_page(c: dict, section: str, crumbs: list[str], main: str, right: str = "",
+                export_for: dict | None = None, **kw) -> HTMLResponse:
     cid = str(c["course"]["id"])
     nav = "".join(f'<li><a class="{"active" if key == section else ""}" href="/courses/{cid}{path}">{label}</a></li>'
                   for key, label, path in COURSE_NAV)
@@ -197,11 +210,7 @@ def course_page(c: dict, section: str, crumbs: list[str], main: str, right: str 
     body = f"""
 <header class="course-header">
   <button class="hamburger" id="course-nav-toggle" aria-label="Hide course navigation">{ICONS["hamburger"]}</button>
-  <nav class="breadcrumbs">{' <span class="sep">&rsaquo;</span> '.join(trail)}</nav>
-  <div class="export-wrap">
-    <button class="btn btn-primary" id="export-btn" data-course="{cid}">{ICONS["export"]} Export for analytics</button>
-    <div class="export-panel" id="export-panel" role="status" hidden></div>
-  </div>
+  <nav class="breadcrumbs">{' <span class="sep">&rsaquo;</span> '.join(trail)}</nav>{export_button(cid, export_for) if export_for else ""}
 </header>
 <div class="course-body{' has-right' if right else ''}">
   <nav class="course-nav" aria-label="Course"><div class="term muted small">{esc(c["course"].get("term", "Autumn 2026"))}</div><ul>{nav}</ul></nav>
@@ -477,7 +486,7 @@ def assignment_page(course_id: str, assignment_id: str):
     a = assignment(c, assignment_id)
     if is_quiz(a):
         main = quiz_overview(course_id, a)
-        return course_page(c, "assignments", ["Quizzes", a["name"]], main)
+        return course_page(c, "assignments", ["Quizzes", a["name"]], main, export_for=a)
     s = submission(c, assignment_id) or {}
     graded = s.get("score") is not None
     assessed = s.get("rubric_assessment", {})
@@ -520,7 +529,7 @@ def assignment_page(course_id: str, assignment_id: str):
 {f'<ul class="comments">{comments}</ul>' if comments else '<p class="muted">No comments</p>'}"""
     else:
         right = '<h2 class="side-h">Submission</h2><p class="muted">Not submitted yet.</p>'
-    return course_page(c, "assignments", ["Assignments", a["name"]], main, right)
+    return course_page(c, "assignments", ["Assignments", a["name"]], main, right, export_for=a)
 
 
 @router.get("/courses/{course_id}/quizzes/{quiz_id}", response_class=HTMLResponse)
@@ -530,7 +539,7 @@ def quiz_page(course_id: str, quiz_id: str):
     if not is_quiz(a):
         raise HTTPException(404, "quiz not found")
     main = quiz_attempt(c, a)
-    return course_page(c, "assignments", ["Quizzes", a["name"], "Take Quiz"], main)
+    return course_page(c, "assignments", ["Quizzes", a["name"], "Take Quiz"], main, export_for=a)
 
 
 @router.get("/courses/{course_id}/grades", response_class=HTMLResponse)
