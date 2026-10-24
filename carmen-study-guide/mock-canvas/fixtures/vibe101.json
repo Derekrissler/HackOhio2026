@@ -1,0 +1,1117 @@
+{
+  "course": {
+    "id": 1001,
+    "name": "VIBE 101: Vibe Coding 101",
+    "course_code": "VIBE 101",
+    "term": "Spring 2026",
+    "syllabus_body": "<h1>VIBE 101: Vibe Coding 101</h1>\n<p><strong>Introduction to Building Software with AI Assistants</strong></p>\n<table>\n<thead>\n<tr>\n<th></th>\n<th></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Credits</strong></td>\n<td>3</td>\n</tr>\n<tr>\n<td><strong>Term</strong></td>\n<td>Autumn (14 weeks)</td>\n</tr>\n<tr>\n<td><strong>Instructor</strong></td>\n<td>Dr. Quinn Ferrous</td>\n</tr>\n<tr>\n<td><strong>TAs</strong></td>\n<td>Maya Okafor, Dev Raman</td>\n</tr>\n<tr>\n<td><strong>Lecture</strong></td>\n<td>Tue/Thu 11:10–12:30</td>\n</tr>\n<tr>\n<td><strong>Office hours</strong></td>\n<td>Wed 2–4 PM, or by appointment (\"the vibe is immaculate\" is not an appointment request)</td>\n</tr>\n<tr>\n<td><strong>Prerequisites</strong></td>\n<td>One prior programming course (any language)</td>\n</tr>\n<tr>\n<td><strong>Textbook</strong></td>\n<td><em>Vibes, Prompts, and Production: A Field Guide to Vibe Coding</em> (provided in course materials)</td>\n</tr>\n</tbody>\n</table>\n<h2>Course Description</h2>\n<p>Vibe coding is the practice of building software by describing what you want to an AI assistant, then steering, testing, and fixing what comes back. It is fast, fun, and occasionally catastrophic. This course teaches you to do it <em>well</em>: writing clear specifications, reading code you did not write, testing before trusting, and shipping something that still works on Monday.</p>\n<p>You will not be graded on how much code the AI wrote. You will be graded on whether you understand it, can defend it, and can fix it when it breaks. The AI is your pair programmer, not your lawyer.</p>\n<h2>Learning Objectives</h2>\n<p>By the end of this course, students will be able to:</p>\n<ol>\n<li><strong>Explain</strong> what vibe coding is, where it works well, and where it fails, including its effect on speed, quality, and maintainability.</li>\n<li><strong>Write</strong> precise prompts and specifications that include requirements, constraints, inputs/outputs, and examples.</li>\n<li><strong>Read and critique</strong> AI-generated code for correctness, clarity, efficiency, and style.</li>\n<li><strong>Test and debug</strong> AI-generated code using unit tests, edge cases, and systematic debugging rather than re-rolling the prompt and hoping.</li>\n<li><strong>Identify and mitigate</strong> security, privacy, and licensing risks in AI-assisted development.</li>\n<li><strong>Iterate and document</strong> a development process, including a prompt log and decision record, to build and ship a small working application.</li>\n<li><strong>Evaluate</strong> when to use AI assistance and when to write code by hand, and justify that decision.</li>\n</ol>\n<h2>Weekly Schedule</h2>\n<table>\n<thead>\n<tr>\n<th>Week</th>\n<th>Topic</th>\n<th>Reading</th>\n<th>Due</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>What Is Vibe Coding?</td>\n<td>Ch. 1</td>\n<td></td>\n</tr>\n<tr>\n<td>2</td>\n<td>Prompting as Specification</td>\n<td>Ch. 2</td>\n<td>Assignment 1 assigned</td>\n</tr>\n<tr>\n<td>3</td>\n<td>Specs, Examples, and Constraints</td>\n<td>Ch. 2</td>\n<td>Quiz 1</td>\n</tr>\n<tr>\n<td>4</td>\n<td>Reading Code You Didn't Write</td>\n<td>Ch. 3</td>\n<td>Assignment 1 due</td>\n</tr>\n<tr>\n<td>5</td>\n<td>Code Review for Humans (and Robots)</td>\n<td>Ch. 3</td>\n<td>Assignment 2 assigned</td>\n</tr>\n<tr>\n<td>6</td>\n<td>Tests First, Vibes Second</td>\n<td>Ch. 4</td>\n<td>Quiz 2</td>\n</tr>\n<tr>\n<td>7</td>\n<td>Debugging AI Code</td>\n<td>Ch. 4</td>\n<td>Assignment 2 due</td>\n</tr>\n<tr>\n<td>8</td>\n<td><strong>Midterm Exam</strong></td>\n<td>Ch. 1–4</td>\n<td>Midterm</td>\n</tr>\n<tr>\n<td>9</td>\n<td>Security and Secrets</td>\n<td>Ch. 5</td>\n<td>Assignment 3 assigned</td>\n</tr>\n<tr>\n<td>10</td>\n<td>Licensing, Privacy, and Ethics</td>\n<td>Ch. 5</td>\n<td>Quiz 3</td>\n</tr>\n<tr>\n<td>11</td>\n<td>Agents, Tools, and Automation</td>\n<td>Ch. 6</td>\n<td>Assignment 3 due</td>\n</tr>\n<tr>\n<td>12</td>\n<td>Project Studio</td>\n<td></td>\n<td>Final project proposal</td>\n</tr>\n<tr>\n<td>13</td>\n<td>Project Studio / Demos</td>\n<td></td>\n<td>Final project draft</td>\n</tr>\n<tr>\n<td>14</td>\n<td>Demo Day and Review</td>\n<td></td>\n<td>Final project due</td>\n</tr>\n<tr>\n<td>Finals</td>\n<td><strong>Final Exam</strong></td>\n<td>Ch. 1–6</td>\n<td>Final</td>\n</tr>\n</tbody>\n</table>\n<h2>Grading</h2>\n<table>\n<thead>\n<tr>\n<th>Component</th>\n<th>Weight</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Assignments (3)</td>\n<td>30%</td>\n</tr>\n<tr>\n<td>Final Project</td>\n<td>10%</td>\n</tr>\n<tr>\n<td>Quizzes (3, lowest score dropped)</td>\n<td>15%</td>\n</tr>\n<tr>\n<td>Midterm Exam</td>\n<td>15%</td>\n</tr>\n<tr>\n<td>Final Exam</td>\n<td>20%</td>\n</tr>\n<tr>\n<td>Participation and Prompt Logs</td>\n<td>10%</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Scale:</strong> A 93–100 · A− 90–92 · B+ 87–89 · B 83–86 · B− 80–82 · C+ 77–79 · C 73–76 · C− 70–72 · D 60–69 · E below 60</p>\n<h2>AI Use Policy</h2>\n<p>This is a course about using AI, so you are expected to use it. The rules:</p>\n<ul>\n<li><strong>Always allowed:</strong> AI assistants for assignments and the final project, with a <strong>prompt log</strong> submitted alongside your work.</li>\n<li><strong>Never allowed:</strong> submitting code you cannot explain. If the TA asks you what line 42 does and the answer is \"the AI wrote that,\" you will receive a gentle but firm zero on that line.</li>\n<li><strong>Exams:</strong> closed AI. You will be asked to read, trace, and write code by hand. Bring a pencil and your own brain.</li>\n<li><strong>Fabrication:</strong> inventing prompt logs, fake test results, or \"I tested this\" when you did not is an academic integrity violation.</li>\n</ul>\n<h2>Late Policy</h2>\n<ul>\n<li>Assignments lose 10% per day, up to 3 days. After that, they are not accepted.</li>\n<li>Two free \"grace days\" are available for the semester. No explanation needed.</li>\n<li>Documented emergencies and accommodations are handled case by case. Email the instructor early.</li>\n</ul>\n<h2>Academic Integrity</h2>\n<p>Collaboration on concepts is encouraged. Collaboration on code must be disclosed in your submission. Copying another student's work or their prompt log is not permitted. When in doubt, disclose.</p>\n<h2>Accessibility and Accommodations</h2>\n<p>Students with documented accommodations should contact the instructor within the first two weeks. All course materials are provided in screen-reader-friendly formats.</p>\n<h2>Well-Being</h2>\n<p>Debugging at 2 AM is a rite of passage, but sleep is also a feature. If you are struggling, reach out to the instructor, a TA, or your campus counseling services.</p>"
+  },
+  "self_user_id": 5001,
+  "self_user_name": "Test Student",
+  "assignment_groups": [
+    {
+      "name": "Assignments",
+      "group_weight": 30
+    },
+    {
+      "name": "Final Project",
+      "group_weight": 10
+    },
+    {
+      "name": "Quizzes",
+      "group_weight": 15
+    },
+    {
+      "name": "Midterm Exam",
+      "group_weight": 15
+    },
+    {
+      "name": "Final Exam",
+      "group_weight": 20
+    }
+  ],
+  "modules": [
+    {
+      "id": 1,
+      "name": "Start Here",
+      "items": [
+        {
+          "id": 10000,
+          "title": "Syllabus",
+          "type": "Page",
+          "page_url": "syllabus"
+        },
+        {
+          "id": 10001,
+          "title": "Textbook: A Field Guide to Vibe Coding",
+          "type": "Page",
+          "page_url": "a-field-guide-to-vibe-coding"
+        },
+        {
+          "id": 10002,
+          "title": "Textbook: Glossary",
+          "type": "Page",
+          "page_url": "glossary"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Week 1: What Is Vibe Coding?",
+      "items": [
+        {
+          "id": 10003,
+          "title": "Read",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10004,
+          "title": "Textbook Chapter 1: What Is Vibe Coding?",
+          "type": "Page",
+          "page_url": "chapter-1-what-is-vibe-coding",
+          "indent": 1
+        },
+        {
+          "id": 10005,
+          "title": "Lecture 1 slides: What Is Vibe Coding?",
+          "type": "File",
+          "content_id": 301,
+          "indent": 1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Week 2: Prompting as Specification",
+      "items": [
+        {
+          "id": 10006,
+          "title": "Read",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10007,
+          "title": "Textbook Chapter 2: Prompting as Specification",
+          "type": "Page",
+          "page_url": "chapter-2-prompting-as-specification",
+          "indent": 1
+        },
+        {
+          "id": 10008,
+          "title": "Lecture 2 slides: Prompting as Specification",
+          "type": "File",
+          "content_id": 302,
+          "indent": 1
+        },
+        {
+          "id": 10009,
+          "title": "Assignments and assessments",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10010,
+          "title": "Assignment 1: Hello, Vibes",
+          "type": "Assignment",
+          "content_id": 2001,
+          "indent": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Week 3: Specs, Examples, and Constraints",
+      "items": [
+        {
+          "id": 10011,
+          "title": "Read",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10012,
+          "title": "Textbook Chapter 2: Prompting as Specification",
+          "type": "Page",
+          "page_url": "chapter-2-prompting-as-specification",
+          "indent": 1
+        },
+        {
+          "id": 10013,
+          "title": "Assignments and assessments",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10014,
+          "title": "Quiz 1: Chapters 1–2",
+          "type": "Assignment",
+          "content_id": 2101,
+          "indent": 1
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Week 4: Reading Code You Didn't Write",
+      "items": [
+        {
+          "id": 10015,
+          "title": "Read",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10016,
+          "title": "Textbook Chapter 3: Reading Code You Didn't Write",
+          "type": "Page",
+          "page_url": "chapter-3-reading-code-you-didn-t-write",
+          "indent": 1
+        },
+        {
+          "id": 10017,
+          "title": "Lecture 3 slides: Reading Code You Didn't Write",
+          "type": "File",
+          "content_id": 303,
+          "indent": 1
+        },
+        {
+          "id": 10018,
+          "title": "Due this week: Assignment 1 due",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10019,
+          "title": "Assignment 1: Hello, Vibes",
+          "type": "Assignment",
+          "content_id": 2001,
+          "indent": 1
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Week 5: Code Review for Humans (and Robots)",
+      "items": [
+        {
+          "id": 10020,
+          "title": "Read",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10021,
+          "title": "Textbook Chapter 3: Reading Code You Didn't Write",
+          "type": "Page",
+          "page_url": "chapter-3-reading-code-you-didn-t-write",
+          "indent": 1
+        },
+        {
+          "id": 10022,
+          "title": "Assignments and assessments",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10023,
+          "title": "Assignment 2: Spec First",
+          "type": "Assignment",
+          "content_id": 2002,
+          "indent": 1
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Week 6: Tests First, Vibes Second",
+      "items": [
+        {
+          "id": 10024,
+          "title": "Read",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10025,
+          "title": "Textbook Chapter 4: Tests First, Vibes Second",
+          "type": "Page",
+          "page_url": "chapter-4-tests-first-vibes-second",
+          "indent": 1
+        },
+        {
+          "id": 10026,
+          "title": "Lecture 4 slides: Tests First, Vibes Second",
+          "type": "File",
+          "content_id": 304,
+          "indent": 1
+        },
+        {
+          "id": 10027,
+          "title": "Assignments and assessments",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10028,
+          "title": "Quiz 2: Chapters 3–4",
+          "type": "Assignment",
+          "content_id": 2102,
+          "indent": 1
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Week 7: Debugging AI Code",
+      "items": [
+        {
+          "id": 10029,
+          "title": "Read",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10030,
+          "title": "Textbook Chapter 4: Tests First, Vibes Second",
+          "type": "Page",
+          "page_url": "chapter-4-tests-first-vibes-second",
+          "indent": 1
+        },
+        {
+          "id": 10031,
+          "title": "Due this week: Assignment 2 due",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10032,
+          "title": "Assignment 2: Spec First",
+          "type": "Assignment",
+          "content_id": 2002,
+          "indent": 1
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Week 8: Midterm Exam",
+      "items": [
+        {
+          "id": 10033,
+          "title": "Review: Chapters 1–4",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10034,
+          "title": "Assignments and assessments",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10035,
+          "title": "Midterm Exam",
+          "type": "Assignment",
+          "content_id": 2201,
+          "indent": 1
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Week 9: Security and Secrets",
+      "items": [
+        {
+          "id": 10036,
+          "title": "Read",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10037,
+          "title": "Textbook Chapter 5: Security, Privacy, and Ethics",
+          "type": "Page",
+          "page_url": "chapter-5-security-privacy-and-ethics",
+          "indent": 1
+        },
+        {
+          "id": 10038,
+          "title": "Lecture 5 slides: Security, Privacy, Ethics",
+          "type": "File",
+          "content_id": 305,
+          "indent": 1
+        },
+        {
+          "id": 10039,
+          "title": "Assignments and assessments",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10040,
+          "title": "Assignment 3: The Bug Hunt",
+          "type": "Assignment",
+          "content_id": 2003,
+          "indent": 1
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Week 10: Licensing, Privacy, and Ethics",
+      "items": [
+        {
+          "id": 10041,
+          "title": "Read",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10042,
+          "title": "Textbook Chapter 5: Security, Privacy, and Ethics",
+          "type": "Page",
+          "page_url": "chapter-5-security-privacy-and-ethics",
+          "indent": 1
+        },
+        {
+          "id": 10043,
+          "title": "Assignments and assessments",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10044,
+          "title": "Quiz 3: Chapter 5",
+          "type": "Assignment",
+          "content_id": 2103,
+          "indent": 1
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Week 11: Agents, Tools, and Automation",
+      "items": [
+        {
+          "id": 10045,
+          "title": "Read",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10046,
+          "title": "Textbook Chapter 6: Agents, Tools, and Automation",
+          "type": "Page",
+          "page_url": "chapter-6-agents-tools-and-automation",
+          "indent": 1
+        },
+        {
+          "id": 10047,
+          "title": "Lecture 6 slides: Agents and Guardrails",
+          "type": "File",
+          "content_id": 306,
+          "indent": 1
+        },
+        {
+          "id": 10048,
+          "title": "Due this week: Assignment 3 due",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10049,
+          "title": "Assignment 3: The Bug Hunt",
+          "type": "Assignment",
+          "content_id": 2003,
+          "indent": 1
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Week 12: Project Studio",
+      "items": [
+        {
+          "id": 10050,
+          "title": "Assignments and assessments",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10051,
+          "title": "Final Project: Ship It",
+          "type": "Assignment",
+          "content_id": 2004,
+          "indent": 1
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Week 13: Project Studio / Demos",
+      "items": [
+        {
+          "id": 10052,
+          "title": "Due this week: Final project draft",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10053,
+          "title": "Final Project: Ship It",
+          "type": "Assignment",
+          "content_id": 2004,
+          "indent": 1
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Week 14: Demo Day and Review",
+      "items": [
+        {
+          "id": 10054,
+          "title": "Due this week: Final project due",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10055,
+          "title": "Final Project: Ship It",
+          "type": "Assignment",
+          "content_id": 2004,
+          "indent": 1
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Finals Week: Final Exam",
+      "items": [
+        {
+          "id": 10056,
+          "title": "Review: Chapters 1–6",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10057,
+          "title": "Assignments and assessments",
+          "type": "SubHeader"
+        },
+        {
+          "id": 10058,
+          "title": "Final Exam",
+          "type": "Assignment",
+          "content_id": 2202,
+          "indent": 1
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "url": "syllabus",
+      "title": "Syllabus",
+      "body": "<h1>VIBE 101: Vibe Coding 101</h1>\n<p><strong>Introduction to Building Software with AI Assistants</strong></p>\n<table>\n<thead>\n<tr>\n<th></th>\n<th></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Credits</strong></td>\n<td>3</td>\n</tr>\n<tr>\n<td><strong>Term</strong></td>\n<td>Autumn (14 weeks)</td>\n</tr>\n<tr>\n<td><strong>Instructor</strong></td>\n<td>Dr. Quinn Ferrous</td>\n</tr>\n<tr>\n<td><strong>TAs</strong></td>\n<td>Maya Okafor, Dev Raman</td>\n</tr>\n<tr>\n<td><strong>Lecture</strong></td>\n<td>Tue/Thu 11:10–12:30</td>\n</tr>\n<tr>\n<td><strong>Office hours</strong></td>\n<td>Wed 2–4 PM, or by appointment (\"the vibe is immaculate\" is not an appointment request)</td>\n</tr>\n<tr>\n<td><strong>Prerequisites</strong></td>\n<td>One prior programming course (any language)</td>\n</tr>\n<tr>\n<td><strong>Textbook</strong></td>\n<td><em>Vibes, Prompts, and Production: A Field Guide to Vibe Coding</em> (provided in course materials)</td>\n</tr>\n</tbody>\n</table>\n<h2>Course Description</h2>\n<p>Vibe coding is the practice of building software by describing what you want to an AI assistant, then steering, testing, and fixing what comes back. It is fast, fun, and occasionally catastrophic. This course teaches you to do it <em>well</em>: writing clear specifications, reading code you did not write, testing before trusting, and shipping something that still works on Monday.</p>\n<p>You will not be graded on how much code the AI wrote. You will be graded on whether you understand it, can defend it, and can fix it when it breaks. The AI is your pair programmer, not your lawyer.</p>\n<h2>Learning Objectives</h2>\n<p>By the end of this course, students will be able to:</p>\n<ol>\n<li><strong>Explain</strong> what vibe coding is, where it works well, and where it fails, including its effect on speed, quality, and maintainability.</li>\n<li><strong>Write</strong> precise prompts and specifications that include requirements, constraints, inputs/outputs, and examples.</li>\n<li><strong>Read and critique</strong> AI-generated code for correctness, clarity, efficiency, and style.</li>\n<li><strong>Test and debug</strong> AI-generated code using unit tests, edge cases, and systematic debugging rather than re-rolling the prompt and hoping.</li>\n<li><strong>Identify and mitigate</strong> security, privacy, and licensing risks in AI-assisted development.</li>\n<li><strong>Iterate and document</strong> a development process, including a prompt log and decision record, to build and ship a small working application.</li>\n<li><strong>Evaluate</strong> when to use AI assistance and when to write code by hand, and justify that decision.</li>\n</ol>\n<h2>Weekly Schedule</h2>\n<table>\n<thead>\n<tr>\n<th>Week</th>\n<th>Topic</th>\n<th>Reading</th>\n<th>Due</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>What Is Vibe Coding?</td>\n<td>Ch. 1</td>\n<td></td>\n</tr>\n<tr>\n<td>2</td>\n<td>Prompting as Specification</td>\n<td>Ch. 2</td>\n<td>Assignment 1 assigned</td>\n</tr>\n<tr>\n<td>3</td>\n<td>Specs, Examples, and Constraints</td>\n<td>Ch. 2</td>\n<td>Quiz 1</td>\n</tr>\n<tr>\n<td>4</td>\n<td>Reading Code You Didn't Write</td>\n<td>Ch. 3</td>\n<td>Assignment 1 due</td>\n</tr>\n<tr>\n<td>5</td>\n<td>Code Review for Humans (and Robots)</td>\n<td>Ch. 3</td>\n<td>Assignment 2 assigned</td>\n</tr>\n<tr>\n<td>6</td>\n<td>Tests First, Vibes Second</td>\n<td>Ch. 4</td>\n<td>Quiz 2</td>\n</tr>\n<tr>\n<td>7</td>\n<td>Debugging AI Code</td>\n<td>Ch. 4</td>\n<td>Assignment 2 due</td>\n</tr>\n<tr>\n<td>8</td>\n<td><strong>Midterm Exam</strong></td>\n<td>Ch. 1–4</td>\n<td>Midterm</td>\n</tr>\n<tr>\n<td>9</td>\n<td>Security and Secrets</td>\n<td>Ch. 5</td>\n<td>Assignment 3 assigned</td>\n</tr>\n<tr>\n<td>10</td>\n<td>Licensing, Privacy, and Ethics</td>\n<td>Ch. 5</td>\n<td>Quiz 3</td>\n</tr>\n<tr>\n<td>11</td>\n<td>Agents, Tools, and Automation</td>\n<td>Ch. 6</td>\n<td>Assignment 3 due</td>\n</tr>\n<tr>\n<td>12</td>\n<td>Project Studio</td>\n<td></td>\n<td>Final project proposal</td>\n</tr>\n<tr>\n<td>13</td>\n<td>Project Studio / Demos</td>\n<td></td>\n<td>Final project draft</td>\n</tr>\n<tr>\n<td>14</td>\n<td>Demo Day and Review</td>\n<td></td>\n<td>Final project due</td>\n</tr>\n<tr>\n<td>Finals</td>\n<td><strong>Final Exam</strong></td>\n<td>Ch. 1–6</td>\n<td>Final</td>\n</tr>\n</tbody>\n</table>\n<h2>Grading</h2>\n<table>\n<thead>\n<tr>\n<th>Component</th>\n<th>Weight</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Assignments (3)</td>\n<td>30%</td>\n</tr>\n<tr>\n<td>Final Project</td>\n<td>10%</td>\n</tr>\n<tr>\n<td>Quizzes (3, lowest score dropped)</td>\n<td>15%</td>\n</tr>\n<tr>\n<td>Midterm Exam</td>\n<td>15%</td>\n</tr>\n<tr>\n<td>Final Exam</td>\n<td>20%</td>\n</tr>\n<tr>\n<td>Participation and Prompt Logs</td>\n<td>10%</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Scale:</strong> A 93–100 · A− 90–92 · B+ 87–89 · B 83–86 · B− 80–82 · C+ 77–79 · C 73–76 · C− 70–72 · D 60–69 · E below 60</p>\n<h2>AI Use Policy</h2>\n<p>This is a course about using AI, so you are expected to use it. The rules:</p>\n<ul>\n<li><strong>Always allowed:</strong> AI assistants for assignments and the final project, with a <strong>prompt log</strong> submitted alongside your work.</li>\n<li><strong>Never allowed:</strong> submitting code you cannot explain. If the TA asks you what line 42 does and the answer is \"the AI wrote that,\" you will receive a gentle but firm zero on that line.</li>\n<li><strong>Exams:</strong> closed AI. You will be asked to read, trace, and write code by hand. Bring a pencil and your own brain.</li>\n<li><strong>Fabrication:</strong> inventing prompt logs, fake test results, or \"I tested this\" when you did not is an academic integrity violation.</li>\n</ul>\n<h2>Late Policy</h2>\n<ul>\n<li>Assignments lose 10% per day, up to 3 days. After that, they are not accepted.</li>\n<li>Two free \"grace days\" are available for the semester. No explanation needed.</li>\n<li>Documented emergencies and accommodations are handled case by case. Email the instructor early.</li>\n</ul>\n<h2>Academic Integrity</h2>\n<p>Collaboration on concepts is encouraged. Collaboration on code must be disclosed in your submission. Copying another student's work or their prompt log is not permitted. When in doubt, disclose.</p>\n<h2>Accessibility and Accommodations</h2>\n<p>Students with documented accommodations should contact the instructor within the first two weeks. All course materials are provided in screen-reader-friendly formats.</p>\n<h2>Well-Being</h2>\n<p>Debugging at 2 AM is a rite of passage, but sleep is also a feature. If you are struggling, reach out to the instructor, a TA, or your campus counseling services.</p>"
+    },
+    {
+      "url": "a-field-guide-to-vibe-coding",
+      "title": "Textbook: A Field Guide to Vibe Coding",
+      "body": "<p><em>\"The code compiles. The vibes are good. What could go wrong?\" — Famous last words, every semester</em></p>"
+    },
+    {
+      "url": "chapter-1-what-is-vibe-coding",
+      "title": "Textbook Chapter 1: What Is Vibe Coding?",
+      "body": "<h3>1.1 Definition</h3>\n<p><strong>Vibe coding</strong> is a style of software development in which the programmer describes intent in natural language and relies on an AI assistant to generate most of the code. The programmer's job shifts from <em>typing</em> to <em>directing, reviewing, and verifying</em>.</p>\n<h3>1.2 A Short History</h3>\n<p>Programming has always moved toward higher abstraction: machine code, assembly, compilers, high-level languages, frameworks. Vibe coding is the next step in that sequence. The difference is that earlier abstractions were deterministic. A compiler given the same input produces the same output. A language model does not. That single fact explains most of this book.</p>\n<h3>1.3 Where It Works</h3>\n<ul>\n<li>Prototypes and throwaway scripts</li>\n<li>Boilerplate (config files, CRUD endpoints, data parsing)</li>\n<li>Learning a new library or language</li>\n<li>Translating code between languages</li>\n<li>Writing first drafts of tests</li>\n</ul>\n<h3>1.4 Where It Struggles</h3>\n<ul>\n<li>Large codebases with unwritten conventions</li>\n<li>Performance-critical or safety-critical code</li>\n<li>Novel algorithms with no good public examples</li>\n<li>Anything where \"mostly right\" is not good enough</li>\n</ul>\n<h3>1.5 The Vibe Coding Loop</h3>\n<ol>\n<li><strong>Describe</strong> what you want.</li>\n<li><strong>Generate</strong> code with the assistant.</li>\n<li><strong>Read</strong> what came back.</li>\n<li><strong>Test</strong> it.</li>\n<li><strong>Refine</strong> the prompt, the code, or both.</li>\n</ol>\n<p>Skipping step 3 or 4 is how you end up deploying a login page that accepts any password. This has happened. Not in this class, but somewhere.</p>\n<h3>1.6 Key Idea: You Own the Output</h3>\n<p>The assistant writes the code. You ship it. If it breaks production, \"the AI did it\" is not a defense, in the same way \"autocomplete did it\" never was.</p>"
+    },
+    {
+      "url": "chapter-2-prompting-as-specification",
+      "title": "Textbook Chapter 2: Prompting as Specification",
+      "body": "<h3>2.1 A Prompt Is a Spec</h3>\n<p>A vague prompt produces vague code. Compare:</p>\n<blockquote>\n<p><strong>Weak:</strong> \"Make a to-do app.\"</p>\n<p><strong>Strong:</strong> \"Write a Python command-line to-do app. Commands: <code>add &lt;text&gt;</code>, <code>done &lt;id&gt;</code>, <code>list</code>. Store tasks in a JSON file <code>tasks.json</code>. IDs are integers starting at 1 and never reused. <code>list</code> prints <code>[ ] 1 Buy milk</code> or <code>[x] 1 Buy milk</code>. Use only the standard library.\"</p>\n</blockquote>\n<p>The second prompt names the language, interface, storage, ID rules, output format, and constraints.</p>\n<h3>2.2 The Five Parts of a Good Prompt</h3>\n<ol>\n<li><strong>Goal:</strong> what the code should do</li>\n<li><strong>Context:</strong> language, framework, existing code</li>\n<li><strong>Constraints:</strong> libraries allowed, style, performance, what <em>not</em> to do</li>\n<li><strong>Examples:</strong> sample inputs and expected outputs</li>\n<li><strong>Format:</strong> how you want the answer (full file, diff, explanation)</li>\n</ol>\n<h3>2.3 Examples Beat Adjectives</h3>\n<p>\"Make it robust\" means nothing. \"Return <code>None</code> if the list is empty; raise <code>ValueError</code> if any element is negative\" means something. Give edge cases explicitly.</p>\n<h3>2.4 Iterating Without Spiraling</h3>\n<p>When the output is wrong, resist re-rolling. Instead:</p>\n<ul>\n<li>Identify <em>what</em> is wrong (wrong behavior, wrong style, wrong approach).</li>\n<li>Tell the assistant specifically.</li>\n<li>Change one thing at a time.</li>\n</ul>\n<p>If you have rewritten the same prompt six times with minor tweaks, the problem is probably your spec, not the model.</p>\n<h3>2.5 Prompt Logs</h3>\n<p>A <strong>prompt log</strong> records your prompts, the assistant's key responses, and what you changed. It documents your process and lets others (and future you) understand why the code looks the way it does.</p>"
+    },
+    {
+      "url": "chapter-3-reading-code-you-didn-t-write",
+      "title": "Textbook Chapter 3: Reading Code You Didn't Write",
+      "body": "<h3>3.1 Why Reading Matters More Now</h3>\n<p>When you write code yourself, you understand it by default. When an assistant writes it, understanding is a separate step that you must do deliberately.</p>\n<h3>3.2 A Reading Checklist</h3>\n<ol>\n<li><strong>Does it match the spec?</strong> Check each requirement.</li>\n<li><strong>Trace it by hand</strong> on a small example.</li>\n<li><strong>Check boundaries:</strong> empty input, single element, maximum size, negative numbers, <code>None</code>/null.</li>\n<li><strong>Check hidden assumptions:</strong> is it assuming sorted input? Unique elements? Specific encodings?</li>\n<li><strong>Check dependencies:</strong> does it import a library that exists? (Assistants sometimes invent them.)</li>\n<li><strong>Look for smells:</strong> unused variables, duplicated logic, swallowed exceptions, magic numbers.</li>\n</ol>\n<h3>3.3 Common AI Code Failure Modes</h3>\n<ul>\n<li><strong>Hallucinated APIs:</strong> calls to functions or packages that do not exist.</li>\n<li><strong>Plausible but wrong logic:</strong> off-by-one errors, wrong comparison operators.</li>\n<li><strong>Silent error handling:</strong> a bare <code>except: pass</code> that hides every failure.</li>\n<li><strong>Mutable default arguments:</strong> <code>def f(x, items=[])</code> in Python shares one list across calls.</li>\n<li><strong>Outdated practices:</strong> deprecated functions, old library versions.</li>\n<li><strong>Overengineering:</strong> a factory pattern for a 10-line script.</li>\n</ul>\n<h3>3.4 Example</h3>\n<pre><code class=\"language-python\">def average(nums):\n    return sum(nums) / len(nums)\n</code></pre>\n<p>Looks fine. But <code>average([])</code> raises <code>ZeroDivisionError</code>. Is that acceptable? Only if the spec says so. Otherwise, it is a bug.</p>"
+    },
+    {
+      "url": "chapter-4-tests-first-vibes-second",
+      "title": "Textbook Chapter 4: Tests First, Vibes Second",
+      "body": "<h3>4.1 Why Tests Are the Seatbelt</h3>\n<p>Tests turn \"it seems to work\" into \"it works on these cases.\" With AI-generated code, tests are your main defense against confident nonsense.</p>\n<h3>4.2 Test-First Prompting</h3>\n<ol>\n<li>Write the spec.</li>\n<li>Write tests (by hand, or ask the assistant and then <em>review them</em>).</li>\n<li>Ask the assistant to write code that passes the tests.</li>\n<li>Run the tests.</li>\n</ol>\n<p>Note that AI-written tests for AI-written code can share the same blind spots. Review both.</p>\n<h3>4.3 What to Test</h3>\n<ul>\n<li><strong>Normal cases:</strong> typical inputs</li>\n<li><strong>Edge cases:</strong> empty, one item, very large, duplicates</li>\n<li><strong>Error cases:</strong> invalid input, missing files</li>\n<li><strong>Regression cases:</strong> every bug you fix gets a test so it stays fixed</li>\n</ul>\n<h3>4.4 A Minimal Example</h3>\n<pre><code class=\"language-python\">def test_average_basic():\n    assert average([2, 4, 6]) == 4\n\ndef test_average_empty():\n    # spec: return 0 for empty list\n    assert average([]) == 0\n</code></pre>\n<h3>4.5 Systematic Debugging</h3>\n<p>When something fails:</p>\n<ol>\n<li><strong>Reproduce</strong> it with the smallest input possible.</li>\n<li><strong>Locate</strong> where actual behavior diverges from expected (print statements, debugger, tracing).</li>\n<li><strong>Hypothesize</strong> a cause.</li>\n<li><strong>Fix</strong> one thing.</li>\n<li><strong>Re-run</strong> all tests.</li>\n</ol>\n<p>Do not paste the error into the assistant and accept the first fix without reading it. Sometimes the \"fix\" is deleting the test.</p>"
+    },
+    {
+      "url": "chapter-5-security-privacy-and-ethics",
+      "title": "Textbook Chapter 5: Security, Privacy, and Ethics",
+      "body": "<h3>5.1 Secrets</h3>\n<p>Never paste API keys, passwords, or private data into a prompt. Never commit them to a repository. Use environment variables and <code>.gitignore</code>. Assistants will cheerfully generate code with <code>API_KEY = \"sk-12345\"</code> hard-coded. Do not keep it.</p>\n<h3>5.2 Common Vulnerabilities in Generated Code</h3>\n<ul>\n<li><strong>SQL injection:</strong> building queries with string concatenation instead of parameterized queries.</li>\n<li><strong>Missing input validation:</strong> trusting user input.</li>\n<li><strong>Insecure defaults:</strong> debug mode on, wide-open CORS, weak password hashing.</li>\n<li><strong>Dependency risk:</strong> installing packages that are abandoned, malicious, or non-existent (\"slopsquatting\").</li>\n</ul>\n<h3>5.3 Privacy</h3>\n<p>Do not send other people's personal data to a third-party assistant unless you are permitted to. Know where your data goes and how the tool's provider uses it.</p>\n<h3>5.4 Licensing</h3>\n<p>Generated code may resemble existing open-source code. Check your tool's policies and your project's license requirements. When in doubt, cite, rewrite, or choose a different approach.</p>\n<h3>5.5 Ethics and Responsibility</h3>\n<p>You are accountable for what you ship. Consider who might be harmed by errors, bias, or misuse, and be honest with users and teammates about what was AI-assisted.</p>"
+    },
+    {
+      "url": "chapter-6-agents-tools-and-automation",
+      "title": "Textbook Chapter 6: Agents, Tools, and Automation",
+      "body": "<h3>6.1 From Chat to Agents</h3>\n<p>Early assistants answered questions. Modern ones can run commands, edit files, and call tools. An <strong>agent</strong> is an assistant that takes multiple steps toward a goal with some autonomy.</p>\n<h3>6.2 Benefits and Risks</h3>\n<p><strong>Benefits:</strong> faster multi-file changes, automated test-fix loops, less copy-pasting.\n<strong>Risks:</strong> unintended file changes, runaway costs, deleted data, actions you did not approve.</p>\n<h3>6.3 Guardrails</h3>\n<ul>\n<li>Work in a <strong>version-controlled</strong> repository so every change can be reverted.</li>\n<li>Give the agent the <strong>minimum permissions</strong> it needs.</li>\n<li>Require <strong>approval</strong> for destructive or irreversible actions.</li>\n<li><strong>Review the diff</strong> before accepting changes.</li>\n<li>Keep a <strong>human checkpoint</strong> before anything reaches production.</li>\n</ul>\n<h3>6.4 When Not to Use AI</h3>\n<p>Use your own hands when the code is security-critical and you need full understanding, when you are learning a concept and need the struggle, or when the cost of a mistake is high and review time exceeds writing time.</p>"
+    },
+    {
+      "url": "glossary",
+      "title": "Textbook: Glossary",
+      "body": "<table>\n<thead>\n<tr>\n<th>Term</th>\n<th>Definition</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Agent</strong></td>\n<td>An AI system that takes multiple actions toward a goal with some autonomy</td>\n</tr>\n<tr>\n<td><strong>Boilerplate</strong></td>\n<td>Repetitive, standard code with little unique logic</td>\n</tr>\n<tr>\n<td><strong>Edge case</strong></td>\n<td>An input at the extreme or unusual end of the allowed range</td>\n</tr>\n<tr>\n<td><strong>Hallucination</strong></td>\n<td>AI output that is confident but false, such as a nonexistent function</td>\n</tr>\n<tr>\n<td><strong>Prompt</strong></td>\n<td>The instruction given to an AI assistant</td>\n</tr>\n<tr>\n<td><strong>Prompt log</strong></td>\n<td>A record of prompts and responses used during development</td>\n</tr>\n<tr>\n<td><strong>Regression test</strong></td>\n<td>A test added to ensure a fixed bug does not return</td>\n</tr>\n<tr>\n<td><strong>Spec</strong></td>\n<td>A precise description of required behavior</td>\n</tr>\n<tr>\n<td><strong>Vibe coding</strong></td>\n<td>Building software by directing an AI assistant in natural language</td>\n</tr>\n</tbody>\n</table>"
+    }
+  ],
+  "files": [
+    {
+      "id": 301,
+      "display_name": "Lecture01-What-Is-Vibe-Coding.pdf",
+      "pages": [
+        "VIBE 101\nLecture 1: What Is Vibe Coding?\nDr. Quinn Ferrous\n\nTextbook: Chapter 1",
+        "Today's Agenda\n- Define vibe coding\n- Where it shines, where it burns\n- The Vibe Coding Loop\n- Live demo: \"Build me a to-do app\" (what could go wrong?)",
+        "Definition\nVibe coding: building software by describing intent in natural language and having an AI generate most of the code.\n\nYour job changes from typing to directing, reviewing, verifying.",
+        "Abstraction, Again\nMachine code -> Assembly -> C -> Python -> Natural language\n\nKey difference: compilers are deterministic. Language models are not.\n\n> Same prompt, different code. Plan accordingly.",
+        "Where It Works\n- Prototypes and throwaway scripts\n- Boilerplate and config\n- Learning new libraries\n- Translating between languages\n- First drafts of tests",
+        "Where It Struggles\n- Big codebases with unwritten rules\n- Safety- or performance-critical code\n- Novel algorithms\n- Anything where \"mostly right\" is not right",
+        "The Vibe Coding Loop\n1. Describe\n2. Generate\n3. Read\n4. Test\n5. Refine\n\nSteps 3 and 4 are not optional. They are the whole course.",
+        "Key Takeaway\nYou own the output.\n\n\"The AI wrote it\" has the same legal and professional weight as \"autocomplete wrote it.\"\n\nNext time: Prompting as Specification"
+      ]
+    },
+    {
+      "id": 302,
+      "display_name": "Lecture02-Prompting-as-Specification.pdf",
+      "pages": [
+        "Lecture 2: Prompting as Specification\nTextbook: Chapter 2",
+        "A Prompt Is a Spec\nWeak: \"Make a to-do app.\"\n\nStrong: \"Python CLI to-do app. Commands: add, done, list. JSON storage. IDs start at 1, never reused. Standard library only.\"\n\nWhich one would you want to implement?",
+        "Five Parts of a Good Prompt\n1. Goal\n2. Context\n3. Constraints\n4. Examples\n5. Format",
+        "Examples Beat Adjectives\n- [no] \"Make it robust.\"\n- [yes] \"Return None for an empty list. Raise ValueError on negative values.\"\n\nEdge cases in the prompt = fewer surprises in the code.",
+        "Iterating Without Spiraling\n- Name what is wrong\n- Change one thing at a time\n- If you've rewritten the prompt 6 times, the spec is the problem",
+        "Prompt Logs\nRecord: prompt -> response -> what you changed and why.\n\nPurpose: reproducibility, accountability, and grading. (Yes, we read them. Yes, all of them. Maya has opinions.)"
+      ]
+    },
+    {
+      "id": 303,
+      "display_name": "Lecture03-Reading-Code-You-Didn-t-Write.pdf",
+      "pages": [
+        "Lecture 3: Reading Code You Didn't Write\nTextbook: Chapter 3",
+        "The Reading Checklist\n1. Matches the spec?\n2. Trace by hand\n3. Check boundaries\n4. Check hidden assumptions\n5. Check dependencies\n6. Look for smells",
+        "Spot the Bug\ndef average(nums):\n    return sum(nums) / len(nums)\nWhat happens on []?\n\nAnswer: ZeroDivisionError. Is that in the spec? If not, it's a bug.",
+        "Spot the Other Bug\ndef add_item(item, items=[]):\n    items.append(item)\n    return items\nCall it twice. What do you get?\n\nAnswer: the default list is shared across calls. The second call returns both items.",
+        "Common AI Failure Modes\n- Hallucinated APIs\n- Plausible but wrong logic\n- Silent except: pass\n- Mutable default arguments\n- Outdated practices\n- Overengineering (a factory for a 10-line script)"
+      ]
+    },
+    {
+      "id": 304,
+      "display_name": "Lecture04-Tests-First-Vibes-Second.pdf",
+      "pages": [
+        "Lecture 4: Tests First, Vibes Second\nTextbook: Chapter 4",
+        "Tests Are the Seatbelt\n\"It seems to work\" -> \"It works on these cases.\"",
+        "Test-First Prompting\n1. Write the spec\n2. Write the tests\n3. Generate code to pass them\n4. Run the tests\n\n(!) AI-written tests for AI-written code can share the same blind spots. Review both.",
+        "What to Test\n- Normal cases\n- Edge cases (empty, one, huge, duplicates)\n- Error cases\n- Regression cases (every fixed bug gets a test)",
+        "Systematic Debugging\n1. Reproduce minimally\n2. Locate the divergence\n3. Hypothesize\n4. Fix one thing\n5. Re-run everything\n\nDo not accept a \"fix\" that deletes the failing test."
+      ]
+    },
+    {
+      "id": 305,
+      "display_name": "Lecture05-Security-Privacy-Ethics.pdf",
+      "pages": [
+        "Lecture 5: Security, Privacy, Ethics\nTextbook: Chapter 5",
+        "Secrets\n- Never paste keys into prompts\n- Never commit them\n- Use environment variables and .gitignore\n\nAPI_KEY = \"sk-12345\"   # Delete this immediately",
+        "Vulnerabilities in Generated Code\n- SQL injection (string-built queries)\n- No input validation\n- Insecure defaults (debug mode, weak hashing)\n- Fake or malicious packages",
+        "Licensing, Privacy, Responsibility\n- Generated code can resemble open-source code\n- Don't send others' personal data to tools without permission\n- You are accountable for what you ship"
+      ]
+    },
+    {
+      "id": 306,
+      "display_name": "Lecture06-Agents-and-Guardrails.pdf",
+      "pages": [
+        "Lecture 6: Agents and Guardrails\nTextbook: Chapter 6",
+        "Chat vs. Agent\nChat: answers questions.\nAgent: takes multiple steps, edits files, runs commands.\n\nMore power. More ways to ruin your afternoon.",
+        "Guardrails\n- Use version control\n- Minimum permissions\n- Approval for destructive actions\n- Review every diff\n- Human checkpoint before production",
+        "When Not to Vibe\n- Security-critical code you must fully understand\n- Concepts you are trying to learn\n- High-stakes code where review costs more than writing",
+        "Course Wrap-Up\nYou can now:\n- Write specs, not wishes\n- Read before trusting\n- Test before shipping\n- Say \"no\" to the AI when needed\n\nMay your builds be green and your diffs be small."
+      ]
+    }
+  ],
+  "assignments": [
+    {
+      "id": 2001,
+      "name": "Assignment 1: Hello, Vibes",
+      "points_possible": 100,
+      "due_at": "2026-02-05T23:59:00",
+      "assignment_group": "Assignments",
+      "submission_types": [
+        "online_upload"
+      ],
+      "description": "<p><strong>Assigned:</strong> Week 2 · <strong>Due:</strong> Week 4 · <strong>Points:</strong> 100 · <strong>Objectives:</strong> 1, 2, 6</p>\n<h3>Overview</h3>\n<p>Build a command-line to-do app in Python using an AI assistant, then document how you got there.</p>\n<h3>Requirements</h3>\n<p>The app must support:</p>\n<ul>\n<li><code>add &lt;text&gt;</code>: adds a task and prints its ID</li>\n<li><code>done &lt;id&gt;</code>: marks a task complete</li>\n<li><code>list</code>: prints all tasks as <code>[ ] 1 Buy milk</code> or <code>[x] 1 Buy milk</code></li>\n<li>Persistent storage in <code>tasks.json</code></li>\n<li>IDs are integers starting at 1 and are never reused, even after deletion</li>\n<li>Standard library only</li>\n</ul>\n<h3>Deliverables</h3>\n<ol>\n<li><code>todo.py</code></li>\n<li><code>README.md</code> with usage instructions</li>\n<li><code>prompt_log.md</code> with at least <strong>5 prompts</strong>, including at least one where the first attempt was wrong and you corrected it</li>\n<li><code>reflection.md</code> (200–300 words): What did the AI get right? What did you have to fix? What would you do differently in your first prompt?</li>\n</ol>\n<hr />\n<p><strong>General rules for all assignments</strong></p>\n<ul>\n<li>Submit your code, tests, and a <strong>prompt log</strong> (PDF or Markdown).</li>\n<li>You may use any AI assistant. You must be able to explain every line.</li>\n<li>Late policy: see syllabus.</li>\n</ul>",
+      "rubric": [
+        {
+          "id": "_r1",
+          "description": "Functionality: all commands work as specified",
+          "points": 40
+        },
+        {
+          "id": "_r2",
+          "description": "Edge cases: bad ID, empty list, missing/corrupt JSON handled",
+          "points": 15
+        },
+        {
+          "id": "_r3",
+          "description": "Code quality: readable, minimal, no dead code",
+          "points": 10
+        },
+        {
+          "id": "_r4",
+          "description": "Prompt log: honest, complete, shows iteration",
+          "points": 20
+        },
+        {
+          "id": "_r5",
+          "description": "Reflection: specific and insightful",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "id": 2002,
+      "name": "Assignment 2: Spec First",
+      "points_possible": 100,
+      "due_at": "2026-02-26T23:59:00",
+      "assignment_group": "Assignments",
+      "submission_types": [
+        "online_upload"
+      ],
+      "description": "<p><strong>Assigned:</strong> Week 5 · <strong>Due:</strong> Week 7 · <strong>Points:</strong> 100 · <strong>Objectives:</strong> 2, 3, 4</p>\n<h3>Overview</h3>\n<p>Practice test-first development. You write the tests and spec <strong>before</strong> asking the AI for code.</p>\n<h3>Task</h3>\n<p>Implement a function <code>normalize_scores(scores: list[float]) -&gt; list[float]</code> that scales a list of numbers to the range 0 to 1 using min-max normalization.</p>\n<h3>Steps</h3>\n<ol>\n<li>Write a <strong>spec</strong> (1 page max) covering normal behavior and these cases: empty list, single element, all identical values, negative numbers, and non-numeric input.</li>\n<li>Write at least <strong>8 unit tests</strong> (using <code>pytest</code> or <code>unittest</code>) <em>before</em> generating any code.</li>\n<li>Prompt an AI to implement the function. Include your spec in the prompt.</li>\n<li>Run your tests. For every failure, decide whether the <strong>code</strong> or the <strong>test</strong> is wrong, and explain.</li>\n<li>Add at least <strong>2 regression tests</strong> for bugs you found along the way.</li>\n</ol>\n<h3>Deliverables</h3>\n<p><code>spec.md</code>, <code>test_normalize.py</code>, <code>normalize.py</code>, <code>prompt_log.md</code>, <code>failure_analysis.md</code></p>\n<hr />\n<p><strong>General rules for all assignments</strong></p>\n<ul>\n<li>Submit your code, tests, and a <strong>prompt log</strong> (PDF or Markdown).</li>\n<li>You may use any AI assistant. You must be able to explain every line.</li>\n<li>Late policy: see syllabus.</li>\n</ul>",
+      "rubric": [
+        {
+          "id": "_r1",
+          "description": "Spec: clear, complete, covers listed cases",
+          "points": 20
+        },
+        {
+          "id": "_r2",
+          "description": "Tests: meaningful, cover edge and error cases",
+          "points": 25
+        },
+        {
+          "id": "_r3",
+          "description": "Implementation passes all tests",
+          "points": 20
+        },
+        {
+          "id": "_r4",
+          "description": "Failure analysis: correct diagnosis of code vs. test errors",
+          "points": 20
+        },
+        {
+          "id": "_r5",
+          "description": "Regression tests and prompt log",
+          "points": 15
+        }
+      ]
+    },
+    {
+      "id": 2003,
+      "name": "Assignment 3: The Bug Hunt",
+      "points_possible": 100,
+      "due_at": "2026-03-26T23:59:00",
+      "assignment_group": "Assignments",
+      "submission_types": [
+        "online_upload"
+      ],
+      "description": "<p><strong>Assigned:</strong> Week 9 · <strong>Due:</strong> Week 11 · <strong>Points:</strong> 100 · <strong>Objectives:</strong> 3, 4, 5</p>\n<h3>Overview</h3>\n<p>You are the code reviewer. The following AI-generated code was submitted by \"an intern\" for a small user-login helper. It has <strong>at least 6 problems</strong> spanning correctness, security, and style.</p>\n<pre><code class=\"language-python\">import sqlite3\n\nusers = []\n\ndef add_user(name, password, roles=[]):\n    roles.append(&quot;user&quot;)\n    conn = sqlite3.connect(&quot;app.db&quot;)\n    conn.execute(\n        &quot;INSERT INTO users VALUES ('&quot; + name + &quot;', '&quot; + password + &quot;')&quot;\n    )\n    conn.commit()\n    return roles\n\ndef find_user(name):\n    conn = sqlite3.connect(&quot;app.db&quot;)\n    cur = conn.execute(&quot;SELECT * FROM users WHERE name = '&quot; + name + &quot;'&quot;)\n    try:\n        return cur.fetchone()\n    except:\n        pass\n\nAPI_KEY = &quot;sk-live-9f8e7d6c5b4a&quot;\n\ndef average_age(ages):\n    return sum(ages) / len(ages)\n</code></pre>\n<h3>Tasks</h3>\n<ol>\n<li><strong>Find</strong> every problem. For each, give the line, the category (correctness, security, style), and why it matters.</li>\n<li><strong>Rewrite</strong> the code to fix them.</li>\n<li><strong>Write tests</strong> that would have caught at least 3 of the problems.</li>\n<li><strong>Prompt an AI</strong> to review the original code. Compare its findings to yours. What did it miss? What did it catch that you missed?</li>\n</ol>\n<h3>Deliverables</h3>\n<p><code>review.md</code>, <code>fixed_users.py</code>, <code>test_users.py</code>, <code>ai_comparison.md</code></p>\n<hr />\n<p><strong>General rules for all assignments</strong></p>\n<ul>\n<li>Submit your code, tests, and a <strong>prompt log</strong> (PDF or Markdown).</li>\n<li>You may use any AI assistant. You must be able to explain every line.</li>\n<li>Late policy: see syllabus.</li>\n</ul>",
+      "rubric": [
+        {
+          "id": "_r1",
+          "description": "Issues found (up to 8 count): 5 pts each, with correct explanation",
+          "points": 40
+        },
+        {
+          "id": "_r2",
+          "description": "Fixed code is correct and secure",
+          "points": 25
+        },
+        {
+          "id": "_r3",
+          "description": "Tests are meaningful",
+          "points": 15
+        },
+        {
+          "id": "_r4",
+          "description": "AI comparison: thoughtful and honest",
+          "points": 15
+        },
+        {
+          "id": "_r5",
+          "description": "Clarity of writing",
+          "points": 5
+        }
+      ]
+    },
+    {
+      "id": 2004,
+      "name": "Final Project: Ship It",
+      "points_possible": 100,
+      "due_at": "2026-04-16T23:59:00",
+      "assignment_group": "Final Project",
+      "submission_types": [
+        "online_upload"
+      ],
+      "description": "<p><strong>Proposal:</strong> Week 12 · <strong>Due:</strong> Week 14 · <strong>Points:</strong> 100 · <strong>Objectives:</strong> all</p>\n<h3>Overview</h3>\n<p>Build and demo a small working application (web app, CLI, bot, or data tool) using AI assistance. Scope: roughly 10 hours of work. Smaller and finished beats bigger and broken.</p>\n<h3>Requirements</h3>\n<ul>\n<li>A working demo (5 minutes live)</li>\n<li>Version-controlled repository with meaningful commits</li>\n<li>At least <strong>10 tests</strong>, passing</li>\n<li><code>PROMPT_LOG.md</code> and <code>DECISIONS.md</code> (3+ moments where you accepted, rejected, or modified AI output, and why)</li>\n<li><code>SECURITY.md</code>: a short checklist confirming no secrets committed, inputs validated, dependencies checked</li>\n<li>A 1-page <strong>\"What the AI got wrong\"</strong> report</li>\n</ul>\n<hr />\n<p><strong>General rules for all assignments</strong></p>\n<ul>\n<li>Submit your code, tests, and a <strong>prompt log</strong> (PDF or Markdown).</li>\n<li>You may use any AI assistant. You must be able to explain every line.</li>\n<li>Late policy: see syllabus.</li>\n</ul>",
+      "rubric": [
+        {
+          "id": "_r1",
+          "description": "Working application matching the proposal",
+          "points": 30
+        },
+        {
+          "id": "_r2",
+          "description": "Tests and code quality",
+          "points": 20
+        },
+        {
+          "id": "_r3",
+          "description": "Process documentation (prompt log, decisions)",
+          "points": 20
+        },
+        {
+          "id": "_r4",
+          "description": "Security and ethics checklist",
+          "points": 10
+        },
+        {
+          "id": "_r5",
+          "description": "Demo and Q&A (can you explain your code?)",
+          "points": 15
+        },
+        {
+          "id": "_r6",
+          "description": "\"What the AI got wrong\" report",
+          "points": 5
+        }
+      ]
+    },
+    {
+      "id": 2101,
+      "name": "Quiz 1: Chapters 1–2",
+      "points_possible": 20,
+      "due_at": "2026-01-29T12:30:00",
+      "assignment_group": "Quizzes",
+      "submission_types": [
+        "online_quiz"
+      ],
+      "description": "<p><strong>Total: 20 points</strong> (8 MCQ × 2 pts, 2 short answer × 2 pts)</p>\n<h3>Multiple Choice</h3>\n<p><strong>1.</strong> Which best defines vibe coding?</p>\n<ul>\n<li>A. Writing code while listening to lo-fi music</li>\n<li>B. Using an IDE with syntax highlighting</li>\n<li>C. Letting an AI write and deploy code without human review</li>\n<li>D. Building software by describing intent to an AI and directing, reviewing, and verifying its output</li>\n</ul>\n<p><strong>2.</strong> What is the key difference between a compiler and a language model?</p>\n<ul>\n<li>A. Compilers are deterministic; language models are not</li>\n<li>B. Language models cannot write Python</li>\n<li>C. Compilers are faster</li>\n<li>D. Compilers only work on small programs</li>\n</ul>\n<p><strong>3.</strong> Which task is generally a GOOD fit for vibe coding?</p>\n<ul>\n<li>A. Flight-control software</li>\n<li>B. A cryptographic library</li>\n<li>C. A medical dosage calculator</li>\n<li>D. A throwaway script to rename 200 files</li>\n</ul>\n<p><strong>4.</strong> In the Vibe Coding Loop, which steps are NOT optional?</p>\n<ul>\n<li>A. Describe and Generate</li>\n<li>B. Read and Test</li>\n<li>C. Describe and Refine</li>\n<li>D. Generate and Refine</li>\n</ul>\n<p><strong>5.</strong> Which prompt is the strongest?</p>\n<ul>\n<li>A. \"Write a Python function <code>sort_desc(nums)</code> that returns a new list sorted high to low, leaving the input unchanged. Example: <code>[3,1,2]</code> → <code>[3,2,1]</code>.\"</li>\n<li>B. \"Write a sorting function, make it fast and robust.\"</li>\n<li>C. \"Write a good sorting function.\"</li>\n<li>D. \"Write a sorting function.\"</li>\n</ul>\n<p><strong>6.</strong> The five parts of a good prompt are:</p>\n<ul>\n<li>A. Input, Output, Process, Storage, Display</li>\n<li>B. Who, What, When, Where, Why</li>\n<li>C. Goal, Context, Constraints, Examples, Format</li>\n<li>D. Goal, Tone, Length, Audience, Format</li>\n</ul>\n<p><strong>7.</strong> You've rewritten your prompt six times with small tweaks and still get wrong output. The most likely problem is:</p>\n<ul>\n<li>A. You should switch programming languages</li>\n<li>B. Your spec is unclear or incomplete</li>\n<li>C. The model is broken</li>\n<li>D. You need a longer prompt regardless of content</li>\n</ul>\n<p><strong>8.</strong> What is the purpose of a prompt log?</p>\n<ul>\n<li>A. To satisfy the compiler</li>\n<li>B. To record prompts, responses, and your changes so the process is documented and reproducible</li>\n<li>C. To make the AI remember you</li>\n<li>D. To increase code speed</li>\n</ul>\n<h3>Short Answer</h3>\n<p><strong>9.</strong> Give one reason \"the AI wrote it\" is not an acceptable defense for a bug in production. (2 pts)</p>\n<p><strong>10.</strong> Rewrite this weak prompt into a stronger one: <em>\"Make a calculator.\"</em> Include at least three of the five parts. (2 pts)</p>",
+      "rubric": []
+    },
+    {
+      "id": 2102,
+      "name": "Quiz 2: Chapters 3–4",
+      "points_possible": 20,
+      "due_at": "2026-02-19T12:30:00",
+      "assignment_group": "Quizzes",
+      "submission_types": [
+        "online_quiz"
+      ],
+      "description": "<p><strong>Total: 20 points</strong></p>\n<h3>Multiple Choice</h3>\n<p><strong>1.</strong> What does this return on its second call?</p>\n<pre><code class=\"language-python\">def add(x, items=[]):\n    items.append(x)\n    return items\nadd(1); add(2)\n</code></pre>\n<ul>\n<li>A. <code>[1, 2]</code></li>\n<li>B. <code>[1]</code></li>\n<li>C. <code>[2]</code></li>\n<li>D. Error</li>\n</ul>\n<p><strong>2.</strong> What is a \"hallucinated API\"?</p>\n<ul>\n<li>A. An API that responds slowly</li>\n<li>B. An API with a graphical interface</li>\n<li>C. A call to a function or library that does not exist</li>\n<li>D. An undocumented but real endpoint</li>\n</ul>\n<p><strong>3.</strong> Which is the best first step when reviewing AI-generated code?</p>\n<ul>\n<li>A. Ask the AI if it is correct</li>\n<li>B. Delete the comments</li>\n<li>C. Deploy it and see</li>\n<li>D. Check whether it matches the spec and trace it on a small example</li>\n</ul>\n<p><strong>4.</strong> What is wrong with <code>except: pass</code>?</p>\n<ul>\n<li>A. It is a syntax error</li>\n<li>B. Nothing, it is best practice</li>\n<li>C. It silently hides all errors, making failures hard to detect</li>\n<li>D. It makes the code run slower</li>\n</ul>\n<p><strong>5.</strong> Which is an edge case for a function that finds the maximum of a list?</p>\n<ul>\n<li>A. A list sorted in ascending order</li>\n<li>B. A list of three positive numbers</li>\n<li>C. A list of five numbers</li>\n<li>D. An empty list</li>\n</ul>\n<p><strong>6.</strong> In test-first prompting, you should:</p>\n<ul>\n<li>A. Generate code, then write tests to match whatever it does</li>\n<li>B. Write the spec and tests first, then have the AI generate code to pass them</li>\n<li>C. Skip tests if the AI is confident</li>\n<li>D. Only test error cases</li>\n</ul>\n<p><strong>7.</strong> Why can AI-written tests for AI-written code be risky?</p>\n<ul>\n<li>A. They cannot run in pytest</li>\n<li>B. They are not allowed in Python</li>\n<li>C. They may share the same blind spots as the code</li>\n<li>D. They are always too long</li>\n</ul>\n<p><strong>8.</strong> What is a regression test?</p>\n<ul>\n<li>A. A test written in a statistical regression library</li>\n<li>B. A test of the oldest code</li>\n<li>C. A test added to ensure a previously fixed bug does not return</li>\n<li>D. A test for slow code</li>\n</ul>\n<h3>Short Answer</h3>\n<p><strong>9.</strong> Name two items from the six-item reading checklist and explain one in a sentence. (2 pts)</p>\n<p><strong>10.</strong> The assistant \"fixed\" your failing test by deleting the test. Explain what you should do instead. (2 pts)</p>",
+      "rubric": []
+    },
+    {
+      "id": 2103,
+      "name": "Quiz 3: Chapter 5",
+      "points_possible": 20,
+      "due_at": "2026-03-19T12:30:00",
+      "assignment_group": "Quizzes",
+      "submission_types": [
+        "online_quiz"
+      ],
+      "description": "<p><strong>Total: 20 points</strong></p>\n<h3>Multiple Choice</h3>\n<p><strong>1.</strong> Where should an API key be stored?</p>\n<ul>\n<li>A. Hard-coded in the source file</li>\n<li>B. In an environment variable that is not committed to version control</li>\n<li>C. In a code comment</li>\n<li>D. In a public README</li>\n</ul>\n<p><strong>2.</strong> Which code is vulnerable to SQL injection?</p>\n<ul>\n<li>A. An ORM query with bound parameters</li>\n<li>B. A prepared statement</li>\n<li>C. <code>cur.execute(\"SELECT * FROM t WHERE n = '\" + name + \"'\")</code></li>\n<li>D. <code>cur.execute(\"SELECT * FROM t WHERE n = ?\", (name,))</code></li>\n</ul>\n<p><strong>3.</strong> \"Slopsquatting\" refers to:</p>\n<ul>\n<li>A. A type of SQL injection</li>\n<li>B. Over-commenting code</li>\n<li>C. Attackers registering package names that AI tools commonly hallucinate</li>\n<li>D. Writing messy code</li>\n</ul>\n<p><strong>4.</strong> Which password storage approach is acceptable?</p>\n<ul>\n<li>A. Reversible encryption with a key in the code</li>\n<li>B. Base64 encoding</li>\n<li>C. Plaintext</li>\n<li>D. Salted hash using a dedicated algorithm (e.g., bcrypt or argon2)</li>\n</ul>\n<p><strong>5.</strong> You want to paste a customer database into an AI tool to help clean it. You should:</p>\n<ul>\n<li>A. Paste it immediately</li>\n<li>B. Check permissions and policies first, and remove or anonymize personal data</li>\n<li>C. Paste only the first half</li>\n<li>D. Rename the file first</li>\n</ul>\n<p><strong>6.</strong> Generated code closely resembles a known open-source library. The best response is to:</p>\n<ul>\n<li>A. Delete the license file</li>\n<li>B. Check licensing implications and cite, rewrite, or comply as needed</li>\n<li>C. Ignore it</li>\n<li>D. Assume AI output is always license-free</li>\n</ul>\n<p><strong>7.</strong> Which is an insecure default often found in generated web apps?</p>\n<ul>\n<li>A. Debug mode enabled in production</li>\n<li>B. Rate limiting</li>\n<li>C. Input validation</li>\n<li>D. HTTPS</li>\n</ul>\n<p><strong>8.</strong> Who is accountable for harm caused by shipped AI-assisted code?</p>\n<ul>\n<li>A. The developer or team that shipped it</li>\n<li>B. Nobody</li>\n<li>C. The user only</li>\n<li>D. The AI vendor only</li>\n</ul>\n<h3>Short Answer</h3>\n<p><strong>9.</strong> You accidentally committed an API key to a public repo. List two steps you should take. (2 pts)</p>\n<p><strong>10.</strong> Give one example of a privacy risk when using AI coding tools. (2 pts)</p>",
+      "rubric": []
+    },
+    {
+      "id": 2201,
+      "name": "Midterm Exam",
+      "points_possible": 100,
+      "due_at": "2026-03-05T12:30:00",
+      "assignment_group": "Midterm Exam",
+      "submission_types": [
+        "on_paper"
+      ],
+      "description": "<p>Closed notes, closed AI. You may use scratch paper. Write code by hand clearly; syntax mistakes will not be penalized if your intent is clear.</p>\n<p><strong>Time:</strong> 75 minutes · <strong>Total:</strong> 100 points\n<strong>Part I:</strong> 12 multiple choice × 3 pts = 36 · <strong>Part II:</strong> 3 free response = 64</p>\n<h2>Part I: Multiple Choice</h2>\n<p><strong>1.</strong> What makes AI-generated code risky to trust without testing?</p>\n<ul>\n<li>A. It always contains syntax errors</li>\n<li>B. It is always slower than hand-written code</li>\n<li>C. It can look plausible yet be wrong, and output varies between runs</li>\n<li>D. It cannot use standard libraries</li>\n</ul>\n<p><strong>2.</strong> The spec says <code>first(xs)</code> returns <code>None</code> for an empty list. Which input exposes the bug in the code below?</p>\n<pre><code class=\"language-python\">def first(xs):\n    return xs[0]\n</code></pre>\n<ul>\n<li>A. <code>[]</code></li>\n<li>B. <code>[1]</code></li>\n<li>C. <code>[1, 2, 3]</code></li>\n<li>D. <code>[\"a\"]</code></li>\n</ul>\n<p><strong>3.</strong> Which is the strongest rewrite of the prompt \"Parse the dates\"?</p>\n<ul>\n<li>A. \"Parse the dates better.\"</li>\n<li>B. \"Parse the dates quickly and robustly.\"</li>\n<li>C. \"Please parse the dates carefully.\"</li>\n<li>D. \"Write Python <code>parse_date(s)</code> that accepts 'YYYY-MM-DD' and returns a <code>datetime.date</code>; raise <code>ValueError</code> otherwise. Example: '2024-02-29' → <code>date(2024, 2, 29)</code>.\"</li>\n</ul>\n<p><strong>4.</strong> What does <code>f(4)</code> return?</p>\n<pre><code class=\"language-python\">def f(n):\n    total = 0\n    for i in range(1, n):\n        total += i\n    return total\n</code></pre>\n<ul>\n<li>A. 10</li>\n<li>B. 6</li>\n<li>C. 4</li>\n<li>D. 3</li>\n</ul>\n<p><strong>5.</strong> The spec says <code>f(n)</code> should return the sum of the integers from 1 through n. Which change fixes the code in Question 4?</p>\n<ul>\n<li>A. <code>range(1, n + 1)</code></li>\n<li>B. <code>range(0, n)</code></li>\n<li>C. <code>range(1, n - 1)</code></li>\n<li>D. <code>range(n)</code></li>\n</ul>\n<p><strong>6.</strong> A regression test is:</p>\n<ul>\n<li>A. A test that measures how fast code runs</li>\n<li>B. A test for the oldest module in a project</li>\n<li>C. A test added after fixing a bug to confirm it does not return</li>\n<li>D. A test generated using regression analysis</li>\n</ul>\n<p><strong>7.</strong> A test fails. What should you do first?</p>\n<ul>\n<li>A. Rewrite the function from scratch</li>\n<li>B. Ask the AI to fix it and accept the answer</li>\n<li>C. Add print statements everywhere</li>\n<li>D. Reproduce the failure with the smallest possible input</li>\n</ul>\n<p><strong>8.</strong> An AI wrote both your tests and your code from the same ambiguous prompt, and all tests pass. The most accurate conclusion is:</p>\n<ul>\n<li>A. The code is definitely correct</li>\n<li>B. The tests show only that the code agrees with the tests, which may share the same misunderstanding</li>\n<li>C. The tests are too short</li>\n<li>D. The prompt must have been fine</li>\n</ul>\n<p><strong>9.</strong> The assistant's code has <code>import fastjsonx</code>, and you have never heard of it. The best action is:</p>\n<ul>\n<li>A. Run <code>pip install fastjsonx</code> and see what happens</li>\n<li>B. Ask the AI whether the package is real</li>\n<li>C. Verify the package exists and is legitimate before installing anything</li>\n<li>D. Rename the import to something familiar</li>\n</ul>\n<p><strong>10.</strong> Which is the strongest sign of overengineering?</p>\n<ul>\n<li>A. An abstract factory and a config loader in a 10-line script</li>\n<li>B. Meaningful variable names</li>\n<li>C. A unit test</li>\n<li>D. A docstring</li>\n</ul>\n<p><strong>11.</strong> Which best describes the programmer's role in vibe coding?</p>\n<ul>\n<li>A. Typing every line by hand</li>\n<li>B. Waiting for the AI to finish</li>\n<li>C. Choosing the programming language only</li>\n<li>D. Directing, reviewing, and verifying the AI's output</li>\n</ul>\n<p><strong>12.</strong> What does this code print?</p>\n<pre><code class=\"language-python\">def g(acc=[]):\n    acc.append(len(acc))\n    return acc\n\ng()\nprint(g())\n</code></pre>\n<ul>\n<li>A. <code>[1]</code></li>\n<li>B. <code>[0, 1]</code></li>\n<li>C. <code>[0]</code></li>\n<li>D. <code>[1, 1]</code></li>\n</ul>\n<h2>Part II: Free Response</h2>\n<p><strong>FRQ 1 (20 pts): Prompts as Specs.</strong>\nA teammate writes this prompt: <em>\"Write a function that cleans up a list of names.\"</em>\n(a) (10 pts) Rewrite the prompt so that it includes all five parts of a good prompt (goal, context, constraints, examples, format). Label each part.\n(b) (6 pts) List three edge cases the new prompt should address.\n(c) (4 pts) Explain in 1–2 sentences why examples help more than adjectives like \"robust.\"</p>\n<p><strong>FRQ 2 (24 pts): Review and Repair.</strong>\nThe spec: <code>top_n(scores, n)</code> returns the <code>n</code> highest scores in <strong>descending order</strong>, does <strong>not modify</strong> the input list, returns all scores if <code>n</code> exceeds the list length, and returns <code>[]</code> if <code>n &lt;= 0</code>.</p>\n<pre><code class=\"language-python\">def top_n(scores, n):\n    scores.sort()\n    return scores[:n]\n</code></pre>\n<p>(a) (9 pts) Identify at least three ways this code violates the spec.\n(b) (7 pts) Write a corrected version.\n(c) (8 pts) Write at least four unit tests (as <code>assert</code> statements) that would catch the bugs. Include at least two edge cases.</p>\n<p><strong>FRQ 3 (20 pts): Argue It.</strong>\nA teammate says, \"We don't need to write tests. The AI is really good now.\" In 150–200 words, respond. Your answer must (i) give at least two specific reasons tests are still necessary, (ii) mention one limitation of AI-written tests, and (iii) suggest a practical workflow.</p>",
+      "rubric": [
+        {
+          "id": "_r1",
+          "description": "Part I: 12 multiple choice × 3 pts",
+          "points": 36
+        },
+        {
+          "id": "_r2",
+          "description": "FRQ 1 (a): Prompts as Specs",
+          "points": 10
+        },
+        {
+          "id": "_r3",
+          "description": "FRQ 1 (b): Prompts as Specs",
+          "points": 6
+        },
+        {
+          "id": "_r4",
+          "description": "FRQ 1 (c): Prompts as Specs",
+          "points": 4
+        },
+        {
+          "id": "_r5",
+          "description": "FRQ 2 (a): Review and Repair",
+          "points": 9
+        },
+        {
+          "id": "_r6",
+          "description": "FRQ 2 (b): Review and Repair",
+          "points": 7
+        },
+        {
+          "id": "_r7",
+          "description": "FRQ 2 (c): Review and Repair",
+          "points": 8
+        },
+        {
+          "id": "_r8",
+          "description": "FRQ 3: Argue It",
+          "points": 20
+        }
+      ]
+    },
+    {
+      "id": 2202,
+      "name": "Final Exam",
+      "points_possible": 100,
+      "due_at": "2026-04-28T10:00:00",
+      "assignment_group": "Final Exam",
+      "submission_types": [
+        "on_paper"
+      ],
+      "description": "<p>Closed notes, closed AI. You may use scratch paper. Write code by hand clearly; syntax mistakes will not be penalized if your intent is clear.</p>\n<p><strong>Time:</strong> 110 minutes · <strong>Total:</strong> 100 points\n<strong>Part I:</strong> 10 multiple choice × 3 pts = 30 · <strong>Part II:</strong> 2 free response × 35 = 70</p>\n<h2>Part I: Multiple Choice</h2>\n<p><strong>1.</strong> What distinguishes an agent from a basic chat assistant?</p>\n<ul>\n<li>A. It never makes mistakes</li>\n<li>B. It takes multiple steps toward a goal with some autonomy, such as editing files or running commands</li>\n<li>C. It runs only on local machines</li>\n<li>D. It cannot use tools</li>\n</ul>\n<p><strong>2.</strong> Which is the best safeguard before letting an agent modify your codebase?</p>\n<ul>\n<li>A. Disable all tests to avoid conflicts</li>\n<li>B. Give it administrator access so it never gets blocked</li>\n<li>C. Trust that it will ask if it's unsure</li>\n<li>D. Work in a version-controlled repository and review the diff before accepting changes</li>\n</ul>\n<p><strong>3.</strong> You discover an API key committed to a public repository. Your first action should be to:</p>\n<ul>\n<li>A. Revoke or rotate the key immediately</li>\n<li>B. Delete the commit and assume the problem is solved</li>\n<li>C. Wait to see whether anyone uses it</li>\n<li>D. Change the variable name</li>\n</ul>\n<p><strong>4.</strong> Which code is safe from SQL injection?</p>\n<ul>\n<li>A. <code>db.execute(\"SELECT * FROM t WHERE n='\" + name + \"'\")</code></li>\n<li>B. <code>db.execute(f\"SELECT * FROM t WHERE n='{name}'\")</code></li>\n<li>C. <code>db.execute(\"SELECT * FROM t WHERE n = ?\", (name,))</code></li>\n<li>D. <code>db.execute(\"SELECT * FROM t WHERE n=\" + repr(name))</code></li>\n</ul>\n<p><strong>5.</strong> Which test best targets a boundary case for <code>mean(xs)</code> defined as <code>sum(xs) / len(xs)</code>?</p>\n<ul>\n<li>A. <code>mean([1, 2, 3])</code></li>\n<li>B. <code>mean([5, 5, 5])</code></li>\n<li>C. <code>mean([10, 20])</code></li>\n<li>D. <code>mean([])</code></li>\n</ul>\n<p><strong>6.</strong> When is it most appropriate to write code by hand rather than using AI?</p>\n<ul>\n<li>A. Boilerplate configuration files</li>\n<li>B. A throwaway script</li>\n<li>C. Learning a new concept you are trying to master, or security-critical code you must fully understand</li>\n<li>D. Translating a short function between languages</li>\n</ul>\n<p><strong>7.</strong> Which is a privacy concern when using AI coding tools?</p>\n<ul>\n<li>A. Using meaningful variable names</li>\n<li>B. Pasting real user records into a third-party tool without permission</li>\n<li>C. Writing unit tests</li>\n<li>D. Adding comments</li>\n</ul>\n<p><strong>8.</strong> An agent proposes running <code>rm -rf</code> on a project directory. The best policy is:</p>\n<ul>\n<li>A. Require explicit human approval for destructive or irreversible actions</li>\n<li>B. Let it proceed to save time</li>\n<li>C. Allow it only on weekends</li>\n<li>D. Ask the agent whether it is sure, then proceed if it says yes</li>\n</ul>\n<p><strong>9.</strong> After an AI \"fix,\" your failing test now passes, but you notice the test file no longer contains that test. What should you do?</p>\n<ul>\n<li>A. Accept the fix, since the suite is green</li>\n<li>B. Ask the AI to rewrite the test</li>\n<li>C. Delete the other tests too for consistency</li>\n<li>D. Restore the test and require the code, not the test, to be changed to pass</li>\n</ul>\n<p><strong>10.</strong> Which statement is most accurate?</p>\n<ul>\n<li>A. AI assistance eliminates the need for code review</li>\n<li>B. AI-generated code is always insecure</li>\n<li>C. AI assistance changes where effort goes, but verification is still required</li>\n<li>D. Only beginners benefit from AI assistance</li>\n</ul>\n<h2>Part II: Free Response</h2>\n<p><strong>FRQ 1 (35 pts): Security Review.</strong></p>\n<pre><code class=\"language-python\">import sqlite3\n\nSECRET = &quot;hunter2-prod&quot;\n\ndef login(name, pw):\n    db = sqlite3.connect(&quot;app.db&quot;)\n    q = f&quot;SELECT * FROM users WHERE name='{name}' AND pw='{pw}'&quot;\n    return db.execute(q).fetchone() is not None\n</code></pre>\n<p>(a) (10 pts) Identify at least three security or quality problems and explain why each matters.\n(b) (15 pts) Rewrite <code>login</code> to fix them. You may assume a helper <code>verify_password(pw, stored_hash)</code> exists.\n(c) (10 pts) Write two tests that would catch problems in the original.</p>\n<p><strong>FRQ 2 (35 pts): Agent Guardrails.</strong>\nYour team plans to let an AI agent make multi-file changes and run shell commands in your project.\n(a) (16 pts) Propose a guardrail plan with at least four distinct safeguards. For each, explain the specific risk it addresses.\n(b) (9 pts) Describe one situation where you would choose <strong>not</strong> to use an agent and justify your choice.\n(c) (10 pts) Explain how your prompt log and a <code>DECISIONS.md</code> file support accountability when something goes wrong.</p>",
+      "rubric": [
+        {
+          "id": "_r1",
+          "description": "Part I: 10 multiple choice × 3 pts",
+          "points": 30
+        },
+        {
+          "id": "_r2",
+          "description": "FRQ 1 (a): Security Review",
+          "points": 10
+        },
+        {
+          "id": "_r3",
+          "description": "FRQ 1 (b): Security Review",
+          "points": 15
+        },
+        {
+          "id": "_r4",
+          "description": "FRQ 1 (c): Security Review",
+          "points": 10
+        },
+        {
+          "id": "_r5",
+          "description": "FRQ 2 (a): Agent Guardrails",
+          "points": 16
+        },
+        {
+          "id": "_r6",
+          "description": "FRQ 2 (b): Agent Guardrails",
+          "points": 9
+        },
+        {
+          "id": "_r7",
+          "description": "FRQ 2 (c): Agent Guardrails",
+          "points": 10
+        }
+      ]
+    }
+  ],
+  "submissions": {
+    "2001": {
+      "user_id": 5001,
+      "workflow_state": "graded",
+      "score": 79.0,
+      "submitted_at": "2026-02-05T23:59:00",
+      "graded_at": "2026-02-11T23:59:00",
+      "submission_comments": [
+        {
+          "id": 1,
+          "author_id": 9002,
+          "author_name": "Maya Okafor",
+          "created_at": "2026-02-11T23:59:00",
+          "comment": "Jordan, nice work. Your code is short, readable, and it runs, which is already more than some \"enterprise\" software can claim. The reflection was the highlight of this submission. You wrote that your biggest mistake was \"asking for features instead of describing rules,\" and that is exactly the lesson of Chapter 2.\n\nTwo things to address:\n\n1. IDs are reused. `new_id = len(tasks) + 1` means that if you delete task 2 of 3, the next task gets ID 3 and collides with the existing one. The spec said IDs are never reused, which implies you need to track a `next_id` separately or use `max(id) + 1`. This was exactly the kind of detail that a stronger first prompt would have caught: \"IDs start at 1 and are never reused\" appears in the assignment text, but not in your Prompt 1.\n2. Missing file crash. Run `python todo.py list` on a fresh machine and you get a `FileNotFoundError`. Try it. A one-line test would have found this.\n\nYour prompt log reads like a list of commands, not a conversation. \"Fix the bug\" tells me nothing: which bug, what did you see, what did you expect? Compare:\n\n> \"Running `list` with no tasks.json raises FileNotFoundError. It should print nothing and exit cleanly.\"\n\nThat second version is shorter to debug and shorter to grade.\n\nNext step: Before Assignment 2, rewrite your Prompt 1 as a full five-part prompt and see how much of the code changes. You do not need to submit it, but I suspect you will be surprised."
+        }
+      ],
+      "rubric_assessment": {
+        "_r1": {
+          "points": 34.0,
+          "comments": "`add`, `done`, `list` all work. IDs are reused after deletion (see below)."
+        },
+        "_r2": {
+          "points": 8.0,
+          "comments": "Crashes if `tasks.json` does not exist. No handling of an invalid ID."
+        },
+        "_r3": {
+          "points": 8.0,
+          "comments": "Clean and short. Files are opened without being closed."
+        },
+        "_r4": {
+          "points": 14.0,
+          "comments": "Honest, but prompts are very short and \"fix the bug\" does not say which bug."
+        },
+        "_r5": {
+          "points": 15.0,
+          "comments": "Genuinely thoughtful. See below."
+        }
+      }
+    },
+    "2003": {
+      "user_id": 5001,
+      "workflow_state": "graded",
+      "score": 89.0,
+      "submitted_at": "2026-03-26T23:59:00",
+      "graded_at": "2026-04-01T23:59:00",
+      "submission_comments": [
+        {
+          "id": 2,
+          "author_id": 9003,
+          "author_name": "Dev Raman",
+          "created_at": "2026-04-01T23:59:00",
+          "comment": "Priya, this is strong work. Your explanation for Issue 1 is the model answer: you did not just say \"SQL injection,\" you showed the actual input that breaks it. That is how a real security review reads.\n\nA few notes:\n\n- Issue 4 is underexplained. \"Bad\" is not a reason. Why is `except: pass` bad here? Because it swallows every exception, including `KeyboardInterrupt`, and hides failures that you would want to know about. There is also a subtler point: the `try` wraps `fetchone()`, but the real failure risk is in the query above it, so the handler is guarding the wrong line. You will get full credit next time for explaining the consequence.\n- You missed `find_user`. You caught the injection in `add_user` but not the identical one in `find_user`. This is a common reviewer trap: once you have found a bug pattern, search for every instance of it. A quick text search for `\"' +\"` would have caught it.\n- Your AI comparison was the best in the section. Noticing that the AI fixed one function and silently left the other is precisely the kind of thing we want to see. It supports the course's central point: the AI is a useful reviewer but a confident one, so verify.\n\nNext step: For your final project, add a \"pattern sweep\" step to your `SECURITY.md`: after fixing any vulnerability, search the entire codebase for the same pattern."
+        }
+      ],
+      "rubric_assessment": {
+        "_r1": {
+          "points": 32.0,
+          "comments": "Six of eight found. Missing SQL injection in `find_user` and the unclosed connections."
+        },
+        "_r2": {
+          "points": 24.0,
+          "comments": "Excellent. Parameterized queries, bcrypt, env var. One minor miss: still no `CREATE TABLE`."
+        },
+        "_r3": {
+          "points": 14.0,
+          "comments": "Good. The mutable default test is exactly right."
+        },
+        "_r4": {
+          "points": 14.0,
+          "comments": "Honest and specific."
+        },
+        "_r5": {
+          "points": 5.0,
+          "comments": ""
+        }
+      }
+    },
+    "2201": {
+      "user_id": 5001,
+      "workflow_state": "graded",
+      "score": 91.0,
+      "submitted_at": "2026-03-05T12:30:00",
+      "graded_at": "2026-03-11T12:30:00",
+      "submission_comments": [
+        {
+          "id": 3,
+          "author_id": 9001,
+          "author_name": "Dr. Quinn Ferrous",
+          "created_at": "2026-03-11T12:30:00",
+          "comment": "Marcus, you have the core ideas right. You noticed the mutation and the wrong sort order, and your `copy()` plus `reverse=True` fix is clean and readable. Many students missed the mutation bug entirely, so well done.\n\nWhere points were lost:\n\n1. The `n <= 0` requirement. The spec explicitly says \"returns `[]` if `n <= 0`.\" With your code, `top_n([1,2,3], -1)` returns `[3, 2]` because `s[:-1]` means \"everything except the last item.\" That is a classic slicing trap, and it is the sort of subtle behavior AI-generated code gets wrong while sounding confident. Adding `max(n, 0)` fixes it.\n2. Your tests are all happy-path. The question asked for at least two edge cases. Edge cases are where bugs live: `n = 0`, `n = -1`, an empty list, and duplicates are all good candidates. Notice that if you had written a test for `n = -1`, you would have discovered your own bug in part (b). This is exactly why we write tests before the code.\n3. You did not test that the input list is unchanged, which was one of the three spec requirements. A test like `s = [3,1,2]; top_n(s, 2); assert s == [3,1,2]` would have covered it.\n\nNext step: For every function you write this term, make a list titled \"ways this could break\" before you write any code. Five minutes of pessimism saves an hour of debugging."
+        }
+      ],
+      "rubric_assessment": {
+        "_r5": {
+          "points": 6.0,
+          "comments": "Two of three issues, both correct and clearly stated. Missing the negative `n` problem."
+        },
+        "_r6": {
+          "points": 5.0,
+          "comments": "Copy and descending order are both correct. No handling for `n <= 0`."
+        },
+        "_r7": {
+          "points": 4.0,
+          "comments": "Two correct tests, but both are normal cases. Only the second is arguably an edge case (n greater than length)."
+        },
+        "_r1": {
+          "points": 36.0,
+          "comments": ""
+        },
+        "_r2": {
+          "points": 10.0,
+          "comments": ""
+        },
+        "_r3": {
+          "points": 6.0,
+          "comments": ""
+        },
+        "_r4": {
+          "points": 4.0,
+          "comments": ""
+        },
+        "_r8": {
+          "points": 20.0,
+          "comments": ""
+        }
+      }
+    },
+    "2202": {
+      "user_id": 5001,
+      "workflow_state": "graded",
+      "score": 94.0,
+      "submitted_at": "2026-04-28T10:00:00",
+      "graded_at": "2026-05-04T10:00:00",
+      "submission_comments": [
+        {
+          "id": 4,
+          "author_id": 9001,
+          "author_name": "Dr. Quinn Ferrous",
+          "created_at": "2026-05-04T10:00:00",
+          "comment": "Elena, solid exam. Part (b) was the best answer I read. You gave a specific situation, and you tied your reasoning to verification cost, which is exactly the argument from Chapter 6.\n\nTwo notes for improvement:\n\n- Part (a): safeguards without risks. The question asked you to explain \"the specific risk it addresses.\" You listed the safeguards, which are all correct, but you lost 4 points because you did not say what could go wrong without them. For instance: \"Require approval before delete commands, because an agent running `rm -rf` on the wrong directory could cause irreversible data loss.\" The safeguard shows you know the tool. The risk shows you understand why it exists.\n- Part (c): make it concrete. \"The prompt log shows what happened\" is true but general. A stronger answer: \"If production broke after an agent change, the prompt log tells me which instruction triggered it, and DECISIONS.md tells me whether we accepted the agent's output deliberately or by accident.\" One example turns a definition into an argument.\n\nNext step: In any future design doc, practice the \"safeguard → risk\" pattern. It is the difference between a checklist and a justification."
+        }
+      ],
+      "rubric_assessment": {
+        "_r5": {
+          "points": 12.0,
+          "comments": "Four valid safeguards, but each is missing the risk it addresses."
+        },
+        "_r6": {
+          "points": 9.0,
+          "comments": "Clear situation and sound justification."
+        },
+        "_r7": {
+          "points": 8.0,
+          "comments": "Correct but brief. Needs an example."
+        },
+        "_r1": {
+          "points": 30.0,
+          "comments": ""
+        },
+        "_r2": {
+          "points": 10.0,
+          "comments": ""
+        },
+        "_r3": {
+          "points": 15.0,
+          "comments": ""
+        },
+        "_r4": {
+          "points": 10.0,
+          "comments": ""
+        }
+      }
+    },
+    "2002": {
+      "user_id": 5001,
+      "workflow_state": "submitted",
+      "score": null,
+      "submitted_at": "2026-02-26T23:59:00",
+      "submission_comments": [],
+      "rubric_assessment": {}
+    },
+    "2004": {
+      "user_id": 5001,
+      "workflow_state": "submitted",
+      "score": null,
+      "submitted_at": "2026-04-16T23:59:00",
+      "submission_comments": [],
+      "rubric_assessment": {}
+    },
+    "2101": {
+      "user_id": 5001,
+      "workflow_state": "submitted",
+      "score": null,
+      "submitted_at": "2026-01-29T12:30:00",
+      "submission_comments": [],
+      "rubric_assessment": {}
+    },
+    "2102": {
+      "user_id": 5001,
+      "workflow_state": "submitted",
+      "score": null,
+      "submitted_at": "2026-02-19T12:30:00",
+      "submission_comments": [],
+      "rubric_assessment": {}
+    },
+    "2103": {
+      "user_id": 5001,
+      "workflow_state": "submitted",
+      "score": null,
+      "submitted_at": "2026-03-19T12:30:00",
+      "submission_comments": [],
+      "rubric_assessment": {}
+    }
+  }
+}
