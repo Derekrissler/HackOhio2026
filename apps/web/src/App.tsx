@@ -1,11 +1,30 @@
-import { Heading, View } from '@instructure/ui'
+import { Route, Routes } from 'react-router-dom'
 
-import { themeVars } from './theme'
+import PlaceholderPage from './pages/PlaceholderPage'
+import AppLayout from './shell/AppLayout'
+import CourseLayout from './shell/CourseLayout'
+import { COURSE_TABS } from './shell/courseTabs'
 
 export default function App() {
   return (
-    <View as="main" padding="medium" style={themeVars}>
-      <Heading level="h1">Dashboard</Heading>
-    </View>
+    <Routes>
+      <Route element={<AppLayout />}>
+        <Route index element={<PlaceholderPage title="Dashboard" phase={3} />} />
+        <Route path="courses/:courseId" element={<CourseLayout />}>
+          {COURSE_TABS.map((tab) =>
+            tab.path === '' ? (
+              <Route key="home" index element={<PlaceholderPage title={tab.label} phase={tab.phase} />} />
+            ) : (
+              <Route
+                key={tab.path}
+                path={tab.path}
+                element={<PlaceholderPage title={tab.label} phase={tab.phase} />}
+              />
+            ),
+          )}
+        </Route>
+        <Route path="*" element={<PlaceholderPage title="Page not found" phase={2} />} />
+      </Route>
+    </Routes>
   )
 }
