@@ -1,0 +1,144 @@
+[
+  {
+    "id": 880141,
+    "assignment_id": 610008,
+    "user_id": 9002,
+    "attempt": 1,
+    "submitted_at": "2026-09-18T17:59:00Z",
+    "graded_at": "2026-09-24T05:59:00Z",
+    "score": 20.0,
+    "grade": "20",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550078,
+        "display_name": "stat_hw1_02.pdf",
+        "filename": "stat_hw1_02.pdf",
+        "content-type": "application/pdf",
+        "size": 1314,
+        "url": "files/submissions/stat1450/stat_hw1_02.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990053,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Great job. Nice, careful work throughout.",
+        "created_at": "2026-09-24T05:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880142,
+    "assignment_id": 610008,
+    "user_id": 9003,
+    "attempt": 1,
+    "submitted_at": "2026-09-18T19:59:00Z",
+    "graded_at": "2026-09-23T04:59:00Z",
+    "score": 20.0,
+    "grade": "20",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550079,
+        "display_name": "stat_hw1_03.pdf",
+        "filename": "stat_hw1_03.pdf",
+        "content-type": "application/pdf",
+        "size": 1318,
+        "url": "files/submissions/stat1450/stat_hw1_03.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880143,
+    "assignment_id": 610008,
+    "user_id": 9004,
+    "attempt": 1,
+    "submitted_at": "2026-09-18T15:59:00Z",
+    "graded_at": "2026-09-22T08:59:00Z",
+    "score": 15.0,
+    "grade": "15",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550080,
+        "display_name": "stat_hw1_04.pdf",
+        "filename": "stat_hw1_04.pdf",
+        "content-type": "application/pdf",
+        "size": 1315,
+        "url": "files/submissions/stat1450/stat_hw1_04.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880144,
+    "assignment_id": 610009,
+    "user_id": 9002,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880145,
+    "assignment_id": 610009,
+    "user_id": 9003,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880146,
+    "assignment_id": 610009,
+    "user_id": 9004,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "id": 4107,
+    "context_id": 48190,
+    "context_type": "Course",
+    "title": "S1",
+    "display_name": "Describe data",
+    "description": "<p>Summarise data with appropriate measures of centre and spread.</p>",
+    "points_possible": 3,
+    "mastery_points": 2,
+    "calculation_method": "highest"
+  },
+  {
+    "id": 4108,
+    "context_id": 48190,
+    "context_type": "Course",
+    "title": "S2",
+    "display_name": "Reason about probability",
+    "description": "<p>Compute and interpret basic probabilities.</p>",
+    "points_possible": 3,
+    "mastery_points": 2,
+    "calculation_method": "highest"
+  }
+]

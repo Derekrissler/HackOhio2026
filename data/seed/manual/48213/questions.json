@@ -1,0 +1,417 @@
+{
+  "610001": [
+    {
+      "key": "Q1",
+      "label": "Q1",
+      "parent_key": null,
+      "prompt_html": "<p>Buckeye Furniture makes tables and chairs. A table needs 4 hours of carpentry and 2 hours of finishing; a chair needs 3 hours of carpentry and 1 hour of finishing. Each week 240 carpentry hours and 100 finishing hours are available. Each table earns $70 profit and each chair $50. Formulate an LP that maximizes weekly profit.</p>",
+      "question_type": "essay",
+      "points_possible": 20,
+      "answer_key": null,
+      "source_page": null,
+      "position": 1
+    },
+    {
+      "key": "Q1a",
+      "label": "Q1a",
+      "parent_key": "Q1",
+      "prompt_html": "<p>Define the decision variables (with units).</p>",
+      "question_type": "essay",
+      "points_possible": 5,
+      "answer_key": "x₁ = tables built per week, x₂ = chairs built per week",
+      "source_page": null,
+      "position": 2
+    },
+    {
+      "key": "Q1b",
+      "label": "Q1b",
+      "parent_key": "Q1",
+      "prompt_html": "<p>Write the objective function.</p>",
+      "question_type": "essay",
+      "points_possible": 5,
+      "answer_key": "max z = 70x₁ + 50x₂",
+      "source_page": null,
+      "position": 3
+    },
+    {
+      "key": "Q1c",
+      "label": "Q1c",
+      "parent_key": "Q1",
+      "prompt_html": "<p>Write all constraints.</p>",
+      "question_type": "essay",
+      "points_possible": 10,
+      "answer_key": "4x₁ + 3x₂ ≤ 240 (carpentry); 2x₁ + x₂ ≤ 100 (finishing); x₁, x₂ ≥ 0",
+      "source_page": null,
+      "position": 4
+    },
+    {
+      "key": "Q2",
+      "label": "Q2",
+      "parent_key": null,
+      "prompt_html": "<p>Solve the LP from Q1 graphically.</p>",
+      "question_type": "essay",
+      "points_possible": 14,
+      "answer_key": null,
+      "source_page": null,
+      "position": 5
+    },
+    {
+      "key": "Q2a",
+      "label": "Q2a",
+      "parent_key": "Q2",
+      "prompt_html": "<p>List every corner point of the feasible region.</p>",
+      "question_type": "essay",
+      "points_possible": 8,
+      "answer_key": "(0, 0), (50, 0), (30, 40), (0, 80)",
+      "source_page": null,
+      "position": 6
+    },
+    {
+      "key": "Q2b",
+      "label": "Q2b",
+      "parent_key": "Q2",
+      "prompt_html": "<p>Give the optimal solution and its profit.</p>",
+      "question_type": "essay",
+      "points_possible": 6,
+      "answer_key": "x₁ = 30, x₂ = 40, z = $4,100",
+      "source_page": null,
+      "position": 7
+    },
+    {
+      "key": "Q3",
+      "label": "Q3",
+      "parent_key": null,
+      "prompt_html": "<p>Suppose the finishing constraint is removed. Is the LP still bounded? Give the new optimum.</p>",
+      "question_type": "essay",
+      "points_possible": 6,
+      "answer_key": "Still bounded: carpentry limits both products. New optimum x₁ = 60, x₂ = 0, z = $4,200.",
+      "source_page": null,
+      "position": 8
+    }
+  ],
+  "610003": [
+    {
+      "key": "Q1",
+      "label": "Q1",
+      "parent_key": null,
+      "prompt_html": "<p>Convert to standard form: min z = 2x₁ − 3x₂ subject to x₁ + x₂ ≤ 8, 2x₁ − x₂ ≥ 2, x₁ ≥ 0, x₂ free.</p>",
+      "question_type": "essay",
+      "points_possible": 10,
+      "answer_key": null,
+      "source_page": null,
+      "position": 1
+    },
+    {
+      "key": "Q1a",
+      "label": "Q1a",
+      "parent_key": "Q1",
+      "prompt_html": "<p>Rewrite both constraints as equalities.</p>",
+      "question_type": "essay",
+      "points_possible": 5,
+      "answer_key": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2; s₁, s₂ ≥ 0",
+      "source_page": null,
+      "position": 2
+    },
+    {
+      "key": "Q1b",
+      "label": "Q1b",
+      "parent_key": "Q1",
+      "prompt_html": "<p>Handle the free variable and write the objective in max form.</p>",
+      "question_type": "essay",
+      "points_possible": 5,
+      "answer_key": "x₂ = x₂⁺ − x₂⁻ with x₂⁺, x₂⁻ ≥ 0; max −z = −2x₁ + 3x₂⁺ − 3x₂⁻",
+      "source_page": null,
+      "position": 3
+    },
+    {
+      "key": "Q2",
+      "label": "Q2",
+      "parent_key": null,
+      "prompt_html": "<p>Solve with the simplex method: max z = 5x₁ + 4x₂ subject to 6x₁ + 4x₂ ≤ 24, x₁ + 2x₂ ≤ 6, x₁, x₂ ≥ 0.</p>",
+      "question_type": "essay",
+      "points_possible": 25,
+      "answer_key": null,
+      "source_page": null,
+      "position": 4
+    },
+    {
+      "key": "Q2a",
+      "label": "Q2a",
+      "parent_key": "Q2",
+      "prompt_html": "<p>Set up the initial tableau and choose the entering and leaving variables.</p>",
+      "question_type": "essay",
+      "points_possible": 8,
+      "answer_key": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+      "source_page": null,
+      "position": 5
+    },
+    {
+      "key": "Q2b",
+      "label": "Q2b",
+      "parent_key": "Q2",
+      "prompt_html": "<p>Perform pivots until the tableau is optimal. Show each tableau.</p>",
+      "question_type": "essay",
+      "points_possible": 9,
+      "answer_key": "Pivot 1 on row s₁; pivot 2: x₂ enters, s₂ leaves (ratio 2 / (4/3) = 1.5). Final: x₁ = 3, x₂ = 1.5.",
+      "source_page": null,
+      "position": 6
+    },
+    {
+      "key": "Q2c",
+      "label": "Q2c",
+      "parent_key": "Q2",
+      "prompt_html": "<p>State the optimal solution, the optimal value and which constraints are binding.</p>",
+      "question_type": "essay",
+      "points_possible": 8,
+      "answer_key": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+      "source_page": null,
+      "position": 7
+    },
+    {
+      "key": "Q3",
+      "label": "Q3",
+      "parent_key": null,
+      "prompt_html": "<p>A refinery blends light (L) and heavy (H) crude into 1,000 barrels of fuel. At least 40% must be light crude, light costs $60/bbl and heavy $45/bbl, and at most 700 bbl of light crude is available. Formulate a minimum-cost LP.</p>",
+      "question_type": "essay",
+      "points_possible": 15,
+      "answer_key": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+      "source_page": null,
+      "position": 8
+    }
+  ],
+  "610005": [
+    {
+      "key": "Q1",
+      "label": "Q1",
+      "parent_key": null,
+      "prompt_html": "<p>Scarlet Bakery bakes bagels and muffins. A dozen bagels uses 2 kg of flour and 1 hour of oven time; a dozen muffins uses 1 kg of flour and 1 hour of oven time. Each day 40 kg of flour and 30 oven hours are available, and at least 5 dozen muffins must be baked. Profit is $9 per dozen bagels and $7 per dozen muffins. Formulate an LP that maximizes daily profit.</p>",
+      "question_type": "essay",
+      "points_possible": 30,
+      "answer_key": null,
+      "source_page": 1,
+      "position": 1
+    },
+    {
+      "key": "Q1a",
+      "label": "Q1a",
+      "parent_key": "Q1",
+      "prompt_html": "<p>Define the decision variables.</p>",
+      "question_type": "essay",
+      "points_possible": 8,
+      "answer_key": "x₁ = dozens of bagels per day, x₂ = dozens of muffins per day",
+      "source_page": 1,
+      "position": 2
+    },
+    {
+      "key": "Q1b",
+      "label": "Q1b",
+      "parent_key": "Q1",
+      "prompt_html": "<p>Write the objective function.</p>",
+      "question_type": "essay",
+      "points_possible": 8,
+      "answer_key": "max z = 9x₁ + 7x₂",
+      "source_page": 1,
+      "position": 3
+    },
+    {
+      "key": "Q1c",
+      "label": "Q1c",
+      "parent_key": "Q1",
+      "prompt_html": "<p>Write all constraints.</p>",
+      "question_type": "essay",
+      "points_possible": 14,
+      "answer_key": "2x₁ + x₂ ≤ 40; x₁ + x₂ ≤ 30; x₂ ≥ 5; x₁, x₂ ≥ 0",
+      "source_page": 1,
+      "position": 4
+    },
+    {
+      "key": "Q2",
+      "label": "Q2",
+      "parent_key": null,
+      "prompt_html": "<p>Convert to standard form: max z = x₁ + 4x₂ subject to −x₁ + x₂ ≤ 3, 3x₁ + x₂ ≥ 6, x₁ ≥ 0, x₂ free.</p>",
+      "question_type": "essay",
+      "points_possible": 20,
+      "answer_key": null,
+      "source_page": 2,
+      "position": 5
+    },
+    {
+      "key": "Q2a",
+      "label": "Q2a",
+      "parent_key": "Q2",
+      "prompt_html": "<p>Write the constraints as equalities with slack/surplus variables.</p>",
+      "question_type": "essay",
+      "points_possible": 10,
+      "answer_key": "−x₁ + x₂ + s₁ = 3; 3x₁ + x₂ − s₂ = 6; s₁, s₂ ≥ 0",
+      "source_page": 2,
+      "position": 6
+    },
+    {
+      "key": "Q2b",
+      "label": "Q2b",
+      "parent_key": "Q2",
+      "prompt_html": "<p>Handle the free variable x₂ and rewrite the objective.</p>",
+      "question_type": "essay",
+      "points_possible": 10,
+      "answer_key": "x₂ = x₂⁺ − x₂⁻, x₂⁺, x₂⁻ ≥ 0; max z = x₁ + 4x₂⁺ − 4x₂⁻",
+      "source_page": 2,
+      "position": 7
+    },
+    {
+      "key": "Q3",
+      "label": "Q3",
+      "parent_key": null,
+      "prompt_html": "<p>Simplex: max z = 2x₁ + 3x₂ subject to x₁ + 2x₂ ≤ 8, 3x₁ + 2x₂ ≤ 12, x₁, x₂ ≥ 0.</p>",
+      "question_type": "essay",
+      "points_possible": 30,
+      "answer_key": null,
+      "source_page": 3,
+      "position": 8
+    },
+    {
+      "key": "Q3a",
+      "label": "Q3a",
+      "parent_key": "Q3",
+      "prompt_html": "<p>Choose the entering and leaving variables for the first pivot.</p>",
+      "question_type": "essay",
+      "points_possible": 10,
+      "answer_key": "x₂ enters (−3); ratios 8/2 = 4, 12/2 = 6, so s₁ leaves.",
+      "source_page": 3,
+      "position": 9
+    },
+    {
+      "key": "Q3b",
+      "label": "Q3b",
+      "parent_key": "Q3",
+      "prompt_html": "<p>Carry out pivots to optimality.</p>",
+      "question_type": "essay",
+      "points_possible": 10,
+      "answer_key": "Pivot 2: x₁ enters, s₂ leaves. Optimal x₁ = 2, x₂ = 3.",
+      "source_page": 3,
+      "position": 10
+    },
+    {
+      "key": "Q3c",
+      "label": "Q3c",
+      "parent_key": "Q3",
+      "prompt_html": "<p>State the optimal solution and value; explain how you know it is optimal.</p>",
+      "question_type": "essay",
+      "points_possible": 10,
+      "answer_key": "x₁ = 2, x₂ = 3, z = 13; optimal because all z-row coefficients are ≥ 0.",
+      "source_page": 3,
+      "position": 11
+    },
+    {
+      "key": "Q4",
+      "label": "Q4",
+      "parent_key": null,
+      "prompt_html": "<p>Graphical method: max z = 5x₁ + 5x₂ subject to x₁ + x₂ ≤ 8, x₁ ≤ 5, x₂ ≤ 6, x₁, x₂ ≥ 0.</p>",
+      "question_type": "essay",
+      "points_possible": 20,
+      "answer_key": null,
+      "source_page": 4,
+      "position": 12
+    },
+    {
+      "key": "Q4a",
+      "label": "Q4a",
+      "parent_key": "Q4",
+      "prompt_html": "<p>List the corner points of the feasible region.</p>",
+      "question_type": "essay",
+      "points_possible": 10,
+      "answer_key": "(0, 0), (5, 0), (5, 3), (2, 6), (0, 6)",
+      "source_page": 4,
+      "position": 13
+    },
+    {
+      "key": "Q4b",
+      "label": "Q4b",
+      "parent_key": "Q4",
+      "prompt_html": "<p>Find all optimal solutions and explain.</p>",
+      "question_type": "essay",
+      "points_possible": 10,
+      "answer_key": "Every point on the segment between (2, 6) and (5, 3) is optimal with z = 40: the objective is parallel to x₁ + x₂ ≤ 8.",
+      "source_page": 4,
+      "position": 14
+    }
+  ],
+  "610006": [
+    {
+      "key": "Q1",
+      "label": "Q1",
+      "parent_key": null,
+      "prompt_html": "<p>Primal: max z = 4x₁ + 3x₂ subject to 2x₁ + x₂ ≤ 10, x₁ + 3x₂ ≤ 15, x₁, x₂ ≥ 0.</p>",
+      "question_type": "essay",
+      "points_possible": 18,
+      "answer_key": null,
+      "source_page": null,
+      "position": 1
+    },
+    {
+      "key": "Q1a",
+      "label": "Q1a",
+      "parent_key": "Q1",
+      "prompt_html": "<p>Write the dual LP.</p>",
+      "question_type": "essay",
+      "points_possible": 10,
+      "answer_key": "min w = 10y₁ + 15y₂ s.t. 2y₁ + y₂ ≥ 4, y₁ + 3y₂ ≥ 3, y₁, y₂ ≥ 0",
+      "source_page": null,
+      "position": 2
+    },
+    {
+      "key": "Q1b",
+      "label": "Q1b",
+      "parent_key": "Q1",
+      "prompt_html": "<p>Use strong duality to give the dual optimal value.</p>",
+      "question_type": "essay",
+      "points_possible": 8,
+      "answer_key": "w* = z* = 24 (primal optimum x = (3, 4))",
+      "source_page": null,
+      "position": 3
+    },
+    {
+      "key": "Q2",
+      "label": "Q2",
+      "parent_key": null,
+      "prompt_html": "<p>Given x* = (3, 4), use complementary slackness to find y*.</p>",
+      "question_type": "essay",
+      "points_possible": 12,
+      "answer_key": "Both x > 0, so both dual constraints are tight: y* = (9/5, 2/5).",
+      "source_page": null,
+      "position": 4
+    },
+    {
+      "key": "Q3",
+      "label": "Q3",
+      "parent_key": null,
+      "prompt_html": "<p>Use the primal from Q1 and its optimal basis.</p>",
+      "question_type": "essay",
+      "points_possible": 20,
+      "answer_key": null,
+      "source_page": null,
+      "position": 5
+    },
+    {
+      "key": "Q3a",
+      "label": "Q3a",
+      "parent_key": "Q3",
+      "prompt_html": "<p>What is the shadow price of the first resource? Interpret it.</p>",
+      "question_type": "essay",
+      "points_possible": 10,
+      "answer_key": "y₁* = 1.8: one more unit of resource 1 raises z by about 1.8.",
+      "source_page": null,
+      "position": 6
+    },
+    {
+      "key": "Q3b",
+      "label": "Q3b",
+      "parent_key": "Q3",
+      "prompt_html": "<p>Over what range of c₁ does the current basis stay optimal?</p>",
+      "question_type": "essay",
+      "points_possible": 10,
+      "answer_key": "1 ≤ c₁ ≤ 6",
+      "source_page": null,
+      "position": 7
+    }
+  ]
+}

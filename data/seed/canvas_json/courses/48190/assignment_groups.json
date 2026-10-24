@@ -1,0 +1,44 @@
+[
+  {
+    "id": 15005,
+    "name": "Assignments",
+    "position": 1,
+    "group_weight": 0,
+    "rules": {},
+    "assignments": [
+      {
+        "id": 610008,
+        "course_id": 48190,
+        "name": "Homework 1: Describing Data",
+        "description": "<p>Summaries and plots for a small data set.</p>",
+        "due_at": "2026-09-19T03:59:00Z",
+        "points_possible": 20,
+        "grading_type": "points",
+        "assignment_group_id": 15005,
+        "position": 1,
+        "published": true,
+        "submission_types": [
+          "online_upload"
+        ],
+        "is_quiz_assignment": false
+      },
+      {
+        "id": 610009,
+        "course_id": 48190,
+        "name": "Quiz 1: Probability Basics",
+        "description": "<p>Three short probability questions.</p>",
+        "due_at": "2026-11-05T04:59:00Z",
+        "points_possible": 6,
+        "grading_type": "points",
+        "assignment_group_id": 15005,
+        "position": 2,
+        "published": true,
+        "submission_types": [
+          "online_quiz"
+        ],
+        "is_quiz_assignment": true,
+        "quiz_id": 32004
+      }
+    ]
+  }
+]

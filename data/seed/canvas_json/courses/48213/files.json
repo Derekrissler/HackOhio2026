@@ -1,0 +1,101 @@
+[
+  {
+    "id": 550001,
+    "display_name": "Lecture 1: Introduction & LP Modeling.pdf",
+    "filename": "w01_intro.pdf",
+    "content-type": "application/pdf",
+    "size": 4580,
+    "url": "files/materials/ise3200/w01_intro.pdf",
+    "created_at": "2026-08-24T12:00:00Z"
+  },
+  {
+    "id": 550002,
+    "display_name": "Lecture 2: The Graphical Method.pdf",
+    "filename": "w02_graphical.pdf",
+    "content-type": "application/pdf",
+    "size": 4522,
+    "url": "files/materials/ise3200/w02_graphical.pdf",
+    "created_at": "2026-08-24T12:00:00Z"
+  },
+  {
+    "id": 550003,
+    "display_name": "Lecture 3: Standard Form.pdf",
+    "filename": "w03_standard_form.pdf",
+    "content-type": "application/pdf",
+    "size": 4450,
+    "url": "files/materials/ise3200/w03_standard_form.pdf",
+    "created_at": "2026-08-24T12:00:00Z"
+  },
+  {
+    "id": 550004,
+    "display_name": "Lecture 4: The Simplex Method I.pdf",
+    "filename": "w04_simplex1.pdf",
+    "content-type": "application/pdf",
+    "size": 4454,
+    "url": "files/materials/ise3200/w04_simplex1.pdf",
+    "created_at": "2026-08-24T12:00:00Z"
+  },
+  {
+    "id": 550005,
+    "display_name": "Lecture 5: The Simplex Method II.pdf",
+    "filename": "w05_simplex2.pdf",
+    "content-type": "application/pdf",
+    "size": 4469,
+    "url": "files/materials/ise3200/w05_simplex2.pdf",
+    "created_at": "2026-08-24T12:00:00Z"
+  },
+  {
+    "id": 550006,
+    "display_name": "Lecture 6: Duality.pdf",
+    "filename": "w06_duality.pdf",
+    "content-type": "application/pdf",
+    "size": 3535,
+    "url": "files/materials/ise3200/w06_duality.pdf",
+    "created_at": "2026-08-24T12:00:00Z"
+  },
+  {
+    "id": 550007,
+    "display_name": "Lecture 7: Complementary Slackness.pdf",
+    "filename": "w07_complementary.pdf",
+    "content-type": "application/pdf",
+    "size": 3528,
+    "url": "files/materials/ise3200/w07_complementary.pdf",
+    "created_at": "2026-08-24T12:00:00Z"
+  },
+  {
+    "id": 550008,
+    "display_name": "Lecture 8: Sensitivity Analysis.pdf",
+    "filename": "w08_sensitivity.pdf",
+    "content-type": "application/pdf",
+    "size": 4480,
+    "url": "files/materials/ise3200/w08_sensitivity.pdf",
+    "created_at": "2026-08-24T12:00:00Z"
+  },
+  {
+    "id": 550009,
+    "display_name": "Reading: A Guide to LP Formulation.pdf",
+    "filename": "r_formulation.pdf",
+    "content-type": "application/pdf",
+    "size": 1482,
+    "url": "files/materials/ise3200/r_formulation.pdf",
+    "created_at": "2026-08-24T12:00:00Z"
+  },
+  {
+    "id": 550010,
+    "display_name": "Reading: Simplex Worked Example.pdf",
+    "filename": "r_simplex_example.pdf",
+    "content-type": "application/pdf",
+    "size": 1457,
+    "url": "files/materials/ise3200/r_simplex_example.pdf",
+    "created_at": "2026-08-24T12:00:00Z"
+  },
+  {
+    "id": 550011,
+    "display_name": "Reading: Duality Notes.pdf",
+    "filename": "r_duality_notes.pdf",
+    "content-type": "application/pdf",
+    "size": 1465,
+    "url": "files/materials/ise3200/r_duality_notes.pdf",
+    "created_at": "2026-08-24T12:00:00Z"
+  }
+]

@@ -1,0 +1,5 @@
+# Generated seed data: keep JSON byte-identical to generator output on every OS.
+data/seed/**/*.json text eol=lf
+data/seed/**/*.md text eol=lf
+*.pdf binary
+*.jpg binary

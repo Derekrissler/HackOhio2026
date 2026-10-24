@@ -1,0 +1,1034 @@
+[
+  {
+    "submission_id": 880001,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "Resource limits are ≤ constraints: you can't use more than 240 carpentry hours.",
+    "created_at": "2026-09-17T06:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880001,
+    "question_key": "Q3",
+    "author_id": 9001,
+    "comment": "Without the finishing row, (30, 40) is no longer a corner point; the optimum moves to (60, 0) with z = 4,200.",
+    "created_at": "2026-09-17T06:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880003,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Decision variables must be quantities you control, with units — 'x = furniture' doesn't say what is counted or over what period.",
+    "created_at": "2026-09-16T09:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880003,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "Coefficients are swapped: tables earn $70 and chairs $50.",
+    "created_at": "2026-09-16T09:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880003,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "Forgot the non-negativity constraints x₁, x₂ ≥ 0.",
+    "created_at": "2026-09-16T09:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880004,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "Resource limits are ≤ constraints: you can't use more than 240 carpentry hours.",
+    "created_at": "2026-09-15T09:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880004,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "Right corner, but 70·30 + 50·40 = 4,100, not 4,300.",
+    "created_at": "2026-09-15T09:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880006,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "The carpentry row should use the carpentry hours of both products (4 and 3), not one product's two resources.",
+    "created_at": "2026-09-16T06:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880006,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "Only the axis intercepts were checked; the intersection (30, 40) of the two resource lines is also a corner point.",
+    "created_at": "2026-09-16T06:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880007,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "Arithmetic slip: the carpentry line meets the x₂-axis at 240/3 = 80, not 60.",
+    "created_at": "2026-09-15T05:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880008,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Decision variables must be quantities you control, with units — 'x = furniture' doesn't say what is counted or over what period.",
+    "created_at": "2026-09-15T07:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880008,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "Forgot the non-negativity constraints x₁, x₂ ≥ 0.",
+    "created_at": "2026-09-15T07:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880008,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "Right corner, but 70·30 + 50·40 = 4,100, not 4,300.",
+    "created_at": "2026-09-15T07:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880008,
+    "question_key": "Q3",
+    "author_id": 9001,
+    "comment": "Removing one constraint doesn't make the LP unbounded: carpentry hours (4x₁ + 3x₂ ≤ 240) still bound both variables.",
+    "created_at": "2026-09-15T07:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880009,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "Forgot the non-negativity constraints x₁, x₂ ≥ 0.",
+    "created_at": "2026-09-17T05:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880010,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "Resource limits are ≤ constraints: you can't use more than 240 carpentry hours.",
+    "created_at": "2026-09-17T10:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880010,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "No answer given.",
+    "created_at": "2026-09-17T10:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880010,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "Right corner, but 70·30 + 50·40 = 4,100, not 4,300.",
+    "created_at": "2026-09-17T10:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880010,
+    "question_key": "Q3",
+    "author_id": 9001,
+    "comment": "Removing one constraint doesn't make the LP unbounded: carpentry hours (4x₁ + 3x₂ ≤ 240) still bound both variables.",
+    "created_at": "2026-09-17T10:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880011,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "This is a profit — the objective should be maximized, not minimized.",
+    "created_at": "2026-09-15T10:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880012,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "Arithmetic slip: the carpentry line meets the x₂-axis at 240/3 = 80, not 60.",
+    "created_at": "2026-09-16T04:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880012,
+    "question_key": "Q3",
+    "author_id": 9001,
+    "comment": "No answer given.",
+    "created_at": "2026-09-16T04:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880013,
+    "question_key": "Q3",
+    "author_id": 9001,
+    "comment": "Without the finishing row, (30, 40) is no longer a corner point; the optimum moves to (60, 0) with z = 4,200.",
+    "created_at": "2026-09-15T05:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880014,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "This is a profit — the objective should be maximized, not minimized.",
+    "created_at": "2026-09-16T04:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880014,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "Only the axis intercepts were checked; the intersection (30, 40) of the two resource lines is also a corner point.",
+    "created_at": "2026-09-16T04:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880014,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "z = 4,100 at (30, 40) beats 4,000 at (0, 80); compare the objective at every corner point.",
+    "created_at": "2026-09-16T04:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880015,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "Forgot the non-negativity constraints x₁, x₂ ≥ 0.",
+    "created_at": "2026-09-15T07:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880018,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Decision variables must be quantities you control, with units — 'x = furniture' doesn't say what is counted or over what period.",
+    "created_at": "2026-09-15T10:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880018,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "Coefficients are swapped: tables earn $70 and chairs $50.",
+    "created_at": "2026-09-15T10:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880018,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "z = 4,100 at (30, 40) beats 4,000 at (0, 80); compare the objective at every corner point.",
+    "created_at": "2026-09-15T10:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880018,
+    "question_key": "Q3",
+    "author_id": 9001,
+    "comment": "Removing one constraint doesn't make the LP unbounded: carpentry hours (4x₁ + 3x₂ ≤ 240) still bound both variables.",
+    "created_at": "2026-09-15T10:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880019,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "The carpentry row should use the carpentry hours of both products (4 and 3), not one product's two resources.",
+    "created_at": "2026-09-14T04:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880043,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Slack and surplus variables must be non-negative too — add s₁, s₂ ≥ 0.",
+    "created_at": "2026-09-29T04:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880043,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "x₂ is free: replace it by x₂⁺ − x₂⁻ with both parts ≥ 0; you cannot just add x₂ ≥ 0.",
+    "created_at": "2026-09-29T04:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880043,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "In the z-row form (z − 5x₁ − 4x₂ = 0), pick the most negative coefficient: x₁ enters, not x₂.",
+    "created_at": "2026-09-29T04:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880043,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "Minimum ratio in the second pivot is 2 / (4/3) = 1.5 on the s₂ row, not 4 / (2/3) = 6.",
+    "created_at": "2026-09-29T04:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880046,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Slack and surplus variables must be non-negative too — add s₁, s₂ ≥ 0.",
+    "created_at": "2026-09-30T05:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880046,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "x₂ is free: replace it by x₂⁺ − x₂⁻ with both parts ≥ 0; you cannot just add x₂ ≥ 0.",
+    "created_at": "2026-09-30T05:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880046,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "Minimum ratio in the second pivot is 2 / (4/3) = 1.5 on the s₂ row, not 4 / (2/3) = 6.",
+    "created_at": "2026-09-30T05:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880046,
+    "question_key": "Q2c",
+    "author_id": 9001,
+    "comment": "Basic variable values come from the RHS of their own rows: x₁ = 3 and x₂ = 1.5, not swapped.",
+    "created_at": "2026-09-30T05:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880047,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "Minimum ratio in the second pivot is 2 / (4/3) = 1.5 on the s₂ row, not 4 / (2/3) = 6.",
+    "created_at": "2026-09-30T04:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880048,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Slack and surplus variables must be non-negative too — add s₁, s₂ ≥ 0.",
+    "created_at": "2026-09-30T10:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880048,
+    "question_key": "Q2c",
+    "author_id": 9001,
+    "comment": "That tableau isn't optimal yet: the z-row still has a negative coefficient (−2/3 under x₂).",
+    "created_at": "2026-09-30T10:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880049,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Sign of the slack variable is reversed: a ≥ constraint needs a surplus variable subtracted (−s), not a slack added (+s).",
+    "created_at": "2026-09-28T08:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880049,
+    "question_key": "Q2c",
+    "author_id": 9001,
+    "comment": "That tableau isn't optimal yet: the z-row still has a negative coefficient (−2/3 under x₂).",
+    "created_at": "2026-09-28T08:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880050,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "Converting min to max negates every coefficient: −(2x₁ − 3x₂) = −2x₁ + 3x₂⁺ − 3x₂⁻.",
+    "created_at": "2026-09-29T05:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880050,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "Minimum ratio in the second pivot is 2 / (4/3) = 1.5 on the s₂ row, not 4 / (2/3) = 6.",
+    "created_at": "2026-09-29T05:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880052,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Sign of the slack variable is reversed: a ≥ constraint needs a surplus variable subtracted (−s), not a slack added (+s).",
+    "created_at": "2026-09-29T06:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880052,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "x₂ is free: replace it by x₂⁺ − x₂⁻ with both parts ≥ 0; you cannot just add x₂ ≥ 0.",
+    "created_at": "2026-09-29T06:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880052,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "The ratio test picks the smallest ratio: 24/6 = 4 < 6/1 = 6, so s₁ leaves, not s₂.",
+    "created_at": "2026-09-29T06:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880052,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "Row-operation error in the second pivot: the updated s₂ row should be (0, 4/3, −1/6, 1 | 2).",
+    "created_at": "2026-09-29T06:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880052,
+    "question_key": "Q2c",
+    "author_id": 9001,
+    "comment": "Basic variable values come from the RHS of their own rows: x₁ = 3 and x₂ = 1.5, not swapped.",
+    "created_at": "2026-09-29T06:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880053,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Sign of the slack variable is reversed: a ≥ constraint needs a surplus variable subtracted (−s), not a slack added (+s).",
+    "created_at": "2026-09-29T06:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880053,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "x₂ is free: replace it by x₂⁺ − x₂⁻ with both parts ≥ 0; you cannot just add x₂ ≥ 0.",
+    "created_at": "2026-09-29T06:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880053,
+    "question_key": "Q3",
+    "author_id": 9001,
+    "comment": "Forgot the non-negativity constraints L, H ≥ 0.",
+    "created_at": "2026-09-29T06:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880054,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "Converting min to max negates every coefficient: −(2x₁ − 3x₂) = −2x₁ + 3x₂⁺ − 3x₂⁻.",
+    "created_at": "2026-09-29T04:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880054,
+    "question_key": "Q2c",
+    "author_id": 9001,
+    "comment": "Basic variable values come from the RHS of their own rows: x₁ = 3 and x₂ = 1.5, not swapped.",
+    "created_at": "2026-09-29T04:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880055,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Slack and surplus variables must be non-negative too — add s₁, s₂ ≥ 0.",
+    "created_at": "2026-10-01T08:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880055,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "Row-operation error in the second pivot: the updated s₂ row should be (0, 4/3, −1/6, 1 | 2).",
+    "created_at": "2026-10-01T08:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880056,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "Converting min to max negates every coefficient: −(2x₁ − 3x₂) = −2x₁ + 3x₂⁺ − 3x₂⁻.",
+    "created_at": "2026-09-30T09:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880056,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "Minimum ratio in the second pivot is 2 / (4/3) = 1.5 on the s₂ row, not 4 / (2/3) = 6.",
+    "created_at": "2026-09-30T09:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880056,
+    "question_key": "Q3",
+    "author_id": 9001,
+    "comment": "“At least 40% light” is a ≥ constraint on L; as written the model allows almost no light crude.",
+    "created_at": "2026-09-30T09:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880057,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Sign of the slack variable is reversed: a ≥ constraint needs a surplus variable subtracted (−s), not a slack added (+s).",
+    "created_at": "2026-09-28T08:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880058,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "x₂ is free: replace it by x₂⁺ − x₂⁻ with both parts ≥ 0; you cannot just add x₂ ≥ 0.",
+    "created_at": "2026-09-29T08:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880058,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "The ratio test picks the smallest ratio: 24/6 = 4 < 6/1 = 6, so s₁ leaves, not s₂.",
+    "created_at": "2026-09-29T08:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880058,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "Minimum ratio in the second pivot is 2 / (4/3) = 1.5 on the s₂ row, not 4 / (2/3) = 6.",
+    "created_at": "2026-09-29T08:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880059,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Slack and surplus variables must be non-negative too — add s₁, s₂ ≥ 0.",
+    "created_at": "2026-09-29T05:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880060,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "Minimum ratio in the second pivot is 2 / (4/3) = 1.5 on the s₂ row, not 4 / (2/3) = 6.",
+    "created_at": "2026-09-29T07:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880060,
+    "question_key": "Q3",
+    "author_id": 9001,
+    "comment": "Forgot the non-negativity constraints L, H ≥ 0.",
+    "created_at": "2026-09-29T07:00:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880081,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "Sign of the slack variable is reversed: a ≥ constraint needs a surplus variable subtracted (−s), not a slack added (+s).",
+    "created_at": "2026-10-19T15:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880081,
+    "question_key": "Q4b",
+    "author_id": 9001,
+    "comment": "Multiple optima come from a parallel objective, not degeneracy (a zero basic variable).",
+    "created_at": "2026-10-19T15:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880082,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "x₂ is free: substitute x₂⁺ − x₂⁻ instead of assuming x₂ ≥ 0.",
+    "created_at": "2026-10-16T21:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880082,
+    "question_key": "Q3a",
+    "author_id": 9001,
+    "comment": "Minimum ratio is 8/2 = 4 (row s₁), not 12/2 = 6.",
+    "created_at": "2026-10-16T21:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880083,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Give units and a period: dozens per day.",
+    "created_at": "2026-10-18T15:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880083,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "Forgot the non-negativity constraints x₁, x₂ ≥ 0.",
+    "created_at": "2026-10-18T15:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880083,
+    "question_key": "Q4a",
+    "author_id": 9001,
+    "comment": "x₁ = 5 meets x₁ + x₂ = 8 at x₂ = 3, not 4.",
+    "created_at": "2026-10-18T15:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880083,
+    "question_key": "Q4b",
+    "author_id": 9001,
+    "comment": "The objective 5x₁ + 5x₂ is parallel to the binding constraint x₁ + x₂ = 8, so the whole edge from (2, 6) to (5, 3) is optimal.",
+    "created_at": "2026-10-18T15:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "Flour use is 2 kg per dozen bagels and 1 kg per dozen muffins: 2x₁ + x₂ ≤ 40.",
+    "created_at": "2026-10-16T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "Slack and surplus variables must be non-negative too — add s₁, s₂ ≥ 0.",
+    "created_at": "2026-10-16T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "x₂ is free: substitute x₂⁺ − x₂⁻ instead of assuming x₂ ≥ 0.",
+    "created_at": "2026-10-16T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q3b",
+    "author_id": 9001,
+    "comment": "Minimum ratio in the second pivot is 4 / 2 = 2 on the s₂ row, not 4 / (1/2) = 8.",
+    "created_at": "2026-10-16T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q4b",
+    "author_id": 9001,
+    "comment": "Multiple optima come from a parallel objective, not degeneracy (a zero basic variable).",
+    "created_at": "2026-10-16T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880086,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "Forgot the non-negativity constraints x₁, x₂ ≥ 0.",
+    "created_at": "2026-10-18T21:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880086,
+    "question_key": "Q3b",
+    "author_id": 9001,
+    "comment": "Check the second pivot: after updating, the x₂ row is (0, 1, 3/4, −1/4 | 3).",
+    "created_at": "2026-10-18T21:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880086,
+    "question_key": "Q4a",
+    "author_id": 9001,
+    "comment": "The lines x₁ + x₂ = 8 with x₁ = 5 and with x₂ = 6 create corners (5, 3) and (2, 6).",
+    "created_at": "2026-10-18T21:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880087,
+    "question_key": "Q3a",
+    "author_id": 9001,
+    "comment": "Minimum ratio is 8/2 = 4 (row s₁), not 12/2 = 6.",
+    "created_at": "2026-10-16T21:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880087,
+    "question_key": "Q3b",
+    "author_id": 9001,
+    "comment": "Minimum ratio in the second pivot is 4 / 2 = 2 on the s₂ row, not 4 / (1/2) = 8.",
+    "created_at": "2026-10-16T21:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880087,
+    "question_key": "Q4b",
+    "author_id": 9001,
+    "comment": "Multiple optima come from a parallel objective, not degeneracy (a zero basic variable).",
+    "created_at": "2026-10-16T21:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "Profit is maximized, not minimized.",
+    "created_at": "2026-10-17T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "“At least 5 dozen muffins” is x₂ ≥ 5, not ≤.",
+    "created_at": "2026-10-17T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "Substituting x₂ = x₂⁺ − x₂⁻ gives 4x₂⁺ − 4x₂⁻; the second term is negative.",
+    "created_at": "2026-10-17T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q3b",
+    "author_id": 9001,
+    "comment": "Check the second pivot: after updating, the x₂ row is (0, 1, 3/4, −1/4 | 3).",
+    "created_at": "2026-10-17T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q3c",
+    "author_id": 9001,
+    "comment": "After the first pivot the z-row still has −1/2 under x₁, so it isn't optimal.",
+    "created_at": "2026-10-17T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q4b",
+    "author_id": 9001,
+    "comment": "Multiple optima come from a parallel objective, not degeneracy (a zero basic variable).",
+    "created_at": "2026-10-17T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880089,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "Sign of the slack variable is reversed: a ≥ constraint needs a surplus variable subtracted (−s), not a slack added (+s).",
+    "created_at": "2026-10-19T18:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880089,
+    "question_key": "Q3b",
+    "author_id": 9001,
+    "comment": "Check the second pivot: after updating, the x₂ row is (0, 1, 3/4, −1/4 | 3).",
+    "created_at": "2026-10-19T18:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880089,
+    "question_key": "Q3c",
+    "author_id": 9001,
+    "comment": "After the first pivot the z-row still has −1/2 under x₁, so it isn't optimal.",
+    "created_at": "2026-10-19T18:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880089,
+    "question_key": "Q4b",
+    "author_id": 9001,
+    "comment": "Multiple optima come from a parallel objective, not degeneracy (a zero basic variable).",
+    "created_at": "2026-10-19T18:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880090,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Give units and a period: dozens per day.",
+    "created_at": "2026-10-18T18:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880090,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "Sign of the slack variable is reversed: a ≥ constraint needs a surplus variable subtracted (−s), not a slack added (+s).",
+    "created_at": "2026-10-18T18:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880090,
+    "question_key": "Q3b",
+    "author_id": 9001,
+    "comment": "No answer given.",
+    "created_at": "2026-10-18T18:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880090,
+    "question_key": "Q4b",
+    "author_id": 9001,
+    "comment": "Multiple optima come from a parallel objective, not degeneracy (a zero basic variable).",
+    "created_at": "2026-10-18T18:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880091,
+    "question_key": "Q3b",
+    "author_id": 9001,
+    "comment": "Minimum ratio in the second pivot is 4 / 2 = 2 on the s₂ row, not 4 / (1/2) = 8.",
+    "created_at": "2026-10-18T17:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "Give units and a period: dozens per day.",
+    "created_at": "2026-10-16T21:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "Coefficients are swapped: bagels earn $9 per dozen.",
+    "created_at": "2026-10-16T21:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "x₂ is free: substitute x₂⁺ − x₂⁻ instead of assuming x₂ ≥ 0.",
+    "created_at": "2026-10-16T21:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q3b",
+    "author_id": 9001,
+    "comment": "Check the second pivot: after updating, the x₂ row is (0, 1, 3/4, −1/4 | 3).",
+    "created_at": "2026-10-16T21:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q3c",
+    "author_id": 9001,
+    "comment": "Read basic values from each variable's own row: x₁ = 2, x₂ = 3.",
+    "created_at": "2026-10-16T21:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q4b",
+    "author_id": 9001,
+    "comment": "Multiple optima come from a parallel objective, not degeneracy (a zero basic variable).",
+    "created_at": "2026-10-16T21:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880094,
+    "question_key": "Q1a",
+    "author_id": 9001,
+    "comment": "No answer given.",
+    "created_at": "2026-10-17T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880094,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "x₂ is free: substitute x₂⁺ − x₂⁻ instead of assuming x₂ ≥ 0.",
+    "created_at": "2026-10-17T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880094,
+    "question_key": "Q4a",
+    "author_id": 9001,
+    "comment": "The lines x₁ + x₂ = 8 with x₁ = 5 and with x₂ = 6 create corners (5, 3) and (2, 6).",
+    "created_at": "2026-10-17T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880094,
+    "question_key": "Q4b",
+    "author_id": 9001,
+    "comment": "The objective 5x₁ + 5x₂ is parallel to the binding constraint x₁ + x₂ = 8, so the whole edge from (2, 6) to (5, 3) is optimal.",
+    "created_at": "2026-10-17T19:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880095,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "Slack and surplus variables must be non-negative too — add s₁, s₂ ≥ 0.",
+    "created_at": "2026-10-16T15:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880096,
+    "question_key": "Q3a",
+    "author_id": 9001,
+    "comment": "The most negative z-row coefficient is −3 (x₂), so x₂ enters.",
+    "created_at": "2026-10-18T16:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880096,
+    "question_key": "Q4b",
+    "author_id": 9001,
+    "comment": "Multiple optima come from a parallel objective, not degeneracy (a zero basic variable).",
+    "created_at": "2026-10-18T16:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880097,
+    "question_key": "Q1b",
+    "author_id": 9001,
+    "comment": "Coefficients are swapped: bagels earn $9 per dozen.",
+    "created_at": "2026-10-19T16:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880097,
+    "question_key": "Q4b",
+    "author_id": 9001,
+    "comment": "The objective 5x₁ + 5x₂ is parallel to the binding constraint x₁ + x₂ = 8, so the whole edge from (2, 6) to (5, 3) is optimal.",
+    "created_at": "2026-10-19T16:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "“At least 5 dozen muffins” is x₂ ≥ 5, not ≤.",
+    "created_at": "2026-10-18T16:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "Sign of the slack variable is reversed: a ≥ constraint needs a surplus variable subtracted (−s), not a slack added (+s).",
+    "created_at": "2026-10-18T16:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "x₂ is free: substitute x₂⁺ − x₂⁻ instead of assuming x₂ ≥ 0.",
+    "created_at": "2026-10-18T16:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q3a",
+    "author_id": 9001,
+    "comment": "The most negative z-row coefficient is −3 (x₂), so x₂ enters.",
+    "created_at": "2026-10-18T16:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q3b",
+    "author_id": 9001,
+    "comment": "Check the second pivot: after updating, the x₂ row is (0, 1, 3/4, −1/4 | 3).",
+    "created_at": "2026-10-18T16:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q4a",
+    "author_id": 9001,
+    "comment": "x₁ = 5 meets x₁ + x₂ = 8 at x₂ = 3, not 4.",
+    "created_at": "2026-10-18T16:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880099,
+    "question_key": "Q1c",
+    "author_id": 9001,
+    "comment": "Forgot the non-negativity constraints x₁, x₂ ≥ 0.",
+    "created_at": "2026-10-19T16:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880099,
+    "question_key": "Q2a",
+    "author_id": 9001,
+    "comment": "Slack and surplus variables must be non-negative too — add s₁, s₂ ≥ 0.",
+    "created_at": "2026-10-19T16:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880099,
+    "question_key": "Q2b",
+    "author_id": 9001,
+    "comment": "Substituting x₂ = x₂⁺ − x₂⁻ gives 4x₂⁺ − 4x₂⁻; the second term is negative.",
+    "created_at": "2026-10-19T16:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880100,
+    "question_key": "Q3b",
+    "author_id": 9001,
+    "comment": "Check the second pivot: after updating, the x₂ row is (0, 1, 3/4, −1/4 | 3).",
+    "created_at": "2026-10-19T15:21:00Z",
+    "visible_to_student": true
+  },
+  {
+    "submission_id": 880100,
+    "question_key": "Q4b",
+    "author_id": 9001,
+    "comment": "The objective 5x₁ + 5x₂ is parallel to the binding constraint x₁ + x₂ = 8, so the whole edge from (2, 6) to (5, 3) is optimal.",
+    "created_at": "2026-10-19T15:21:00Z",
+    "visible_to_student": true
+  }
+]

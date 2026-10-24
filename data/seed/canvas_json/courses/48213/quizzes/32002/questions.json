@@ -1,0 +1,144 @@
+[
+  {
+    "id": 77006,
+    "quiz_id": 32002,
+    "position": 1,
+    "question_name": "Question 1",
+    "question_type": "multiple_choice_question",
+    "question_text": "<p>To convert 3x₁ + 2x₂ ≥ 12 to an equality in standard form, you:</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5016,
+        "text": "subtract a surplus variable s ≥ 0",
+        "weight": 100
+      },
+      {
+        "id": 5017,
+        "text": "add a slack variable s ≥ 0",
+        "weight": 0
+      },
+      {
+        "id": 5018,
+        "text": "multiply by −1 and add a slack variable",
+        "weight": 0
+      },
+      {
+        "id": 5019,
+        "text": "drop the constraint",
+        "weight": 0
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  },
+  {
+    "id": 77007,
+    "quiz_id": 32002,
+    "position": 2,
+    "question_name": "Question 2",
+    "question_type": "true_false_question",
+    "question_text": "<p>True or false: in standard form every variable, including slack and surplus variables, is non-negative.</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5020,
+        "text": "True",
+        "weight": 100
+      },
+      {
+        "id": 5021,
+        "text": "False",
+        "weight": 0
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  },
+  {
+    "id": 77008,
+    "quiz_id": 32002,
+    "position": 3,
+    "question_name": "Question 3",
+    "question_type": "multiple_choice_question",
+    "question_text": "<p>The z-row of a max problem is z − 3x₁ − 5x₂ + 0s₁ = 0. Which variable enters?</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5022,
+        "text": "x₂",
+        "weight": 100
+      },
+      {
+        "id": 5023,
+        "text": "x₁",
+        "weight": 0
+      },
+      {
+        "id": 5024,
+        "text": "s₁",
+        "weight": 0
+      },
+      {
+        "id": 5025,
+        "text": "None — the tableau is optimal",
+        "weight": 0
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  },
+  {
+    "id": 77009,
+    "quiz_id": 32002,
+    "position": 4,
+    "question_name": "Question 4",
+    "question_type": "numerical_question",
+    "question_text": "<p>The entering column has entries (2, −1, 4) and the right-hand side is (10, 6, 12). What is the minimum ratio?</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5026,
+        "numerical_answer_type": "exact_answer",
+        "exact": 3.0,
+        "margin": 0,
+        "weight": 100
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  },
+  {
+    "id": 77010,
+    "quiz_id": 32002,
+    "position": 5,
+    "question_name": "Question 5",
+    "question_type": "multiple_choice_question",
+    "question_text": "<p>If the entering column has no positive entries, the LP is:</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5027,
+        "text": "unbounded",
+        "weight": 100
+      },
+      {
+        "id": 5028,
+        "text": "infeasible",
+        "weight": 0
+      },
+      {
+        "id": 5029,
+        "text": "degenerate",
+        "weight": 0
+      },
+      {
+        "id": 5030,
+        "text": "has multiple optima",
+        "weight": 0
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  }
+]

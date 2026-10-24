@@ -1,0 +1,380 @@
+[
+  {
+    "id": 9001,
+    "name": "Prof. Dana Rivera",
+    "sortable_name": "Rivera, Dana",
+    "short_name": "Prof. Dana Rivera",
+    "login_id": "drivera@example.edu",
+    "email": "drivera@example.edu",
+    "enrollments": [
+      {
+        "id": 70001,
+        "course_id": 48213,
+        "user_id": 9001,
+        "type": "TeacherEnrollment",
+        "role": "TeacherEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9002,
+    "name": "Alex Kim",
+    "sortable_name": "Kim, Alex",
+    "short_name": "Alex Kim",
+    "login_id": "akim@example.edu",
+    "email": "akim@example.edu",
+    "enrollments": [
+      {
+        "id": 70002,
+        "course_id": 48213,
+        "user_id": 9002,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9003,
+    "name": "Priya Natarajan",
+    "sortable_name": "Natarajan, Priya",
+    "short_name": "Priya Natarajan",
+    "login_id": "pnatarajan@example.edu",
+    "email": "pnatarajan@example.edu",
+    "enrollments": [
+      {
+        "id": 70003,
+        "course_id": 48213,
+        "user_id": 9003,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9004,
+    "name": "Marcus Bell",
+    "sortable_name": "Bell, Marcus",
+    "short_name": "Marcus Bell",
+    "login_id": "mbell@example.edu",
+    "email": "mbell@example.edu",
+    "enrollments": [
+      {
+        "id": 70004,
+        "course_id": 48213,
+        "user_id": 9004,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9005,
+    "name": "Jordan Alvarez",
+    "sortable_name": "Alvarez, Jordan",
+    "short_name": "Jordan Alvarez",
+    "login_id": "jalvarez@example.edu",
+    "email": "jalvarez@example.edu",
+    "enrollments": [
+      {
+        "id": 70005,
+        "course_id": 48213,
+        "user_id": 9005,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9006,
+    "name": "Samira Haddad",
+    "sortable_name": "Haddad, Samira",
+    "short_name": "Samira Haddad",
+    "login_id": "shaddad@example.edu",
+    "email": "shaddad@example.edu",
+    "enrollments": [
+      {
+        "id": 70006,
+        "course_id": 48213,
+        "user_id": 9006,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9007,
+    "name": "Ethan Brooks",
+    "sortable_name": "Brooks, Ethan",
+    "short_name": "Ethan Brooks",
+    "login_id": "ebrooks@example.edu",
+    "email": "ebrooks@example.edu",
+    "enrollments": [
+      {
+        "id": 70007,
+        "course_id": 48213,
+        "user_id": 9007,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9008,
+    "name": "Mei Lin Chen",
+    "sortable_name": "Chen, Mei Lin",
+    "short_name": "Mei Lin Chen",
+    "login_id": "mchen@example.edu",
+    "email": "mchen@example.edu",
+    "enrollments": [
+      {
+        "id": 70008,
+        "course_id": 48213,
+        "user_id": 9008,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9009,
+    "name": "Daniel Okafor",
+    "sortable_name": "Okafor, Daniel",
+    "short_name": "Daniel Okafor",
+    "login_id": "dokafor@example.edu",
+    "email": "dokafor@example.edu",
+    "enrollments": [
+      {
+        "id": 70009,
+        "course_id": 48213,
+        "user_id": 9009,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9010,
+    "name": "Hannah Schultz",
+    "sortable_name": "Schultz, Hannah",
+    "short_name": "Hannah Schultz",
+    "login_id": "hschultz@example.edu",
+    "email": "hschultz@example.edu",
+    "enrollments": [
+      {
+        "id": 70010,
+        "course_id": 48213,
+        "user_id": 9010,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9011,
+    "name": "Luis Romero",
+    "sortable_name": "Romero, Luis",
+    "short_name": "Luis Romero",
+    "login_id": "lromero@example.edu",
+    "email": "lromero@example.edu",
+    "enrollments": [
+      {
+        "id": 70011,
+        "course_id": 48213,
+        "user_id": 9011,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9012,
+    "name": "Grace Park",
+    "sortable_name": "Park, Grace",
+    "short_name": "Grace Park",
+    "login_id": "gpark@example.edu",
+    "email": "gpark@example.edu",
+    "enrollments": [
+      {
+        "id": 70012,
+        "course_id": 48213,
+        "user_id": 9012,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9013,
+    "name": "Owen Fitzgerald",
+    "sortable_name": "Fitzgerald, Owen",
+    "short_name": "Owen Fitzgerald",
+    "login_id": "ofitzgerald@example.edu",
+    "email": "ofitzgerald@example.edu",
+    "enrollments": [
+      {
+        "id": 70013,
+        "course_id": 48213,
+        "user_id": 9013,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9014,
+    "name": "Aisha Rahman",
+    "sortable_name": "Rahman, Aisha",
+    "short_name": "Aisha Rahman",
+    "login_id": "arahman@example.edu",
+    "email": "arahman@example.edu",
+    "enrollments": [
+      {
+        "id": 70014,
+        "course_id": 48213,
+        "user_id": 9014,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9015,
+    "name": "Tyler Nguyen",
+    "sortable_name": "Nguyen, Tyler",
+    "short_name": "Tyler Nguyen",
+    "login_id": "tnguyen@example.edu",
+    "email": "tnguyen@example.edu",
+    "enrollments": [
+      {
+        "id": 70015,
+        "course_id": 48213,
+        "user_id": 9015,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9016,
+    "name": "Sofia Marchetti",
+    "sortable_name": "Marchetti, Sofia",
+    "short_name": "Sofia Marchetti",
+    "login_id": "smarchetti@example.edu",
+    "email": "smarchetti@example.edu",
+    "enrollments": [
+      {
+        "id": 70016,
+        "course_id": 48213,
+        "user_id": 9016,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9017,
+    "name": "Caleb Johnson",
+    "sortable_name": "Johnson, Caleb",
+    "short_name": "Caleb Johnson",
+    "login_id": "cjohnson@example.edu",
+    "email": "cjohnson@example.edu",
+    "enrollments": [
+      {
+        "id": 70017,
+        "course_id": 48213,
+        "user_id": 9017,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9018,
+    "name": "Nadia Petrova",
+    "sortable_name": "Petrova, Nadia",
+    "short_name": "Nadia Petrova",
+    "login_id": "npetrova@example.edu",
+    "email": "npetrova@example.edu",
+    "enrollments": [
+      {
+        "id": 70018,
+        "course_id": 48213,
+        "user_id": 9018,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9019,
+    "name": "Ryan O'Connell",
+    "sortable_name": "O'Connell, Ryan",
+    "short_name": "Ryan O'Connell",
+    "login_id": "roconnell@example.edu",
+    "email": "roconnell@example.edu",
+    "enrollments": [
+      {
+        "id": 70019,
+        "course_id": 48213,
+        "user_id": 9019,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9020,
+    "name": "Emily Watanabe",
+    "sortable_name": "Watanabe, Emily",
+    "short_name": "Emily Watanabe",
+    "login_id": "ewatanabe@example.edu",
+    "email": "ewatanabe@example.edu",
+    "enrollments": [
+      {
+        "id": 70020,
+        "course_id": 48213,
+        "user_id": 9020,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9021,
+    "name": "Kwame Mensah",
+    "sortable_name": "Mensah, Kwame",
+    "short_name": "Kwame Mensah",
+    "login_id": "kmensah@example.edu",
+    "email": "kmensah@example.edu",
+    "enrollments": [
+      {
+        "id": 70021,
+        "course_id": 48213,
+        "user_id": 9021,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  }
+]

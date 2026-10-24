@@ -1,0 +1,13 @@
+{
+  "id": 48213,
+  "name": "Linear Optimization",
+  "course_code": "ISE 3200",
+  "workflow_state": "available",
+  "start_at": "2026-08-24T12:00:00Z",
+  "end_at": "2026-12-12T04:59:00Z",
+  "term": {
+    "name": "Autumn 2026"
+  },
+  "apply_assignment_group_weights": true,
+  "syllabus_body": "<p>ISE 3200 introduces linear optimization: how to model decisions as linear programs, solve them graphically and with the simplex method, and interpret the answers through duality and sensitivity analysis.</p><p><strong>Meetings:</strong> Mon/Wed 10:20–11:40, Hitchcock Hall 031. <strong>Office hours:</strong> Tue 2–4 pm, Baker Systems 280.</p><h2>Learning Objectives</h2><p>By the end of the course you will be able to:</p><ol class=\"learning-objectives\"><li id=\"LO1\"><strong>LO1</strong> — Formulate linear programs from word problems by defining decision variables, an objective and constraints.</li><li id=\"LO2\"><strong>LO2</strong> — Convert any LP to standard form using slack and surplus variables, non-negativity and free-variable substitution.</li><li id=\"LO3\"><strong>LO3</strong> — Solve two-variable LPs graphically and interpret corner points, unboundedness and multiple optima.</li><li id=\"LO4\"><strong>LO4</strong> — Carry out the simplex method: choose entering and leaving variables, perform pivots and recognise optimality, degeneracy and unboundedness.</li><li id=\"LO5\"><strong>LO5</strong> — Formulate the dual of an LP and apply weak duality, strong duality and complementary slackness.</li><li id=\"LO6\"><strong>LO6</strong> — Interpret shadow prices, reduced costs and the ranges over which the optimal basis stays optimal.</li></ol><h2>Grading</h2><table><thead><tr><th>Category</th><th>Weight</th></tr></thead><tbody><tr><td>Homework</td><td>30%</td></tr><tr><td>Quizzes</td><td>20%</td></tr><tr><td>Midterm</td><td>25%</td></tr><tr><td>Final Exam</td><td>25%</td></tr></tbody></table><h2>Schedule</h2><ul><li>Week 1: Introduction & LP Modeling</li><li>Week 2: The Graphical Method</li><li>Week 3: Standard Form</li><li>Week 4: The Simplex Method I</li><li>Week 5: The Simplex Method II</li><li>Week 6: Duality</li><li>Week 7: Complementary Slackness</li><li>Week 8: Sensitivity Analysis</li></ul>"
+}

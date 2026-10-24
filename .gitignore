@@ -218,3 +218,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- HackOhio2026 app ---
+node_modules/
+apps/web/dist/
+data/app.db
+data/*.db-journal
+.DS_Store

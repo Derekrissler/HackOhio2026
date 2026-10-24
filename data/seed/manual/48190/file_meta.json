@@ -1,0 +1,22 @@
+{
+  "550077": {
+    "page_count": 1,
+    "has_text_layer": true,
+    "sha256": "a735629fa2836953a2a41a8b8837c009331b75aa98ce660673edb7c7450e1638"
+  },
+  "550078": {
+    "page_count": 1,
+    "has_text_layer": true,
+    "sha256": "e501c89c8d43afa1b55e4a0c840a80ae660fe4ba8060d8d12e96392309a856b9"
+  },
+  "550079": {
+    "page_count": 1,
+    "has_text_layer": true,
+    "sha256": "6348bc820e6a6e3b63f732c23fada5d1ec56d7266a432f9824be77b435490395"
+  },
+  "550080": {
+    "page_count": 1,
+    "has_text_layer": true,
+    "sha256": "1658f75460507ec4181d4a406b6f26a6d6434a515e75ce1e425a08c011a2be7a"
+  }
+}

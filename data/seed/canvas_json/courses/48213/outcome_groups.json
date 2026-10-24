@@ -1,0 +1,9 @@
+[
+  {
+    "id": 4001,
+    "title": "ISE 3200 Learning Objectives",
+    "context_id": 48213,
+    "context_type": "Course",
+    "outcomes_url": "/api/v1/courses/48213/outcome_groups/4001/outcomes"
+  }
+]

@@ -1,0 +1,310 @@
+[
+  {
+    "id": 15001,
+    "name": "Homework",
+    "position": 1,
+    "group_weight": 30,
+    "rules": {},
+    "assignments": [
+      {
+        "id": 610001,
+        "course_id": 48213,
+        "name": "HW1: Modeling & the Graphical Method",
+        "description": "<p>Formulate and solve a two-variable product-mix LP. Upload a single PDF with your work. Show every corner point you evaluate.</p>",
+        "due_at": "2026-09-12T03:59:00Z",
+        "points_possible": 40,
+        "grading_type": "points",
+        "assignment_group_id": 15001,
+        "position": 1,
+        "published": true,
+        "submission_types": [
+          "online_upload"
+        ],
+        "is_quiz_assignment": false
+      },
+      {
+        "id": 610003,
+        "course_id": 48213,
+        "name": "HW2: Standard Form & Simplex",
+        "description": "<p>Convert an LP to standard form, run the simplex method by hand and formulate a blending model. Graded with the rubric below.</p>",
+        "due_at": "2026-09-26T03:59:00Z",
+        "points_possible": 50,
+        "grading_type": "points",
+        "assignment_group_id": 15001,
+        "position": 3,
+        "published": true,
+        "submission_types": [
+          "online_upload"
+        ],
+        "is_quiz_assignment": false,
+        "rubric": [
+          {
+            "id": "_8201",
+            "description": "Standard form (Q1)",
+            "long_description": "Equalities with correctly signed slack/surplus variables, free-variable substitution and max-form objective.",
+            "points": 10,
+            "learning_outcome_id": 4102,
+            "ratings": [
+              {
+                "id": "_8201_full",
+                "description": "Full marks",
+                "points": 10
+              },
+              {
+                "id": "_8201_part",
+                "description": "Partial credit",
+                "points": 5.0
+              },
+              {
+                "id": "_8201_none",
+                "description": "No marks",
+                "points": 0
+              }
+            ]
+          },
+          {
+            "id": "_8202",
+            "description": "Simplex iterations (Q2)",
+            "long_description": "Correct entering/leaving choices, accurate pivots and a correctly read optimal tableau.",
+            "points": 25,
+            "learning_outcome_id": 4104,
+            "ratings": [
+              {
+                "id": "_8202_full",
+                "description": "Full marks",
+                "points": 25
+              },
+              {
+                "id": "_8202_part",
+                "description": "Partial credit",
+                "points": 12.5
+              },
+              {
+                "id": "_8202_none",
+                "description": "No marks",
+                "points": 0
+              }
+            ]
+          },
+          {
+            "id": "_8203",
+            "description": "Blending model (Q3)",
+            "long_description": "Complete, correctly directed constraints including the percentage requirement and non-negativity.",
+            "points": 15,
+            "learning_outcome_id": 4101,
+            "ratings": [
+              {
+                "id": "_8203_full",
+                "description": "Full marks",
+                "points": 15
+              },
+              {
+                "id": "_8203_part",
+                "description": "Partial credit",
+                "points": 7.5
+              },
+              {
+                "id": "_8203_none",
+                "description": "No marks",
+                "points": 0
+              }
+            ]
+          }
+        ],
+        "rubric_settings": {
+          "id": 3001,
+          "title": "HW2: Standard Form & Simplex Rubric",
+          "points_possible": 50
+        }
+      },
+      {
+        "id": 610006,
+        "course_id": 48213,
+        "name": "HW3: Duality & Sensitivity",
+        "description": "<p>Form a dual, apply complementary slackness and interpret sensitivity results. Graded with the rubric below.</p>",
+        "due_at": "2026-10-31T03:59:00Z",
+        "points_possible": 50,
+        "grading_type": "points",
+        "assignment_group_id": 15001,
+        "position": 6,
+        "published": true,
+        "submission_types": [
+          "online_upload"
+        ],
+        "is_quiz_assignment": false,
+        "rubric": [
+          {
+            "id": "_8204",
+            "description": "Dual formulation (Q1)",
+            "long_description": "Correct dual objective, transposed constraints with the right directions, and the strong-duality value.",
+            "points": 18,
+            "learning_outcome_id": 4105,
+            "ratings": [
+              {
+                "id": "_8204_full",
+                "description": "Full marks",
+                "points": 18
+              },
+              {
+                "id": "_8204_part",
+                "description": "Partial credit",
+                "points": 9.0
+              },
+              {
+                "id": "_8204_none",
+                "description": "No marks",
+                "points": 0
+              }
+            ]
+          },
+          {
+            "id": "_8205",
+            "description": "Complementary slackness (Q2)",
+            "long_description": "Uses tight dual constraints for positive primal variables and solves for y*.",
+            "points": 12,
+            "learning_outcome_id": 4105,
+            "ratings": [
+              {
+                "id": "_8205_full",
+                "description": "Full marks",
+                "points": 12
+              },
+              {
+                "id": "_8205_part",
+                "description": "Partial credit",
+                "points": 6.0
+              },
+              {
+                "id": "_8205_none",
+                "description": "No marks",
+                "points": 0
+              }
+            ]
+          },
+          {
+            "id": "_8206",
+            "description": "Sensitivity (Q3)",
+            "long_description": "Correct shadow price with interpretation and a correct optimality range.",
+            "points": 20,
+            "learning_outcome_id": 4106,
+            "ratings": [
+              {
+                "id": "_8206_full",
+                "description": "Full marks",
+                "points": 20
+              },
+              {
+                "id": "_8206_part",
+                "description": "Partial credit",
+                "points": 10.0
+              },
+              {
+                "id": "_8206_none",
+                "description": "No marks",
+                "points": 0
+              }
+            ]
+          }
+        ],
+        "rubric_settings": {
+          "id": 3002,
+          "title": "HW3: Duality & Sensitivity Rubric",
+          "points_possible": 50
+        }
+      }
+    ]
+  },
+  {
+    "id": 15002,
+    "name": "Quizzes",
+    "position": 2,
+    "group_weight": 20,
+    "rules": {},
+    "assignments": [
+      {
+        "id": 610002,
+        "course_id": 48213,
+        "name": "Quiz 1: Formulation",
+        "description": "<p>Five questions on LP formulation and graphical solutions. One attempt, 20 minutes.</p>",
+        "due_at": "2026-09-19T03:59:00Z",
+        "points_possible": 10,
+        "grading_type": "points",
+        "assignment_group_id": 15002,
+        "position": 2,
+        "published": true,
+        "submission_types": [
+          "online_quiz"
+        ],
+        "is_quiz_assignment": true,
+        "quiz_id": 32001
+      },
+      {
+        "id": 610004,
+        "course_id": 48213,
+        "name": "Quiz 2: Simplex Mechanics",
+        "description": "<p>Standard form and simplex mechanics. One attempt, 20 minutes.</p>",
+        "due_at": "2026-10-03T03:59:00Z",
+        "points_possible": 10,
+        "grading_type": "points",
+        "assignment_group_id": 15002,
+        "position": 4,
+        "published": true,
+        "submission_types": [
+          "online_quiz"
+        ],
+        "is_quiz_assignment": true,
+        "quiz_id": 32002
+      },
+      {
+        "id": 610007,
+        "course_id": 48213,
+        "name": "Quiz 3: Duality",
+        "description": "<p>Duality and sensitivity. Opens after the HW3 deadline.</p>",
+        "due_at": "2026-11-07T04:59:00Z",
+        "points_possible": 10,
+        "grading_type": "points",
+        "assignment_group_id": 15002,
+        "position": 7,
+        "published": true,
+        "submission_types": [
+          "online_quiz"
+        ],
+        "is_quiz_assignment": true,
+        "quiz_id": 32003
+      }
+    ]
+  },
+  {
+    "id": 15003,
+    "name": "Midterm",
+    "position": 3,
+    "group_weight": 25,
+    "rules": {},
+    "assignments": [
+      {
+        "id": 610005,
+        "course_id": 48213,
+        "name": "Midterm Exam",
+        "description": "<p>In-class written exam, 80 minutes, covering Weeks 1–5. Graded papers were scanned; per-question scores and comments are shown with your scan.</p>",
+        "due_at": "2026-10-14T15:20:00Z",
+        "points_possible": 100,
+        "grading_type": "points",
+        "assignment_group_id": 15003,
+        "position": 5,
+        "published": true,
+        "submission_types": [
+          "on_paper"
+        ],
+        "is_quiz_assignment": false
+      }
+    ]
+  },
+  {
+    "id": 15004,
+    "name": "Final Exam",
+    "position": 4,
+    "group_weight": 25,
+    "rules": {},
+    "assignments": []
+  }
+]

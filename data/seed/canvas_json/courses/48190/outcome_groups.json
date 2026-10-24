@@ -1,0 +1,9 @@
+[
+  {
+    "id": 4002,
+    "title": "STAT 1450 Learning Objectives",
+    "context_id": 48190,
+    "context_type": "Course",
+    "outcomes_url": "/api/v1/courses/48190/outcome_groups/4002/outcomes"
+  }
+]

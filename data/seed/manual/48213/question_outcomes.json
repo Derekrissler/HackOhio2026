@@ -1,0 +1,245 @@
+[
+  {
+    "assignment_id": 610001,
+    "question_key": "Q1a",
+    "outcome_id": 4101,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610001,
+    "question_key": "Q1b",
+    "outcome_id": 4101,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610001,
+    "question_key": "Q1c",
+    "outcome_id": 4101,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610001,
+    "question_key": "Q2a",
+    "outcome_id": 4103,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610001,
+    "question_key": "Q2b",
+    "outcome_id": 4103,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610001,
+    "question_key": "Q3",
+    "outcome_id": 4103,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77001,
+    "outcome_id": 4101,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77002,
+    "outcome_id": 4103,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77003,
+    "outcome_id": 4103,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77004,
+    "outcome_id": 4103,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77005,
+    "outcome_id": 4101,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610003,
+    "question_key": "Q1a",
+    "outcome_id": 4102,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610003,
+    "question_key": "Q1b",
+    "outcome_id": 4102,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610003,
+    "question_key": "Q2a",
+    "outcome_id": 4104,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610003,
+    "question_key": "Q2b",
+    "outcome_id": 4104,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610003,
+    "question_key": "Q2c",
+    "outcome_id": 4104,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610003,
+    "question_key": "Q3",
+    "outcome_id": 4101,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77006,
+    "outcome_id": 4102,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77007,
+    "outcome_id": 4102,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77008,
+    "outcome_id": 4104,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77009,
+    "outcome_id": 4104,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77010,
+    "outcome_id": 4104,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610005,
+    "question_key": "Q1a",
+    "outcome_id": 4101,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610005,
+    "question_key": "Q1b",
+    "outcome_id": 4101,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610005,
+    "question_key": "Q1c",
+    "outcome_id": 4101,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610005,
+    "question_key": "Q2a",
+    "outcome_id": 4102,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610005,
+    "question_key": "Q2b",
+    "outcome_id": 4102,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610005,
+    "question_key": "Q3a",
+    "outcome_id": 4104,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610005,
+    "question_key": "Q3b",
+    "outcome_id": 4104,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610005,
+    "question_key": "Q3c",
+    "outcome_id": 4104,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610005,
+    "question_key": "Q4a",
+    "outcome_id": 4103,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610005,
+    "question_key": "Q4b",
+    "outcome_id": 4103,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610005,
+    "question_key": "Q4b",
+    "outcome_id": 4104,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610006,
+    "question_key": "Q1a",
+    "outcome_id": 4105,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610006,
+    "question_key": "Q1b",
+    "outcome_id": 4105,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610006,
+    "question_key": "Q2",
+    "outcome_id": 4105,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610006,
+    "question_key": "Q3a",
+    "outcome_id": 4106,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610006,
+    "question_key": "Q3b",
+    "outcome_id": 4106,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77011,
+    "outcome_id": 4105,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77012,
+    "outcome_id": 4105,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77013,
+    "outcome_id": 4106,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77014,
+    "outcome_id": 4106,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77015,
+    "outcome_id": 4105,
+    "weight": 1.0
+  }
+]

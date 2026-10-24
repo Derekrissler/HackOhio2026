@@ -1,0 +1,16 @@
+[
+  {
+    "id": 32004,
+    "title": "Quiz 1: Probability Basics",
+    "description": "<p>Three short probability questions.</p>",
+    "quiz_type": "assignment",
+    "assignment_id": 610009,
+    "assignment_group_id": 15005,
+    "points_possible": 6,
+    "question_count": 3,
+    "due_at": "2026-11-05T04:59:00Z",
+    "published": true,
+    "allowed_attempts": 1,
+    "time_limit": 20
+  }
+]

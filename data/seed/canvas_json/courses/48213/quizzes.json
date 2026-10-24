@@ -1,0 +1,44 @@
+[
+  {
+    "id": 32001,
+    "title": "Quiz 1: Formulation",
+    "description": "<p>Five questions on LP formulation and graphical solutions. One attempt, 20 minutes.</p>",
+    "quiz_type": "assignment",
+    "assignment_id": 610002,
+    "assignment_group_id": 15002,
+    "points_possible": 10,
+    "question_count": 5,
+    "due_at": "2026-09-19T03:59:00Z",
+    "published": true,
+    "allowed_attempts": 1,
+    "time_limit": 20
+  },
+  {
+    "id": 32002,
+    "title": "Quiz 2: Simplex Mechanics",
+    "description": "<p>Standard form and simplex mechanics. One attempt, 20 minutes.</p>",
+    "quiz_type": "assignment",
+    "assignment_id": 610004,
+    "assignment_group_id": 15002,
+    "points_possible": 10,
+    "question_count": 5,
+    "due_at": "2026-10-03T03:59:00Z",
+    "published": true,
+    "allowed_attempts": 1,
+    "time_limit": 20
+  },
+  {
+    "id": 32003,
+    "title": "Quiz 3: Duality",
+    "description": "<p>Duality and sensitivity. Opens after the HW3 deadline.</p>",
+    "quiz_type": "assignment",
+    "assignment_id": 610007,
+    "assignment_group_id": 15002,
+    "points_possible": 10,
+    "question_count": 5,
+    "due_at": "2026-11-07T04:59:00Z",
+    "published": true,
+    "allowed_attempts": 1,
+    "time_limit": 20
+  }
+]

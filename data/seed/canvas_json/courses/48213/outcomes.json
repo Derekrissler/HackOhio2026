@@ -1,0 +1,68 @@
+[
+  {
+    "id": 4101,
+    "context_id": 48213,
+    "context_type": "Course",
+    "title": "LO1",
+    "display_name": "Formulate linear programs",
+    "description": "<p>Formulate linear programs from word problems by defining decision variables, an objective and constraints.</p>",
+    "points_possible": 3,
+    "mastery_points": 2,
+    "calculation_method": "highest"
+  },
+  {
+    "id": 4102,
+    "context_id": 48213,
+    "context_type": "Course",
+    "title": "LO2",
+    "display_name": "Convert to standard form",
+    "description": "<p>Convert any LP to standard form using slack and surplus variables, non-negativity and free-variable substitution.</p>",
+    "points_possible": 3,
+    "mastery_points": 2,
+    "calculation_method": "highest"
+  },
+  {
+    "id": 4103,
+    "context_id": 48213,
+    "context_type": "Course",
+    "title": "LO3",
+    "display_name": "Solve graphically",
+    "description": "<p>Solve two-variable LPs graphically and interpret corner points, unboundedness and multiple optima.</p>",
+    "points_possible": 3,
+    "mastery_points": 2,
+    "calculation_method": "highest"
+  },
+  {
+    "id": 4104,
+    "context_id": 48213,
+    "context_type": "Course",
+    "title": "LO4",
+    "display_name": "Apply the simplex method",
+    "description": "<p>Carry out the simplex method: choose entering and leaving variables, perform pivots and recognise optimality, degeneracy and unboundedness.</p>",
+    "points_possible": 3,
+    "mastery_points": 2,
+    "calculation_method": "highest"
+  },
+  {
+    "id": 4105,
+    "context_id": 48213,
+    "context_type": "Course",
+    "title": "LO5",
+    "display_name": "Use duality",
+    "description": "<p>Formulate the dual of an LP and apply weak duality, strong duality and complementary slackness.</p>",
+    "points_possible": 3,
+    "mastery_points": 2,
+    "calculation_method": "highest"
+  },
+  {
+    "id": 4106,
+    "context_id": 48213,
+    "context_type": "Course",
+    "title": "LO6",
+    "display_name": "Interpret sensitivity analysis",
+    "description": "<p>Interpret shadow prices, reduced costs and the ranges over which the optimal basis stays optimal.</p>",
+    "points_possible": 3,
+    "mastery_points": 2,
+    "calculation_method": "highest"
+  }
+]

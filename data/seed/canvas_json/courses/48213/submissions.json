@@ -1,0 +1,5781 @@
+[
+  {
+    "id": 880001,
+    "assignment_id": 610001,
+    "user_id": 9002,
+    "attempt": 1,
+    "submitted_at": "2026-09-11T05:59:00Z",
+    "graded_at": "2026-09-17T05:59:00Z",
+    "score": 32.0,
+    "grade": "32",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550012,
+        "display_name": "hw1_02.pdf",
+        "filename": "hw1_02.pdf",
+        "content-type": "application/pdf",
+        "size": 1812,
+        "url": "files/submissions/ise3200/hw1_02.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990001,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Mostly correct. Watch the details flagged on each question.",
+        "created_at": "2026-09-17T05:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880002,
+    "assignment_id": 610001,
+    "user_id": 9003,
+    "attempt": 1,
+    "submitted_at": "2026-09-11T04:59:00Z",
+    "graded_at": "2026-09-14T03:59:00Z",
+    "score": 40.0,
+    "grade": "40",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550013,
+        "display_name": "hw1_03.pdf",
+        "filename": "hw1_03.pdf",
+        "content-type": "application/pdf",
+        "size": 1847,
+        "url": "files/submissions/ise3200/hw1_03.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990002,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Great job. Nice, careful work throughout.",
+        "created_at": "2026-09-14T03:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880003,
+    "assignment_id": 610001,
+    "user_id": 9004,
+    "attempt": 1,
+    "submitted_at": "2026-09-09T15:59:00Z",
+    "graded_at": "2026-09-16T08:59:00Z",
+    "score": 29.0,
+    "grade": "29",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550014,
+        "display_name": "hw1_04.pdf",
+        "filename": "hw1_04.pdf",
+        "content-type": "application/pdf",
+        "size": 1817,
+        "url": "files/submissions/ise3200/hw1_04.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880004,
+    "assignment_id": 610001,
+    "user_id": 9005,
+    "attempt": 1,
+    "submitted_at": "2026-09-09T13:59:00Z",
+    "graded_at": "2026-09-15T08:59:00Z",
+    "score": 30.5,
+    "grade": "30.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550015,
+        "display_name": "hw1_05.pdf",
+        "filename": "hw1_05.pdf",
+        "content-type": "application/pdf",
+        "size": 1836,
+        "url": "files/submissions/ise3200/hw1_05.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990003,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Solid work overall; see the question comments for where points were lost.",
+        "created_at": "2026-09-15T08:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880005,
+    "assignment_id": 610001,
+    "user_id": 9006,
+    "attempt": 1,
+    "submitted_at": "2026-09-09T15:59:00Z",
+    "graded_at": "2026-09-14T08:59:00Z",
+    "score": 35.0,
+    "grade": "35",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550016,
+        "display_name": "hw1_06.pdf",
+        "filename": "hw1_06.pdf",
+        "content-type": "application/pdf",
+        "size": 1834,
+        "url": "files/submissions/ise3200/hw1_06.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990004,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Good effort — review the marked parts before the next quiz.",
+        "created_at": "2026-09-14T08:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880006,
+    "assignment_id": 610001,
+    "user_id": 9007,
+    "attempt": 1,
+    "submitted_at": "2026-09-10T17:59:00Z",
+    "graded_at": "2026-09-16T05:59:00Z",
+    "score": 31.0,
+    "grade": "31",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550017,
+        "display_name": "hw1_07.pdf",
+        "filename": "hw1_07.pdf",
+        "content-type": "application/pdf",
+        "size": 1829,
+        "url": "files/submissions/ise3200/hw1_07.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880007,
+    "assignment_id": 610001,
+    "user_id": 9008,
+    "attempt": 1,
+    "submitted_at": "2026-09-11T09:59:00Z",
+    "graded_at": "2026-09-15T04:59:00Z",
+    "score": 37.0,
+    "grade": "37",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550018,
+        "display_name": "hw1_08.pdf",
+        "filename": "hw1_08.pdf",
+        "content-type": "application/pdf",
+        "size": 1845,
+        "url": "files/submissions/ise3200/hw1_08.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880008,
+    "assignment_id": 610001,
+    "user_id": 9009,
+    "attempt": 1,
+    "submitted_at": "2026-09-11T03:59:00Z",
+    "graded_at": "2026-09-15T06:59:00Z",
+    "score": 27.5,
+    "grade": "27.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550019,
+        "display_name": "hw1_09.pdf",
+        "filename": "hw1_09.pdf",
+        "content-type": "application/pdf",
+        "size": 1814,
+        "url": "files/submissions/ise3200/hw1_09.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990005,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Review the comment on each question and redo those parts before the exam.",
+        "created_at": "2026-09-15T06:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880009,
+    "assignment_id": 610001,
+    "user_id": 9010,
+    "attempt": 1,
+    "submitted_at": "2026-09-11T13:59:00Z",
+    "graded_at": "2026-09-17T04:59:00Z",
+    "score": 37.0,
+    "grade": "37",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550020,
+        "display_name": "hw1_10.pdf",
+        "filename": "hw1_10.pdf",
+        "content-type": "application/pdf",
+        "size": 1827,
+        "url": "files/submissions/ise3200/hw1_10.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880010,
+    "assignment_id": 610001,
+    "user_id": 9011,
+    "attempt": 1,
+    "submitted_at": "2026-09-11T13:59:00Z",
+    "graded_at": "2026-09-17T09:59:00Z",
+    "score": 20.5,
+    "grade": "20.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550021,
+        "display_name": "hw1_11.pdf",
+        "filename": "hw1_11.pdf",
+        "content-type": "application/pdf",
+        "size": 1815,
+        "url": "files/submissions/ise3200/hw1_11.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880011,
+    "assignment_id": 610001,
+    "user_id": 9012,
+    "attempt": 1,
+    "submitted_at": "2026-09-11T02:59:00Z",
+    "graded_at": "2026-09-15T09:59:00Z",
+    "score": 37.0,
+    "grade": "37",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550022,
+        "display_name": "hw1_12.pdf",
+        "filename": "hw1_12.pdf",
+        "content-type": "application/pdf",
+        "size": 1845,
+        "url": "files/submissions/ise3200/hw1_12.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880012,
+    "assignment_id": 610001,
+    "user_id": 9013,
+    "attempt": 1,
+    "submitted_at": "2026-09-09T19:59:00Z",
+    "graded_at": "2026-09-16T03:59:00Z",
+    "score": 29.0,
+    "grade": "29",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550023,
+        "display_name": "hw1_13.pdf",
+        "filename": "hw1_13.pdf",
+        "content-type": "application/pdf",
+        "size": 1821,
+        "url": "files/submissions/ise3200/hw1_13.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990006,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Review the comment on each question and redo those parts before the exam.",
+        "created_at": "2026-09-16T03:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880013,
+    "assignment_id": 610001,
+    "user_id": 9014,
+    "attempt": 1,
+    "submitted_at": "2026-09-11T01:59:00Z",
+    "graded_at": "2026-09-15T04:59:00Z",
+    "score": 37.0,
+    "grade": "37",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550024,
+        "display_name": "hw1_14.pdf",
+        "filename": "hw1_14.pdf",
+        "content-type": "application/pdf",
+        "size": 1824,
+        "url": "files/submissions/ise3200/hw1_14.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990007,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Very well done; your setup and notation are easy to follow.",
+        "created_at": "2026-09-15T04:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880014,
+    "assignment_id": 610001,
+    "user_id": 9015,
+    "attempt": 1,
+    "submitted_at": "2026-09-09T08:59:00Z",
+    "graded_at": "2026-09-16T03:59:00Z",
+    "score": 26.0,
+    "grade": "26",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550025,
+        "display_name": "hw1_15.pdf",
+        "filename": "hw1_15.pdf",
+        "content-type": "application/pdf",
+        "size": 1825,
+        "url": "files/submissions/ise3200/hw1_15.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990008,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Review the comment on each question and redo those parts before the exam.",
+        "created_at": "2026-09-16T03:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880015,
+    "assignment_id": 610001,
+    "user_id": 9016,
+    "attempt": 1,
+    "submitted_at": "2026-09-11T09:59:00Z",
+    "graded_at": "2026-09-15T06:59:00Z",
+    "score": 37.0,
+    "grade": "37",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550026,
+        "display_name": "hw1_16.pdf",
+        "filename": "hw1_16.pdf",
+        "content-type": "application/pdf",
+        "size": 1827,
+        "url": "files/submissions/ise3200/hw1_16.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990009,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Excellent work — clear and complete.",
+        "created_at": "2026-09-15T06:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880016,
+    "assignment_id": 610001,
+    "user_id": 9017,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": "2026-09-14T03:59:00Z",
+    "score": null,
+    "grade": null,
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": true,
+    "submission_type": null,
+    "grader_id": 9001,
+    "submission_comments": [
+      {
+        "id": 990010,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Excused — documentation received by the advising office.",
+        "created_at": "2026-09-14T03:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880017,
+    "assignment_id": 610001,
+    "user_id": 9018,
+    "attempt": 1,
+    "submitted_at": "2026-09-12T00:59:00Z",
+    "graded_at": "2026-09-15T03:59:00Z",
+    "score": 40.0,
+    "grade": "40",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550027,
+        "display_name": "hw1_18.pdf",
+        "filename": "hw1_18.pdf",
+        "content-type": "application/pdf",
+        "size": 1845,
+        "url": "files/submissions/ise3200/hw1_18.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990011,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Great job. Nice, careful work throughout.",
+        "created_at": "2026-09-15T03:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880018,
+    "assignment_id": 610001,
+    "user_id": 9019,
+    "attempt": 1,
+    "submitted_at": "2026-09-09T22:59:00Z",
+    "graded_at": "2026-09-15T09:59:00Z",
+    "score": 27.0,
+    "grade": "27",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550028,
+        "display_name": "hw1_19.pdf",
+        "filename": "hw1_19.pdf",
+        "content-type": "application/pdf",
+        "size": 1834,
+        "url": "files/submissions/ise3200/hw1_19.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990012,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Review the comment on each question and redo those parts before the exam.",
+        "created_at": "2026-09-15T09:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880019,
+    "assignment_id": 610001,
+    "user_id": 9020,
+    "attempt": 1,
+    "submitted_at": "2026-09-10T19:59:00Z",
+    "graded_at": "2026-09-14T03:59:00Z",
+    "score": 35.0,
+    "grade": "35",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550029,
+        "display_name": "hw1_20.pdf",
+        "filename": "hw1_20.pdf",
+        "content-type": "application/pdf",
+        "size": 1836,
+        "url": "files/submissions/ise3200/hw1_20.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990013,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Mostly correct. Watch the details flagged on each question.",
+        "created_at": "2026-09-14T03:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880020,
+    "assignment_id": 610001,
+    "user_id": 9021,
+    "attempt": 1,
+    "submitted_at": "2026-09-09T05:59:00Z",
+    "graded_at": "2026-09-14T03:59:00Z",
+    "score": 40.0,
+    "grade": "40",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550030,
+        "display_name": "hw1_21.pdf",
+        "filename": "hw1_21.pdf",
+        "content-type": "application/pdf",
+        "size": 1845,
+        "url": "files/submissions/ise3200/hw1_21.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990014,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Excellent work — clear and complete.",
+        "created_at": "2026-09-14T03:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880021,
+    "assignment_id": 610002,
+    "user_id": 9002,
+    "attempt": 1,
+    "submitted_at": "2026-09-17T23:59:00Z",
+    "graded_at": "2026-09-22T08:59:00Z",
+    "score": 8.0,
+    "grade": "8",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880021,
+        "attempt": 1,
+        "submitted_at": "2026-09-17T23:59:00Z",
+        "score": 8.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5001,
+            "text": "xⱼ = ounces of food j in the daily diet",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77002,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5006,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": null,
+            "text": "11",
+            "more_comments": "(3, 1) gives 11, but the corner (4, 0) gives 12 — check every corner point."
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5012,
+            "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880022,
+    "assignment_id": 610002,
+    "user_id": 9003,
+    "attempt": 1,
+    "submitted_at": "2026-09-17T15:59:00Z",
+    "graded_at": "2026-09-22T07:59:00Z",
+    "score": 10.0,
+    "grade": "10",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880022,
+        "attempt": 1,
+        "submitted_at": "2026-09-17T15:59:00Z",
+        "score": 10.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5001,
+            "text": "xⱼ = ounces of food j in the daily diet",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77002,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5006,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5007,
+            "text": "12",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5012,
+            "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880023,
+    "assignment_id": 610002,
+    "user_id": 9004,
+    "attempt": 1,
+    "submitted_at": "2026-09-16T10:59:00Z",
+    "graded_at": "2026-09-24T06:59:00Z",
+    "score": 4.0,
+    "grade": "4",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880023,
+        "attempt": 1,
+        "submitted_at": "2026-09-16T10:59:00Z",
+        "score": 4.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5003,
+            "text": "xⱼ = cost of food j",
+            "more_comments": "The cost of a food is given data (a parameter), not something you decide."
+          },
+          {
+            "question_id": 77002,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5005,
+            "text": "True",
+            "more_comments": "A feasible LP can still be unbounded — e.g. max x₁ with only x₁ ≥ 0."
+          },
+          {
+            "question_id": 77003,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": null,
+            "text": "11",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5012,
+            "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880024,
+    "assignment_id": 610002,
+    "user_id": 9005,
+    "attempt": 1,
+    "submitted_at": "2026-09-18T01:59:00Z",
+    "graded_at": "2026-09-22T04:59:00Z",
+    "score": 8.0,
+    "grade": "8",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880024,
+        "attempt": 1,
+        "submitted_at": "2026-09-18T01:59:00Z",
+        "score": 8.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5003,
+            "text": "xⱼ = cost of food j",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77002,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5006,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5007,
+            "text": "12",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5012,
+            "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880025,
+    "assignment_id": 610002,
+    "user_id": 9006,
+    "attempt": 1,
+    "submitted_at": "2026-09-16T16:59:00Z",
+    "graded_at": "2026-09-21T09:59:00Z",
+    "score": 8.0,
+    "grade": "8",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880025,
+        "attempt": 1,
+        "submitted_at": "2026-09-16T16:59:00Z",
+        "score": 8.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5003,
+            "text": "xⱼ = cost of food j",
+            "more_comments": "The cost of a food is given data (a parameter), not something you decide."
+          },
+          {
+            "question_id": 77002,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5006,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5007,
+            "text": "12",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5012,
+            "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990015,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Good effort — review the marked parts before the next quiz.",
+        "created_at": "2026-09-21T09:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880026,
+    "assignment_id": 610002,
+    "user_id": 9007,
+    "attempt": 1,
+    "submitted_at": "2026-09-19T00:59:00Z",
+    "graded_at": "2026-09-22T09:59:00Z",
+    "score": 8.0,
+    "grade": "8",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880026,
+        "attempt": 1,
+        "submitted_at": "2026-09-19T00:59:00Z",
+        "score": 8.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5001,
+            "text": "xⱼ = ounces of food j in the daily diet",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77002,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5006,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5007,
+            "text": "12",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5009,
+            "text": "the center of the feasible region",
+            "more_comments": "LP optima are attained at extreme (corner) points, never only in the interior."
+          },
+          {
+            "question_id": 77005,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5012,
+            "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880027,
+    "assignment_id": 610002,
+    "user_id": 9008,
+    "attempt": 1,
+    "submitted_at": "2026-09-17T16:59:00Z",
+    "graded_at": "2026-09-21T08:59:00Z",
+    "score": 8.0,
+    "grade": "8",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880027,
+        "attempt": 1,
+        "submitted_at": "2026-09-17T16:59:00Z",
+        "score": 8.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5001,
+            "text": "xⱼ = ounces of food j in the daily diet",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77002,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5006,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5007,
+            "text": "12",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5014,
+            "text": "x₂ ≤ 0.3(x₁ + x₂)",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880028,
+    "assignment_id": 610002,
+    "user_id": 9009,
+    "attempt": 1,
+    "submitted_at": "2026-09-18T09:59:00Z",
+    "graded_at": "2026-09-21T09:59:00Z",
+    "score": 10.0,
+    "grade": "10",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880028,
+        "attempt": 1,
+        "submitted_at": "2026-09-18T09:59:00Z",
+        "score": 10.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5001,
+            "text": "xⱼ = ounces of food j in the daily diet",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77002,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5006,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5007,
+            "text": "12",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5012,
+            "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880029,
+    "assignment_id": 610002,
+    "user_id": 9010,
+    "attempt": 1,
+    "submitted_at": "2026-09-16T08:59:00Z",
+    "graded_at": "2026-09-22T08:59:00Z",
+    "score": 8.0,
+    "grade": "8",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880029,
+        "attempt": 1,
+        "submitted_at": "2026-09-16T08:59:00Z",
+        "score": 8.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5001,
+            "text": "xⱼ = ounces of food j in the daily diet",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77002,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5005,
+            "text": "True",
+            "more_comments": "A feasible LP can still be unbounded — e.g. max x₁ with only x₁ ≥ 0."
+          },
+          {
+            "question_id": 77003,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5007,
+            "text": "12",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5012,
+            "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880030,
+    "assignment_id": 610002,
+    "user_id": 9011,
+    "attempt": 1,
+    "submitted_at": "2026-09-18T06:59:00Z",
+    "graded_at": "2026-09-23T07:59:00Z",
+    "score": 2.0,
+    "grade": "2",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880030,
+        "attempt": 1,
+        "submitted_at": "2026-09-18T06:59:00Z",
+        "score": 2.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5002,
+            "text": "x = healthy food",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77002,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5006,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": null,
+            "text": "11",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5010,
+            "text": "where the objective line crosses an axis",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5014,
+            "text": "x₂ ≤ 0.3(x₁ + x₂)",
+            "more_comments": "“At least” means ≥, not ≤."
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880031,
+    "assignment_id": 610002,
+    "user_id": 9012,
+    "attempt": 1,
+    "submitted_at": "2026-09-18T18:59:00Z",
+    "graded_at": "2026-09-21T07:59:00Z",
+    "score": 6.0,
+    "grade": "6",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880031,
+        "attempt": 1,
+        "submitted_at": "2026-09-18T18:59:00Z",
+        "score": 6.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5003,
+            "text": "xⱼ = cost of food j",
+            "more_comments": "The cost of a food is given data (a parameter), not something you decide."
+          },
+          {
+            "question_id": 77002,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5006,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5007,
+            "text": "12",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5013,
+            "text": "x₂ ≥ 0.3",
+            "more_comments": "A percentage requirement compares x₂ to total production: x₂ ≥ 0.3(x₁ + x₂)."
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880032,
+    "assignment_id": 610002,
+    "user_id": 9013,
+    "attempt": 1,
+    "submitted_at": "2026-09-17T22:59:00Z",
+    "graded_at": "2026-09-23T06:59:00Z",
+    "score": 6.0,
+    "grade": "6",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880032,
+        "attempt": 1,
+        "submitted_at": "2026-09-17T22:59:00Z",
+        "score": 6.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5001,
+            "text": "xⱼ = ounces of food j in the daily diet",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77002,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5006,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": null,
+            "text": "14",
+            "more_comments": "No feasible corner reaches 14; recheck the intercepts."
+          },
+          {
+            "question_id": 77004,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5010,
+            "text": "where the objective line crosses an axis",
+            "more_comments": "The objective line's intercepts depend on z; the optimum is at a corner of the feasible region."
+          },
+          {
+            "question_id": 77005,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5012,
+            "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880033,
+    "assignment_id": 610002,
+    "user_id": 9014,
+    "attempt": 1,
+    "submitted_at": "2026-09-18T01:59:00Z",
+    "graded_at": "2026-09-22T08:59:00Z",
+    "score": 4.0,
+    "grade": "4",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880033,
+        "attempt": 1,
+        "submitted_at": "2026-09-18T01:59:00Z",
+        "score": 4.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5003,
+            "text": "xⱼ = cost of food j",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77002,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5005,
+            "text": "True",
+            "more_comments": "A feasible LP can still be unbounded — e.g. max x₁ with only x₁ ≥ 0."
+          },
+          {
+            "question_id": 77003,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5007,
+            "text": "12",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5013,
+            "text": "x₂ ≥ 0.3",
+            "more_comments": "A percentage requirement compares x₂ to total production: x₂ ≥ 0.3(x₁ + x₂)."
+          }
+        ]
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990016,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Several setup errors here; rework the flagged parts using the lecture slides for this week.",
+        "created_at": "2026-09-22T08:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880034,
+    "assignment_id": 610002,
+    "user_id": 9015,
+    "attempt": 1,
+    "submitted_at": "2026-09-18T19:59:00Z",
+    "graded_at": "2026-09-23T03:59:00Z",
+    "score": 2.0,
+    "grade": "2",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880034,
+        "attempt": 1,
+        "submitted_at": "2026-09-18T19:59:00Z",
+        "score": 2.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5001,
+            "text": "xⱼ = ounces of food j in the daily diet",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77002,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5005,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": null,
+            "text": "11",
+            "more_comments": "(3, 1) gives 11, but the corner (4, 0) gives 12 — check every corner point."
+          },
+          {
+            "question_id": 77004,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5009,
+            "text": "the center of the feasible region",
+            "more_comments": "LP optima are attained at extreme (corner) points, never only in the interior."
+          },
+          {
+            "question_id": 77005,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5014,
+            "text": "x₂ ≤ 0.3(x₁ + x₂)",
+            "more_comments": "“At least” means ≥, not ≤."
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880035,
+    "assignment_id": 610002,
+    "user_id": 9016,
+    "attempt": 1,
+    "submitted_at": "2026-09-18T08:59:00Z",
+    "graded_at": "2026-09-23T03:59:00Z",
+    "score": 8.0,
+    "grade": "8",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880035,
+        "attempt": 1,
+        "submitted_at": "2026-09-18T08:59:00Z",
+        "score": 8.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5003,
+            "text": "xⱼ = cost of food j",
+            "more_comments": "The cost of a food is given data (a parameter), not something you decide."
+          },
+          {
+            "question_id": 77002,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5006,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5007,
+            "text": "12",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5012,
+            "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990017,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Mostly correct. Watch the details flagged on each question.",
+        "created_at": "2026-09-23T03:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880036,
+    "assignment_id": 610002,
+    "user_id": 9017,
+    "attempt": 1,
+    "submitted_at": "2026-09-16T14:59:00Z",
+    "graded_at": "2026-09-22T04:59:00Z",
+    "score": 6.0,
+    "grade": "6",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880036,
+        "attempt": 1,
+        "submitted_at": "2026-09-16T14:59:00Z",
+        "score": 6.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5001,
+            "text": "xⱼ = ounces of food j in the daily diet",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77002,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5006,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": null,
+            "text": "14",
+            "more_comments": "No feasible corner reaches 14; recheck the intercepts."
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5013,
+            "text": "x₂ ≥ 0.3",
+            "more_comments": "A percentage requirement compares x₂ to total production: x₂ ≥ 0.3(x₁ + x₂)."
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880037,
+    "assignment_id": 610002,
+    "user_id": 9018,
+    "attempt": 1,
+    "submitted_at": "2026-09-18T20:59:00Z",
+    "graded_at": "2026-09-21T03:59:00Z",
+    "score": 8.0,
+    "grade": "8",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880037,
+        "attempt": 1,
+        "submitted_at": "2026-09-18T20:59:00Z",
+        "score": 8.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5001,
+            "text": "xⱼ = ounces of food j in the daily diet",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77002,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5005,
+            "text": "True",
+            "more_comments": "A feasible LP can still be unbounded — e.g. max x₁ with only x₁ ≥ 0."
+          },
+          {
+            "question_id": 77003,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5007,
+            "text": "12",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5012,
+            "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990018,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Solid work overall; see the question comments for where points were lost.",
+        "created_at": "2026-09-21T03:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880038,
+    "assignment_id": 610002,
+    "user_id": 9019,
+    "attempt": 1,
+    "submitted_at": "2026-09-19T00:59:00Z",
+    "graded_at": "2026-09-23T08:59:00Z",
+    "score": 8.0,
+    "grade": "8",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880038,
+        "attempt": 1,
+        "submitted_at": "2026-09-19T00:59:00Z",
+        "score": 8.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5001,
+            "text": "xⱼ = ounces of food j in the daily diet",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77002,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5006,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": null,
+            "text": "11",
+            "more_comments": "(3, 1) gives 11, but the corner (4, 0) gives 12 — check every corner point."
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5012,
+            "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880039,
+    "assignment_id": 610002,
+    "user_id": 9020,
+    "attempt": 1,
+    "submitted_at": "2026-09-18T14:59:00Z",
+    "graded_at": "2026-09-24T04:59:00Z",
+    "score": 6.0,
+    "grade": "6",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880039,
+        "attempt": 1,
+        "submitted_at": "2026-09-18T14:59:00Z",
+        "score": 6.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5003,
+            "text": "xⱼ = cost of food j",
+            "more_comments": "The cost of a food is given data (a parameter), not something you decide."
+          },
+          {
+            "question_id": 77002,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5006,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5007,
+            "text": "12",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5010,
+            "text": "where the objective line crosses an axis",
+            "more_comments": "The objective line's intercepts depend on z; the optimum is at a corner of the feasible region."
+          },
+          {
+            "question_id": 77005,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5012,
+            "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990019,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Please come to office hours this week so we can go over the marked questions together.",
+        "created_at": "2026-09-24T04:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880040,
+    "assignment_id": 610002,
+    "user_id": 9021,
+    "attempt": 1,
+    "submitted_at": "2026-09-16T23:59:00Z",
+    "graded_at": "2026-09-24T07:59:00Z",
+    "score": 4.0,
+    "grade": "4",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880040,
+        "attempt": 1,
+        "submitted_at": "2026-09-16T23:59:00Z",
+        "score": 4.0,
+        "submission_data": [
+          {
+            "question_id": 77001,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5002,
+            "text": "x = healthy food",
+            "more_comments": "A decision variable needs a quantity and units, e.g. ounces of food j per day."
+          },
+          {
+            "question_id": 77002,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5005,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77003,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": null,
+            "text": "11",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77004,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5008,
+            "text": "a corner point of the feasible region",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77005,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5012,
+            "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990020,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Please come to office hours this week so we can go over the marked questions together.",
+        "created_at": "2026-09-24T07:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880041,
+    "assignment_id": 610003,
+    "user_id": 9002,
+    "attempt": 1,
+    "submitted_at": "2026-09-25T02:59:00Z",
+    "graded_at": "2026-10-01T07:59:00Z",
+    "score": 50.0,
+    "grade": "50",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550031,
+        "display_name": "hw2_02.pdf",
+        "filename": "hw2_02.pdf",
+        "content-type": "application/pdf",
+        "size": 1990,
+        "url": "files/submissions/ise3200/hw2_02.pdf"
+      }
+    ],
+    "submission_comments": [],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 10.0,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 25.0,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 15.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880042,
+    "assignment_id": 610003,
+    "user_id": 9003,
+    "attempt": 1,
+    "submitted_at": "2026-09-24T13:59:00Z",
+    "graded_at": "2026-10-01T09:59:00Z",
+    "score": 50.0,
+    "grade": "50",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550032,
+        "display_name": "hw2_03.pdf",
+        "filename": "hw2_03.pdf",
+        "content-type": "application/pdf",
+        "size": 1996,
+        "url": "files/submissions/ise3200/hw2_03.pdf"
+      }
+    ],
+    "submission_comments": [],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 10.0,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 25.0,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 15.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880043,
+    "assignment_id": 610003,
+    "user_id": 9004,
+    "attempt": 1,
+    "submitted_at": "2026-09-23T07:59:00Z",
+    "graded_at": "2026-09-29T03:59:00Z",
+    "score": 32.5,
+    "grade": "32.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550033,
+        "display_name": "hw2_04.pdf",
+        "filename": "hw2_04.pdf",
+        "content-type": "application/pdf",
+        "size": 1895,
+        "url": "files/submissions/ise3200/hw2_04.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990021,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Please come to office hours this week so we can go over the marked questions together.",
+        "created_at": "2026-09-29T03:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 4.0,
+        "comments": "Review this section — see the comments on each part."
+      },
+      "_8202": {
+        "points": 16.5,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 12.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880044,
+    "assignment_id": 610003,
+    "user_id": 9005,
+    "attempt": 1,
+    "submitted_at": "2026-09-23T11:59:00Z",
+    "graded_at": "2026-09-28T08:59:00Z",
+    "score": 50.0,
+    "grade": "50",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550034,
+        "display_name": "hw2_05.pdf",
+        "filename": "hw2_05.pdf",
+        "content-type": "application/pdf",
+        "size": 1995,
+        "url": "files/submissions/ise3200/hw2_05.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990022,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Very well done; your setup and notation are easy to follow.",
+        "created_at": "2026-09-28T08:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 10.0,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 25.0,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 15.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880045,
+    "assignment_id": 610003,
+    "user_id": 9006,
+    "attempt": 1,
+    "submitted_at": "2026-09-24T08:59:00Z",
+    "graded_at": "2026-09-29T09:59:00Z",
+    "score": 47.0,
+    "grade": "47",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550035,
+        "display_name": "hw2_06.pdf",
+        "filename": "hw2_06.pdf",
+        "content-type": "application/pdf",
+        "size": 1990,
+        "url": "files/submissions/ise3200/hw2_06.pdf"
+      }
+    ],
+    "submission_comments": [],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 10.0,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 25.0,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 12.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880046,
+    "assignment_id": 610003,
+    "user_id": 9007,
+    "attempt": 1,
+    "submitted_at": "2026-09-25T06:59:00Z",
+    "graded_at": "2026-09-30T04:59:00Z",
+    "score": 30.5,
+    "grade": "30.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550036,
+        "display_name": "hw2_07.pdf",
+        "filename": "hw2_07.pdf",
+        "content-type": "application/pdf",
+        "size": 1928,
+        "url": "files/submissions/ise3200/hw2_07.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990023,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Please come to office hours this week so we can go over the marked questions together.",
+        "created_at": "2026-09-30T04:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 4.0,
+        "comments": "Review this section — see the comments on each part."
+      },
+      "_8202": {
+        "points": 17.5,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 9.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880047,
+    "assignment_id": 610003,
+    "user_id": 9008,
+    "attempt": 1,
+    "submitted_at": "2026-09-25T23:59:00Z",
+    "graded_at": "2026-09-30T03:59:00Z",
+    "score": 45.5,
+    "grade": "45.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550037,
+        "display_name": "hw2_08.pdf",
+        "filename": "hw2_08.pdf",
+        "content-type": "application/pdf",
+        "size": 1966,
+        "url": "files/submissions/ise3200/hw2_08.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990024,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Excellent work — clear and complete.",
+        "created_at": "2026-09-30T03:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 10.0,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 20.5,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 15.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880048,
+    "assignment_id": 610003,
+    "user_id": 9009,
+    "attempt": 1,
+    "submitted_at": "2026-09-25T23:59:00Z",
+    "graded_at": "2026-09-30T09:59:00Z",
+    "score": 43.0,
+    "grade": "43",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550038,
+        "display_name": "hw2_09.pdf",
+        "filename": "hw2_09.pdf",
+        "content-type": "application/pdf",
+        "size": 1995,
+        "url": "files/submissions/ise3200/hw2_09.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990025,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Good effort — review the marked parts before the next quiz.",
+        "created_at": "2026-09-30T09:59:00Z",
+        "attempt": 1,
+        "draft": false
+      },
+      {
+        "id": 990026,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Q3 wording is nearly identical to another submission. Follow up before grading HW3.",
+        "created_at": "2026-09-30T10:04:00Z",
+        "attempt": 1,
+        "draft": true
+      }
+    ],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 8.0,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 20.0,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 15.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880049,
+    "assignment_id": 610003,
+    "user_id": 9010,
+    "attempt": 1,
+    "submitted_at": "2026-09-23T13:59:00Z",
+    "graded_at": "2026-09-28T07:59:00Z",
+    "score": 42.0,
+    "grade": "42",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550039,
+        "display_name": "hw2_10.pdf",
+        "filename": "hw2_10.pdf",
+        "content-type": "application/pdf",
+        "size": 1995,
+        "url": "files/submissions/ise3200/hw2_10.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990027,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Mostly correct. Watch the details flagged on each question.",
+        "created_at": "2026-09-28T07:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 7.0,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 20.0,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 15.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880050,
+    "assignment_id": 610003,
+    "user_id": 9011,
+    "attempt": 1,
+    "submitted_at": "2026-09-23T19:59:00Z",
+    "graded_at": "2026-09-29T04:59:00Z",
+    "score": 43.0,
+    "grade": "43",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550040,
+        "display_name": "hw2_11.pdf",
+        "filename": "hw2_11.pdf",
+        "content-type": "application/pdf",
+        "size": 1956,
+        "url": "files/submissions/ise3200/hw2_11.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990028,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Good effort — review the marked parts before the next quiz.",
+        "created_at": "2026-09-29T04:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 7.5,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 20.5,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 15.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880051,
+    "assignment_id": 610003,
+    "user_id": 9012,
+    "attempt": 1,
+    "submitted_at": "2026-09-25T21:59:00Z",
+    "graded_at": "2026-09-29T04:59:00Z",
+    "score": 50.0,
+    "grade": "50",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550041,
+        "display_name": "hw2_12.pdf",
+        "filename": "hw2_12.pdf",
+        "content-type": "application/pdf",
+        "size": 1992,
+        "url": "files/submissions/ise3200/hw2_12.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990029,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Great job. Nice, careful work throughout.",
+        "created_at": "2026-09-29T04:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 10.0,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 25.0,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 15.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880052,
+    "assignment_id": 610003,
+    "user_id": 9013,
+    "attempt": 1,
+    "submitted_at": "2026-09-25T19:59:00Z",
+    "graded_at": "2026-09-29T05:59:00Z",
+    "score": 26.5,
+    "grade": "26.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550042,
+        "display_name": "hw2_13.pdf",
+        "filename": "hw2_13.pdf",
+        "content-type": "application/pdf",
+        "size": 1878,
+        "url": "files/submissions/ise3200/hw2_13.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990030,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Please come to office hours this week so we can go over the marked questions together.",
+        "created_at": "2026-09-29T05:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 3.0,
+        "comments": "Review this section — see the comments on each part."
+      },
+      "_8202": {
+        "points": 14.5,
+        "comments": "Review this section — see the comments on each part."
+      },
+      "_8203": {
+        "points": 9.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880053,
+    "assignment_id": 610003,
+    "user_id": 9014,
+    "attempt": 1,
+    "submitted_at": "2026-09-23T19:59:00Z",
+    "graded_at": "2026-09-29T05:59:00Z",
+    "score": 40.0,
+    "grade": "40",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550043,
+        "display_name": "hw2_14.pdf",
+        "filename": "hw2_14.pdf",
+        "content-type": "application/pdf",
+        "size": 1967,
+        "url": "files/submissions/ise3200/hw2_14.pdf"
+      }
+    ],
+    "submission_comments": [],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 3.0,
+        "comments": "Review this section — see the comments on each part."
+      },
+      "_8202": {
+        "points": 25.0,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 12.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880054,
+    "assignment_id": 610003,
+    "user_id": 9015,
+    "attempt": 1,
+    "submitted_at": "2026-09-24T08:59:00Z",
+    "graded_at": "2026-09-29T03:59:00Z",
+    "score": 41.0,
+    "grade": "41",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550044,
+        "display_name": "hw2_15.pdf",
+        "filename": "hw2_15.pdf",
+        "content-type": "application/pdf",
+        "size": 1935,
+        "url": "files/submissions/ise3200/hw2_15.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990031,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Solid work overall; see the question comments for where points were lost.",
+        "created_at": "2026-09-29T03:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 7.5,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 18.5,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 15.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880055,
+    "assignment_id": 610003,
+    "user_id": 9016,
+    "attempt": 1,
+    "submitted_at": "2026-09-23T09:59:00Z",
+    "graded_at": "2026-10-01T07:59:00Z",
+    "score": 38.5,
+    "grade": "38.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550045,
+        "display_name": "hw2_16.pdf",
+        "filename": "hw2_16.pdf",
+        "content-type": "application/pdf",
+        "size": 1951,
+        "url": "files/submissions/ise3200/hw2_16.pdf"
+      }
+    ],
+    "submission_comments": [],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 8.0,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 21.5,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 9.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880056,
+    "assignment_id": 610003,
+    "user_id": 9017,
+    "attempt": 1,
+    "submitted_at": "2026-09-24T06:59:00Z",
+    "graded_at": "2026-09-30T08:59:00Z",
+    "score": 33.0,
+    "grade": "33",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550046,
+        "display_name": "hw2_17.pdf",
+        "filename": "hw2_17.pdf",
+        "content-type": "application/pdf",
+        "size": 1912,
+        "url": "files/submissions/ise3200/hw2_17.pdf"
+      }
+    ],
+    "submission_comments": [],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 7.5,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 16.5,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 9.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880057,
+    "assignment_id": 610003,
+    "user_id": 9018,
+    "attempt": 1,
+    "submitted_at": "2026-09-23T19:59:00Z",
+    "graded_at": "2026-09-28T07:59:00Z",
+    "score": 47.0,
+    "grade": "47",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550047,
+        "display_name": "hw2_18.pdf",
+        "filename": "hw2_18.pdf",
+        "content-type": "application/pdf",
+        "size": 1990,
+        "url": "files/submissions/ise3200/hw2_18.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990032,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Very well done; your setup and notation are easy to follow.",
+        "created_at": "2026-09-28T07:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 7.0,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 25.0,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 15.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880058,
+    "assignment_id": 610003,
+    "user_id": 9019,
+    "attempt": 1,
+    "submitted_at": "2026-09-24T18:59:00Z",
+    "graded_at": "2026-09-29T07:59:00Z",
+    "score": 37.5,
+    "grade": "37.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550048,
+        "display_name": "hw2_19.pdf",
+        "filename": "hw2_19.pdf",
+        "content-type": "application/pdf",
+        "size": 1910,
+        "url": "files/submissions/ise3200/hw2_19.pdf"
+      }
+    ],
+    "submission_comments": [],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 6.0,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 16.5,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 15.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880059,
+    "assignment_id": 610003,
+    "user_id": 9020,
+    "attempt": 1,
+    "submitted_at": "2026-09-24T21:59:00Z",
+    "graded_at": "2026-09-29T04:59:00Z",
+    "score": 45.5,
+    "grade": "45.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550049,
+        "display_name": "hw2_20.pdf",
+        "filename": "hw2_20.pdf",
+        "content-type": "application/pdf",
+        "size": 1978,
+        "url": "files/submissions/ise3200/hw2_20.pdf"
+      }
+    ],
+    "submission_comments": [],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 5.5,
+        "comments": "Review this section — see the comments on each part."
+      },
+      "_8202": {
+        "points": 25.0,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 15.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880060,
+    "assignment_id": 610003,
+    "user_id": 9021,
+    "attempt": 1,
+    "submitted_at": "2026-09-23T15:59:00Z",
+    "graded_at": "2026-09-29T06:59:00Z",
+    "score": 42.5,
+    "grade": "42.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550050,
+        "display_name": "hw2_21.pdf",
+        "filename": "hw2_21.pdf",
+        "content-type": "application/pdf",
+        "size": 1963,
+        "url": "files/submissions/ise3200/hw2_21.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990033,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Good effort — review the marked parts before the next quiz.",
+        "created_at": "2026-09-29T06:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ],
+    "rubric_assessment": {
+      "_8201": {
+        "points": 10.0,
+        "comments": ""
+      },
+      "_8202": {
+        "points": 20.5,
+        "comments": ""
+      },
+      "_8203": {
+        "points": 12.0,
+        "comments": ""
+      }
+    }
+  },
+  {
+    "id": 880061,
+    "assignment_id": 610004,
+    "user_id": 9002,
+    "attempt": 1,
+    "submitted_at": "2026-10-01T22:59:00Z",
+    "graded_at": "2026-10-06T09:59:00Z",
+    "score": 4.0,
+    "grade": "4",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880061,
+        "attempt": 1,
+        "submitted_at": "2026-10-01T22:59:00Z",
+        "score": 4.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5021,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5022,
+            "text": "x₂",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": null,
+            "text": "-6",
+            "more_comments": "Ratios are only taken over positive column entries; −1 is skipped."
+          },
+          {
+            "question_id": 77010,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5029,
+            "text": "degenerate",
+            "more_comments": "Degeneracy is a zero RHS in the ratio test; no positive entries means the LP is unbounded."
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880062,
+    "assignment_id": 610004,
+    "user_id": 9003,
+    "attempt": 1,
+    "submitted_at": "2026-10-02T21:59:00Z",
+    "graded_at": "2026-10-06T08:59:00Z",
+    "score": 10.0,
+    "grade": "10",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880062,
+        "attempt": 1,
+        "submitted_at": "2026-10-02T21:59:00Z",
+        "score": 10.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5022,
+            "text": "x₂",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5026,
+            "text": "3",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5027,
+            "text": "unbounded",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880063,
+    "assignment_id": 610004,
+    "user_id": 9004,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": "2026-10-04T03:59:00Z",
+    "score": 0,
+    "grade": "0",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": true,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": 9001,
+    "submission_comments": []
+  },
+  {
+    "id": 880064,
+    "assignment_id": 610004,
+    "user_id": 9005,
+    "attempt": 1,
+    "submitted_at": "2026-10-01T22:59:00Z",
+    "graded_at": "2026-10-05T08:59:00Z",
+    "score": 8.0,
+    "grade": "8",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880064,
+        "attempt": 1,
+        "submitted_at": "2026-10-01T22:59:00Z",
+        "score": 8.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5022,
+            "text": "x₂",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5026,
+            "text": "3",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5029,
+            "text": "degenerate",
+            "more_comments": "Degeneracy is a zero RHS in the ratio test; no positive entries means the LP is unbounded."
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880065,
+    "assignment_id": 610004,
+    "user_id": 9006,
+    "attempt": 1,
+    "submitted_at": "2026-10-02T06:59:00Z",
+    "graded_at": "2026-10-05T04:59:00Z",
+    "score": 10.0,
+    "grade": "10",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880065,
+        "attempt": 1,
+        "submitted_at": "2026-10-02T06:59:00Z",
+        "score": 10.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5022,
+            "text": "x₂",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5026,
+            "text": "3",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5027,
+            "text": "unbounded",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880066,
+    "assignment_id": 610004,
+    "user_id": 9007,
+    "attempt": 1,
+    "submitted_at": "2026-10-01T18:59:00Z",
+    "graded_at": "2026-10-08T05:59:00Z",
+    "score": 6.0,
+    "grade": "6",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880066,
+        "attempt": 1,
+        "submitted_at": "2026-10-01T18:59:00Z",
+        "score": 6.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5018,
+            "text": "multiply by −1 and add a slack variable",
+            "more_comments": "That gives a negative right-hand side (−12); standard form needs b ≥ 0."
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5022,
+            "text": "x₂",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": null,
+            "text": "-6",
+            "more_comments": "Ratios are only taken over positive column entries; −1 is skipped."
+          },
+          {
+            "question_id": 77010,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5027,
+            "text": "unbounded",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990034,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Please come to office hours this week so we can go over the marked questions together.",
+        "created_at": "2026-10-08T05:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880067,
+    "assignment_id": 610004,
+    "user_id": 9008,
+    "attempt": 1,
+    "submitted_at": "2026-10-02T22:59:00Z",
+    "graded_at": "2026-10-06T04:59:00Z",
+    "score": 10.0,
+    "grade": "10",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880067,
+        "attempt": 1,
+        "submitted_at": "2026-10-02T22:59:00Z",
+        "score": 10.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5022,
+            "text": "x₂",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5026,
+            "text": "3",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5027,
+            "text": "unbounded",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880068,
+    "assignment_id": 610004,
+    "user_id": 9009,
+    "attempt": 1,
+    "submitted_at": "2026-10-01T22:59:00Z",
+    "graded_at": "2026-10-07T08:59:00Z",
+    "score": 4.0,
+    "grade": "4",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880068,
+        "attempt": 1,
+        "submitted_at": "2026-10-01T22:59:00Z",
+        "score": 4.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5017,
+            "text": "add a slack variable s ≥ 0",
+            "more_comments": "Sign of the slack variable is reversed: a ≥ constraint needs a surplus variable subtracted (−s), not a slack added (+s)."
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5023,
+            "text": "x₁",
+            "more_comments": "Pick the most negative coefficient in the z-row: −5 (x₂), not the first one listed."
+          },
+          {
+            "question_id": 77009,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5026,
+            "text": "3",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5029,
+            "text": "degenerate",
+            "more_comments": "Degeneracy is a zero RHS in the ratio test; no positive entries means the LP is unbounded."
+          }
+        ]
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990035,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Review the comment on each question and redo those parts before the exam.",
+        "created_at": "2026-10-07T08:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880069,
+    "assignment_id": 610004,
+    "user_id": 9010,
+    "attempt": 1,
+    "submitted_at": "2026-10-02T08:59:00Z",
+    "graded_at": "2026-10-08T08:59:00Z",
+    "score": 8.0,
+    "grade": "8",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880069,
+        "attempt": 1,
+        "submitted_at": "2026-10-02T08:59:00Z",
+        "score": 8.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5023,
+            "text": "x₁",
+            "more_comments": "Pick the most negative coefficient in the z-row: −5 (x₂), not the first one listed."
+          },
+          {
+            "question_id": 77009,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5026,
+            "text": "3",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5027,
+            "text": "unbounded",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880070,
+    "assignment_id": 610004,
+    "user_id": 9011,
+    "attempt": 1,
+    "submitted_at": "2026-10-02T22:59:00Z",
+    "graded_at": "2026-10-08T09:59:00Z",
+    "score": 8.0,
+    "grade": "8",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880070,
+        "attempt": 1,
+        "submitted_at": "2026-10-02T22:59:00Z",
+        "score": 8.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5022,
+            "text": "x₂",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": null,
+            "text": "-6",
+            "more_comments": "Ratios are only taken over positive column entries; −1 is skipped."
+          },
+          {
+            "question_id": 77010,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5027,
+            "text": "unbounded",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880071,
+    "assignment_id": 610004,
+    "user_id": 9012,
+    "attempt": 1,
+    "submitted_at": "2026-10-01T22:59:00Z",
+    "graded_at": "2026-10-08T05:59:00Z",
+    "score": 10.0,
+    "grade": "10",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880071,
+        "attempt": 1,
+        "submitted_at": "2026-10-01T22:59:00Z",
+        "score": 10.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5022,
+            "text": "x₂",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5026,
+            "text": "3",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5027,
+            "text": "unbounded",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990036,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Great job. Nice, careful work throughout.",
+        "created_at": "2026-10-08T05:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880072,
+    "assignment_id": 610004,
+    "user_id": 9013,
+    "attempt": 1,
+    "submitted_at": "2026-10-02T22:59:00Z",
+    "graded_at": "2026-10-05T05:59:00Z",
+    "score": 10.0,
+    "grade": "10",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880072,
+        "attempt": 1,
+        "submitted_at": "2026-10-02T22:59:00Z",
+        "score": 10.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5022,
+            "text": "x₂",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5026,
+            "text": "3",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5027,
+            "text": "unbounded",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990037,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Very well done; your setup and notation are easy to follow.",
+        "created_at": "2026-10-05T05:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880073,
+    "assignment_id": 610004,
+    "user_id": 9014,
+    "attempt": 1,
+    "submitted_at": "2026-09-30T08:59:00Z",
+    "graded_at": "2026-10-08T08:59:00Z",
+    "score": 6.0,
+    "grade": "6",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880073,
+        "attempt": 1,
+        "submitted_at": "2026-09-30T08:59:00Z",
+        "score": 6.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5025,
+            "text": "None — the tableau is optimal",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": null,
+            "text": "5",
+            "more_comments": "12/4 = 3 is smaller than 10/2 = 5."
+          },
+          {
+            "question_id": 77010,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5027,
+            "text": "unbounded",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880074,
+    "assignment_id": 610004,
+    "user_id": 9015,
+    "attempt": 1,
+    "submitted_at": "2026-09-30T05:59:00Z",
+    "graded_at": "2026-10-08T03:59:00Z",
+    "score": 4.0,
+    "grade": "4",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880074,
+        "attempt": 1,
+        "submitted_at": "2026-09-30T05:59:00Z",
+        "score": 4.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5021,
+            "text": "False",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5023,
+            "text": "x₁",
+            "more_comments": "Pick the most negative coefficient in the z-row: −5 (x₂), not the first one listed."
+          },
+          {
+            "question_id": 77009,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5026,
+            "text": "3",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5029,
+            "text": "degenerate",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880075,
+    "assignment_id": 610004,
+    "user_id": 9016,
+    "attempt": 1,
+    "submitted_at": "2026-09-30T18:59:00Z",
+    "graded_at": "2026-10-06T06:59:00Z",
+    "score": 8.0,
+    "grade": "8",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880075,
+        "attempt": 1,
+        "submitted_at": "2026-09-30T18:59:00Z",
+        "score": 8.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5023,
+            "text": "x₁",
+            "more_comments": "Pick the most negative coefficient in the z-row: −5 (x₂), not the first one listed."
+          },
+          {
+            "question_id": 77009,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5026,
+            "text": "3",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5027,
+            "text": "unbounded",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880076,
+    "assignment_id": 610004,
+    "user_id": 9017,
+    "attempt": 1,
+    "submitted_at": "2026-10-01T07:59:00Z",
+    "graded_at": "2026-10-08T05:59:00Z",
+    "score": 6.0,
+    "grade": "6",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880076,
+        "attempt": 1,
+        "submitted_at": "2026-10-01T07:59:00Z",
+        "score": 6.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5023,
+            "text": "x₁",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5026,
+            "text": "3",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5028,
+            "text": "infeasible",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880077,
+    "assignment_id": 610004,
+    "user_id": 9018,
+    "attempt": 1,
+    "submitted_at": "2026-10-02T15:59:00Z",
+    "graded_at": "2026-10-07T05:59:00Z",
+    "score": 10.0,
+    "grade": "10",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880077,
+        "attempt": 1,
+        "submitted_at": "2026-10-02T15:59:00Z",
+        "score": 10.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5022,
+            "text": "x₂",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5026,
+            "text": "3",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5027,
+            "text": "unbounded",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880078,
+    "assignment_id": 610004,
+    "user_id": 9019,
+    "attempt": 1,
+    "submitted_at": "2026-10-02T22:59:00Z",
+    "graded_at": "2026-10-05T03:59:00Z",
+    "score": 6.0,
+    "grade": "6",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880078,
+        "attempt": 1,
+        "submitted_at": "2026-10-02T22:59:00Z",
+        "score": 6.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5017,
+            "text": "add a slack variable s ≥ 0",
+            "more_comments": "Sign of the slack variable is reversed: a ≥ constraint needs a surplus variable subtracted (−s), not a slack added (+s)."
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5022,
+            "text": "x₂",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5026,
+            "text": "3",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5029,
+            "text": "degenerate",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990038,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Review the comment on each question and redo those parts before the exam.",
+        "created_at": "2026-10-05T03:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880079,
+    "assignment_id": 610004,
+    "user_id": 9020,
+    "attempt": 1,
+    "submitted_at": "2026-10-02T02:59:00Z",
+    "graded_at": "2026-10-08T09:59:00Z",
+    "score": 4.0,
+    "grade": "4",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880079,
+        "attempt": 1,
+        "submitted_at": "2026-10-02T02:59:00Z",
+        "score": 4.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5021,
+            "text": "False",
+            "more_comments": "All variables in standard form — slacks included — are ≥ 0."
+          },
+          {
+            "question_id": 77008,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5022,
+            "text": "x₂",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": null,
+            "text": "5",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": false,
+            "points": 0.0,
+            "answer_id": 5029,
+            "text": "degenerate",
+            "more_comments": "Degeneracy is a zero RHS in the ratio test; no positive entries means the LP is unbounded."
+          }
+        ]
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990039,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Please come to office hours this week so we can go over the marked questions together.",
+        "created_at": "2026-10-08T09:59:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880080,
+    "assignment_id": 610004,
+    "user_id": 9021,
+    "attempt": 1,
+    "submitted_at": "2026-10-01T14:59:00Z",
+    "graded_at": "2026-10-05T09:59:00Z",
+    "score": 10.0,
+    "grade": "10",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_quiz",
+    "grader_id": 9001,
+    "submission_history": [
+      {
+        "id": 880080,
+        "attempt": 1,
+        "submitted_at": "2026-10-01T14:59:00Z",
+        "score": 10.0,
+        "submission_data": [
+          {
+            "question_id": 77006,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5016,
+            "text": "subtract a surplus variable s ≥ 0",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77007,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5020,
+            "text": "True",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77008,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5022,
+            "text": "x₂",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77009,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5026,
+            "text": "3",
+            "more_comments": ""
+          },
+          {
+            "question_id": 77010,
+            "correct": true,
+            "points": 2.0,
+            "answer_id": 5027,
+            "text": "unbounded",
+            "more_comments": ""
+          }
+        ]
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880081,
+    "assignment_id": 610005,
+    "user_id": 9002,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-19T15:20:00Z",
+    "score": 89.0,
+    "grade": "89",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550051,
+        "display_name": "midterm_scan_02.pdf",
+        "filename": "midterm_scan_02.pdf",
+        "content-type": "application/pdf",
+        "size": 241007,
+        "url": "files/submissions/ise3200/midterm_scan_02.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880082,
+    "assignment_id": 610005,
+    "user_id": 9003,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-16T21:20:00Z",
+    "score": 87.0,
+    "grade": "87",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550052,
+        "display_name": "midterm_scan_03.pdf",
+        "filename": "midterm_scan_03.pdf",
+        "content-type": "application/pdf",
+        "size": 237333,
+        "url": "files/submissions/ise3200/midterm_scan_03.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880083,
+    "assignment_id": 610005,
+    "user_id": 9004,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-18T15:20:00Z",
+    "score": 72.5,
+    "grade": "72.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550053,
+        "display_name": "midterm_scan_04.pdf",
+        "filename": "midterm_scan_04.pdf",
+        "content-type": "application/pdf",
+        "size": 234114,
+        "url": "files/submissions/ise3200/midterm_scan_04.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990040,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Spoke with Marcus after class; recommended the tutoring center for simplex practice.",
+        "created_at": "2026-10-18T15:25:00Z",
+        "attempt": 1,
+        "draft": true
+      }
+    ]
+  },
+  {
+    "id": 880084,
+    "assignment_id": 610005,
+    "user_id": 9005,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-16T19:20:00Z",
+    "score": 73.5,
+    "grade": "73.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550054,
+        "display_name": "midterm_scan_05.pdf",
+        "filename": "midterm_scan_05.pdf",
+        "content-type": "application/pdf",
+        "size": 246937,
+        "url": "files/submissions/ise3200/midterm_scan_05.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880085,
+    "assignment_id": 610005,
+    "user_id": 9006,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-18T19:20:00Z",
+    "score": 100.0,
+    "grade": "100",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550055,
+        "display_name": "midterm_scan_06.pdf",
+        "filename": "midterm_scan_06.pdf",
+        "content-type": "application/pdf",
+        "size": 234666,
+        "url": "files/submissions/ise3200/midterm_scan_06.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880086,
+    "assignment_id": 610005,
+    "user_id": 9007,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-18T21:20:00Z",
+    "score": 86.5,
+    "grade": "86.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550056,
+        "display_name": "midterm_scan_07.pdf",
+        "filename": "midterm_scan_07.pdf",
+        "content-type": "application/pdf",
+        "size": 242102,
+        "url": "files/submissions/ise3200/midterm_scan_07.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880087,
+    "assignment_id": 610005,
+    "user_id": 9008,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-16T21:20:00Z",
+    "score": 79.0,
+    "grade": "79",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550057,
+        "display_name": "midterm_scan_08.pdf",
+        "filename": "midterm_scan_08.pdf",
+        "content-type": "application/pdf",
+        "size": 236446,
+        "url": "files/submissions/ise3200/midterm_scan_08.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990041,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Solid work overall; see the question comments for where points were lost.",
+        "created_at": "2026-10-16T21:20:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880088,
+    "assignment_id": 610005,
+    "user_id": 9009,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-17T19:20:00Z",
+    "score": 68.5,
+    "grade": "68.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550058,
+        "display_name": "midterm_scan_09.pdf",
+        "filename": "midterm_scan_09.pdf",
+        "content-type": "application/pdf",
+        "size": 246521,
+        "url": "files/submissions/ise3200/midterm_scan_09.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990042,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Please come to office hours this week so we can go over the marked questions together.",
+        "created_at": "2026-10-17T19:20:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880089,
+    "assignment_id": 610005,
+    "user_id": 9010,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-19T18:20:00Z",
+    "score": 78.0,
+    "grade": "78",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550059,
+        "display_name": "midterm_scan_10.pdf",
+        "filename": "midterm_scan_10.pdf",
+        "content-type": "application/pdf",
+        "size": 245026,
+        "url": "files/submissions/ise3200/midterm_scan_10.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880090,
+    "assignment_id": 610005,
+    "user_id": 9011,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-18T18:20:00Z",
+    "score": 64.5,
+    "grade": "64.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550060,
+        "display_name": "midterm_scan_11.pdf",
+        "filename": "midterm_scan_11.pdf",
+        "content-type": "application/pdf",
+        "size": 235226,
+        "url": "files/submissions/ise3200/midterm_scan_11.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990043,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Please come to office hours this week so we can go over the marked questions together.",
+        "created_at": "2026-10-18T18:20:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880091,
+    "assignment_id": 610005,
+    "user_id": 9012,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-18T17:20:00Z",
+    "score": 95.0,
+    "grade": "95",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550061,
+        "display_name": "midterm_scan_12.pdf",
+        "filename": "midterm_scan_12.pdf",
+        "content-type": "application/pdf",
+        "size": 238063,
+        "url": "files/submissions/ise3200/midterm_scan_12.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990044,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Regrade request for Q3b reviewed; the original score stands.",
+        "created_at": "2026-10-18T17:25:00Z",
+        "attempt": 1,
+        "draft": true
+      }
+    ]
+  },
+  {
+    "id": 880092,
+    "assignment_id": 610005,
+    "user_id": 9013,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-16T21:20:00Z",
+    "score": 71.0,
+    "grade": "71",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550062,
+        "display_name": "midterm_scan_13.pdf",
+        "filename": "midterm_scan_13.pdf",
+        "content-type": "application/pdf",
+        "size": 241052,
+        "url": "files/submissions/ise3200/midterm_scan_13.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880093,
+    "assignment_id": 610005,
+    "user_id": 9014,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-16T19:20:00Z",
+    "score": 100.0,
+    "grade": "100",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550063,
+        "display_name": "midterm_scan_14.pdf",
+        "filename": "midterm_scan_14.pdf",
+        "content-type": "application/pdf",
+        "size": 236162,
+        "url": "files/submissions/ise3200/midterm_scan_14.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990045,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Very well done; your setup and notation are easy to follow.",
+        "created_at": "2026-10-16T19:20:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880094,
+    "assignment_id": 610005,
+    "user_id": 9015,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-17T19:20:00Z",
+    "score": 73.0,
+    "grade": "73",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550064,
+        "display_name": "midterm_scan_15.pdf",
+        "filename": "midterm_scan_15.pdf",
+        "content-type": "application/pdf",
+        "size": 236110,
+        "url": "files/submissions/ise3200/midterm_scan_15.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990046,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Review the comment on each question and redo those parts before the exam.",
+        "created_at": "2026-10-17T19:20:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880095,
+    "assignment_id": 610005,
+    "user_id": 9016,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-16T15:20:00Z",
+    "score": 86.0,
+    "grade": "86",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550065,
+        "display_name": "midterm_scan_16.pdf",
+        "filename": "midterm_scan_16.pdf",
+        "content-type": "application/pdf",
+        "size": 231605,
+        "url": "files/submissions/ise3200/midterm_scan_16.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990047,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Solid work overall; see the question comments for where points were lost.",
+        "created_at": "2026-10-16T15:20:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880096,
+    "assignment_id": 610005,
+    "user_id": 9017,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-18T16:20:00Z",
+    "score": 72.0,
+    "grade": "72",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550066,
+        "display_name": "midterm_scan_17.pdf",
+        "filename": "midterm_scan_17.pdf",
+        "content-type": "application/pdf",
+        "size": 232911,
+        "url": "files/submissions/ise3200/midterm_scan_17.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990048,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Several setup errors here; rework the flagged parts using the lecture slides for this week.",
+        "created_at": "2026-10-18T16:20:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880097,
+    "assignment_id": 610005,
+    "user_id": 9018,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-19T16:20:00Z",
+    "score": 91.0,
+    "grade": "91",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550067,
+        "display_name": "midterm_scan_18.pdf",
+        "filename": "midterm_scan_18.pdf",
+        "content-type": "application/pdf",
+        "size": 239462,
+        "url": "files/submissions/ise3200/midterm_scan_18.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990049,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Excellent work — clear and complete.",
+        "created_at": "2026-10-19T16:20:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880098,
+    "assignment_id": 610005,
+    "user_id": 9019,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-18T16:20:00Z",
+    "score": 60.5,
+    "grade": "60.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550068,
+        "display_name": "midterm_scan_19.pdf",
+        "filename": "midterm_scan_19.pdf",
+        "content-type": "application/pdf",
+        "size": 245734,
+        "url": "files/submissions/ise3200/midterm_scan_19.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990050,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Please come to office hours this week so we can go over the marked questions together.",
+        "created_at": "2026-10-18T16:20:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880099,
+    "assignment_id": 610005,
+    "user_id": 9020,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-19T16:20:00Z",
+    "score": 84.5,
+    "grade": "84.5",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550069,
+        "display_name": "midterm_scan_20.pdf",
+        "filename": "midterm_scan_20.pdf",
+        "content-type": "application/pdf",
+        "size": 244935,
+        "url": "files/submissions/ise3200/midterm_scan_20.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990051,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Mostly correct. Watch the details flagged on each question.",
+        "created_at": "2026-10-19T16:20:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880100,
+    "assignment_id": 610005,
+    "user_id": 9021,
+    "attempt": 1,
+    "submitted_at": "2026-10-14T15:20:00Z",
+    "graded_at": "2026-10-19T15:20:00Z",
+    "score": 83.0,
+    "grade": "83",
+    "workflow_state": "graded",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": 9001,
+    "attachments": [
+      {
+        "id": 550070,
+        "display_name": "midterm_scan_21.pdf",
+        "filename": "midterm_scan_21.pdf",
+        "content-type": "application/pdf",
+        "size": 236605,
+        "url": "files/submissions/ise3200/midterm_scan_21.pdf"
+      }
+    ],
+    "submission_comments": [
+      {
+        "id": 990052,
+        "author_id": 9001,
+        "author_name": "Prof. Dana Rivera",
+        "comment": "Good effort — review the marked parts before the next quiz.",
+        "created_at": "2026-10-19T15:20:00Z",
+        "attempt": 1,
+        "draft": false
+      }
+    ]
+  },
+  {
+    "id": 880101,
+    "assignment_id": 610006,
+    "user_id": 9002,
+    "attempt": 1,
+    "submitted_at": "2026-10-23T19:59:00Z",
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "submitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": null,
+    "attachments": [
+      {
+        "id": 550071,
+        "display_name": "hw3_02.pdf",
+        "filename": "hw3_02.pdf",
+        "content-type": "application/pdf",
+        "size": 1641,
+        "url": "files/submissions/ise3200/hw3_02.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880102,
+    "assignment_id": 610006,
+    "user_id": 9003,
+    "attempt": 1,
+    "submitted_at": "2026-10-21T17:59:00Z",
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "submitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": null,
+    "attachments": [
+      {
+        "id": 550072,
+        "display_name": "hw3_03.pdf",
+        "filename": "hw3_03.pdf",
+        "content-type": "application/pdf",
+        "size": 1645,
+        "url": "files/submissions/ise3200/hw3_03.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880103,
+    "assignment_id": 610006,
+    "user_id": 9004,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880104,
+    "assignment_id": 610006,
+    "user_id": 9005,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880105,
+    "assignment_id": 610006,
+    "user_id": 9006,
+    "attempt": 1,
+    "submitted_at": "2026-10-24T01:59:00Z",
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "submitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": null,
+    "attachments": [
+      {
+        "id": 550073,
+        "display_name": "hw3_06.pdf",
+        "filename": "hw3_06.pdf",
+        "content-type": "application/pdf",
+        "size": 1644,
+        "url": "files/submissions/ise3200/hw3_06.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880106,
+    "assignment_id": 610006,
+    "user_id": 9007,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880107,
+    "assignment_id": 610006,
+    "user_id": 9008,
+    "attempt": 1,
+    "submitted_at": "2026-10-21T03:59:00Z",
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "submitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": null,
+    "attachments": [
+      {
+        "id": 550074,
+        "display_name": "hw3_08.pdf",
+        "filename": "hw3_08.pdf",
+        "content-type": "application/pdf",
+        "size": 1643,
+        "url": "files/submissions/ise3200/hw3_08.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880108,
+    "assignment_id": 610006,
+    "user_id": 9009,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880109,
+    "assignment_id": 610006,
+    "user_id": 9010,
+    "attempt": 1,
+    "submitted_at": "2026-10-22T03:59:00Z",
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "submitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": null,
+    "attachments": [
+      {
+        "id": 550075,
+        "display_name": "hw3_10.pdf",
+        "filename": "hw3_10.pdf",
+        "content-type": "application/pdf",
+        "size": 1645,
+        "url": "files/submissions/ise3200/hw3_10.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880110,
+    "assignment_id": 610006,
+    "user_id": 9011,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880111,
+    "assignment_id": 610006,
+    "user_id": 9012,
+    "attempt": 1,
+    "submitted_at": "2026-10-20T17:59:00Z",
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "submitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": "online_upload",
+    "grader_id": null,
+    "attachments": [
+      {
+        "id": 550076,
+        "display_name": "hw3_12.pdf",
+        "filename": "hw3_12.pdf",
+        "content-type": "application/pdf",
+        "size": 1642,
+        "url": "files/submissions/ise3200/hw3_12.pdf"
+      }
+    ],
+    "submission_comments": []
+  },
+  {
+    "id": 880112,
+    "assignment_id": 610006,
+    "user_id": 9013,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880113,
+    "assignment_id": 610006,
+    "user_id": 9014,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880114,
+    "assignment_id": 610006,
+    "user_id": 9015,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880115,
+    "assignment_id": 610006,
+    "user_id": 9016,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880116,
+    "assignment_id": 610006,
+    "user_id": 9017,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880117,
+    "assignment_id": 610006,
+    "user_id": 9018,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880118,
+    "assignment_id": 610006,
+    "user_id": 9019,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880119,
+    "assignment_id": 610006,
+    "user_id": 9020,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880120,
+    "assignment_id": 610006,
+    "user_id": 9021,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880121,
+    "assignment_id": 610007,
+    "user_id": 9002,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880122,
+    "assignment_id": 610007,
+    "user_id": 9003,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880123,
+    "assignment_id": 610007,
+    "user_id": 9004,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880124,
+    "assignment_id": 610007,
+    "user_id": 9005,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880125,
+    "assignment_id": 610007,
+    "user_id": 9006,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880126,
+    "assignment_id": 610007,
+    "user_id": 9007,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880127,
+    "assignment_id": 610007,
+    "user_id": 9008,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880128,
+    "assignment_id": 610007,
+    "user_id": 9009,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880129,
+    "assignment_id": 610007,
+    "user_id": 9010,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880130,
+    "assignment_id": 610007,
+    "user_id": 9011,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880131,
+    "assignment_id": 610007,
+    "user_id": 9012,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880132,
+    "assignment_id": 610007,
+    "user_id": 9013,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880133,
+    "assignment_id": 610007,
+    "user_id": 9014,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880134,
+    "assignment_id": 610007,
+    "user_id": 9015,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880135,
+    "assignment_id": 610007,
+    "user_id": 9016,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880136,
+    "assignment_id": 610007,
+    "user_id": 9017,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880137,
+    "assignment_id": 610007,
+    "user_id": 9018,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880138,
+    "assignment_id": 610007,
+    "user_id": 9019,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880139,
+    "assignment_id": 610007,
+    "user_id": 9020,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  },
+  {
+    "id": 880140,
+    "assignment_id": 610007,
+    "user_id": 9021,
+    "attempt": null,
+    "submitted_at": null,
+    "graded_at": null,
+    "score": null,
+    "grade": null,
+    "workflow_state": "unsubmitted",
+    "late": false,
+    "missing": false,
+    "excused": false,
+    "submission_type": null,
+    "grader_id": null,
+    "submission_comments": []
+  }
+]

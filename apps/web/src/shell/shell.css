@@ -1,0 +1,417 @@
+/* Layout only. Colours and fonts come from the InstUI canvas theme via themeVars (theme.ts). */
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+.app {
+  display: flex;
+  min-height: 100%;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--surface);
+}
+
+.app > nav {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  flex-shrink: 0;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.app-main:focus {
+  outline: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip-link:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+  z-index: 10;
+  padding: 0.5rem 0.75rem;
+  background: var(--surface);
+  color: var(--brand);
+}
+
+/* Course header: hamburger + breadcrumbs, as on every Canvas course page. */
+.course-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 4.5rem;
+  padding: 0 1.5rem 0 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* InstUI's Breadcrumb truncates to its container, so it needs the remaining width. */
+.course-header__crumbs {
+  flex: 1;
+  min-width: 0;
+}
+
+.course-body {
+  display: flex;
+  align-items: flex-start;
+}
+
+.course-content {
+  flex: 1;
+  min-width: 0;
+  padding: 1.5rem;
+}
+
+.course-nav {
+  flex-shrink: 0;
+  width: 10.5rem;
+  padding: 1.5rem 0 1.5rem 1.5rem;
+}
+
+.course-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.course-nav a {
+  display: block;
+  padding: 0.375rem 0.75rem;
+  border-left: 3px solid transparent;
+  color: var(--brand);
+  text-decoration: none;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.course-nav a:hover {
+  text-decoration: underline;
+}
+
+.course-nav a[aria-current='page'] {
+  border-left-color: var(--text);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.course-nav a:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: -2px;
+}
+
+/* Dashboard course cards */
+.course-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.course-card {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  background: var(--surface);
+}
+
+.course-card:hover .course-card__name {
+  text-decoration: underline;
+}
+
+.course-card:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.course-card__hero {
+  height: 9rem;
+}
+
+.course-card__body {
+  padding: 0.75rem 1rem 1rem;
+}
+
+.course-card__name {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.course-card__meta {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* Narrow screens: course nav stacks above the content. */
+@media (max-width: 48rem) {
+  .course-body {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .course-nav {
+    width: auto;
+    padding: 1rem 1rem 0;
+  }
+
+  .course-content {
+    padding: 1rem;
+  }
+
+  .course-header {
+    padding: 0 1rem 0 0.5rem;
+  }
+}
+
+/* ---- Phase 3 page layouts ---------------------------------------------------------------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.plain-list,
+.feedback-list,
+.question-list,
+.response-list,
+.choice-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plain-list.divided > li + li {
+  border-top: 1px solid var(--border);
+}
+
+.feedback-list,
+.question-list,
+.response-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.question-list__part {
+  margin-left: 1.5rem;
+}
+
+.choice-list {
+  margin: 0.5rem 0;
+}
+
+.choice-list li {
+  padding: 0.25rem 0.5rem;
+  border-left: 3px solid var(--border);
+  margin-bottom: 0.25rem;
+}
+
+.choice-list li.is-correct {
+  border-left-color: var(--success);
+  background: var(--success-bg);
+}
+
+.link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--brand);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.user-content {
+  line-height: 1.6;
+}
+
+.user-content table {
+  border-collapse: collapse;
+  margin: 0.5rem 0;
+}
+
+.user-content th,
+.user-content td {
+  padding: 0.25rem 1rem 0.25rem 0;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Learning objectives in the syllabus: a highlighted callout with LO badges. */
+.syllabus-body .learning-objectives {
+  list-style: none;
+  margin: 0.75rem 0 1.5rem;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--brand);
+  background: var(--surface-muted);
+}
+
+.syllabus-body .learning-objectives li {
+  margin: 0.5rem 0;
+}
+
+.syllabus-body .learning-objectives strong {
+  display: inline-block;
+  min-width: 2.75rem;
+  margin-right: 0.5rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  background: var(--brand);
+  color: var(--surface);
+  font-size: 0.8125rem;
+  text-align: center;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  min-width: 0;
+}
+
+/* Submission: work on the left, grade sidebar on the right (stacks on narrow screens). */
+.submission-layout,
+.grades-layout,
+.files-layout {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.submission-layout {
+  grid-template-columns: minmax(0, 1fr) 22rem;
+}
+
+.grades-layout {
+  grid-template-columns: minmax(0, 1fr) 16rem;
+}
+
+.files-layout {
+  grid-template-columns: 20rem minmax(0, 1fr);
+}
+
+.pdf-viewer iframe {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  background: var(--surface-muted);
+}
+
+.file-button {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0.375rem 0.5rem;
+  border: 0;
+  border-left: 3px solid transparent;
+  background: none;
+  color: var(--brand);
+  font: inherit;
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.file-button:hover span {
+  text-decoration: underline;
+}
+
+.file-button[aria-current='true'] {
+  border-left-color: var(--text);
+  background: var(--surface-muted);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.file-button:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: -2px;
+}
+
+/* Gradebook grid: scrolls sideways with the student column pinned. */
+.gradebook {
+  overflow: auto;
+  max-height: 75vh;
+  border: 1px solid var(--border);
+}
+
+.gradebook:focus-visible {
+  outline: 2px solid var(--brand);
+}
+
+.gradebook table {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+}
+
+.gradebook th,
+.gradebook td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  white-space: nowrap;
+  background: var(--surface);
+  text-align: left;
+}
+
+.gradebook thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--surface-muted);
+  vertical-align: bottom;
+}
+
+.gradebook tbody th,
+.gradebook thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+
+.gradebook thead th:first-child {
+  z-index: 3;
+}
+
+.gradebook .num {
+  text-align: right;
+}
+
+@media (max-width: 64rem) {
+  .submission-layout,
+  .grades-layout,
+  .files-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .question-list__part {
+    margin-left: 0.75rem;
+  }
+}
