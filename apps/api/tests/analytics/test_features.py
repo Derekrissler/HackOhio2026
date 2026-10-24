@@ -223,3 +223,32 @@ def test_course_and_student_are_distinct_aggregation_boundaries():
     tables = build_features([other_course, first, other_student])
     assert len(primary_ids(tables)) == 3
     assert len(tables.observations) == 3
+
+
+def test_one_practice_attempt_cannot_be_counted_under_two_origins():
+    first = record().model_copy(update={
+        "assessment_origin": "generated_practice", "practice_attempt_id": UUID(uid(800)),
+    })
+    conflicting = first.model_copy(update={
+        "ler_id": UUID(uid(102)), "assessment_origin": "instructor_practice",
+    })
+    tables = build_features([first, conflicting])
+    assert tables.practice.empty
+    assert set(tables.exclusions.reason) == {"conflicting_question_attempt"}
+
+
+def test_nested_reference_order_does_not_make_identical_lers_conflict():
+    first = record()
+    refs = [UUID(uid(900)), UUID(uid(901))]
+    error = first.errors[0].model_copy(update={"evidence_ref_ids": refs})
+    first = first.model_copy(update={"errors": [error], "evidence_ref_ids": refs})
+    same = first.model_copy(update={"errors": [error.model_copy(update={"evidence_ref_ids": refs[::-1]})]})
+    tables = build_features([first, same])
+    assert len(tables.observations) == 1
+
+
+def test_finite_extreme_weights_do_not_crash_normalization():
+    first = record()
+    mappings = [m.model_copy(update={"weight": Decimal("1e1000000")}) for m in first.outcome_mappings]
+    tables = build_features([first.model_copy(update={"outcome_mappings": mappings})])
+    assert tables.outcomes.normalized_weight.tolist() == [0.5, 0.5]

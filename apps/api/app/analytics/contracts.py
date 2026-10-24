@@ -156,6 +156,16 @@ class PerformanceMetrics(Contract):
             raise ValueError("a score ratio requires a positive denominator")
         if self.weighted_earned > self.weighted_possible:
             raise ValueError("earned exceeds possible")
+        if self.observed_score_ratio is not None:
+            expected = float(self.weighted_earned / self.weighted_possible)
+            if abs(self.observed_score_ratio - expected) > 1e-12:
+                raise ValueError("score ratio differs from weighted earned / possible")
+        if self.distinct_question_count > self.scored_observation_count:
+            raise ValueError("distinct questions exceed scored observations")
+        if self.distinct_assessment_count > self.distinct_question_count:
+            raise ValueError("distinct assessments exceed scored questions")
+        if self.scored_observation_count == 0 and (self.weighted_possible or self.weighted_earned):
+            raise ValueError("weighted points require scored observations")
         return self
 
 

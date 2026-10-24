@@ -270,3 +270,17 @@ def test_malformed_envelope_is_reported_without_crashing(data):
     result = adapt_ler(data)
     assert result.record is None
     assert result.issues[0].code == "invalid_object"
+
+
+def test_reported_score_ratio_must_agree_with_points():
+    data = arr()
+    data["metrics"]["observed_score_ratio"] = 0.9  # source points are 6/10
+    with pytest.raises(ValidationError):
+        ARR_ADAPTER.validate_python(data)
+
+
+def test_distinct_counts_cannot_exceed_observation_count():
+    data = arr()
+    data["metrics"]["distinct_question_count"] = 9
+    with pytest.raises(ValidationError):
+        ARR_ADAPTER.validate_python(data)

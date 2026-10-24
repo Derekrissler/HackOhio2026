@@ -95,6 +95,14 @@ remain separate and unmapped/zero-weight observations can still support question
 analytics. Positive outcome weights normalize per question, using Decimal division
 before conversion to numerical features. Confidence never substitutes for weight.
 
+Verification review strengthened these boundaries: normalized weights are scaled
+before summation to avoid Decimal overflow, and nested evidence-reference ordering
+does not create false duplicate conflicts. Practice attempt identity is independent
+of its claimed origin; conflicting origins quarantine that attempt instead of
+counting it twice. ARR performance ratios must match their weighted numerator and
+denominator (absolute tolerance 1e-12), and distinct counts cannot exceed their
+supporting scored observation counts.
+
 No student/class aggregation, prevalence, recurring-error declaration, trend
 calculation or clustering happens yet. Those use the selections and evidence
 dimensions in later phases. Feature history is restricted internal data, never a

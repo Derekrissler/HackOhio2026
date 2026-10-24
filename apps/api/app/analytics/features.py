@@ -2,7 +2,7 @@
 
 from collections import defaultdict
 from dataclasses import dataclass
-from decimal import Decimal
+from decimal import Decimal, localcontext, MAX_EMAX, MIN_EMIN
 import json
 
 import numpy as np
@@ -51,9 +51,14 @@ def _canonical(record, exclude_identity=False):
     if exclude_identity:
         data.pop("ler_id")
         data.pop("revision")
-    # Order of mappings, tags and source references has no semantic significance.
-    for key in ("outcome_mappings", "errors", "evidence_ref_ids"):
-        data[key] = sorted(data[key], key=lambda item: json.dumps(item, sort_keys=True))
+    # These lists are sets of mappings/tags/references, including nested ID lists.
+    def ordered(value):
+        if isinstance(value, dict):
+            return {key: ordered(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return sorted((ordered(item) for item in value), key=lambda item: json.dumps(item, sort_keys=True))
+        return value
+    data = ordered(data)
     return json.dumps(data, sort_keys=True, separators=(",", ":"))
 
 
@@ -103,9 +108,9 @@ def build_features(
     # One observation per logical question-attempt, even if duplicated under new IDs.
     semantic = defaultdict(list)
     for record in eligible:
-        key = (str(record.course_id), str(record.learner_id), record.assessment_origin,
-               str(record.practice_attempt_id) if record.practice_attempt_id else
-               (str(record.assessment_id), str(record.question_id), str(record.attempt_id)))
+        key = (str(record.course_id), str(record.learner_id),
+               ("practice", str(record.practice_attempt_id)) if record.practice_attempt_id else
+               ("graded", str(record.assessment_id), str(record.question_id), str(record.attempt_id)))
         semantic[key].append(record)
     retained = []
     for group in semantic.values():
@@ -200,12 +205,17 @@ def build_features(
             "primary_score": record.ler_id in primary_scores,
             "primary_error": record.ler_id in primary_errors, "evidence_ref_ids": refs,
         })
-        positive = [m for m in record.outcome_mappings if m.weight > 0]
-        total = sum((m.weight for m in positive), Decimal(0))
+        positive = sorted((m for m in record.outcome_mappings if m.weight > 0), key=lambda m: str(m.outcome_id))
+        # Scale before summing so finite but extreme Decimal weights cannot overflow.
+        with localcontext() as ctx:
+            ctx.Emax, ctx.Emin = MAX_EMAX, MIN_EMIN
+            scale = max((m.weight for m in positive), default=Decimal(1))
+            scaled = [m.weight / scale for m in positive]
+            total = sum(scaled, Decimal(0))
+            weights = [float(weight / total) for weight in scaled]
         if not positive:
             exclude(record, "outcomes", "no_positive_outcome_weights")
-        for mapping in sorted(positive, key=lambda m: str(m.outcome_id)):
-            weight = float(mapping.weight / total)
+        for mapping, weight in zip(positive, weights):
             outcomes.append({
                 "ler_id": rid, "outcome_id": str(mapping.outcome_id), "raw_weight": str(mapping.weight),
                 "normalized_weight": weight,
