@@ -42,6 +42,64 @@ Phase 3 must enforce metric-specific eligibility. Missing score halves must neve
 be summed independently. Timestamp-dependent metrics require an aware timestamp.
 Records are not deduplicated or selected by this contract-only phase.
 
+## Phase 3 feature tables
+
+`app.analytics.features.build_features(records, config=None, period=None)` returns
+Pandas DataFrames in a `FeatureTables` object. Use `requirements-analytics.txt` for
+the optional backend analytics dependencies (Pandas and NumPy). The core mock LMS
+does not import this module or need these packages to start.
+
+- `observations`: one retained question-attempt/practice observation, normalized
+  score, assistance, timestamp, evidence IDs and primary selection flags.
+- `outcomes`: one row per positive outcome mapping, normalized weight and weighted
+  points. Join to observations on `ler_id`; do not sum every history row as primary.
+- `errors`: one event per retained LER and error code, with unique source refs,
+  explicit outcome associations, identity dimensions and primary error flag.
+- `practice`: all distinct eligible practice attempts, with independence, hints,
+  correctness, outcomes and evidence. Never pooled into primary assessment scores.
+- `exclusions`: LER ID, processing stage and reason. Some reasons exclude only a
+  particular metric; history can remain present. Duplicate collapse is recorded.
+
+Input order does not decide results. Conflicting copies of a LER ID or logical
+question-attempt are quarantined; identical duplicates collapse deterministically.
+Superseded and insufficient LERs do not enter feature tables. Assessment-score
+candidates require explicitly independent performance and a valid complete score.
+NumPy checks floating-point representability; unrepresentable points do not become
+infinite metrics. Numeric scored/weighted columns are null for an incomplete pair.
+`source_points_earned` and `source_points_possible` retain available normalized
+Decimal values as exact strings, including values too large for floating point.
+Original invalid input remains in the source envelope, not these DTOs.
+
+Primary score and primary error selections are independent: an unscored latest
+attempt with reliable error classification can inform errors while an earlier
+valid score supplies performance. Primary errors require completed classification
+and independent graded evidence. Error history includes eligible assisted/practice
+evidence, with assistance/origin labels. Rejected errors are removed; unreviewed
+errors follow configuration. Repeated tags merge their distinct source refs and
+explicit outcome links. An unknown error-outcome association stays empty rather
+than attributing that error to every question outcome.
+
+For each course/learner/assessment/question, use latest valid submission time when
+all candidate timestamps exist; explicit attempt number resolves equal times. If
+some timestamps are missing, use attempt numbers only when all candidates supply
+them. Unresolved ties/missing ordering exclude primary selection, not history.
+A single candidate needs no ordering comparison. Timestamps remain necessary for
+trends and bounded analyses; supplied periods use `[start, end)` and exclude missing
+timestamps. Missing times are never filled with LER creation time.
+
+For each metric separately, if selected `rubric_question_part` evidence exists for
+an assessment/student, exclude selected `assignment_level` evidence from that metric.
+This applies across attempts and may yield incomplete coverage; it does not invent
+missing question-part points. Whole evidence stays in history. Ordinary questions
+remain separate and unmapped/zero-weight observations can still support question
+analytics. Positive outcome weights normalize per question, using Decimal division
+before conversion to numerical features. Confidence never substitutes for weight.
+
+No student/class aggregation, prevalence, recurring-error declaration, trend
+calculation or clustering happens yet. Those use the selections and evidence
+dimensions in later phases. Feature history is restricted internal data, never a
+browser response or a privacy-suppressed aggregate.
+
 ## ARR and run contracts
 
 Use `ARR_ADAPTER.validate_python(...)` for the scope-discriminated union:
