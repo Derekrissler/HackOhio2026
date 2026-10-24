@@ -1,14 +1,15 @@
-"""ORM tables. Phase 2 keeps only users, courses and enrollments (PHASE1_PLAN §5.1)."""
+from datetime import datetime
 
-from sqlalchemy import CheckConstraint, ForeignKey, String, UniqueConstraint
+from sqlalchemy import Boolean, CheckConstraint, DateTime, ForeignKey, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db import Base
+from app.models._mixins import SourceMixin
 
 ROLES = ("student", "teacher")
 
 
-class User(Base):
+class User(SourceMixin, Base):
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -19,18 +20,22 @@ class User(Base):
     enrollments: Mapped[list["Enrollment"]] = relationship(back_populates="user")
 
 
-class Course(Base):
+class Course(SourceMixin, Base):
     __tablename__ = "courses"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     code: Mapped[str] = mapped_column(String(50))
     name: Mapped[str] = mapped_column(String(200))
     term: Mapped[str | None] = mapped_column(String(100))
+    syllabus_html: Mapped[str | None] = mapped_column(Text)
+    apply_group_weights: Mapped[bool] = mapped_column(Boolean, default=False)
+    start_at: Mapped[datetime | None] = mapped_column(DateTime)
+    end_at: Mapped[datetime | None] = mapped_column(DateTime)
 
     enrollments: Mapped[list["Enrollment"]] = relationship(back_populates="course")
 
 
-class Enrollment(Base):
+class Enrollment(SourceMixin, Base):
     __tablename__ = "enrollments"
     __table_args__ = (
         UniqueConstraint("course_id", "user_id", "role"),
