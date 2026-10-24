@@ -384,24 +384,34 @@ def quiz_questions(description: str, total_points: float) -> list[dict]:
     return questions
 
 
+def quiz_result(c: dict, a: dict) -> dict:
+    attempts = c.get("quiz_results", {}).get(str(a["id"]), {})
+    return attempts.get(str(c.get("self_user_id"))) or next(iter(attempts.values()), {})
+
+
 def quiz_overview(course_id: str, a: dict) -> str:
     description = a.get("description", "")
     instructions = re.split(r"<h3>Multiple Choice</h3>|<h3>Short Answer</h3>", description, maxsplit=1)[0]
+    result = quiz_result(course(course_id), a)
+    score = result.get("score")
+    total = a.get("points_possible") or 0
     return f"""
 <div class="quiz-overview">
   <div class="quiz-overview-head"><div><p class="quiz-kicker">Quiz</p><h1>{esc(a["name"])}</h1></div>
-    <a class="btn btn-primary" href="/courses/{course_id}/quizzes/{a['id']}">Take the Quiz</a></div>
+    <a class="btn btn-primary" href="/courses/{course_id}/quizzes/{a['id']}">Review Quiz</a></div>
+  <div class="quiz-result-summary"><div><span class="quiz-result-label">Attempt status</span><strong>Completed</strong></div>
+    <div><span class="quiz-result-label">Your score</span><strong>{fmt_score(score)} / {fmt_score(total)} points</strong></div>
+    <div><span class="quiz-result-label">Questions</span><strong>{len(quiz_questions(description, total))}</strong></div></div>
   <dl class="quiz-facts">
     <div><dt>Due</dt><dd>{fmt_due(a.get("due_at"))}</dd></div>
     <div><dt>Points</dt><dd>{fmt_score(a.get("points_possible"))}</dd></div>
     <div><dt>Questions</dt><dd>{len(quiz_questions(description, a.get("points_possible") or 0))}</dd></div>
-    <div><dt>Time limit</dt><dd>15 minutes</dd></div>
-    <div><dt>Attempts</dt><dd>Not specified</dd></div>
+    <div><dt>Submitted</dt><dd>{fmt_due(result.get("submitted_at"))}</dd></div>
+    <div><dt>Attempts</dt><dd>1 completed attempt</dd></div>
   </dl>
   <div class="user-content">{instructions}
-    <p>This quiz is closed notes and closed AI. Read each question carefully before submitting.</p>
+    <p>Your attempt has been graded. Review your answers below to see which questions were correct.</p>
   </div>
-  <p class="muted small">Practice preview: this mock quiz does not record or grade responses.</p>
 </div>"""
 
 
@@ -410,83 +420,55 @@ def quiz_attempt(c: dict, a: dict) -> str:
     if not questions:
         return '<h1>Quiz questions unavailable</h1><p class="muted">No numbered questions were found for this quiz.</p>'
     cid = c["course"]["id"]
+    result = quiz_result(c, a)
+    responses = result.get("responses", {})
     cards, nav = [], []
-    for i, question in enumerate(questions):
+    for question in questions:
         number = question["number"]
-        answers = "".join(
-            f'<li><label><input type="radio" name="question-{number}" value="{option_index}">'
-            f'<span>{option}</span></label></li>'
-            for option_index, option in enumerate(question["options"])
-        )
-        response = (f'<ul class="quiz-options">{answers}</ul>' if answers else
-                    f'<label class="quiz-response-label" for="response-{number}">Your answer</label>'
-                    f'<textarea id="response-{number}" name="question-{number}" rows="5"></textarea>')
+        response = responses.get(str(number), {})
+        earned, possible = response.get("earned", 0), response.get("possible", question["points"])
+        correct = response.get("correct_index")
+        selected = response.get("selected_index")
+        is_correct = correct is not None and selected == correct
+        status = "Correct" if is_correct else ("Incorrect" if correct is not None else "Reviewed")
+        if question["options"]:
+            options = []
+            for option_index, option in enumerate(question["options"]):
+                is_answer = option_index == correct
+                is_selected = option_index == selected
+                classes = "quiz-review-option"
+                if is_answer:
+                    classes += " correct"
+                elif is_selected:
+                    classes += " incorrect"
+                labels = []
+                if is_selected:
+                    labels.append("Your answer")
+                if is_answer:
+                    labels.append("Correct answer")
+                suffix = f'<span class="quiz-answer-label">{" · ".join(labels)}</span>' if labels else ""
+                options.append(f'<li class="{classes}"><span>{option}</span>{suffix}</li>')
+            answer_review = f'<ul class="quiz-review-options">{"".join(options)}</ul>'
+        else:
+            answer_review = f'''<div class="quiz-short-review"><b>Your answer</b><p>{esc(response.get("text", "No response recorded."))}</p>
+              <b>Review note</b><p>{esc(response.get("feedback", "Review the key ideas in your response."))}</p></div>'''
         cards.append(f"""
-<section class="quiz-question-card" data-question="{i}"{' hidden' if i else ''}>
-  <header class="quiz-question-head"><h2>Question {number}</h2><span>{fmt_score(question['points'])} pts</span></header>
-  <div class="quiz-question-body"><div class="quiz-question-stem">{question['stem']}</div>{response}</div>
+<section class="quiz-question-card quiz-review-card" id="question-{number}">
+  <header class="quiz-question-head"><h2>Question {number}</h2><span class="quiz-question-result {"is-correct" if is_correct else "is-incorrect" if correct is not None else "is-reviewed"}">{status} · {fmt_score(earned)} / {fmt_score(possible)} pts</span></header>
+  <div class="quiz-question-body"><div class="quiz-question-stem">{question['stem']}</div>{answer_review}</div>
 </section>""")
-        current_attr = ' aria-current="step"' if i == 0 else ""
-        nav.append(f'<button type="button" class="quiz-number{" active" if i == 0 else ""}" '
-                   f'data-go="{i}" aria-label="Go to question {number}"{current_attr}>{number}</button>')
+        nav.append(f'<a class="quiz-number" href="#question-{number}" aria-label="Go to question {number}">{number}</a>')
     return f"""
-<div class="quiz-attempt-top"><div><p class="quiz-kicker">Quiz attempt</p><h1>{esc(a['name'])}</h1></div>
-  <div class="quiz-time"><span class="muted small">Time limit</span><b>15 minutes</b></div></div>
-<p class="quiz-preview-note">Practice preview. Responses are not saved or graded.</p>
-<div class="quiz-layout" id="quiz-attempt">
-  <main class="quiz-main">
-    <div class="quiz-progress" aria-live="polite">Question 1 of {len(questions)}</div>
-    {''.join(cards)}
-    <div class="quiz-controls">
-      <button type="button" class="btn" id="quiz-previous" disabled>&larr; Previous</button>
-      <button type="button" class="btn btn-primary" id="quiz-next">Next Question &rarr;</button>
-      <button type="button" class="btn btn-primary" id="quiz-submit" hidden>Submit Quiz</button>
-    </div>
-    <div class="quiz-submitted" id="quiz-submitted" hidden role="status">
-      <b>Practice attempt complete.</b> This mock quiz does not record or grade responses.
-      <a href="/courses/{cid}/assignments/{a['id']}">Return to quiz details</a>
-    </div>
-  </main>
-  <aside class="quiz-question-list"><h2>Questions</h2><p class="muted small">{len(questions)} questions</p>
+<div class="quiz-review-top"><div><p class="quiz-kicker">Completed attempt</p><h1>{esc(a['name'])}</h1></div>
+  <div class="quiz-review-total"><span>Your score</span><strong>{fmt_score(result.get('score'))} / {fmt_score(a.get('points_possible'))}</strong></div></div>
+<div class="quiz-layout quiz-review-layout">
+  <main class="quiz-main">{''.join(cards)}</main>
+  <aside class="quiz-question-list"><h2>Questions</h2><p class="muted small">Completed · {len(questions)} questions</p>
     <div class="quiz-number-grid">{''.join(nav)}</div>
     <a class="quiz-return" href="/courses/{cid}/assignments/{a['id']}">&larr; Quiz details</a>
   </aside>
 </div>
-<script>
-(() => {{
-  const root = document.getElementById('quiz-attempt');
-  const cards = [...root.querySelectorAll('.quiz-question-card')];
-  const numbers = [...root.querySelectorAll('.quiz-number')];
-  const previous = document.getElementById('quiz-previous');
-  const next = document.getElementById('quiz-next');
-  const submit = document.getElementById('quiz-submit');
-  const progress = root.querySelector('.quiz-progress');
-  let current = 0;
-  function show(index) {{
-    current = index;
-    cards.forEach((card, i) => card.hidden = i !== current);
-    numbers.forEach((button, i) => {{
-      button.classList.toggle('active', i === current);
-      if (i === current) button.setAttribute('aria-current', 'step');
-      else button.removeAttribute('aria-current');
-    }});
-    progress.textContent = `Question ${{current + 1}} of ${{cards.length}}`;
-    previous.disabled = current === 0;
-    next.hidden = current === cards.length - 1;
-    submit.hidden = current !== cards.length - 1;
-  }}
-  numbers.forEach((button) => button.addEventListener('click', () => show(Number(button.dataset.go))));
-  previous.addEventListener('click', () => show(Math.max(0, current - 1)));
-  next.addEventListener('click', () => show(Math.min(cards.length - 1, current + 1)));
-  submit.addEventListener('click', () => {{
-    document.getElementById('quiz-submitted').hidden = false;
-    root.querySelector('.quiz-question-list').hidden = true;
-    root.querySelector('.quiz-progress').hidden = true;
-    root.querySelector('.quiz-question-card').hidden = true;
-    root.querySelector('.quiz-controls').hidden = true;
-  }});
-}})();
-</script>"""
+"""
 
 
 @router.get("/courses/{course_id}/assignments/{assignment_id}", response_class=HTMLResponse)
@@ -682,6 +664,129 @@ def files_index(course_id: str):
                    f'{esc(f["display_name"])}</a></td><td>PDF</td></tr>' for f in c.get("files", []))
     return course_page(c, "files", ["Files"], f'<h1>Files</h1><table class="table"><thead><tr><th>Name</th><th>Type</th>'
                                               f'</tr></thead><tbody>{rows}</tbody></table>')
+
+
+def people_roster(c: dict) -> str:
+    people = c.get("users", [])
+    cid = c["course"]["id"]
+    role_order = {"Teacher": 0, "Teaching Assistant": 1, "Student": 2}
+    people = sorted(people, key=lambda person: (role_order.get(person.get("role", "Student"), 3),
+                                                person.get("name", "").casefold()))
+    rows = []
+    for person in people:
+        name = person.get("name", "")
+        initials = "".join(part[0] for part in name.split()[:2]).upper()
+        role = person.get("role", "Student")
+        rows.append(f'<tr data-person="{esc(name.casefold())}" data-role="{esc(role.casefold())}">'
+                    f'<td><span class="people-avatar" aria-hidden="true">{esc(initials)}</span>'
+                    f'<a class="people-name" href="/courses/{cid}/users/{person["id"]}">{esc(name)}</a></td>'
+                    f'<td>{esc(role)}</td><td>{esc(person.get("section", c["course"].get("course_code", "")))}</td></tr>')
+    return f'''<div class="people-heading"><div><h1>People</h1>
+      <p class="muted">{len(people)} people in this course</p></div>
+      <label class="people-search-label" for="people-search">Search people</label>
+      <input id="people-search" class="people-search" type="search" placeholder="Search by name or role" autocomplete="off"></div>
+      <div class="people-table-wrap"><table class="table people-table"><thead><tr>
+      <th scope="col">Name</th><th scope="col">Role</th><th scope="col">Section</th></tr></thead>
+      <tbody>{''.join(rows)}</tbody></table>
+      <p id="people-empty" class="muted people-empty" hidden>No people match your search.</p></div>
+      <p class="muted small people-note">Course roster · Spring 2026</p>'''
+
+
+def people_profile_drawer(c: dict, person: dict) -> str:
+    cid = c["course"]["id"]
+    user_id = str(person["id"])
+    grades = c.get("student_grades", {}).get(user_id, [])
+    points = sum(item.get("points_possible", 0) for item in grades)
+    earned = sum(item.get("score", 0) for item in grades)
+    percent = earned / points * 100 if points else 0
+    letter = "A" if percent >= 90 else "B" if percent >= 80 else "C" if percent >= 70 else "D" if percent >= 60 else "F"
+    missing = sum(item.get("missing", False) for item in grades)
+    late = sum(item.get("late", False) for item in grades)
+    graded = sorted(grades, key=lambda item: item.get("graded_at", ""), reverse=True)[:10]
+    grade_rows = []
+    for item in graded:
+        possible = item.get("points_possible", 0)
+        score = item.get("score", 0)
+        ratio = min(100, max(0, score / possible * 100 if possible else 0))
+        bar_class = "low" if ratio < 60 else ""
+        aid = item["assignment_id"]
+        grade_rows.append(f'''<li class="profile-grade-row"><a class="profile-grade-bar {bar_class}" href="/courses/{cid}/assignments/{aid}"
+          aria-label="{esc(item['name'])}: {fmt_score(score)} out of {fmt_score(possible)}"><span style="width:{ratio:.1f}%"></span></a>
+          <a class="profile-grade-score" href="/courses/{cid}/assignments/{aid}">{fmt_score(score)}/{fmt_score(possible)}</a>
+          <span class="profile-grade-name">{esc(item['name'])}</span></li>''')
+
+    student_activity = c.get("student_activity", {})
+    classmates = [v for uid, v in student_activity.items() if uid != user_id]
+    metrics = student_activity.get(user_id, {})
+
+    def activity_summary(key: str) -> str:
+        value = metrics.get(key, 0)
+        average = sum(entry.get(key, 0) for entry in classmates) / len(classmates) if classmates else value
+        rating = "High" if value >= average * 1.05 else "Moderate" if value >= average * .8 else "Low"
+        filled = 3 if rating == "High" else 2 if rating == "Moderate" else 1
+        dots = "".join('<span class="activity-dot filled"></span>' if i < filled else '<span class="activity-dot"></span>'
+                       for i in range(3))
+        label = "Participation" if key == "participation" else "Page Views"
+        return f'<div class="profile-activity-item"><span>{label}</span><div class="activity-dots" aria-label="{rating}">{dots}</div><b>{rating}</b></div>'
+
+    role = person.get("role", "Student")
+    if grades:
+        grade_content = f'''<div class="profile-grade-summary"><span class="profile-grade-letter">{letter}</span><span>Grade</span></div>
+          <div class="profile-stat"><strong>{missing}</strong><span>Missing</span></div><div class="profile-stat"><strong>{late}</strong><span>Late</span></div>'''
+        item_content = f'''<section class="profile-section" id="profile-grade-items"><h2>Last 10 Graded Items</h2>
+          <ol class="profile-grade-list">{"".join(grade_rows)}</ol></section>
+          <section class="profile-section" id="profile-activity"><h2>Activity Compared to Class</h2>
+            <div class="profile-activity">{activity_summary("participation")}{activity_summary("page_views")}</div></section>'''
+    else:
+        grade_content = '<div class="profile-staff-note">Student grade summary is available for enrolled students.</div>'
+        item_content = '<p class="muted">No student grade items to show for this account.</p>'
+
+    initials = "".join(part[0] for part in person["name"].split()[:2]).upper()
+    return f'''<a class="people-profile-backdrop" href="/courses/{cid}/users" aria-label="Close profile"></a>
+      <aside class="people-profile-drawer" role="dialog" aria-modal="true" aria-labelledby="profile-name">
+        <a class="profile-close" href="/courses/{cid}/users" aria-label="Close profile">Close</a>
+        <header class="profile-header"><div class="profile-avatar" aria-hidden="true">{esc(initials)}</div>
+          <h1 id="profile-name">{esc(person['name'])}</h1><p class="profile-course">{esc(c['course'].get('name', 'Course'))}</p>
+          <p class="muted">{esc(role)} · Section: {esc(person.get('section', c['course'].get('course_code', '')))}</p>
+          <p class="muted">Last login: Thursday</p></header>
+        <nav class="profile-actions" aria-label="Student details"><a href="#profile-grade-items">Grades</a><a href="#profile-activity">Course Analytics</a></nav>
+        <div class="profile-stats">{grade_content}</div>
+        {item_content}
+      </aside>'''
+
+
+@router.get("/courses/{course_id}/users", response_class=HTMLResponse)
+def people_index(course_id: str):
+    c = course(course_id)
+    body = people_roster(c)
+    script = '''<script>
+      (() => {
+        const input = document.getElementById("people-search");
+        const rows = [...document.querySelectorAll(".people-table tbody tr")];
+        const empty = document.getElementById("people-empty");
+        input.addEventListener("input", () => {
+          const query = input.value.trim().toLowerCase();
+          let visible = 0;
+          for (const row of rows) {
+            const show = row.dataset.person.includes(query) || row.dataset.role.includes(query);
+            row.hidden = !show;
+            visible += show ? 1 : 0;
+          }
+          empty.hidden = visible !== 0;
+        });
+      })();
+    </script>'''
+    return course_page(c, "people", ["People"], body, scripts=script)
+
+
+@router.get("/courses/{course_id}/users/{user_id}", response_class=HTMLResponse)
+def people_profile(course_id: str, user_id: str):
+    c = course(course_id)
+    person = next((user for user in c.get("users", []) if str(user.get("id")) == str(user_id)), None)
+    if not person:
+        raise HTTPException(404, "person not found")
+    body = people_roster(c) + people_profile_drawer(c, person)
+    return course_page(c, "people", ["People", person["name"]], body)
 
 
 @router.get("/courses/{course_id}/{section}", response_class=HTMLResponse)

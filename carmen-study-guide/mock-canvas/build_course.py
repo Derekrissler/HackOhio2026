@@ -34,6 +34,26 @@ WEEK1_MONDAY = datetime(2026, 1, 12)
 FINAL_EXAM_AT = datetime(2026, 4, 28, 10, 0)
 SELF_USER = {"id": 5001, "name": "Test Student"}
 STAFF = {"Dr. Quinn Ferrous": 9001, "Maya Okafor": 9002, "Dev Raman": 9003}
+ROSTER = [
+    {"id": 9001, "name": "Dr. Quinn Ferrous", "role": "Teacher", "section": "VIBE 101"},
+    {"id": 9002, "name": "Maya Okafor", "role": "Teaching Assistant", "section": "VIBE 101"},
+    {"id": 9003, "name": "Dev Raman", "role": "Teaching Assistant", "section": "VIBE 101"},
+    {"id": 5001, "name": "Test Student", "role": "Student", "section": "VIBE 101"},
+    {"id": 5002, "name": "Avery Chen", "role": "Student", "section": "VIBE 101"},
+    {"id": 5003, "name": "Jordan Patel", "role": "Student", "section": "VIBE 101"},
+    {"id": 5004, "name": "Morgan Williams", "role": "Student", "section": "VIBE 101"},
+    {"id": 5005, "name": "Riley Thompson", "role": "Student", "section": "VIBE 101"},
+    {"id": 5006, "name": "Casey Nguyen", "role": "Student", "section": "VIBE 101"},
+    {"id": 5007, "name": "Samira Hassan", "role": "Student", "section": "VIBE 101"},
+    {"id": 5008, "name": "Elliot Brooks", "role": "Student", "section": "VIBE 101"},
+    {"id": 5009, "name": "Nia Robinson", "role": "Student", "section": "VIBE 101"},
+    {"id": 5010, "name": "Leo Martinez", "role": "Student", "section": "VIBE 101"},
+    {"id": 5011, "name": "Priya Shah", "role": "Student", "section": "VIBE 101"},
+    {"id": 5012, "name": "Kai Anderson", "role": "Student", "section": "VIBE 101"},
+    {"id": 5013, "name": "Isabel Rivera", "role": "Student", "section": "VIBE 101"},
+    {"id": 5014, "name": "Noah Kim", "role": "Student", "section": "VIBE 101"},
+    {"id": 5015, "name": "Zoe Campbell", "role": "Student", "section": "VIBE 101"},
+]
 
 
 def read(name: str) -> str:
@@ -160,11 +180,15 @@ def build_assignments():
     for n, part in enumerate(c for c in chunks(read("05_quizzes.md")) if c.startswith("## Quiz")):
         title = part.splitlines()[0].lstrip("# ").strip()
         week = int(re.search(r"\(Week (\d+)\)", title).group(1))
+        key_text = part.split("### Answer Key", 1)[1] if "### Answer Key" in part else ""
+        answer_key = {int(number): ord(letter) - ord("A")
+                      for number, letter in re.findall(r"(?:^|\s)(\d+)\.\s*([A-D])\b", key_text)}
         out.append({
             "id": 2101 + n, "name": re.sub(r"\s*\(Week \d+\)", "", title),
             "points_possible": int(re.search(r"Total: (\d+) points", part).group(1)), "due_at": due(week, 12, 30),
             "assignment_group": "Quizzes", "submission_types": SUBMIT["quiz"],
             "description": html(cut(part.split("\n", 1)[1], r"^### Answer Key")), "rubric": [],
+            "_answer_key": answer_key,
             "_weeks": {"open": week, "due": week},
         })
 
@@ -230,11 +254,90 @@ def build_submissions(assignments: list[dict]) -> dict:
                                      "created_at": graded_at.isoformat(), "comment": plain(written)}],
             "rubric_assessment": assessment,
         }
-    # Everything else was turned in and is waiting to be graded.
+    # Quizzes have completed, graded attempts for every student in the roster.
     for a in assignments:
-        subs.setdefault(str(a["id"]), {"user_id": SELF_USER["id"], "workflow_state": "submitted", "score": None,
-                                       "submitted_at": a["due_at"], "submission_comments": [], "rubric_assessment": {}})
+        if a["submission_types"] == SUBMIT["quiz"]:
+            result = quiz_results(a)[str(SELF_USER["id"])]
+            subs[str(a["id"])] = {"user_id": SELF_USER["id"], "workflow_state": "graded",
+                                   "score": result["score"], "submitted_at": a["due_at"],
+                                   "graded_at": (datetime.fromisoformat(a["due_at"]) + timedelta(days=1)).isoformat(),
+                                   "submission_comments": [], "rubric_assessment": {},
+                                   "quiz_responses": result["responses"]}
+        else:
+            subs.setdefault(str(a["id"]), {"user_id": SELF_USER["id"], "workflow_state": "submitted", "score": None,
+                                            "submitted_at": a["due_at"], "submission_comments": [], "rubric_assessment": {}})
     return subs
+
+
+SHORT_ANSWERS = {
+    1: {9: "The developer is responsible for the code they ship, even when an AI helped write it.",
+        10: "Write a Python calculator for +, -, *, and /, return a number, and raise an error for invalid operations or division by zero."},
+    2: {9: "Trace by hand and check boundaries. Boundary checks cover values such as an empty list or zero.",
+        10: "Restore the test, compare it with the spec, and fix the underlying code or test based on that spec."},
+    3: {9: "Rotate the exposed key, remove it from the source, and store the replacement in an environment variable.",
+        10: "Authentication verifies identity; authorization checks whether that user may access the requested record."},
+}
+
+
+def quiz_results(assignment: dict) -> dict:
+    """Create completed, reviewable attempts for every fictional student in the course."""
+    quiz_number = assignment["id"] - 2100
+    questions = re.findall(r"<p><strong>(\d+)\.</strong>(.*?)</p>", assignment["description"], flags=re.S)
+    answer_key = assignment.get("_answer_key", {})
+    mc_numbers = set(answer_key)
+    students = [person for person in ROSTER if person["role"] == "Student"]
+    per_question = assignment["points_possible"] / len(questions) if questions else 0
+    results = {}
+    for student_index, person in enumerate(students):
+        responses, score = {}, 0
+        for number, _stem in questions:
+            n = int(number)
+            if n in mc_numbers:
+                correct = answer_key[n]
+                missed = (student_index * 3 + quiz_number + n) % 5 == 0
+                selected = (correct + 1 + student_index % 3) % 4 if missed else correct
+                earned = 0 if missed else per_question
+                response = {"selected_index": selected, "correct_index": correct,
+                            "earned": earned, "possible": per_question}
+            else:
+                answer = SHORT_ANSWERS.get(quiz_number, {}).get(n, "I reviewed the question and explained my reasoning.")
+                earned = per_question
+                response = {"text": answer, "earned": earned, "possible": per_question,
+                            "feedback": "Your response addresses the key idea."}
+            responses[str(n)] = response
+            score += earned
+        results[str(person["id"])] = {"user_id": person["id"], "user_name": person["name"],
+                                       "workflow_state": "graded", "score": score,
+                                       "submitted_at": assignment["due_at"], "responses": responses}
+    return results
+
+
+def build_student_data(assignments: list[dict], submissions: dict, all_quiz_results: dict) -> tuple[dict, dict]:
+    students = [person for person in ROSTER if person["role"] == "Student"]
+    grades, activity = {}, {}
+    for student_index, person in enumerate(students):
+        user_id = str(person["id"])
+        items = []
+        for item_index, assignment in enumerate(assignments):
+            aid = str(assignment["id"])
+            possible = float(assignment.get("points_possible") or 0)
+            attempt = all_quiz_results.get(aid, {}).get(user_id)
+            own_submission = submissions.get(aid, {}) if person["id"] == SELF_USER["id"] else {}
+            score = attempt.get("score") if attempt else own_submission.get("score")
+            if score is None:
+                percent = 72 + ((student_index * 7 + item_index * 11) % 25)
+                score = round(possible * percent / 100, 1)
+            due_at = datetime.fromisoformat(assignment["due_at"])
+            graded_at = due_at + timedelta(days=2 + (student_index + item_index) % 5)
+            items.append({"assignment_id": assignment["id"], "name": assignment["name"],
+                          "score": score, "points_possible": possible, "status": "graded",
+                          "graded_at": graded_at.isoformat(), "missing": False, "late": False})
+        grades[user_id] = items
+        activity[user_id] = {
+            "participation": 30 + ((student_index * 17 + 18) % 70),
+            "page_views": 45 + ((student_index * 29 + 31) % 150),
+        }
+    return grades, activity
 
 
 # ---------------------------------------------------------------- modules
@@ -293,10 +396,14 @@ def main():
     syllabus_md, pages = build_pages()
     files = build_slides()
     assignments = build_assignments()
+    all_quiz_results = {str(a["id"]): quiz_results(a) for a in assignments if a["submission_types"] == SUBMIT["quiz"]}
+    submissions = build_submissions(assignments)
+    student_grades, student_activity = build_student_data(assignments, submissions, all_quiz_results)
     fixture = {
         "course": {"id": COURSE_ID, "name": "VIBE 101: Vibe Coding 101", "course_code": "VIBE 101", "term": TERM,
                    "syllabus_body": html(syllabus_md)},
         "self_user_id": SELF_USER["id"], "self_user_name": SELF_USER["name"],
+        "users": ROSTER,
         "assignment_groups": [{"name": n, "group_weight": w} for n, w in
                               [("Assignments", 30), ("Final Project", 10), ("Quizzes", 15),
                                ("Midterm Exam", 15), ("Final Exam", 20)]],
@@ -304,7 +411,10 @@ def main():
         "pages": pages,
         "files": [{k: v for k, v in f.items() if k != "title"} for f in files],
         "assignments": [{k: v for k, v in a.items() if not k.startswith("_")} for a in assignments],
-        "submissions": build_submissions(assignments),
+        "submissions": submissions,
+        "quiz_results": all_quiz_results,
+        "student_grades": student_grades,
+        "student_activity": student_activity,
     }
     OUT.write_text(json.dumps(fixture, indent=2, ensure_ascii=False), encoding="utf-8")
     graded = [a["name"] for a in assignments if fixture["submissions"][str(a["id"])]["score"] is not None]
