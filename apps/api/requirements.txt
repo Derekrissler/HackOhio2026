@@ -2,6 +2,3 @@ fastapi==0.162.0
 uvicorn[standard]==0.54.0
 SQLAlchemy==2.1.6
 pydantic==2.14.1
-# dev / test
-pytest==9.1.1
-httpx2==2.16.0
