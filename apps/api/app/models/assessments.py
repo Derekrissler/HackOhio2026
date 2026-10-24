@@ -67,6 +67,7 @@ class Question(SourceMixin, Base):
     question_type: Mapped[str] = mapped_column(String(30))
     points_possible: Mapped[float] = mapped_column(Float, default=0)
     answer_key: Mapped[Any] = mapped_column(JSON, nullable=True)
+    choices: Mapped[list[str] | None] = mapped_column(JSON, nullable=True)  # MC/TF options, not secret
     source_page: Mapped[int | None]
 
     outcomes: Mapped[list["QuestionOutcome"]] = relationship(back_populates="question")

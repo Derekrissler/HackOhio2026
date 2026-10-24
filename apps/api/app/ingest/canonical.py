@@ -60,6 +60,7 @@ class CQuestion(BaseModel):
     question_type: str
     points_possible: float
     answer_key: Any = None
+    choices: list[str] | None = None
     source_page: int | None = None
     source: Literal["canvas", "manual"] = "canvas"
 

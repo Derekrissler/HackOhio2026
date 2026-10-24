@@ -12,7 +12,7 @@ from app.ingest.canvas_json_adapter import CanvasJsonAdapter
 from app.ingest.manual_adapter import ManualAdapter
 
 # Bump when the schema changes; init_db() rebuilds a database with a different version.
-SCHEMA_VERSION = 3
+SCHEMA_VERSION = 4
 
 
 def read_seed(seed_dir: Path) -> list[CourseBundle]:
@@ -90,7 +90,7 @@ def load(bundle: CourseBundle, session: Session) -> m.Course:
             qrow = m.Question(external_id=q.external_id, source=q.source, assessment_id=row.id,
                               parent_question_id=questions[q.parent] if q.parent else None, label=q.label,
                               position=q.position, prompt_html=q.prompt_html, question_type=q.question_type,
-                              points_possible=q.points_possible, answer_key=q.answer_key,
+                              points_possible=q.points_possible, answer_key=q.answer_key, choices=q.choices,
                               source_page=q.source_page)
             session.add(qrow)
             session.flush()

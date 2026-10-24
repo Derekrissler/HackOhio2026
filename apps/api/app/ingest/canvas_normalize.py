@@ -106,6 +106,7 @@ def normalize_quiz_questions(raw_questions: list[Json]) -> list[CQuestion]:
             external_id=ext(q["id"]), label=f"Q{q['position']}", position=q["position"],
             prompt_html=q["question_text"], question_type=qtype, points_possible=q["points_possible"],
             answer_key=key,
+            choices=[a["text"] for a in q.get("answers", []) if "text" in a] or None,
         ))
     return out
 
