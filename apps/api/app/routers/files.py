@@ -14,4 +14,6 @@ def get_file_content(file_id: int, user: CurrentUser, db: DbSession) -> FileResp
     path = (DATA_DIR / file.storage_path).resolve()
     if not path.is_relative_to(DATA_DIR.resolve()) or not path.is_file():
         raise HTTPException(status.HTTP_404_NOT_FOUND, "File content missing")
-    return FileResponse(path, media_type=file.mime, filename=file.display_name, content_disposition_type="inline")
+    # no-store: the same URL must not be served from cache after switching to another user.
+    return FileResponse(path, media_type=file.mime, filename=file.display_name, content_disposition_type="inline",
+                        headers={"Cache-Control": "private, no-store"})
