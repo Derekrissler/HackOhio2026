@@ -1,0 +1,37 @@
+[
+  {
+    "id": 21009,
+    "name": "Week 2: Describing Data",
+    "position": 1,
+    "items": [
+      {
+        "id": 22019,
+        "title": "Reading: Measures of Centre",
+        "type": "File",
+        "content_id": 550077,
+        "position": 1
+      },
+      {
+        "id": 22020,
+        "title": "Homework 1: Describing Data",
+        "type": "Assignment",
+        "content_id": 610008,
+        "position": 2
+      }
+    ]
+  },
+  {
+    "id": 21010,
+    "name": "Week 3: Probability",
+    "position": 2,
+    "items": [
+      {
+        "id": 22021,
+        "title": "Quiz 1: Probability Basics",
+        "type": "Quiz",
+        "content_id": 32004,
+        "position": 1
+      }
+    ]
+  }
+]

@@ -1,0 +1,3250 @@
+[
+  {
+    "submission_id": 880001,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880001,
+    "question_key": "Q1b",
+    "response": "max z = 70x₁ + 50x₂",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880001,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≥ 240; 2x₁ + x₂ ≥ 100; x₁, x₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880001,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 80)",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880001,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,100",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880001,
+    "question_key": "Q3",
+    "response": "Bounded; optimum stays at (30, 40).",
+    "points_awarded": 3.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880002,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880002,
+    "question_key": "Q1b",
+    "response": "max z = 70x₁ + 50x₂",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880002,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≤ 240 (carpentry); 2x₁ + x₂ ≤ 100 (finishing); x₁, x₂ ≥ 0",
+    "points_awarded": 10.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880002,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 80)",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880002,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,100",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880002,
+    "question_key": "Q3",
+    "response": "Still bounded: carpentry limits both products. New optimum x₁ = 60, x₂ = 0, z = $4,200.",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880003,
+    "question_key": "Q1a",
+    "response": "x = furniture, y = profit",
+    "points_awarded": 2.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880003,
+    "question_key": "Q1b",
+    "response": "max z = 50x₁ + 70x₂",
+    "points_awarded": 3.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880003,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≤ 240; 2x₁ + x₂ ≤ 100",
+    "points_awarded": 7.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880003,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 60)",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880003,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,100",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880003,
+    "question_key": "Q3",
+    "response": "Still bounded: carpentry limits both products. New optimum x₁ = 60, x₂ = 0, z = $4,200.",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880004,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880004,
+    "question_key": "Q1b",
+    "response": "max z = 50x₁ + 70x₂",
+    "points_awarded": 3.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880004,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≥ 240; 2x₁ + x₂ ≥ 100; x₁, x₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880004,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 80)",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880004,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,300",
+    "points_awarded": 3.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880004,
+    "question_key": "Q3",
+    "response": "Still bounded: carpentry limits both products. New optimum x₁ = 60, x₂ = 0, z = $4,200.",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880005,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880005,
+    "question_key": "Q1b",
+    "response": "max z = 70x₁ + 50x₂",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880005,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≥ 240; 2x₁ + x₂ ≥ 100; x₁, x₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880005,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 80)",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880005,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,100",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880005,
+    "question_key": "Q3",
+    "response": "Still bounded: carpentry limits both products. New optimum x₁ = 60, x₂ = 0, z = $4,200.",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880006,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880006,
+    "question_key": "Q1b",
+    "response": "max z = 70x₁ + 50x₂",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880006,
+    "question_key": "Q1c",
+    "response": "4x₁ + 2x₂ ≤ 240; 3x₁ + x₂ ≤ 100; x₁, x₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880006,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (0, 80)",
+    "points_awarded": 4.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880006,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,100",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880006,
+    "question_key": "Q3",
+    "response": "Still bounded: carpentry limits both products. New optimum x₁ = 60, x₂ = 0, z = $4,200.",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880007,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880007,
+    "question_key": "Q1b",
+    "response": "max z = 70x₁ + 50x₂",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880007,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≤ 240 (carpentry); 2x₁ + x₂ ≤ 100 (finishing); x₁, x₂ ≥ 0",
+    "points_awarded": 10.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880007,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 60)",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880007,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,100",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880007,
+    "question_key": "Q3",
+    "response": "Still bounded: carpentry limits both products. New optimum x₁ = 60, x₂ = 0, z = $4,200.",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880008,
+    "question_key": "Q1a",
+    "response": "x = furniture, y = profit",
+    "points_awarded": 2.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880008,
+    "question_key": "Q1b",
+    "response": "max z = 70x₁ + 50x₂",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880008,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≤ 240; 2x₁ + x₂ ≤ 100",
+    "points_awarded": 7.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880008,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 80)",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880008,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,300",
+    "points_awarded": 3.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880008,
+    "question_key": "Q3",
+    "response": "Unbounded — without finishing there is no limit on production.",
+    "points_awarded": 2.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880009,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880009,
+    "question_key": "Q1b",
+    "response": "max z = 70x₁ + 50x₂",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880009,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≤ 240; 2x₁ + x₂ ≤ 100",
+    "points_awarded": 7.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880009,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 80)",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880009,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,100",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880009,
+    "question_key": "Q3",
+    "response": "Still bounded: carpentry limits both products. New optimum x₁ = 60, x₂ = 0, z = $4,200.",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880010,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880010,
+    "question_key": "Q1b",
+    "response": "max z = 70x₁ + 50x₂",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880010,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≥ 240; 2x₁ + x₂ ≥ 100; x₁, x₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880010,
+    "question_key": "Q2a",
+    "response": "",
+    "points_awarded": 0.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880010,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,300",
+    "points_awarded": 3.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880010,
+    "question_key": "Q3",
+    "response": "Unbounded — without finishing there is no limit on production.",
+    "points_awarded": 2.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880011,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880011,
+    "question_key": "Q1b",
+    "response": "min z = 70x₁ + 50x₂",
+    "points_awarded": 2.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880011,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≤ 240 (carpentry); 2x₁ + x₂ ≤ 100 (finishing); x₁, x₂ ≥ 0",
+    "points_awarded": 10.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880011,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 80)",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880011,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,100",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880011,
+    "question_key": "Q3",
+    "response": "Still bounded: carpentry limits both products. New optimum x₁ = 60, x₂ = 0, z = $4,200.",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880012,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880012,
+    "question_key": "Q1b",
+    "response": "max z = 50x₁ + 70x₂",
+    "points_awarded": 3.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880012,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≤ 240 (carpentry); 2x₁ + x₂ ≤ 100 (finishing); x₁, x₂ ≥ 0",
+    "points_awarded": 10.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880012,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 60)",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880012,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,100",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880012,
+    "question_key": "Q3",
+    "response": "",
+    "points_awarded": 0.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880013,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880013,
+    "question_key": "Q1b",
+    "response": "max z = 70x₁ + 50x₂",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880013,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≤ 240 (carpentry); 2x₁ + x₂ ≤ 100 (finishing); x₁, x₂ ≥ 0",
+    "points_awarded": 10.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880013,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 80)",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880013,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,100",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880013,
+    "question_key": "Q3",
+    "response": "Bounded; optimum stays at (30, 40).",
+    "points_awarded": 3.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880014,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880014,
+    "question_key": "Q1b",
+    "response": "min z = 70x₁ + 50x₂",
+    "points_awarded": 2.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880014,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≤ 240 (carpentry); 2x₁ + x₂ ≤ 100 (finishing); x₁, x₂ ≥ 0",
+    "points_awarded": 10.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880014,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (0, 80)",
+    "points_awarded": 4.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880014,
+    "question_key": "Q2b",
+    "response": "x₁ = 0, x₂ = 80, z = $4,000",
+    "points_awarded": 2.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880014,
+    "question_key": "Q3",
+    "response": "Bounded; optimum stays at (30, 40).",
+    "points_awarded": 3.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880015,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880015,
+    "question_key": "Q1b",
+    "response": "max z = 70x₁ + 50x₂",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880015,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≤ 240; 2x₁ + x₂ ≤ 100",
+    "points_awarded": 7.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880015,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 80)",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880015,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,100",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880015,
+    "question_key": "Q3",
+    "response": "Still bounded: carpentry limits both products. New optimum x₁ = 60, x₂ = 0, z = $4,200.",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880017,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880017,
+    "question_key": "Q1b",
+    "response": "max z = 70x₁ + 50x₂",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880017,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≤ 240 (carpentry); 2x₁ + x₂ ≤ 100 (finishing); x₁, x₂ ≥ 0",
+    "points_awarded": 10.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880017,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 80)",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880017,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,100",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880017,
+    "question_key": "Q3",
+    "response": "Still bounded: carpentry limits both products. New optimum x₁ = 60, x₂ = 0, z = $4,200.",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880018,
+    "question_key": "Q1a",
+    "response": "x = furniture, y = profit",
+    "points_awarded": 2.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880018,
+    "question_key": "Q1b",
+    "response": "max z = 50x₁ + 70x₂",
+    "points_awarded": 3.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880018,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≤ 240 (carpentry); 2x₁ + x₂ ≤ 100 (finishing); x₁, x₂ ≥ 0",
+    "points_awarded": 10.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880018,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 80)",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880018,
+    "question_key": "Q2b",
+    "response": "x₁ = 0, x₂ = 80, z = $4,000",
+    "points_awarded": 2.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880018,
+    "question_key": "Q3",
+    "response": "Unbounded — without finishing there is no limit on production.",
+    "points_awarded": 2.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880019,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880019,
+    "question_key": "Q1b",
+    "response": "max z = 70x₁ + 50x₂",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880019,
+    "question_key": "Q1c",
+    "response": "4x₁ + 2x₂ ≤ 240; 3x₁ + x₂ ≤ 100; x₁, x₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880019,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 80)",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880019,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,100",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880019,
+    "question_key": "Q3",
+    "response": "Still bounded: carpentry limits both products. New optimum x₁ = 60, x₂ = 0, z = $4,200.",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880020,
+    "question_key": "Q1a",
+    "response": "x₁ = tables built per week, x₂ = chairs built per week",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880020,
+    "question_key": "Q1b",
+    "response": "max z = 70x₁ + 50x₂",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880020,
+    "question_key": "Q1c",
+    "response": "4x₁ + 3x₂ ≤ 240 (carpentry); 2x₁ + x₂ ≤ 100 (finishing); x₁, x₂ ≥ 0",
+    "points_awarded": 10.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880020,
+    "question_key": "Q2a",
+    "response": "(0, 0), (50, 0), (30, 40), (0, 80)",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880020,
+    "question_key": "Q2b",
+    "response": "x₁ = 30, x₂ = 40, z = $4,100",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880020,
+    "question_key": "Q3",
+    "response": "Still bounded: carpentry limits both products. New optimum x₁ = 60, x₂ = 0, z = $4,200.",
+    "points_awarded": 6.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880041,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2; s₁, s₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880041,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻ with x₂⁺, x₂⁻ ≥ 0; max −z = −2x₁ + 3x₂⁺ − 3x₂⁻",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880041,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880041,
+    "question_key": "Q2b",
+    "response": "Pivot 1 on row s₁; pivot 2: x₂ enters, s₂ leaves (ratio 2 / (4/3) = 1.5). Final: x₁ = 3, x₂ = 1.5.",
+    "points_awarded": 9.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880041,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880041,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 15.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880042,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2; s₁, s₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880042,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻ with x₂⁺, x₂⁻ ≥ 0; max −z = −2x₁ + 3x₂⁺ − 3x₂⁻",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880042,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880042,
+    "question_key": "Q2b",
+    "response": "Pivot 1 on row s₁; pivot 2: x₂ enters, s₂ leaves (ratio 2 / (4/3) = 1.5). Final: x₁ = 3, x₂ = 1.5.",
+    "points_awarded": 9.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880042,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880042,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 15.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880043,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2",
+    "points_awarded": 3.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880043,
+    "question_key": "Q1b",
+    "response": "add x₂ ≥ 0; max −z = −2x₁ + 3x₂",
+    "points_awarded": 1.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880043,
+    "question_key": "Q2a",
+    "response": "Entering x₂; s₂ leaves.",
+    "points_awarded": 4.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880043,
+    "question_key": "Q2b",
+    "response": "Pivot 2: x₂ enters, x₁ leaves (ratio 6).",
+    "points_awarded": 4.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880043,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880043,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700",
+    "points_awarded": 12.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880044,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2; s₁, s₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880044,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻ with x₂⁺, x₂⁻ ≥ 0; max −z = −2x₁ + 3x₂⁺ − 3x₂⁻",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880044,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880044,
+    "question_key": "Q2b",
+    "response": "Pivot 1 on row s₁; pivot 2: x₂ enters, s₂ leaves (ratio 2 / (4/3) = 1.5). Final: x₁ = 3, x₂ = 1.5.",
+    "points_awarded": 9.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880044,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880044,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 15.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880045,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2; s₁, s₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880045,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻ with x₂⁺, x₂⁻ ≥ 0; max −z = −2x₁ + 3x₂⁺ − 3x₂⁻",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880045,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880045,
+    "question_key": "Q2b",
+    "response": "Pivot 1 on row s₁; pivot 2: x₂ enters, s₂ leaves (ratio 2 / (4/3) = 1.5). Final: x₁ = 3, x₂ = 1.5.",
+    "points_awarded": 9.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880045,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880045,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700",
+    "points_awarded": 12.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880046,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2",
+    "points_awarded": 3.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880046,
+    "question_key": "Q1b",
+    "response": "add x₂ ≥ 0; max −z = −2x₁ + 3x₂",
+    "points_awarded": 1.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880046,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880046,
+    "question_key": "Q2b",
+    "response": "Pivot 2: x₂ enters, x₁ leaves (ratio 6).",
+    "points_awarded": 4.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880046,
+    "question_key": "Q2c",
+    "response": "x₁ = 1.5, x₂ = 3, z = 19.5.",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880046,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4; L ≤ 700; L, H ≥ 0",
+    "points_awarded": 9.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880047,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2; s₁, s₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880047,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻ with x₂⁺, x₂⁻ ≥ 0; max −z = −2x₁ + 3x₂⁺ − 3x₂⁻",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880047,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880047,
+    "question_key": "Q2b",
+    "response": "Pivot 2: x₂ enters, x₁ leaves (ratio 6).",
+    "points_awarded": 4.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880047,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880047,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 15.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880048,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2",
+    "points_awarded": 3.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880048,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻ with x₂⁺, x₂⁻ ≥ 0; max −z = −2x₁ + 3x₂⁺ − 3x₂⁻",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880048,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880048,
+    "question_key": "Q2b",
+    "response": "Pivot 1 on row s₁; pivot 2: x₂ enters, s₂ leaves (ratio 2 / (4/3) = 1.5). Final: x₁ = 3, x₂ = 1.5.",
+    "points_awarded": 9.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880048,
+    "question_key": "Q2c",
+    "response": "x₁ = 4, x₂ = 0, z = 20 (stopped after one pivot).",
+    "points_awarded": 3.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880048,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 15.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880049,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ + s₂ = 2",
+    "points_awarded": 2.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880049,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻ with x₂⁺, x₂⁻ ≥ 0; max −z = −2x₁ + 3x₂⁺ − 3x₂⁻",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880049,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880049,
+    "question_key": "Q2b",
+    "response": "Pivot 1 on row s₁; pivot 2: x₂ enters, s₂ leaves (ratio 2 / (4/3) = 1.5). Final: x₁ = 3, x₂ = 1.5.",
+    "points_awarded": 9.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880049,
+    "question_key": "Q2c",
+    "response": "x₁ = 4, x₂ = 0, z = 20 (stopped after one pivot).",
+    "points_awarded": 3.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880049,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 15.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880050,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2; s₁, s₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880050,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻; max −z = −2x₁ − 3x₂⁺ + 3x₂⁻",
+    "points_awarded": 2.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880050,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880050,
+    "question_key": "Q2b",
+    "response": "Pivot 2: x₂ enters, x₁ leaves (ratio 6).",
+    "points_awarded": 4.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880050,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880050,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 15.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880051,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2; s₁, s₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880051,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻ with x₂⁺, x₂⁻ ≥ 0; max −z = −2x₁ + 3x₂⁺ − 3x₂⁻",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880051,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880051,
+    "question_key": "Q2b",
+    "response": "Pivot 1 on row s₁; pivot 2: x₂ enters, s₂ leaves (ratio 2 / (4/3) = 1.5). Final: x₁ = 3, x₂ = 1.5.",
+    "points_awarded": 9.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880051,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880051,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 15.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880052,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ + s₂ = 2",
+    "points_awarded": 2.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880052,
+    "question_key": "Q1b",
+    "response": "add x₂ ≥ 0; max −z = −2x₁ + 3x₂",
+    "points_awarded": 1.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880052,
+    "question_key": "Q2a",
+    "response": "Entering x₁; s₂ leaves.",
+    "points_awarded": 4.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880052,
+    "question_key": "Q2b",
+    "response": "Final: x₁ = 3, x₂ = 2.",
+    "points_awarded": 5.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880052,
+    "question_key": "Q2c",
+    "response": "x₁ = 1.5, x₂ = 3, z = 19.5.",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880052,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H ≥ 1000; L ≤ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 9.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880053,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ + s₂ = 2",
+    "points_awarded": 2.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880053,
+    "question_key": "Q1b",
+    "response": "add x₂ ≥ 0; max −z = −2x₁ + 3x₂",
+    "points_awarded": 1.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880053,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880053,
+    "question_key": "Q2b",
+    "response": "Pivot 1 on row s₁; pivot 2: x₂ enters, s₂ leaves (ratio 2 / (4/3) = 1.5). Final: x₁ = 3, x₂ = 1.5.",
+    "points_awarded": 9.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880053,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880053,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700",
+    "points_awarded": 12.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880054,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2; s₁, s₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880054,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻; max −z = −2x₁ − 3x₂⁺ + 3x₂⁻",
+    "points_awarded": 2.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880054,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880054,
+    "question_key": "Q2b",
+    "response": "Final: x₁ = 3, x₂ = 2.",
+    "points_awarded": 5.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880054,
+    "question_key": "Q2c",
+    "response": "x₁ = 1.5, x₂ = 3, z = 19.5.",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880054,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 15.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880055,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2",
+    "points_awarded": 3.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880055,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻ with x₂⁺, x₂⁻ ≥ 0; max −z = −2x₁ + 3x₂⁺ − 3x₂⁻",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880055,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880055,
+    "question_key": "Q2b",
+    "response": "Final: x₁ = 3, x₂ = 2.",
+    "points_awarded": 5.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880055,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880055,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H ≥ 1000; L ≤ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 9.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880056,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2; s₁, s₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880056,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻; max −z = −2x₁ − 3x₂⁺ + 3x₂⁻",
+    "points_awarded": 2.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880056,
+    "question_key": "Q2a",
+    "response": "Entering x₂; s₂ leaves.",
+    "points_awarded": 4.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880056,
+    "question_key": "Q2b",
+    "response": "Pivot 2: x₂ enters, x₁ leaves (ratio 6).",
+    "points_awarded": 4.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880056,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880056,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H ≥ 1000; L ≤ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 9.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880057,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ + s₂ = 2",
+    "points_awarded": 2.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880057,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻ with x₂⁺, x₂⁻ ≥ 0; max −z = −2x₁ + 3x₂⁺ − 3x₂⁻",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880057,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880057,
+    "question_key": "Q2b",
+    "response": "Pivot 1 on row s₁; pivot 2: x₂ enters, s₂ leaves (ratio 2 / (4/3) = 1.5). Final: x₁ = 3, x₂ = 1.5.",
+    "points_awarded": 9.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880057,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880057,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 15.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880058,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2; s₁, s₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880058,
+    "question_key": "Q1b",
+    "response": "add x₂ ≥ 0; max −z = −2x₁ + 3x₂",
+    "points_awarded": 1.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880058,
+    "question_key": "Q2a",
+    "response": "Entering x₁; s₂ leaves.",
+    "points_awarded": 4.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880058,
+    "question_key": "Q2b",
+    "response": "Pivot 2: x₂ enters, x₁ leaves (ratio 6).",
+    "points_awarded": 4.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880058,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880058,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 15.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880059,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2",
+    "points_awarded": 3.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880059,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻; max −z = −2x₁ − 3x₂⁺ + 3x₂⁻",
+    "points_awarded": 2.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880059,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880059,
+    "question_key": "Q2b",
+    "response": "Pivot 1 on row s₁; pivot 2: x₂ enters, s₂ leaves (ratio 2 / (4/3) = 1.5). Final: x₁ = 3, x₂ = 1.5.",
+    "points_awarded": 9.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880059,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880059,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700; L, H ≥ 0",
+    "points_awarded": 15.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880060,
+    "question_key": "Q1a",
+    "response": "x₁ + x₂ + s₁ = 8; 2x₁ − x₂ − s₂ = 2; s₁, s₂ ≥ 0",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880060,
+    "question_key": "Q1b",
+    "response": "x₂ = x₂⁺ − x₂⁻ with x₂⁺, x₂⁻ ≥ 0; max −z = −2x₁ + 3x₂⁺ − 3x₂⁻",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880060,
+    "question_key": "Q2a",
+    "response": "Entering x₁ (most negative z-row coefficient, −5); ratios 24/6 = 4 and 6/1 = 6, so s₁ leaves.",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880060,
+    "question_key": "Q2b",
+    "response": "Pivot 2: x₂ enters, x₁ leaves (ratio 6).",
+    "points_awarded": 4.5,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880060,
+    "question_key": "Q2c",
+    "response": "x₁ = 3, x₂ = 1.5, z = 21; both constraints binding (s₁ = s₂ = 0).",
+    "points_awarded": 8.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880060,
+    "question_key": "Q3",
+    "response": "min 60L + 45H s.t. L + H = 1000; L ≥ 0.4(L + H); L ≤ 700",
+    "points_awarded": 12.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880081,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880081,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880081,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 14.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880081,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880081,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880081,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880081,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880081,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880081,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880081,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880082,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880082,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880082,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 14.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880082,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880082,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 2.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880082,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880082,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880082,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880082,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880082,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880083,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880083,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880083,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 10.5,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880083,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880083,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880083,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880083,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880083,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880083,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 7.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880083,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 8.5,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 7.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 2.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880084,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880085,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880085,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880085,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 14.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880085,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880085,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880085,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880085,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880085,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880085,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880085,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880086,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880086,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880086,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 10.5,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880086,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880086,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880086,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880086,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880086,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880086,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880086,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880087,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880087,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880087,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 14.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880087,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880087,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880087,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880087,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880087,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880087,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880087,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 3.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 7.5,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 6.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880088,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880089,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880089,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880089,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 14.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880089,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880089,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880089,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880089,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880089,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880089,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880089,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880090,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880090,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880090,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 7.5,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880090,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880090,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 6.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880090,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880090,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 0.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880090,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880090,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880090,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880091,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880091,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880091,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 14.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880091,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880091,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880091,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880091,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880091,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880091,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880091,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 14.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 2.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 6.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880092,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880093,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880093,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880093,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 14.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880093,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880093,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880093,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880093,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880093,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880093,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880093,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880094,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 0.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880094,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880094,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 14.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880094,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880094,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 2.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880094,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880094,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880094,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880094,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880094,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880095,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880095,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880095,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 14.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880095,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 7.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880095,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880095,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880095,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880095,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880095,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880095,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880096,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880096,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880096,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 14.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880096,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880096,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 2.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880096,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880096,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880096,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880096,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 0.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880096,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880097,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880097,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880097,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 14.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880097,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880097,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880097,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880097,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880097,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880097,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880097,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 7.5,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 2.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 7.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880098,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880099,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880099,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880099,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 10.5,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880099,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 7.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880099,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 6.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880099,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880099,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880099,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880099,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880099,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880100,
+    "question_key": "Q1a",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880100,
+    "question_key": "Q1b",
+    "response": null,
+    "points_awarded": 8.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880100,
+    "question_key": "Q1c",
+    "response": null,
+    "points_awarded": 14.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880100,
+    "question_key": "Q2a",
+    "response": null,
+    "points_awarded": 7.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880100,
+    "question_key": "Q2b",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880100,
+    "question_key": "Q3a",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880100,
+    "question_key": "Q3b",
+    "response": null,
+    "points_awarded": 5.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880100,
+    "question_key": "Q3c",
+    "response": null,
+    "points_awarded": 10.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880100,
+    "question_key": "Q4a",
+    "response": null,
+    "points_awarded": 7.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880100,
+    "question_key": "Q4b",
+    "response": null,
+    "points_awarded": 4.0,
+    "graded_by": "manual_entry"
+  },
+  {
+    "submission_id": 880101,
+    "question_key": "Q1a",
+    "response": "min w = 10y₁ + 15y₂ s.t. 2y₁ + y₂ ≥ 4, y₁ + 3y₂ ≥ 3, y₁, y₂ ≥ 0",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880101,
+    "question_key": "Q1b",
+    "response": "w* = z* = 24 (primal optimum x = (3, 4))",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880101,
+    "question_key": "Q2",
+    "response": "Both x > 0, so both dual constraints are tight: y* = (9/5, 2/5).",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880101,
+    "question_key": "Q3a",
+    "response": "y₁* = 1.8: one more unit of resource 1 raises z by about 1.8.",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880101,
+    "question_key": "Q3b",
+    "response": "1 ≤ c₁ ≤ 6",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880102,
+    "question_key": "Q1a",
+    "response": "min w = 10y₁ + 15y₂ s.t. 2y₁ + y₂ ≥ 4, y₁ + 3y₂ ≥ 3, y₁, y₂ ≥ 0",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880102,
+    "question_key": "Q1b",
+    "response": "w* = z* = 24 (primal optimum x = (3, 4))",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880102,
+    "question_key": "Q2",
+    "response": "Both x > 0, so both dual constraints are tight: y* = (9/5, 2/5).",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880102,
+    "question_key": "Q3a",
+    "response": "y₁* = 1.8: one more unit of resource 1 raises z by about 1.8.",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880102,
+    "question_key": "Q3b",
+    "response": "1 ≤ c₁ ≤ 6",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880105,
+    "question_key": "Q1a",
+    "response": "min w = 10y₁ + 15y₂ s.t. 2y₁ + y₂ ≥ 4, y₁ + 3y₂ ≥ 3, y₁, y₂ ≥ 0",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880105,
+    "question_key": "Q1b",
+    "response": "w* = z* = 24 (primal optimum x = (3, 4))",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880105,
+    "question_key": "Q2",
+    "response": "Both x > 0, so both dual constraints are tight: y* = (9/5, 2/5).",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880105,
+    "question_key": "Q3a",
+    "response": "y₁* = 1.8: one more unit of resource 1 raises z by about 1.8.",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880105,
+    "question_key": "Q3b",
+    "response": "1 ≤ c₁ ≤ 6",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880107,
+    "question_key": "Q1a",
+    "response": "min w = 10y₁ + 15y₂ s.t. 2y₁ + y₂ ≥ 4, y₁ + 3y₂ ≥ 3, y₁, y₂ ≥ 0",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880107,
+    "question_key": "Q1b",
+    "response": "w* = z* = 24 (primal optimum x = (3, 4))",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880107,
+    "question_key": "Q2",
+    "response": "Both x > 0, so both dual constraints are tight: y* = (9/5, 2/5).",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880107,
+    "question_key": "Q3a",
+    "response": "y₁* = 1.8: one more unit of resource 1 raises z by about 1.8.",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880107,
+    "question_key": "Q3b",
+    "response": "1 ≤ c₁ ≤ 6",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880109,
+    "question_key": "Q1a",
+    "response": "min w = 10y₁ + 15y₂ s.t. 2y₁ + y₂ ≥ 4, y₁ + 3y₂ ≥ 3, y₁, y₂ ≥ 0",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880109,
+    "question_key": "Q1b",
+    "response": "w* = z* = 24 (primal optimum x = (3, 4))",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880109,
+    "question_key": "Q2",
+    "response": "Both x > 0, so both dual constraints are tight: y* = (9/5, 2/5).",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880109,
+    "question_key": "Q3a",
+    "response": "y₁* = 1.8: one more unit of resource 1 raises z by about 1.8.",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880109,
+    "question_key": "Q3b",
+    "response": "1 ≤ c₁ ≤ 6",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880111,
+    "question_key": "Q1a",
+    "response": "min w = 10y₁ + 15y₂ s.t. 2y₁ + y₂ ≥ 4, y₁ + 3y₂ ≥ 3, y₁, y₂ ≥ 0",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880111,
+    "question_key": "Q1b",
+    "response": "w* = z* = 24 (primal optimum x = (3, 4))",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880111,
+    "question_key": "Q2",
+    "response": "Both x > 0, so both dual constraints are tight: y* = (9/5, 2/5).",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880111,
+    "question_key": "Q3a",
+    "response": "y₁* = 1.8: one more unit of resource 1 raises z by about 1.8.",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880111,
+    "question_key": "Q3b",
+    "response": "1 ≤ c₁ ≤ 6",
+    "points_awarded": null,
+    "graded_by": "instructor"
+  }
+]

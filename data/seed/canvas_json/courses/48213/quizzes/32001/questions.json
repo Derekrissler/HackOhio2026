@@ -1,0 +1,144 @@
+[
+  {
+    "id": 77001,
+    "quiz_id": 32001,
+    "position": 1,
+    "question_name": "Question 1",
+    "question_type": "multiple_choice_question",
+    "question_text": "<p>Which is a valid decision variable for a diet problem?</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5001,
+        "text": "xⱼ = ounces of food j in the daily diet",
+        "weight": 100
+      },
+      {
+        "id": 5002,
+        "text": "x = healthy food",
+        "weight": 0
+      },
+      {
+        "id": 5003,
+        "text": "xⱼ = cost of food j",
+        "weight": 0
+      },
+      {
+        "id": 5004,
+        "text": "x = total calories",
+        "weight": 0
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  },
+  {
+    "id": 77002,
+    "quiz_id": 32001,
+    "position": 2,
+    "question_name": "Question 2",
+    "question_type": "true_false_question",
+    "question_text": "<p>True or false: every LP with a nonempty feasible region has an optimal solution.</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5005,
+        "text": "True",
+        "weight": 0
+      },
+      {
+        "id": 5006,
+        "text": "False",
+        "weight": 100
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  },
+  {
+    "id": 77003,
+    "quiz_id": 32001,
+    "position": 3,
+    "question_name": "Question 3",
+    "question_type": "numerical_question",
+    "question_text": "<p>For max z = 3x₁ + 2x₂ subject to x₁ + x₂ ≤ 4, x₁ + 3x₂ ≤ 6, x₁, x₂ ≥ 0, what is the optimal value of z?</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5007,
+        "numerical_answer_type": "exact_answer",
+        "exact": 12.0,
+        "margin": 0,
+        "weight": 100
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  },
+  {
+    "id": 77004,
+    "quiz_id": 32001,
+    "position": 4,
+    "question_name": "Question 4",
+    "question_type": "multiple_choice_question",
+    "question_text": "<p>If an LP has an optimal solution, at least one optimal solution occurs at:</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5008,
+        "text": "a corner point of the feasible region",
+        "weight": 100
+      },
+      {
+        "id": 5009,
+        "text": "the center of the feasible region",
+        "weight": 0
+      },
+      {
+        "id": 5010,
+        "text": "where the objective line crosses an axis",
+        "weight": 0
+      },
+      {
+        "id": 5011,
+        "text": "any point on the boundary",
+        "weight": 0
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  },
+  {
+    "id": 77005,
+    "quiz_id": 32001,
+    "position": 5,
+    "question_name": "Question 5",
+    "question_type": "multiple_choice_question",
+    "question_text": "<p>Which constraint models “at least 30% of production must be chairs (x₂)”?</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5012,
+        "text": "−0.3x₁ + 0.7x₂ ≥ 0",
+        "weight": 100
+      },
+      {
+        "id": 5013,
+        "text": "x₂ ≥ 0.3",
+        "weight": 0
+      },
+      {
+        "id": 5014,
+        "text": "x₂ ≤ 0.3(x₁ + x₂)",
+        "weight": 0
+      },
+      {
+        "id": 5015,
+        "text": "0.3x₂ ≥ x₁ + x₂",
+        "weight": 0
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  }
+]

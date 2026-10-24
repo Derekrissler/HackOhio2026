@@ -1,0 +1,65 @@
+[
+  {
+    "id": 77016,
+    "quiz_id": 32004,
+    "position": 1,
+    "question_name": "Question 1",
+    "question_type": "numerical_question",
+    "question_text": "<p>A fair die is rolled. What is P(even)?</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5044,
+        "numerical_answer_type": "exact_answer",
+        "exact": 0.5,
+        "margin": 0,
+        "weight": 100
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  },
+  {
+    "id": 77017,
+    "quiz_id": 32004,
+    "position": 2,
+    "question_name": "Question 2",
+    "question_type": "true_false_question",
+    "question_text": "<p>True or false: P(A or B) = P(A) + P(B) for any events A and B.</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5045,
+        "text": "True",
+        "weight": 0
+      },
+      {
+        "id": 5046,
+        "text": "False",
+        "weight": 100
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  },
+  {
+    "id": 77018,
+    "quiz_id": 32004,
+    "position": 3,
+    "question_name": "Question 3",
+    "question_type": "numerical_question",
+    "question_text": "<p>Two fair coins are tossed. What is P(two heads)?</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5047,
+        "numerical_answer_type": "exact_answer",
+        "exact": 0.25,
+        "margin": 0,
+        "weight": 100
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  }
+]

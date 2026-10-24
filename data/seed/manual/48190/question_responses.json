@@ -1,0 +1,44 @@
+[
+  {
+    "submission_id": 880141,
+    "question_key": "Q1",
+    "response": "Mean 10, median 7",
+    "points_awarded": 10.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880141,
+    "question_key": "Q2",
+    "response": "The median: 23 is an outlier that pulls the mean up.",
+    "points_awarded": 10.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880142,
+    "question_key": "Q1",
+    "response": "Mean 10, median 7",
+    "points_awarded": 10.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880142,
+    "question_key": "Q2",
+    "response": "The median: 23 is an outlier that pulls the mean up.",
+    "points_awarded": 10.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880143,
+    "question_key": "Q1",
+    "response": "Mean 7, median 10",
+    "points_awarded": 5.0,
+    "graded_by": "instructor"
+  },
+  {
+    "submission_id": 880143,
+    "question_key": "Q2",
+    "response": "The median: 23 is an outlier that pulls the mean up.",
+    "points_awarded": 10.0,
+    "graded_by": "instructor"
+  }
+]

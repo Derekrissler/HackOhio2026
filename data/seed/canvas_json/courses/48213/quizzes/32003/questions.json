@@ -1,0 +1,134 @@
+[
+  {
+    "id": 77011,
+    "quiz_id": 32003,
+    "position": 1,
+    "question_name": "Question 1",
+    "question_type": "multiple_choice_question",
+    "question_text": "<p>The dual of a minimization LP with ≥ constraints and non-negative variables is:</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5031,
+        "text": "a maximization LP with ≤ constraints",
+        "weight": 100
+      },
+      {
+        "id": 5032,
+        "text": "a minimization LP with ≥ constraints",
+        "weight": 0
+      },
+      {
+        "id": 5033,
+        "text": "a maximization LP with ≥ constraints",
+        "weight": 0
+      },
+      {
+        "id": 5034,
+        "text": "the same LP",
+        "weight": 0
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  },
+  {
+    "id": 77012,
+    "quiz_id": 32003,
+    "position": 2,
+    "question_name": "Question 2",
+    "question_type": "true_false_question",
+    "question_text": "<p>True or false: any feasible dual solution gives an upper bound on a max primal's optimal value.</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5035,
+        "text": "True",
+        "weight": 100
+      },
+      {
+        "id": 5036,
+        "text": "False",
+        "weight": 0
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  },
+  {
+    "id": 77013,
+    "quiz_id": 32003,
+    "position": 3,
+    "question_name": "Question 3",
+    "question_type": "numerical_question",
+    "question_text": "<p>A resource has shadow price 2.5. If 4 more units are added (within range), by how much does z change?</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5037,
+        "numerical_answer_type": "exact_answer",
+        "exact": 10.0,
+        "margin": 0,
+        "weight": 100
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  },
+  {
+    "id": 77014,
+    "quiz_id": 32003,
+    "position": 4,
+    "question_name": "Question 4",
+    "question_type": "multiple_choice_question",
+    "question_text": "<p>The reduced cost of a non-basic variable measures:</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5038,
+        "text": "how much its objective coefficient must improve before it enters the basis",
+        "weight": 100
+      },
+      {
+        "id": 5039,
+        "text": "the value of one more unit of a resource",
+        "weight": 0
+      },
+      {
+        "id": 5040,
+        "text": "the variable's current value",
+        "weight": 0
+      },
+      {
+        "id": 5041,
+        "text": "the slack in its constraint",
+        "weight": 0
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  },
+  {
+    "id": 77015,
+    "quiz_id": 32003,
+    "position": 5,
+    "question_name": "Question 5",
+    "question_type": "true_false_question",
+    "question_text": "<p>True or false: if a primal constraint has positive slack at the optimum, its dual variable is zero.</p>",
+    "points_possible": 2,
+    "answers": [
+      {
+        "id": 5042,
+        "text": "True",
+        "weight": 100
+      },
+      {
+        "id": 5043,
+        "text": "False",
+        "weight": 0
+      }
+    ],
+    "correct_comments": "",
+    "incorrect_comments": ""
+  }
+]

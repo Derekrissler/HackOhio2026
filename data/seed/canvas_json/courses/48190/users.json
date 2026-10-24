@@ -1,0 +1,74 @@
+[
+  {
+    "id": 9001,
+    "name": "Prof. Dana Rivera",
+    "sortable_name": "Rivera, Dana",
+    "short_name": "Prof. Dana Rivera",
+    "login_id": "drivera@example.edu",
+    "email": "drivera@example.edu",
+    "enrollments": [
+      {
+        "id": 70022,
+        "course_id": 48190,
+        "user_id": 9001,
+        "type": "TeacherEnrollment",
+        "role": "TeacherEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9002,
+    "name": "Alex Kim",
+    "sortable_name": "Kim, Alex",
+    "short_name": "Alex Kim",
+    "login_id": "akim@example.edu",
+    "email": "akim@example.edu",
+    "enrollments": [
+      {
+        "id": 70023,
+        "course_id": 48190,
+        "user_id": 9002,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9003,
+    "name": "Priya Natarajan",
+    "sortable_name": "Natarajan, Priya",
+    "short_name": "Priya Natarajan",
+    "login_id": "pnatarajan@example.edu",
+    "email": "pnatarajan@example.edu",
+    "enrollments": [
+      {
+        "id": 70024,
+        "course_id": 48190,
+        "user_id": 9003,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  },
+  {
+    "id": 9004,
+    "name": "Marcus Bell",
+    "sortable_name": "Bell, Marcus",
+    "short_name": "Marcus Bell",
+    "login_id": "mbell@example.edu",
+    "email": "mbell@example.edu",
+    "enrollments": [
+      {
+        "id": 70025,
+        "course_id": 48190,
+        "user_id": 9004,
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "enrollment_state": "active"
+      }
+    ]
+  }
+]

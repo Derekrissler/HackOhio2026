@@ -1,0 +1,29 @@
+[
+  {
+    "assignment_id": 610008,
+    "question_key": "Q1",
+    "outcome_id": 4107,
+    "weight": 1.0
+  },
+  {
+    "assignment_id": 610008,
+    "question_key": "Q2",
+    "outcome_id": 4107,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77016,
+    "outcome_id": 4108,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77017,
+    "outcome_id": 4108,
+    "weight": 1.0
+  },
+  {
+    "quiz_question_id": 77018,
+    "outcome_id": 4108,
+    "weight": 1.0
+  }
+]

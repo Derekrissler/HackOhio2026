@@ -1,0 +1,184 @@
+[
+  {
+    "id": 21001,
+    "name": "Week 1: Introduction & LP Modeling",
+    "position": 1,
+    "items": [
+      {
+        "id": 22001,
+        "title": "Lecture 1: Introduction & LP Modeling",
+        "type": "File",
+        "content_id": 550001,
+        "position": 1
+      },
+      {
+        "id": 22002,
+        "title": "Reading: A Guide to LP Formulation",
+        "type": "File",
+        "content_id": 550009,
+        "position": 2
+      }
+    ]
+  },
+  {
+    "id": 21002,
+    "name": "Week 2: The Graphical Method",
+    "position": 2,
+    "items": [
+      {
+        "id": 22003,
+        "title": "Lecture 2: The Graphical Method",
+        "type": "File",
+        "content_id": 550002,
+        "position": 1
+      },
+      {
+        "id": 22004,
+        "title": "HW1: Modeling & the Graphical Method",
+        "type": "Assignment",
+        "content_id": 610001,
+        "position": 2
+      },
+      {
+        "id": 22005,
+        "title": "Quiz 1: Formulation",
+        "type": "Quiz",
+        "content_id": 32001,
+        "position": 3
+      }
+    ]
+  },
+  {
+    "id": 21003,
+    "name": "Week 3: Standard Form",
+    "position": 3,
+    "items": [
+      {
+        "id": 22006,
+        "title": "Lecture 3: Standard Form",
+        "type": "File",
+        "content_id": 550003,
+        "position": 1
+      }
+    ]
+  },
+  {
+    "id": 21004,
+    "name": "Week 4: The Simplex Method I",
+    "position": 4,
+    "items": [
+      {
+        "id": 22007,
+        "title": "Lecture 4: The Simplex Method I",
+        "type": "File",
+        "content_id": 550004,
+        "position": 1
+      },
+      {
+        "id": 22008,
+        "title": "Reading: Simplex Worked Example",
+        "type": "File",
+        "content_id": 550010,
+        "position": 2
+      },
+      {
+        "id": 22009,
+        "title": "HW2: Standard Form & Simplex",
+        "type": "Assignment",
+        "content_id": 610003,
+        "position": 3
+      }
+    ]
+  },
+  {
+    "id": 21005,
+    "name": "Week 5: The Simplex Method II",
+    "position": 5,
+    "items": [
+      {
+        "id": 22010,
+        "title": "Lecture 5: The Simplex Method II",
+        "type": "File",
+        "content_id": 550005,
+        "position": 1
+      },
+      {
+        "id": 22011,
+        "title": "Quiz 2: Simplex Mechanics",
+        "type": "Quiz",
+        "content_id": 32002,
+        "position": 2
+      },
+      {
+        "id": 22012,
+        "title": "Midterm Exam",
+        "type": "Assignment",
+        "content_id": 610005,
+        "position": 3
+      }
+    ]
+  },
+  {
+    "id": 21006,
+    "name": "Week 6: Duality",
+    "position": 6,
+    "items": [
+      {
+        "id": 22013,
+        "title": "Lecture 6: Duality",
+        "type": "File",
+        "content_id": 550006,
+        "position": 1
+      },
+      {
+        "id": 22014,
+        "title": "Reading: Duality Notes",
+        "type": "File",
+        "content_id": 550011,
+        "position": 2
+      }
+    ]
+  },
+  {
+    "id": 21007,
+    "name": "Week 7: Complementary Slackness",
+    "position": 7,
+    "items": [
+      {
+        "id": 22015,
+        "title": "Lecture 7: Complementary Slackness",
+        "type": "File",
+        "content_id": 550007,
+        "position": 1
+      },
+      {
+        "id": 22016,
+        "title": "HW3: Duality & Sensitivity",
+        "type": "Assignment",
+        "content_id": 610006,
+        "position": 2
+      }
+    ]
+  },
+  {
+    "id": 21008,
+    "name": "Week 8: Sensitivity Analysis",
+    "position": 8,
+    "items": [
+      {
+        "id": 22017,
+        "title": "Lecture 8: Sensitivity Analysis",
+        "type": "File",
+        "content_id": 550008,
+        "position": 1
+      },
+      {
+        "id": 22018,
+        "title": "Quiz 3: Duality",
+        "type": "Quiz",
+        "content_id": 32003,
+        "position": 2
+      }
+    ]
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "610008": [
+    {
+      "key": "Q1",
+      "label": "Q1",
+      "parent_key": null,
+      "prompt_html": "<p>Find the mean and median of 4, 7, 7, 9, 23.</p>",
+      "question_type": "essay",
+      "points_possible": 10,
+      "answer_key": "Mean 10, median 7",
+      "source_page": null,
+      "position": 1
+    },
+    {
+      "key": "Q2",
+      "label": "Q2",
+      "parent_key": null,
+      "prompt_html": "<p>Which summary is more appropriate for these data, and why?</p>",
+      "question_type": "essay",
+      "points_possible": 10,
+      "answer_key": "The median: 23 is an outlier that pulls the mean up.",
+      "source_page": null,
+      "position": 2
+    }
+  ]
+}

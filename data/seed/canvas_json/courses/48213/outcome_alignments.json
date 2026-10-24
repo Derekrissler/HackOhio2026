@@ -1,0 +1,87 @@
+[
+  {
+    "learning_outcome_id": 4101,
+    "assignment_id": 610001,
+    "title": "HW1: Modeling & the Graphical Method"
+  },
+  {
+    "learning_outcome_id": 4103,
+    "assignment_id": 610001,
+    "title": "HW1: Modeling & the Graphical Method"
+  },
+  {
+    "learning_outcome_id": 4101,
+    "assignment_id": 610002,
+    "title": "Quiz 1: Formulation"
+  },
+  {
+    "learning_outcome_id": 4103,
+    "assignment_id": 610002,
+    "title": "Quiz 1: Formulation"
+  },
+  {
+    "learning_outcome_id": 4101,
+    "assignment_id": 610003,
+    "title": "HW2: Standard Form & Simplex"
+  },
+  {
+    "learning_outcome_id": 4102,
+    "assignment_id": 610003,
+    "title": "HW2: Standard Form & Simplex"
+  },
+  {
+    "learning_outcome_id": 4104,
+    "assignment_id": 610003,
+    "title": "HW2: Standard Form & Simplex"
+  },
+  {
+    "learning_outcome_id": 4102,
+    "assignment_id": 610004,
+    "title": "Quiz 2: Simplex Mechanics"
+  },
+  {
+    "learning_outcome_id": 4104,
+    "assignment_id": 610004,
+    "title": "Quiz 2: Simplex Mechanics"
+  },
+  {
+    "learning_outcome_id": 4101,
+    "assignment_id": 610005,
+    "title": "Midterm Exam"
+  },
+  {
+    "learning_outcome_id": 4102,
+    "assignment_id": 610005,
+    "title": "Midterm Exam"
+  },
+  {
+    "learning_outcome_id": 4103,
+    "assignment_id": 610005,
+    "title": "Midterm Exam"
+  },
+  {
+    "learning_outcome_id": 4104,
+    "assignment_id": 610005,
+    "title": "Midterm Exam"
+  },
+  {
+    "learning_outcome_id": 4105,
+    "assignment_id": 610006,
+    "title": "HW3: Duality & Sensitivity"
+  },
+  {
+    "learning_outcome_id": 4106,
+    "assignment_id": 610006,
+    "title": "HW3: Duality & Sensitivity"
+  },
+  {
+    "learning_outcome_id": 4105,
+    "assignment_id": 610007,
+    "title": "Quiz 3: Duality"
+  },
+  {
+    "learning_outcome_id": 4106,
+    "assignment_id": 610007,
+    "title": "Quiz 3: Duality"
+  }
+]

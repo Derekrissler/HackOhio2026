@@ -1,0 +1,13 @@
+{
+  "id": 48190,
+  "name": "Introduction to Statistical Reasoning",
+  "course_code": "STAT 1450",
+  "workflow_state": "available",
+  "start_at": "2026-08-24T12:00:00Z",
+  "end_at": "2026-12-12T04:59:00Z",
+  "term": {
+    "name": "Autumn 2026"
+  },
+  "apply_assignment_group_weights": false,
+  "syllabus_body": "<p>An introduction to describing data and reasoning with probability.</p><h2>Learning Objectives</h2><p>By the end of the course you will be able to:</p><ol class=\"learning-objectives\"><li id=\"S1\"><strong>S1</strong> — Summarise data with appropriate measures of centre and spread.</li><li id=\"S2\"><strong>S2</strong> — Compute and interpret basic probabilities.</li></ol><h2>Schedule</h2><ul><li>Week 2: Describing Data</li><li>Week 3: Probability</li></ul>"
+}
