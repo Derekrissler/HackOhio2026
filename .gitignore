@@ -222,6 +222,7 @@ __marimo__/
 node_modules/
 apps/web/dist/
 data/app.db
+data/analytics-runs/
 data/*.db-journal
 .DS_Store
 .claude/settings.local.json
