@@ -32,7 +32,7 @@ from pypdf import PdfReader
 
 HERE = Path(__file__).resolve().parent
 EXPORTS = HERE / "exports"
-SCHEMA_VERSION = "ingest-1.0"
+SCHEMA_VERSION = "ingest-1.1"
 ADAPTER = "canvas_rest_v1"
 PDF_EXTRACTOR = "pypdf-text-1"
 HTML_EXTRACTOR = "html-sections-1"
@@ -97,6 +97,23 @@ def text_of(html: str | None) -> str:
     t = unescape(re.sub(r"<[^>]+>", "", t))
     t = re.sub(r"[ \t]+", " ", t)
     return re.sub(r"\n\s*\n+", "\n\n", "\n".join(line.strip() for line in t.splitlines())).strip()
+
+
+def quiz_question_catalog(assessment: dict) -> dict[int, dict]:
+    """Read stable question numbers, stems and choices from a quiz assignment description."""
+    html = assessment.get("description_html") or ""
+    matches = list(re.finditer(r"<p><strong>(\d+)\.</strong>(.*?)</p>", html, flags=re.S))
+    catalog = {}
+    for index, match in enumerate(matches):
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(html)
+        tail = html[match.end():end]
+        catalog[int(match.group(1))] = {
+            "question_id": f"Q-{assessment['canvas_id']}-{int(match.group(1)):02d}",
+            "question_number": int(match.group(1)),
+            "question_text": text_of(match.group(2)),
+            "choices": [text_of(choice) for choice in re.findall(r"<li>(.*?)</li>", tail, flags=re.S)],
+        }
+    return catalog
 
 
 def html_sections(html: str) -> list[tuple[str | None, str]]:
@@ -319,6 +336,67 @@ class Exporter:
         return [{"student_id": pseudonym("S", u["id"]), "enrollment_state": u.get("enrollment_state", "active")}
                 for u in users], True
 
+    def question_responses(self, assessment: dict, submission: dict, instructor_view: bool,
+                           api_path: str) -> list[dict]:
+        if assessment.get("type") != "quiz":
+            return []
+        questions = quiz_question_catalog(assessment)
+        raw_items = submission.get("quiz_responses") or []
+        # Read the older local mock shape during the contract transition.
+        if isinstance(raw_items, dict):
+            raw_items = [{"question_number": number, "answer_index": response.get("selected_index"),
+                          "correct_answer_index": response.get("correct_index"), "response_text": response.get("text"),
+                          "points_earned": response.get("earned"), "points_possible": response.get("possible")}
+                         for number, response in raw_items.items()]
+        if not raw_items and isinstance(submission.get("responses"), dict):
+            raw_items = [{"question_number": number, "answer_index": response.get("selected_index"),
+                          "correct_answer_index": response.get("correct_index"), "response_text": response.get("text"),
+                          "points_earned": response.get("earned"), "points_possible": response.get("possible")}
+                         for number, response in submission["responses"].items()]
+
+        out = []
+        for raw in raw_items:
+            number = int(raw.get("question_number", 0))
+            question = questions.get(number, {})
+            question_id = raw.get("question_id") or question.get("question_id") or \
+                f"Q-{assessment['canvas_id']}-{number:02d}"
+            answer_index = raw.get("answer_index", raw.get("selected_index"))
+            correct_index = raw.get("correct_answer_index", raw.get("correct_index"))
+            choices = question.get("choices", [])
+            if answer_index is not None:
+                answer = {"choice_index": answer_index,
+                          "text": choices[answer_index] if 0 <= answer_index < len(choices) else None}
+            else:
+                answer = {"text": raw.get("response_text", raw.get("text"))}
+            correct = raw.get("correct")
+            if correct is None and answer_index is not None and correct_index is not None:
+                correct = answer_index == correct_index
+            item = {
+                "question_id": question_id,
+                "question_number": number,
+                "question_text": question.get("question_text") or None,
+                "response": answer,
+                "correct": correct,
+                "points_earned": raw.get("points_earned", raw.get("earned")),
+                "points_possible": raw.get("points_possible", raw.get("possible")),
+            }
+            if instructor_view and correct_index is not None:
+                item["correct_answer"] = {
+                    "choice_index": correct_index,
+                    "text": choices[correct_index] if 0 <= correct_index < len(choices) else None,
+                    "access_roles": ["instructor"],
+                }
+            excerpt = f"Question: {item['question_text'] or question_id}\nResponse: {answer.get('text') or '(choice not found)'}"
+            if item["points_earned"] is not None:
+                excerpt += f"\nPoints: {item['points_earned']}/{item['points_possible']}"
+            item["evidence_ref_id"] = self.evidence_ref(
+                "canvas_quiz_response", api_path, excerpt, submission_id=submission.get("id"),
+                question_id=question_id, attempt_id=submission.get("attempt"))
+            item["source_ref"] = {"api_path": api_path, "canvas_submission_id": submission.get("id"),
+                                  "question_id": question_id}
+            out.append(item)
+        return out
+
     def submissions(self, assessments: list[dict], instructor_view: bool) -> list[dict]:
         out = []
         include = {"include[]": ["submission_comments", "rubric_assessment"]}
@@ -351,10 +429,14 @@ class Exporter:
                         "evidence_ref_id": self.evidence_ref("canvas_submission_comment", path, text,
                                                              submission_id=s.get("id"), comment_id=cm.get("id"))})
                 body = text_of(s.get("body"))
+                attempt_id = str(s["attempt"]) if s.get("attempt") is not None else None
+                submission_id = f"SUB-{a['canvas_id']}-{student}"
+                if attempt_id:
+                    submission_id += f"-A{attempt_id}"
                 out.append({
-                    "submission_id": f"SUB-{a['canvas_id']}-{student}", "canvas_id": s.get("id"),
+                    "submission_id": submission_id, "canvas_id": s.get("id"),
                     "assessment_id": a["assessment_id"], "student_id": student,
-                    "attempt_id": str(s["attempt"]) if s.get("attempt") is not None else None,
+                    "attempt_id": attempt_id,
                     "workflow_state": s.get("workflow_state"), "late": s.get("late"), "missing": s.get("missing"),
                     "submitted_at": s.get("submitted_at"), "graded_at": s.get("graded_at"),
                     "score": s.get("score"), "points_possible": a["points_possible"],
@@ -363,6 +445,7 @@ class Exporter:
                                                   "content_type": att.get("content-type"), "url": att.get("url"),
                                                   "access_roles": ["instructor", "owner"]}
                                                  for att in s.get("attachments") or []]},
+                    "question_responses": self.question_responses(a, s, instructor_view, path),
                     "rubric_assessment": rubric, "feedback": feedback,
                     "source_ref": {"api_path": path},
                 })
@@ -384,9 +467,14 @@ class Exporter:
 
         if os.environ.get("ANON_SALT", DEV_SALT) == DEV_SALT:
             self.warnings.append("ANON_SALT is not set; pseudonyms use the development salt.")
-        if submissions and not any(s["response"]["body_text"] or s["response"]["attachments"] for s in submissions):
-            self.warnings.append("No submission bodies or attachments: student responses are not available, so "
-                                 "evidence is assignment- and rubric-level (no question-level response text).")
+        has_question_responses = any(s["question_responses"] for s in submissions)
+        has_submission_bodies = any(s["response"]["body_text"] or s["response"]["attachments"] for s in submissions)
+        if submissions and not has_question_responses and not has_submission_bodies:
+            self.warnings.append("No submission bodies, attachments or quiz item responses were available; "
+                                 "evidence is assignment- and rubric-level.")
+        elif has_question_responses and not has_submission_bodies:
+            self.warnings.append("Graded quiz item responses are available; non-quiz submission bodies and "
+                                 "attachments are not present in this mock course.")
         if not instructor_view:
             self.warnings.append("Token can't list course enrollments; only the token owner's submissions are included.")
 
@@ -410,6 +498,7 @@ class Exporter:
                 "counts": {"outcomes": len(outcomes), "modules": len(modules), "assessments": len(assessments),
                            "students": len(students), "submissions": len(submissions),
                            "graded_submissions": sum(s["score"] is not None for s in submissions),
+                           "question_responses": sum(len(s["question_responses"]) for s in submissions),
                            "feedback_comments": sum(len(s["feedback"]) for s in submissions),
                            "rubric_notes": sum(1 for s in submissions for r in s["rubric_assessment"] if r["comments"]),
                            "documents": len(documents), "resource_chunks": len(chunks),
@@ -445,12 +534,12 @@ def stated_outcomes(desc_text: str, outcomes: list[dict]) -> list[dict]:
 
 
 def export_course(base_url: str, token: str, course_id: str) -> tuple[dict, Path]:
-    export_id = f"EXP-{course_id}-{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}"
+    export_id = f"EXP-{course_id}-{datetime.now(timezone.utc):%Y%m%dT%H%M%S%fZ}"
     out_dir = EXPORTS / export_id
     out_dir.mkdir(parents=True, exist_ok=True)
     bundle = Exporter(Canvas(base_url, token), course_id, out_dir).run()
     path = out_dir / "bundle.json"
-    path.write_text(json.dumps(bundle, indent=2, ensure_ascii=False))
+    path.write_text(json.dumps(bundle, indent=2, ensure_ascii=False), encoding="utf-8")
     return bundle, path
 
 
