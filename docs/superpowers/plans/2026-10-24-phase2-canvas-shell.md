@@ -141,3 +141,18 @@ Windows, `bin/` elsewhere). `concurrently` runs web + api for `npm run dev`.
 - [ ] `npm run dev` from the root; via the Vite proxy: `/api/health` 200; student analytics 403.
 - [ ] Headless browser screenshots of dashboard, course home (teacher and student).
 - [ ] Commit `docs: Add setup and run instructions`.
+
+---
+
+## Implementation notes (deviations found while executing)
+
+- **Review Focus 5:** instead of `queryClient.clear()` on switch, every user-scoped query key
+  includes the demo user id (`api/hooks.ts`). A switch then fetches fresh data and cached
+  responses can never cross users. Clearing the cache would not refetch for mounted observers.
+- `getCourseNavItems` and the tab list live in `src/shell/courseTabs.ts` so routes, nav and
+  breadcrumbs share one source.
+- `scripts/dev-api.mjs` became `scripts/api-python.mjs`, which forwards its arguments to the venv
+  Python, so it serves both `dev:api` (uvicorn) and `test:api` (pytest).
+- `httpx` → `httpx2`: Starlette 1.10's TestClient deprecates httpx.
+- InstUI `Breadcrumb` draws a separator after every child but the last, `false` children
+  included. Pass only real children.
