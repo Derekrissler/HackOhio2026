@@ -28,6 +28,7 @@ class FileEvidenceSource:
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
+    commands.add_parser("courses", help="read-only discovery of course UUIDs and Canvas IDs")
     for name in ("readiness", "analyze"):
         command = commands.add_parser(name)
         command.add_argument("--course", type=UUID, required=True)
@@ -46,6 +47,12 @@ def main(argv=None):
                          help="attest that ingestion and metadata writers are paused/serialized for this course")
     args = parser.parse_args(argv)
     try:
+        if args.command == "courses":
+            from .evidence_repository import read_pages
+            from .supabase_clients import create_pipeline_client
+            rows = read_pages(create_pipeline_client(), "courses", "id,code,canvas_id")
+            print(json.dumps({"courses": rows}, indent=2))
+            return 0
         if args.command == "publish":
             bundle = AnalysisBundle.model_validate_json(args.bundle.read_text(encoding="utf-8"))
             if not args.exclusive_course_access or bundle.source_kind != "supabase":

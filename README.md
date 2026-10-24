@@ -3,9 +3,11 @@
 A lightweight, Canvas-style LMS that will host learning analytics for students and instructors.
 The architecture and roadmap are in [docs/PHASE1_PLAN.md](docs/PHASE1_PLAN.md).
 
-**Current state: Phase 3.** Every Canvas tab (Home, Syllabus, Assignments, Quizzes, Grades,
-Files) shows seeded course data for students and the teacher. Learning Insights and
-Instructor Analytics are still placeholders (Phases 6–7).
+**Current state:** Every Canvas tab (Home, Syllabus, Assignments, Quizzes, Grades,
+Files) shows seeded course data for students and the teacher. Instructor Analytics
+now has authenticated Supabase ARR retrieval; live-data
+acceptance is pending local credentials and an inspected course run. Learning
+Insights remains a placeholder. See [analytics setup and verification](docs/analytics-dashboard.md).
 
 | Part | Stack | Folder |
 |---|---|---|
@@ -65,8 +67,9 @@ question → outcome alignments and material kinds. See [data/seed/README.md](da
 
 ## Demo users
 
-There is no login. Open **Account** in the left navigation, type a name, and pick who to view
-the app as.
+The mock LMS uses demo identities. Open **Account** in the left navigation, type
+a name, and pick who to view the app as. Shared Supabase analytics requires a
+separate course-account sign-in on Instructor Analytics.
 
 | Id | Name | Role |
 |---|---|---|

@@ -354,6 +354,11 @@ body,
   outline-offset: -2px;
 }
 
+.analytics-login { display: grid; gap: 0.75rem; max-width: 24rem; margin-bottom: 1rem; }
+.analytics-login label { display: grid; gap: 0.25rem; }
+.analytics-login input { padding: 0.5rem; font: inherit; }
+.analytics-login button { padding: 0.5rem; font: inherit; }
+
 /* Gradebook grid: scrolls sideways with the student column pinned. */
 .gradebook {
   overflow: auto;

@@ -152,7 +152,9 @@ staff-only manifest to students and performs no automatic database writes.
 Always use this guarded service for current results; directly querying a
 nonstale row is not a full freshness guarantee. Supabase remains responsible for
 JWT authorization/RLS. The mock LMS's demo identity is not a Supabase session.
-Dashboard auth/route wiring is Phase 7; no privileged result proxy is added here.
+Dashboard auth/route wiring is described in [analytics-dashboard.md](analytics-dashboard.md).
+Its display endpoints verify a real Supabase JWT and course enrollment, read ARR
+payloads with the user's JWT, and keep private control metadata server-only.
 
 ## Usage from apps/api
 

@@ -55,4 +55,4 @@ def test_analytics_is_teacher_only(client):
     assert client.get("/api/courses/1/analytics/summary", headers=STUDENT).status_code == 403
     res = client.get("/api/courses/1/analytics/summary", headers=TEACHER)
     assert res.status_code == 200
-    assert res.json() == {"course_id": 1, "status": "coming_in_phase_7"}
+    assert res.json() == {"course_id": 1, "status": "supabase_sign_in_required"}
