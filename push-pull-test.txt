@@ -1,0 +1,2 @@
+Push/pull test file.
+Edit this line, commit, and push; then pull on another machine to confirm sync works.
