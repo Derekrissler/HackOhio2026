@@ -3,26 +3,26 @@
 A lightweight, Canvas-style LMS that will host learning analytics for students and instructors.
 The architecture and roadmap are in [docs/PHASE1_PLAN.md](docs/PHASE1_PLAN.md).
 
-**Current state: Phase 2.** The Canvas-like shell (global nav, course nav, breadcrumbs, role
-switcher) and a small API run end to end. Course pages are placeholders until Phase 3.
+**Current state: Phase 3.** Every Canvas tab (Home, Syllabus, Assignments, Quizzes, Grades,
+Files) shows seeded course data for students and the teacher. Learning Insights and
+Instructor Analytics are still placeholders (Phases 6–7).
 
 | Part | Stack | Folder |
 |---|---|---|
 | Web | React 18, TypeScript, Vite, InstUI 11.6 (`canvas` theme), React Router, TanStack Query | `apps/web` |
 | API | Python 3.14 (tested), FastAPI, SQLAlchemy 2, SQLite | `apps/api` |
-| Data | `data/app.db`, created and seeded automatically on first start (gitignored) | `data/` |
+| Seed | Canvas REST API-shaped JSON + manual JSON + PDFs, generated deterministically | `data/seed` |
+| Database | `data/app.db`, rebuilt from the seed (gitignored) | `data/` |
 
 ## Setup (once)
 
-You need **Node 20+** (tested on 24) and **Python 3.14** (the only version tested; 3.12 should work but is unverified). The commands below are for PowerShell on Windows.
-macOS and Linux work the same, except for the venv path (shown in comments).
+You need **Node 20+** (tested on 24) and **Python 3.14** (the only version tested; 3.12 should
+work but is unverified). The commands below are for PowerShell on Windows; macOS and Linux work
+the same, except for the venv path.
 
 ```powershell
-# 1. Python virtualenv for the API
 py -3 -m venv apps/api/.venv          # macOS/Linux: python3 -m venv apps/api/.venv
-
-# 2. Install everything (root tools, web packages, API packages)
-npm run setup
+npm run setup                         # root tools, web packages, API + dev packages
 ```
 
 ## Run
@@ -31,43 +31,72 @@ npm run setup
 npm run dev
 ```
 
-This starts both servers:
-
 - Web: <http://localhost:5173>
-- API: <http://127.0.0.1:8000> (interactive docs at <http://127.0.0.1:8000/docs>). The web app
-  reaches it through Vite's `/api` proxy.
+- API: <http://127.0.0.1:8000> (interactive docs at <http://127.0.0.1:8000/docs>), reached by
+  the web app through Vite's `/api` proxy.
 
-To restart from a clean database, stop the servers, delete `data/app.db` and run `npm run dev` again.
+The API builds `data/app.db` from the seed on first start, and again whenever the schema version
+changes.
+
+## Seed data
+
+| Command | What it does |
+|---|---|
+| `npm run seed` | Drop and rebuild `data/app.db` from `data/seed/` (safe while the API is running) |
+| `npm run seed:generate` | Regenerate `data/seed/` from `apps/api/seedgen/` (fixed random seed, byte-identical output) |
+
+The seed holds two fictional courses:
+
+- **ISE 3200 – Linear Optimization** (main): 20 students, 6 learning outcomes, 7 assessments
+  (3 homeworks, 3 quizzes, a scanned midterm) with 42 scored questions, rubrics, realistic
+  mistakes and instructor comments, and 11 lecture/reading PDFs.
+- **STAT 1450**: a lightly populated second course.
+
+Data flows through the same ingestion path that live Canvas data will use in Phase 4:
+
+```
+data/seed/canvas_json  →  CanvasJsonAdapter ─┐
+                                             ├→ canonical models → loader → SQLite
+data/seed/manual       →  ManualAdapter ─────┘   (apps/api/app/ingest/)
+```
+
+`manual/` holds what Canvas doesn't expose: per-question scores for homework and scanned exams,
+question → outcome alignments and material kinds. See [data/seed/README.md](data/seed/README.md).
+
+## Demo users
+
+There is no login. Open **Account** in the left navigation, type a name, and pick who to view
+the app as.
+
+| Id | Name | Role |
+|---|---|---|
+| 1 | Prof. Dana Rivera | Teacher of both courses |
+| 2 | Alex Kim | Student (average; makes a recurring slack-sign error) |
+| 3 | Priya Natarajan | Student (strong) |
+| 4 | Marcus Bell | Student (struggling; missed Quiz 2) |
+| 5–21 | 17 more students | ISE 3200 only |
+
+The web app sends the selected user as an `X-Demo-User` header. It also sets a `demo_user` cookie,
+because PDF iframes can't send headers. [apps/api/app/auth.py](apps/api/app/auth.py) is the only
+code that turns either into a user and decides access. Students see only their own submissions,
+files and grades: anyone else's are a 404. They see quiz questions only after taking the quiz,
+and scores, answer keys and comments only once their work is graded. Teacher-only comments are
+never shown to students.
 
 ## Test
 
 ```powershell
-npm test              # API (pytest) and web (Vitest)
-npm run test:api      # API only
-npm --prefix apps/web run build   # type-check and production build
+npm test                              # API (pytest) and web (Vitest)
+npm --prefix apps/web run build       # type-check and production build
+npm run e2e                           # Playwright: click through every tab as teacher and student
 ```
 
-## Demo users
-
-There is no login. Open **Account** in the left navigation and choose who to view the app as.
-
-| Id | Name | Role in STAT 1450 |
-|---|---|---|
-| 1 | Prof. Dana Rivera | Teacher |
-| 2 | Alex Kim | Student |
-| 3 | Priya Natarajan | Student |
-| 4 | Marcus Bell | Student |
-
-All names are fictional. Teachers see **Instructor Analytics** in the course navigation, and
-students see **Learning Insights**. The API enforces the same rule: a student requesting
-`/api/courses/1/analytics/summary` gets `403`.
-
-The web app sends the selected user as an `X-Demo-User` header. `apps/api/app/auth.py` is the
-only code that reads it, so LTI 1.3 launch can replace it later without touching the routes.
+`npm run e2e` starts its own API (port 8010) and web server (port 5180), uses the installed
+Microsoft Edge, and saves screenshots to a temp folder (set `E2E_OUT` to choose one).
 
 ## Licence note
 
 This repo does **not** copy code from Canvas LMS (which is AGPL-3.0). It uses
-[InstUI](https://github.com/instructure/instructure-ui) (MIT) for Canvas's look, and re-implements
-Canvas's layout patterns. Keep it that way, or the repo would have to be AGPL-licensed
-(see PHASE1_PLAN §3).
+[InstUI](https://github.com/instructure/instructure-ui) (MIT) for Canvas's look and imitates
+Canvas's REST response *shapes* for its seed data. Keep it that way, or the repo would have to be
+AGPL-licensed (see PHASE1_PLAN §3). All people and course content are fictional.
