@@ -98,7 +98,7 @@ def main(course_id: str) -> None:
         "submissions": {},
     }
     path = out_dir / f"course_{course_id}.json"
-    path.write_text(json.dumps(fixture, indent=2))
+    path.write_text(json.dumps(fixture, indent=2), encoding="utf-8")
     print(f"Wrote {path.relative_to(HERE)}")
 
 

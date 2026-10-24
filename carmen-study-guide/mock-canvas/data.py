@@ -12,7 +12,7 @@ def load_courses() -> dict[str, dict]:
     """Read every fixtures/**/*.json. Re-read per request so edits show up without a restart."""
     courses = {}
     for path in sorted(FIXTURES.rglob("*.json")):
-        data = json.loads(path.read_text())
+        data = json.loads(path.read_text(encoding="utf-8"))
         data["_dir"] = path.parent
         courses[str(data["course"]["id"])] = data
     return courses

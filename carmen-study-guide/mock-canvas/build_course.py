@@ -37,7 +37,7 @@ STAFF = {"Dr. Quinn Ferrous": 9001, "Maya Okafor": 9002, "Dev Raman": 9003}
 
 
 def read(name: str) -> str:
-    return (SRC / name).read_text()
+    return (SRC / name).read_text(encoding="utf-8")
 
 
 def html(md: str) -> str:
@@ -306,7 +306,7 @@ def main():
         "assignments": [{k: v for k, v in a.items() if not k.startswith("_")} for a in assignments],
         "submissions": build_submissions(assignments),
     }
-    OUT.write_text(json.dumps(fixture, indent=2, ensure_ascii=False))
+    OUT.write_text(json.dumps(fixture, indent=2, ensure_ascii=False), encoding="utf-8")
     graded = [a["name"] for a in assignments if fixture["submissions"][str(a["id"])]["score"] is not None]
     print(f"Wrote {OUT.relative_to(HERE)}: {len(fixture['modules'])} modules, {len(pages)} pages, "
           f"{len(files)} slide decks ({sum(len(f['pages']) for f in files)} slides), {len(assignments)} assignments, "

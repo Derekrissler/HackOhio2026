@@ -6,7 +6,7 @@ other fixture string goes through esc().
 
 import re
 from datetime import datetime
-from html import escape as esc
+from html import escape as esc, unescape
 from math import cos, pi, sin
 from pathlib import Path
 
@@ -171,6 +171,7 @@ def trays() -> str:
 COURSE_NAV = [("home", "Home", ""), ("announcements", "Announcements", "/announcements"),
               ("assignments", "Assignments", "/assignments"), ("discussions", "Discussions", "/discussion_topics"),
               ("grades", "Grades", "/grades"), ("people", "People", "/users"), ("pages", "Pages", "/pages"),
+              ("textbook", "Textbook", "/textbook"),
               ("files", "Files", "/files"), ("syllabus", "Syllabus", "/assignments/syllabus"),
               ("modules", "Modules", "/modules")]
 
@@ -375,10 +376,140 @@ SUBMITTING = {"online_upload": "a file upload", "online_text_entry": "a text ent
               "online_quiz": "an online quiz", "on_paper": "on paper (in class)", "none": "nothing"}
 
 
+def is_quiz(a: dict) -> bool:
+    return "online_quiz" in (a.get("submission_types") or [])
+
+
+def quiz_questions(description: str, total_points: float) -> list[dict]:
+    matches = list(re.finditer(r"<p><strong>(\d+)\.</strong>(.*?)</p>", description, flags=re.S))
+    questions = []
+    per_question = total_points / len(matches) if matches else 0
+    for i, match in enumerate(matches):
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(description)
+        tail = description[match.end():end]
+        options = re.findall(r"<li>(.*?)</li>", tail, flags=re.S)
+        extras = re.sub(r"<ul>.*?</ul>", "", tail, flags=re.S)
+        questions.append({
+            "number": int(match.group(1)),
+            "stem": f'<p>{match.group(2)}</p>{extras}',
+            "options": options,
+            "points": per_question,
+        })
+    return questions
+
+
+def quiz_overview(course_id: str, a: dict) -> str:
+    description = a.get("description", "")
+    instructions = re.split(r"<h3>Multiple Choice</h3>|<h3>Short Answer</h3>", description, maxsplit=1)[0]
+    return f"""
+<div class="quiz-overview">
+  <div class="quiz-overview-head"><div><p class="quiz-kicker">Quiz</p><h1>{esc(a["name"])}</h1></div>
+    <a class="btn btn-primary" href="/courses/{course_id}/quizzes/{a['id']}">Take the Quiz</a></div>
+  <dl class="quiz-facts">
+    <div><dt>Due</dt><dd>{fmt_due(a.get("due_at"))}</dd></div>
+    <div><dt>Points</dt><dd>{fmt_score(a.get("points_possible"))}</dd></div>
+    <div><dt>Questions</dt><dd>{len(quiz_questions(description, a.get("points_possible") or 0))}</dd></div>
+    <div><dt>Time limit</dt><dd>15 minutes</dd></div>
+    <div><dt>Attempts</dt><dd>Not specified</dd></div>
+  </dl>
+  <div class="user-content">{instructions}
+    <p>This quiz is closed notes and closed AI. Read each question carefully before submitting.</p>
+  </div>
+  <p class="muted small">Practice preview: this mock quiz does not record or grade responses.</p>
+</div>"""
+
+
+def quiz_attempt(c: dict, a: dict) -> str:
+    questions = quiz_questions(a.get("description", ""), a.get("points_possible") or 0)
+    if not questions:
+        return '<h1>Quiz questions unavailable</h1><p class="muted">No numbered questions were found for this quiz.</p>'
+    cid = c["course"]["id"]
+    cards, nav = [], []
+    for i, question in enumerate(questions):
+        number = question["number"]
+        answers = "".join(
+            f'<li><label><input type="radio" name="question-{number}" value="{option_index}">'
+            f'<span>{option}</span></label></li>'
+            for option_index, option in enumerate(question["options"])
+        )
+        response = (f'<ul class="quiz-options">{answers}</ul>' if answers else
+                    f'<label class="quiz-response-label" for="response-{number}">Your answer</label>'
+                    f'<textarea id="response-{number}" name="question-{number}" rows="5"></textarea>')
+        cards.append(f"""
+<section class="quiz-question-card" data-question="{i}"{' hidden' if i else ''}>
+  <header class="quiz-question-head"><h2>Question {number}</h2><span>{fmt_score(question['points'])} pts</span></header>
+  <div class="quiz-question-body"><div class="quiz-question-stem">{question['stem']}</div>{response}</div>
+</section>""")
+        current_attr = ' aria-current="step"' if i == 0 else ""
+        nav.append(f'<button type="button" class="quiz-number{" active" if i == 0 else ""}" '
+                   f'data-go="{i}" aria-label="Go to question {number}"{current_attr}>{number}</button>')
+    return f"""
+<div class="quiz-attempt-top"><div><p class="quiz-kicker">Quiz attempt</p><h1>{esc(a['name'])}</h1></div>
+  <div class="quiz-time"><span class="muted small">Time limit</span><b>15 minutes</b></div></div>
+<p class="quiz-preview-note">Practice preview. Responses are not saved or graded.</p>
+<div class="quiz-layout" id="quiz-attempt">
+  <main class="quiz-main">
+    <div class="quiz-progress" aria-live="polite">Question 1 of {len(questions)}</div>
+    {''.join(cards)}
+    <div class="quiz-controls">
+      <button type="button" class="btn" id="quiz-previous" disabled>&larr; Previous</button>
+      <button type="button" class="btn btn-primary" id="quiz-next">Next Question &rarr;</button>
+      <button type="button" class="btn btn-primary" id="quiz-submit" hidden>Submit Quiz</button>
+    </div>
+    <div class="quiz-submitted" id="quiz-submitted" hidden role="status">
+      <b>Practice attempt complete.</b> This mock quiz does not record or grade responses.
+      <a href="/courses/{cid}/assignments/{a['id']}">Return to quiz details</a>
+    </div>
+  </main>
+  <aside class="quiz-question-list"><h2>Questions</h2><p class="muted small">{len(questions)} questions</p>
+    <div class="quiz-number-grid">{''.join(nav)}</div>
+    <a class="quiz-return" href="/courses/{cid}/assignments/{a['id']}">&larr; Quiz details</a>
+  </aside>
+</div>
+<script>
+(() => {{
+  const root = document.getElementById('quiz-attempt');
+  const cards = [...root.querySelectorAll('.quiz-question-card')];
+  const numbers = [...root.querySelectorAll('.quiz-number')];
+  const previous = document.getElementById('quiz-previous');
+  const next = document.getElementById('quiz-next');
+  const submit = document.getElementById('quiz-submit');
+  const progress = root.querySelector('.quiz-progress');
+  let current = 0;
+  function show(index) {{
+    current = index;
+    cards.forEach((card, i) => card.hidden = i !== current);
+    numbers.forEach((button, i) => {{
+      button.classList.toggle('active', i === current);
+      if (i === current) button.setAttribute('aria-current', 'step');
+      else button.removeAttribute('aria-current');
+    }});
+    progress.textContent = `Question ${{current + 1}} of ${{cards.length}}`;
+    previous.disabled = current === 0;
+    next.hidden = current === cards.length - 1;
+    submit.hidden = current !== cards.length - 1;
+  }}
+  numbers.forEach((button) => button.addEventListener('click', () => show(Number(button.dataset.go))));
+  previous.addEventListener('click', () => show(Math.max(0, current - 1)));
+  next.addEventListener('click', () => show(Math.min(cards.length - 1, current + 1)));
+  submit.addEventListener('click', () => {{
+    document.getElementById('quiz-submitted').hidden = false;
+    root.querySelector('.quiz-question-list').hidden = true;
+    root.querySelector('.quiz-progress').hidden = true;
+    root.querySelector('.quiz-question-card').hidden = true;
+    root.querySelector('.quiz-controls').hidden = true;
+  }});
+}})();
+</script>"""
+
+
 @router.get("/courses/{course_id}/assignments/{assignment_id}", response_class=HTMLResponse)
 def assignment_page(course_id: str, assignment_id: str):
     c = course(course_id)
     a = assignment(c, assignment_id)
+    if is_quiz(a):
+        main = quiz_overview(course_id, a)
+        return course_page(c, "assignments", ["Quizzes", a["name"]], main)
     s = submission(c, assignment_id) or {}
     graded = s.get("score") is not None
     assessed = s.get("rubric_assessment", {})
@@ -424,6 +555,16 @@ def assignment_page(course_id: str, assignment_id: str):
     return course_page(c, "assignments", ["Assignments", a["name"]], main, right, scripts=SHIM)
 
 
+@router.get("/courses/{course_id}/quizzes/{quiz_id}", response_class=HTMLResponse)
+def quiz_page(course_id: str, quiz_id: str):
+    c = course(course_id)
+    a = assignment(c, quiz_id)
+    if not is_quiz(a):
+        raise HTTPException(404, "quiz not found")
+    main = quiz_attempt(c, a)
+    return course_page(c, "assignments", ["Quizzes", a["name"], "Take Quiz"], main)
+
+
 @router.get("/courses/{course_id}/grades", response_class=HTMLResponse)
 def grades(course_id: str):
     c = course(course_id)
@@ -459,6 +600,68 @@ def grades(course_id: str):
     return course_page(c, "grades", ["Grades"], main, right)
 
 
+def textbook_pages(c: dict) -> list[dict]:
+    return [p for p in c.get("pages", []) if p["title"].startswith("Textbook")]
+
+
+def textbook_label(page: dict) -> str:
+    title = page["title"]
+    if title.startswith("Textbook Chapter "):
+        return title.removeprefix("Textbook ")
+    if title == "Textbook: Glossary":
+        return "Glossary"
+    return "Start Here"
+
+
+def textbook_toc(body: str) -> tuple[str, str]:
+    links = []
+    section_number = 0
+
+    def add_id(match):
+        nonlocal section_number
+        section_number += 1
+        anchor = f"textbook-section-{section_number}"
+        heading = match.group(1)
+        label = unescape(re.sub(r"<[^>]+>", "", heading))
+        links.append(f'<li><a href="#{anchor}">{esc(label)}</a></li>')
+        return f'<h3 id="{anchor}">{heading}</h3>'
+
+    body = re.sub(r"<h3>(.*?)</h3>", add_id, body, flags=re.S)
+    toc = (f'<nav class="textbook-toc" aria-label="In this chapter"><strong>In this chapter</strong>'
+           f'<ol>{"".join(links)}</ol></nav>') if links else ""
+    return toc, body
+
+
+def textbook_pagination(c: dict, page: dict) -> str:
+    pages = textbook_pages(c)
+    index = next((i for i, item in enumerate(pages) if item["url"] == page["url"]), 0)
+    previous = pages[index - 1] if index > 0 else None
+    following = pages[index + 1] if index + 1 < len(pages) else None
+    cid = c["course"]["id"]
+    prev_link = (f'<a class="btn textbook-prev" href="/courses/{cid}/pages/{esc(previous["url"])}">'
+                 f'&larr; {esc(textbook_label(previous))}</a>') if previous else '<span></span>'
+    next_link = (f'<a class="btn btn-primary textbook-next" href="/courses/{cid}/pages/{esc(following["url"])}">'
+                 f'{esc(textbook_label(following))} &rarr;</a>') if following else '<span></span>'
+    return (f'<nav class="textbook-pagination" aria-label="Textbook navigation">{prev_link}'
+            f'<a class="textbook-index-link" href="/courses/{cid}/textbook">Chapter index</a>{next_link}</nav>')
+
+
+@router.get("/courses/{course_id}/textbook", response_class=HTMLResponse)
+def textbook_index(course_id: str):
+    c = course(course_id)
+    pages = textbook_pages(c)
+    items = "".join(
+        f'<li><a href="/courses/{course_id}/pages/{esc(p["url"])}">{esc(textbook_label(p))}</a></li>'
+        for p in pages
+    )
+    main = (f'<h1>Vibes, Prompts, and Production</h1>'
+            f'<p class="textbook-subtitle">A Field Guide to Vibe Coding</p>'
+            f'<p>Read the introduction, move through the six chapters, and finish with the glossary. '
+            f'Each chapter has a section list and links to the previous and next reading.</p>'
+            f'<ol class="textbook-index">{items}</ol>')
+    return course_page(c, "textbook", ["Textbook"], main)
+
+
 @router.get("/courses/{course_id}/pages", response_class=HTMLResponse)
 def pages_index(course_id: str):
     c = course(course_id)
@@ -474,6 +677,14 @@ def page_view(course_id: str, page_url: str):
     p = next((p for p in c.get("pages", []) if p["url"] == page_url), None)
     if not p:
         raise HTTPException(404, "page not found")
+    if p in textbook_pages(c):
+        toc, body = textbook_toc(p["body"])
+        label = textbook_label(p)
+        main = (f'<div class="textbook-return"><a href="/courses/{course_id}/textbook">'
+                f'&larr; All textbook chapters</a></div>'
+                f'<h1 class="page-title">{esc(label)}</h1>{toc}'
+                f'<div class="user-content">{body}</div>{textbook_pagination(c, p)}')
+        return course_page(c, "textbook", ["Textbook", label], main)
     return course_page(c, "pages", ["Pages", p["title"]],
                        f'<h1 class="page-title">{esc(p["title"])}</h1><div class="user-content">{p["body"]}</div>')
 

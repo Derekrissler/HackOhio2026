@@ -61,7 +61,7 @@ By the end of this course, students will be able to:
 | Final Exam | 20% |
 | Participation and Prompt Logs | 10% |
 
-**Scale:** A 93–100 · A− 90–92 · B+ 87–89 · B 83–86 · B− 80–82 · C+ 77–79 · C 73–76 · C− 70–72 · D 60–69 · E below 60
+**Scale:** A 93.00-99.99 | A- 90.00-92.99 | B+ 87.00-89.99 | B 83.00-86.99 | B- 80.00-82.99 | C+ 77.00-79.99 | C 73.00-76.99 | C- 70.00-72.99 | D 60.00-69.99 | E below 60.00
 
 ## AI Use Policy
 
