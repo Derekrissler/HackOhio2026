@@ -1,58 +1,58 @@
-# Mock Canvas
+# Mock Canvas (Carmen)
 
-A local copy of Canvas (Carmen) to build on. It serves Canvas-styled pages and the Canvas REST API, with the
-same JSON shapes and Link-header pagination as osu.instructure.com. The course data is **VIBE 101** (course id
-1001), built from the markdown in `CourseContent/`.
+A local Canvas-style course for the Carmen Study Guide. It serves VIBE 101 (course ID `1001`), mock Canvas REST endpoints, seeded student grades, and a normalized analytics export.
 
-## Run it
-```bash
+## Run locally
+
+From this directory in PowerShell:
+
+```powershell
 cd mock-canvas
-python3.13 -m venv .venv                 # first time only; needs Python 3.10+ (macOS's python3 is 3.9)
-.venv/bin/pip install -r requirements.txt
-.venv/bin/uvicorn server:app --reload --port 8001
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m uvicorn server:app --reload --port 8001
 ```
-Open http://localhost:8001/courses/1001. The API is under http://localhost:8001/api/v1/, and you can try every
-endpoint at http://localhost:8001/docs. Any bearer token works.
 
-## What's in it
-| Page | URL |
-|---|---|
-| Dashboard | `/` |
-| Course home (modules) | `/courses/1001` |
-| Assignments, grouped and weighted | `/courses/1001/assignments` |
-| Assignment with rubric, grade and comments | `/courses/1001/assignments/2001` |
-| Grades | `/courses/1001/grades` |
-| Pages, Files, Syllabus | `/courses/1001/pages`, `/files`, `/assignments/syllabus` |
+Open [http://localhost:8001/courses/1001](http://localhost:8001/courses/1001). API documentation is at [http://localhost:8001/docs](http://localhost:8001/docs).
+If port 8001 is already occupied, change the run command to `--port 8002` and open [http://localhost:8002/courses/1001](http://localhost:8002/courses/1001).
 
-API endpoints include courses, modules (`include[]=items`), pages, files and downloads, assignments, and
-`submissions/self` (`include[]=submission_comments`, `rubric_assessment`, `assignment`).
+On macOS or Linux, use `python3 -m venv .venv`, `.venv/bin/pip install -r requirements.txt`, and `.venv/bin/uvicorn server:app --reload --port 8001`.
+
+## Demo API access
+
+The mock API requires a bearer token on `/api/v1/` routes:
+
+- `Bearer dev` or `Bearer mock`: instructor view, including the synthetic roster and class submissions.
+- `Bearer student-5001` through `Bearer student-5015`: student view. A student can only read their own `/submissions/self` response.
+
+Student quiz review includes their score and whether each answer was correct. Correct-answer values are only present in instructor responses. These fixture tokens are for the local demo only.
+
+## End-to-end checks
+
+With the server running, open a second PowerShell terminal in this directory:
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+```
+
+The integration checks launch a separate temporary local server, follow Canvas-style pagination, verify student/staff access, build instructor and student-only exports, and check the seeded quiz response data. They do not call the analytics export button or the optional Supabase storage writer.
 
 ## Export for analytics
-Every course page has an **Export for analytics** button at the top right. It pulls the course through the
-Canvas API: outcomes, modules, assignments and rubrics, every submission's grades, rubric notes and comments,
-pages, and slide PDFs. It writes one JSON bundle to `mock-canvas/exports/<export_id>/bundle.json`, with the
-original files in `files/`, for the analytics pipeline. The format is in
-[mock-canvas/INGEST_CONTRACT.md](mock-canvas/INGEST_CONTRACT.md).
 
-When `SUPABASE_SERVICE_ROLE_KEY` is set in `mock-canvas/.env`, the button also stores the export in the team's
-Supabase Postgres (`db_store.py`), and re-clicking is safe. It writes the course, learners, outcomes, documents
-(with the originals uploaded to the `course-materials` bucket), chunks, assessments, questions, attempts,
-responses, evidence and feedback, and logs an `ingestion_jobs` row. To store an existing export by hand, run
-`.venv/bin/python db_store.py exports/<export_id>/bundle.json`. To run the same export against real Canvas:
-`CANVAS_BASE_URL=https://osu.instructure.com CANVAS_TOKEN=<token> .venv/bin/python ingest.py <course_id>`.
+The course pages have an **Export for analytics** button. It calls the mock Canvas API and writes `mock-canvas/exports/<export_id>/bundle.json` plus source PDFs. The format and data limits are documented in [mock-canvas/INGEST_CONTRACT.md](mock-canvas/INGEST_CONTRACT.md).
 
-## Where things live
-| File | Job |
+When the server has a Supabase secret configured in `mock-canvas/.env`, the export button also invokes the server-side writer in `db_store.py`. It stores source records and quiz item responses; answer keys are stored only in the protected `question_answer_keys` table. The browser never receives the secret key. To export a local bundle without storing it, run `python ingest.py 1001` from this directory while the local server is up.
+
+## Main files
+
+| File | Purpose |
 |---|---|
-| `mock-canvas/server.py` | JSON API |
-| `mock-canvas/ui.py`, `static/` | Canvas-styled pages |
-| `mock-canvas/fixtures/*.json` | Course data, one course per file. Edits show up on the next request |
-| `mock-canvas/ingest.py` | Canvas → analytics bundle exporter (the button) |
-| `mock-canvas/build_course.py` | Rebuilds `fixtures/vibe101.json` from `CourseContent/` |
-| `mock-canvas/snapshot.py` | Copies a real Canvas course's materials into `fixtures/local/` (gitignored) |
+| `server.py` | Mock Canvas JSON API, demo token roles and course pages |
+| `ui.py`, `static/` | Canvas-style dashboard, assignments, grades and people views |
+| `fixtures/vibe101.json` | Generated synthetic course, roster, grades and quiz attempts |
+| `build_course.py` | Rebuilds the course fixture from `CourseContent/` |
+| `ingest.py` | Canvas API adapter and local analytics bundle exporter |
+| `db_store.py` | Optional server-side Supabase storage for a completed export |
+| `INGEST_CONTRACT.md` | Bundle contract, access rules and known limits |
 
-After editing the markdown in `CourseContent/`, run `.venv/bin/python build_course.py` from `mock-canvas/`.
-Answer keys and the TA comment bank are left out on purpose, because the course is the student's view.
-
-To mock a real course, put `CANVAS_BASE_URL` and a real `CANVAS_TOKEN` in `mock-canvas/.env`, then run
-`.venv/bin/python snapshot.py <COURSE_ID>`.
+After editing `CourseContent/`, run `python build_course.py` from this directory.
