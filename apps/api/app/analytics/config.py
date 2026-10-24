@@ -15,6 +15,7 @@ class AnalyticsConfig(BaseModel):
     question_policy: Literal["parts_preferred_no_whole_overlap"] = "parts_preferred_no_whole_overlap"
     recurring_error_min_observations: int = Field(default=2, ge=2, strict=True)
     student_min_questions: int = Field(default=2, ge=1, strict=True)
+    practice_min_attempts: int = Field(default=2, ge=1, strict=True)
     class_min_students: int = Field(default=5, ge=2, strict=True)
     observed_performance_threshold: float = Field(default=0.70, ge=0, le=1)
     suppress_small_cohorts: bool = True

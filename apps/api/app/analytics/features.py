@@ -17,7 +17,7 @@ OBSERVATION_COLUMNS = [
     "practice_attempt_id", "attempt_number", "observed_at", "assessment_origin",
     "assistance", "hints_used", "independent_correctness", "points_earned",
     "points_possible", "source_points_earned", "source_points_possible",
-    "score_ratio", "score_eligible", "error_analysis_complete",
+    "score_ratio", "score_eligible", "error_analysis_complete", "error_policy_complete",
     "primary_score", "primary_error", "evidence_ref_ids",
 ]
 OUTCOME_COLUMNS = [
@@ -172,9 +172,15 @@ def build_features(
                 result.add(record.ler_id)
         return result
 
+    def valid_error_analysis(record):
+        return record.errors_analyzed is True and (
+            config.include_unreviewed_errors or
+            not any(e.instructor_status == "unreviewed" for e in record.errors)
+        )
+
     independent = [r for r in retained if r.assessment_origin == "graded_canvas" and r.assistance == "independent"]
     primary_scores = select_primary([r for r in independent if valid_score(r)], "primary_score")
-    primary_errors = select_primary([r for r in independent if r.errors_analyzed is True], "primary_error")
+    primary_errors = select_primary([r for r in independent if valid_error_analysis(r)], "primary_error")
     observations, outcomes, errors, practice = [], [], [], []
     for record in retained:
         rid = str(record.ler_id)
@@ -202,6 +208,7 @@ def build_features(
             "source_points_possible": str(record.points_possible) if record.points_possible is not None else None,
             "score_ratio": float(record.points_earned / record.points_possible) if scored else None,
             "score_eligible": scored, "error_analysis_complete": record.errors_analyzed,
+            "error_policy_complete": valid_error_analysis(record),
             "primary_score": record.ler_id in primary_scores,
             "primary_error": record.ler_id in primary_errors, "evidence_ref_ids": refs,
         })
@@ -224,6 +231,8 @@ def build_features(
                 "primary_score": record.ler_id in primary_scores, "evidence_ref_ids": refs,
             })
         tags = defaultdict(list)
+        if record.errors_analyzed is True and not valid_error_analysis(record):
+            exclude(record, "errors", "unreviewed_errors_excluded")
         for error in record.errors:
             if error.instructor_status == "rejected":
                 continue

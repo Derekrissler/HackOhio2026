@@ -103,10 +103,80 @@ counting it twice. ARR performance ratios must match their weighted numerator an
 denominator (absolute tolerance 1e-12), and distinct counts cannot exceed their
 supporting scored observation counts.
 
-No student/class aggregation, prevalence, recurring-error declaration, trend
-calculation or clustering happens yet. Those use the selections and evidence
-dimensions in later phases. Feature history is restricted internal data, never a
-browser response or a privacy-suppressed aggregate.
+Feature engineering itself performs no aggregation or clustering. Phase 4 consumes
+these selections for the statistics described below. Feature history is restricted
+internal data, never a browser response or a privacy-suppressed aggregate.
+
+## Phase 4 descriptive statistics
+
+`app.analytics.statistics.analyze_statistics(records, config=None, period=None)`
+returns a validated, JSON-serializable `StatisticsResult` containing student-outcome,
+class-outcome and assessment-question statistics. Configuration and period are
+included. These are intermediate analytical DTOs, not generated ARRs, database
+rows, natural-language interpretations, or authorized dashboard responses.
+
+Student outcome ratios use sums of eligible weighted earned/possible points, not
+the mean of question ratios. At least `student_min_questions` distinct selected
+questions are required; otherwise the ratio is null while counts, points and LER
+references remain available. Actual zero scores remain zero. Practice evidence
+does not contribute to these assessment totals.
+
+Class means average the sufficient student ratios with equal student weight.
+Pooled ratios use weighted points from that same sufficient-student cohort, and
+are reported separately. Counts distinguish observed assessed students, students
+with any valid independent scores, and students meeting the evidence minimum.
+Threshold counts use only the last cohort. Ratios require at least
+`class_min_students` sufficient students even when privacy suppression is off.
+Question statistics require one selected question per student, without requiring
+outcome mappings. Class outcomes include assessment-specific breakdowns, recomputed
+within each assessment using the same minimum-question rule.
+
+Coverage is sufficient students / observed assessed students. The observed cohort
+contains eligible analyzed graded input, including records with missing scores or
+unknown assistance. It excludes upstream insufficient/quarantined LERs; it is not
+an enrollment denominator or a claim about the entire class. Aggregate supporting
+LER IDs include the observed cohort so counts and coverage remain traceable.
+
+Errors use latest eligible independent classifications, separately from latest
+valid score selection. Event counts deduplicate tags per LER; recurrence uses the
+configured number of distinct selected observations. Counts distinguish events,
+questions, assessment/practice attempts, and students. Outcome error denominators
+require completed usable classification plus known attribution for every accepted
+tag in that observation. Unknown attribution is reported in student statistics;
+it is never treated as absence of an outcome error. Question error statistics do
+not need outcome attribution. Rejected errors are omitted. If unreviewed errors
+are excluded by policy, that observation cannot establish an error-free denominator;
+`error_policy_complete` records this separately from upstream classification status.
+
+Prevalence is unique eligible students with the category / unique students with
+eligible error evidence, retaining numerator, denominator, definitions and source
+LER links. Multiple errors by one student do not increase the numerator. No tags
+means no discovered category row, rather than fabricated zero prevalence for every
+possible taxonomy category.
+
+Default privacy suppression clears small-cohort performance counts, ratios,
+weighted points, evidence IDs, categories and assessment breakdowns. It also applies
+when the valid-scored or sufficient-student subset is nonzero but below the minimum.
+A separately small error denominator hides error categories, counts and links even
+if score statistics have enough students. Disabling suppression reveals diagnostic
+counts, not unsupported ratios. Cohort dimensions and suppression flags remain.
+Student results and unsuppressed evidence links remain restricted internal data;
+the whole result bundle must not be returned directly to a student or browser.
+
+Practice has independent/assisted/unknown buckets with distinct attempt counts,
+known hint counts/totals, evidence, and separate scores if actually supplied.
+Missing hints are not zero. `independent_correctness` is summarized only in the
+independent bucket; it does not establish assisted-answer correctness. Practice
+ratios require `practice_min_attempts` known observations (default two). There is
+no assistance penalty, fabricated correctness, improvement claim, or trend model.
+Decimal totals avoid floating-point overflow in pooled points; proportions remain
+ordinary bounded floats. Stable group/order rules make results reproducible under
+input permutation.
+
+The statistical tests use fictional records with manually verified unequal-point
+examples, class versus pooled means, unique-student prevalence, recurrence,
+missing classifications, privacy suppression, practice separation, and periods.
+No live Supabase call, auth change, migration, UI change or persistence occurs.
 
 ## ARR and run contracts
 
