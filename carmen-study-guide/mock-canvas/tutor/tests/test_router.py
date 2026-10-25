@@ -25,6 +25,15 @@ def test_turn_returns_reply_with_citation_links_and_no_internals():
     assert "violations" not in body and "policy_decision" not in body
 
 
+def test_turn_returns_verified_snippets_for_display():
+    from tutor.models import Snippet
+    llm = FakeLLM(good(move="explanation", snippets=[Snippet(chunk_id="c1", quote="evaluated once")]))
+    client, _, _ = make(llm=llm)
+    body = client.post("/courses/1001/tutor/turn", json={"message": "defaults?"}).json()
+    assert body["snippets"] == [{"chunk_id": "c1", "title": "Lecture 4: Python gotchas", "location": "slide 5",
+                                 "deep_link": "/courses/1001/files/40#page=5", "text": "evaluated once"}]
+
+
 def test_unknown_learner_gets_404():
     client, _, _ = make(learner=None)
     assert client.post("/courses/1001/tutor/turn", json={"message": "hi"}).status_code == 404

@@ -9,7 +9,8 @@ from tutor.matcher import referenced_assessments
 from tutor.models import (Assessment, Chunk, Learner, Mode, Move, PolicyDecision, Session, Turn,
                           TutorReply)
 from tutor.policy import MODE_RULES, STAFF_ROLES, STRICTNESS, decide_mode, mode_for
-from tutor.verifier import check_reply
+from tutor.snippets import ShownSnippet, select_snippets
+from tutor.verifier import check_reply, shown_text
 
 log = logging.getLogger(__name__)
 
@@ -38,7 +39,7 @@ class TutorRepo(Protocol):
 
 class TutorLLM(Protocol):
     def reply(self, system: str, messages: list[dict]) -> TutorReply: ...
-    def leaks_answer(self, text: str, answer_texts: list[str]) -> bool: ...
+    def leaks_answer(self, text: str, answer_texts: list[str], question: str | None = None) -> bool: ...
     def references(self, message: str, candidates: list[Assessment],
                    current: Assessment | None = None) -> list[str]: ...
 
@@ -60,6 +61,7 @@ class TurnResult:
     fallback: bool
     decision: PolicyDecision
     violations: list[str] = field(default_factory=list)
+    snippets: list[ShownSnippet] = field(default_factory=list)
 
 
 class TutorService:
@@ -96,10 +98,11 @@ class TutorService:
         prev_hint = next((t.hint_level or 0 for t in reversed(history) if t.speaker == "tutor"), 0)
         answers = self.repo.answer_texts(learner.course_id, [a.id for a in restricted])
 
+        asks_about_open = [a.code for a in matched if mode_for(a) is Mode.PROTECTED]
         reply, all_violations = None, []
         for _ in range(MAX_ATTEMPTS):
             messages = self._messages(history, chunks, req.message, rules, prev_hint, all_violations,
-                                      target.title if target else None)
+                                      target.title if target else None, asks_about_open)
             try:
                 draft = self.llm.reply(prompts.SYSTEM, messages)
             except Exception:
@@ -109,7 +112,9 @@ class TutorService:
             violations = check_reply(draft, mode=decision.mode, retrieved_ids={c.id for c in chunks},
                                      prev_hint=prev_hint, answer_texts=answers, own_pseudonym=learner.pseudonym)
             # Runs in every mode: it's the backstop when the classifier misses a paraphrased question.
-            if not violations and answers and self._model_says_leak(draft, answers):
+            # The question goes along only when it matched an open item; then answering it at all is the leak.
+            item_question = req.message if asks_about_open else None
+            if not violations and answers and self._model_says_leak(draft, answers, item_question):
                 violations = ["reply paraphrases the answer key"]
             if not violations:
                 reply = draft
@@ -119,17 +124,21 @@ class TutorService:
         fallback = reply is None
         if fallback:
             reply = _fallback_reply(decision, chunks, by_id)
-        cited = [c for c in chunks if c.id in set(reply.cited_chunk_ids)]
+        snippets, dropped = select_snippets(reply.snippets, {c.id: c for c in chunks})
+        cited_ids = set(reply.cited_chunk_ids) | {s.chunk.id for s in snippets}
+        cited = [c for c in chunks if c.id in cited_ids]
 
         self.repo.add_turns(session.id, [
             {"speaker": "student", "content": req.message},
             {"speaker": "tutor", "content": reply.message, "pedagogical_move": str(reply.move),
-             "hint_level": reply.hint_level, "cited_chunk_ids": reply.cited_chunk_ids,
+             "hint_level": reply.hint_level, "cited_chunk_ids": [c.id for c in cited],
              "policy_decision": {"mode": str(decision.mode), "reason": decision.reason,
                                  "assessment_id": decision.assessment_id, "matched": decision.matched_codes,
-                                 "rejected_drafts": all_violations, "fallback": fallback}},
+                                 "rejected_drafts": all_violations, "fallback": fallback,
+                                 "snippets": [{"chunk_id": s.chunk.id, "text": s.text} for s in snippets],
+                                 "dropped_snippets": dropped}},
         ])
-        return TurnResult(session.id, decision.mode, reply, cited, fallback, decision, all_violations)
+        return TurnResult(session.id, decision.mode, reply, cited, fallback, decision, all_violations, snippets)
 
     # ------------------------------------------------------------------ steps
 
@@ -153,9 +162,9 @@ class TutorService:
             return restricted
         return [a for a in restricted if a.code in codes]
 
-    def _model_says_leak(self, draft: TutorReply, answers: list[str]) -> bool:
+    def _model_says_leak(self, draft: TutorReply, answers: list[str], question: str | None) -> bool:
         try:
-            return self.llm.leaks_answer(f"{draft.message}\n{draft.next_step}", answers)
+            return self.llm.leaks_answer(shown_text(draft), answers, question)
         except Exception:
             log.exception("leak checker failed; rejecting the draft")
             return True
@@ -171,10 +180,11 @@ class TutorService:
 
     @staticmethod
     def _messages(history: list[Turn], chunks: list[Chunk], message: str, rules, prev_hint: int,
-                  violations: list[str], working_on: str | None) -> list[dict]:
+                  violations: list[str], working_on: str | None, asks_about_open: list[str]) -> list[dict]:
         msgs = [{"role": "user" if t.speaker == "student" else "assistant", "content": t.content} for t in history]
         msgs.append({"role": "user", "content": prompts.user_turn(chunks, message)})
-        msgs.append({"role": "system", "content": prompts.mode_note(rules, prev_hint, violations, working_on)})
+        msgs.append({"role": "system", "content": prompts.mode_note(rules, prev_hint, violations, working_on,
+                                                                    asks_about_open)})
         return msgs
 
 
@@ -188,8 +198,8 @@ def _fallback_reply(decision: PolicyDecision, chunks: list[Chunk], by_id: dict[s
         if where:
             message += f" These course materials cover the ideas behind it: {where}."
         return TutorReply(message=message, move=Move.DECLINE, hint_level=0, cited_chunk_ids=[c.id for c in top],
-                          next_step="Review the material, then ask me about the general concept.")
+                          next_step="Review the material, then ask me about the general concept.", snippets=[])
     message = "I couldn't put together a reliable answer just now."
     message += f" A good place to start: {where}. Which part is unclear?" if where else " Which part is unclear?"
     return TutorReply(message=message, move=Move.ASK, hint_level=0, cited_chunk_ids=[c.id for c in top],
-                      next_step="Tell me which step you're stuck on.")
+                      next_step="Tell me which step you're stuck on.", snippets=[])

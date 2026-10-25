@@ -5,6 +5,7 @@ python-dotenv>=1.0
 markdown>=3.5
 pypdf>=4.0
 supabase>=2.10
-anthropic>=2.3
+anthropic[bedrock]>=2.3
 # Shared validated ARR reader and freshness checks.
 -r ../../apps/api/requirements-persistence.txt
+boto3>=1.35

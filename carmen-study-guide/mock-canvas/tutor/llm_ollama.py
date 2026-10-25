@@ -61,10 +61,10 @@ class OllamaTutorLLM:
         content = self._chat(self.tutor_model, [{"role": "system", "content": system}, *messages], TutorReply)
         return TutorReply.model_validate_json(content)
 
-    def leaks_answer(self, text: str, answer_texts: list[str]) -> bool:
+    def leaks_answer(self, text: str, answer_texts: list[str], question: str | None = None) -> bool:
         content = self._chat(self.check_model, [
             {"role": "system", "content": prompts.LEAK_SYSTEM},
-            {"role": "user", "content": prompts.leak_check_content(text, answer_texts)},
+            {"role": "user", "content": prompts.leak_check_content(text, answer_texts, question)},
         ], LeakVerdict)
         return LeakVerdict.model_validate_json(content).leaks
 

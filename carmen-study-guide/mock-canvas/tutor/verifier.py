@@ -24,6 +24,11 @@ def _fragments(answer_texts: list[str]) -> list[str]:
     return [n for n in map(_norm, parts) if len(n) >= MIN_ANSWER_FRAGMENT]
 
 
+def shown_text(reply: TutorReply) -> str:
+    """Everything the student would see, quotes included: what the leak and privacy checks inspect."""
+    return "\n".join([reply.message, reply.next_step, *(s.quote for s in reply.snippets)])
+
+
 def check_reply(reply: TutorReply, *, mode: Mode, retrieved_ids: set[str], prev_hint: int,
                 answer_texts: list[str], own_pseudonym: str) -> list[str]:
     """Return human-readable violations; empty means the reply may be shown."""
@@ -43,10 +48,11 @@ def check_reply(reply: TutorReply, *, mode: Mode, retrieved_ids: set[str], prev_
     elif retrieved_ids and not reply.cited_chunk_ids and reply.move not in NO_CITATION_NEEDED:
         violations.append("reply must cite at least one course_material block")
 
-    text = _norm(f"{reply.message} {reply.next_step}")
+    shown = shown_text(reply)
+    text = _norm(shown)
     if any(f in text for f in _fragments(answer_texts)):
         violations.append("reply contains answer key text")
 
-    if any(p != own_pseudonym for p in PSEUDONYM.findall(f"{reply.message} {reply.next_step}")):
+    if any(p != own_pseudonym for p in PSEUDONYM.findall(shown)):
         violations.append("reply mentions another student's id")
     return violations
