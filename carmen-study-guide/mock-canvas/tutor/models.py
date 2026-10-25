@@ -89,6 +89,11 @@ class ReferenceVerdict(BaseModel):
     assessment_codes: list[str]
 
 
+class Snippet(BaseModel):
+    chunk_id: str = Field(description="Id of the course_material block the quote comes from.")
+    quote: str = Field(description="One to four lines copied exactly, word for word, from that block.")
+
+
 class TutorReply(BaseModel):
     """What the tutor model must return (structured output)."""
 
@@ -97,3 +102,5 @@ class TutorReply(BaseModel):
     hint_level: int = Field(description="0 when no hint is given; otherwise 1 (nudge) to 3 (strong hint).")
     cited_chunk_ids: list[str] = Field(description="Ids of the course_material blocks this reply relies on.")
     next_step: str = Field(description="One concrete thing the student should do next.")
+    snippets: list[Snippet] = Field(description="Up to 3 short exact quotes from course_material to show the "
+                                                "student; empty when no passage helps.")

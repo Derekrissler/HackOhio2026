@@ -103,6 +103,21 @@
     const box = el("div", "tutor-msg tutor-bot");
     box.append(el("span", `tutor-mode tutor-mode-${data.mode}`, MODES[data.mode] || data.mode));
     box.append(el("p", "tutor-text", data.message));
+    for (const s of data.snippets || []) {
+      const card = el("figure", "tutor-snippet");
+      card.append(el("blockquote", null, s.text));
+      const caption = el("figcaption", null, `${s.title} · ${s.location}`);
+      const href = sameSite(s.deep_link);
+      if (href) {
+        const open = el("a", "tutor-snippet-open", s.location.startsWith("slide") ? "Open slide" : "Open page");
+        open.href = href;
+        open.target = "_blank";
+        open.rel = "noopener";
+        caption.append(" ", open);
+      }
+      card.append(caption);
+      box.append(card);
+    }
     if (data.next_step) box.append(el("p", "tutor-next", `Next: ${data.next_step}`));
     if (data.citations?.length) {
       const list = el("ul", "tutor-cites");

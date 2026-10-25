@@ -27,6 +27,20 @@ def test_naming_an_open_quiz_switches_to_protected_mode_and_says_so_to_the_model
     assert logged[1]["policy_decision"]["mode"] == "protected_assessment"
 
 
+def test_when_the_message_is_the_item_the_tutor_is_told_not_to_answer_it():
+    llm = FakeLLM(good(move="explanation"))
+    run(llm, message="what's the answer to quiz 2 question 1?")
+    note = system_notes(llm)
+    assert "Quiz 2" in note and "do not answer" in note.lower()
+
+
+def test_leak_checker_sees_the_students_question_only_when_it_is_an_open_item():
+    llm = FakeLLM(good(move="explanation"), good(move="explanation"))
+    run(llm, message="what's on quiz 2 question 1?")
+    run(llm, message="why do assistants invent functions?")  # concept question: no match
+    assert llm.leak_questions == ["what's on quiz 2 question 1?", None]
+
+
 def test_paraphrased_reference_caught_by_classifier_is_protected():
     llm = FakeLLM(good(), references=["Quiz 2"])
     result, _ = run(llm, message="that question about appending to a list twice, what prints?")
@@ -147,6 +161,26 @@ def test_tutor_is_told_what_the_student_is_working_on():
     llm = FakeLLM(good(move="hint", hint_level=1))
     run(llm, assessment_id="hw2", message="help")
     assert "Assignment 2: Test first" in system_notes(llm)
+
+
+def test_verified_snippets_come_back_with_their_source_and_bad_ones_are_dropped():
+    from tutor.models import Snippet
+    llm = FakeLLM(good(move="explanation", snippets=[
+        Snippet(chunk_id="c1", quote="Default arguments are evaluated once."),
+        Snippet(chunk_id="c1", quote="Default arguments are always fresh."),  # invented
+    ]))
+    result, repo = run(llm, message="why are default arguments tricky?")
+    assert [(s.chunk.id, s.text) for s in result.snippets] == [("c1", "Default arguments are evaluated once.")]
+    assert [c.id for c in result.citations] == ["c1"]
+    assert repo.turns[result.session_id][1]["policy_decision"]["dropped_snippets"]
+
+
+def test_snippet_leaking_the_key_is_rejected_like_the_message():
+    from tutor.models import Snippet
+    leaky = good(snippets=[Snippet(chunk_id="c1", quote="Default arguments are evaluated once.")])
+    llm = FakeLLM(leaky, good(), leaks=[True, False])
+    result, _ = run(llm, assessment_id="hw2")
+    assert len(llm.requests) == 2 and result.snippets == []
 
 
 def test_released_assessment_allows_independent_study():

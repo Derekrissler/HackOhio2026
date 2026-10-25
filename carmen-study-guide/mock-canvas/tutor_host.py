@@ -9,6 +9,7 @@ the API answers 503 with what's missing.
 
 import logging
 import os
+import threading
 from functools import lru_cache
 from html import escape
 
@@ -44,7 +45,7 @@ def backend(request):
 
 @lru_cache(maxsize=1)
 def _llm():
-    """TUTOR_LLM=anthropic|ollama. Unset: Claude when ANTHROPIC_API_KEY is set, otherwise local Ollama."""
+    """TUTOR_LLM=anthropic|bedrock|ollama. Unset: Claude when ANTHROPIC_API_KEY is set, otherwise local Ollama."""
     has_key = os.environ.get("ANTHROPIC_API_KEY", "") not in ("", "REPLACE_ME")
     provider = os.environ.get("TUTOR_LLM", "").strip().lower() or ("anthropic" if has_key else "ollama")
     if provider == "ollama":
@@ -53,8 +54,20 @@ def _llm():
         llm = OllamaTutorLLM()
         llm.check_ready()
         return llm
+    if provider == "bedrock":
+        if not all(os.environ.get(k) for k in ("AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY")):
+            raise RuntimeError("AWS credentials are not set in mock-canvas/.env (needed for TUTOR_LLM=bedrock)")
+        # Default is Amazon Nova (AWS credits). A Claude model id switches to the Claude-on-Bedrock adapter, for
+        # accounts where Anthropic model access is enabled.
+        if "anthropic." in os.environ.get("BEDROCK_TUTOR_MODEL", ""):
+            from tutor.llm import BedrockTutorLLM
+
+            return BedrockTutorLLM()
+        from tutor.llm_bedrock import ConverseTutorLLM
+
+        return ConverseTutorLLM()
     if provider != "anthropic":
-        raise RuntimeError(f"TUTOR_LLM must be 'anthropic' or 'ollama', not {provider!r}")
+        raise RuntimeError(f"TUTOR_LLM must be 'anthropic', 'bedrock' or 'ollama', not {provider!r}")
     if not has_key:
         raise RuntimeError("ANTHROPIC_API_KEY is not set in mock-canvas/.env (or set TUTOR_LLM=ollama)")
     from tutor.llm import AnthropicTutorLLM
@@ -86,6 +99,8 @@ def context(course_id: str, request: Request, response: Response):
     reader, learner = identity(request, course_id)
     repo = SupabaseTutorRepo(service_client(), reader, learner)
     response.headers["Cache-Control"] = "no-store"
+    # Warm the slow analytics lookup while the student reads the page, so the first message is fast.
+    threading.Thread(target=repo.weak_outcomes, args=(learner.course_id, learner.learner_id), daemon=True).start()
     return {"assessments": [{"id": a.id, "title": a.title, "mode": mode_for(a)} for a in repo.assessments(learner.course_id)]}
 
 

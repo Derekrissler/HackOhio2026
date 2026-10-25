@@ -7,7 +7,7 @@ KEY = ["[1, 2]", "The default list is created once and shared between calls"]
 
 def reply(**kw) -> TutorReply:
     base = dict(message="What do you think happens to the list between calls?", move="ask", hint_level=0,
-                cited_chunk_ids=["c1"], next_step="Re-read slide 5.")
+                cited_chunk_ids=["c1"], next_step="Re-read slide 5.", snippets=[])
     return TutorReply(**{**base, **kw})
 
 

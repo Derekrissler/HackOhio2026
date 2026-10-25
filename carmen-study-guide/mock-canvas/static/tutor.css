@@ -16,3 +16,7 @@
 .tutor-mode-independent_study { background: #e6f4ea; color: #1e6b34; }
 .tutor-form { display: flex; gap: 10px; align-items: flex-end; }
 .tutor-form textarea { flex: 1; padding: 10px; border: 1px solid #c7cdd1; border-radius: 4px; font: inherit; resize: vertical; }
+.tutor-snippet { margin: 10px 0 0; background: #fff; border: 1px solid #dfe3e6; border-left: 4px solid var(--primary, #0374b5); border-radius: 4px; padding: 10px 12px; }
+.tutor-snippet blockquote { margin: 0; font-size: .95rem; white-space: pre-wrap; color: #2d3b45; }
+.tutor-snippet figcaption { margin-top: 6px; font-size: .8rem; color: #6b7780; }
+.tutor-snippet-open { font-weight: 700; margin-left: 4px; }

@@ -10,6 +10,7 @@ from tutor.models import Assessment
 
 CODE_SHINGLE = 6   # tokens, punctuation included: "def add ( x , items"
 PROSE_SHINGLE = 10  # consecutive words: a real paste of question text
+MIN_QUESTION_WORDS = 4  # a whole question line this long, asked verbatim, is the item itself
 
 
 def _words(text: str) -> list[str]:
@@ -32,10 +33,22 @@ def _code_shingles(text: str) -> set[tuple[str, ...]]:
             if sum(not is_word(t) for t in s) >= 2 and sum(is_word(t) for t in s) >= 2}
 
 
-def _names(message_words: list[str], code: str) -> bool:
-    code_words = _words(code)
-    n = len(code_words)
-    return n > 0 and any(message_words[i:i + n] == code_words for i in range(len(message_words) - n + 1))
+def _contains(message_words: list[str], phrase: list[str]) -> bool:
+    n = len(phrase)
+    return n > 0 and any(message_words[i:i + n] == phrase for i in range(len(message_words) - n + 1))
+
+
+def _question_lines(text: str) -> list[list[str]]:
+    """Each question in the assessment ("2. What is a regression test?"), as words without its number."""
+    lines = []
+    for line in text.splitlines():
+        if "?" in line:
+            words = _words(line)
+            while words and words[0].isdigit():
+                words = words[1:]
+            if len(words) >= MIN_QUESTION_WORDS:
+                lines.append(words)
+    return lines
 
 
 def referenced_assessments(message: str, assessments: list[Assessment]) -> list[Assessment]:
@@ -43,6 +56,7 @@ def referenced_assessments(message: str, assessments: list[Assessment]) -> list[
     prose = _shingles(words, PROSE_SHINGLE)
     code = _code_shingles(message)
     return [a for a in assessments
-            if _names(words, a.code)
+            if _contains(words, _words(a.code))
             or (code and code & _code_shingles(a.text))
-            or (prose and prose & _shingles(_words(a.text), PROSE_SHINGLE))]
+            or (prose and prose & _shingles(_words(a.text), PROSE_SHINGLE))
+            or any(_contains(words, q) for q in _question_lines(a.text))]

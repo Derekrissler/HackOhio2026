@@ -77,6 +77,8 @@ def create_router(resolve_learner: Callable[[Request, str], Learner | None],
             "hint_level": r.hint_level, "next_step": r.next_step, "fallback": result.fallback,
             "citations": [{"id": c.id, "title": c.title, "location": prompts.locator(c), "deep_link": c.deep_link}
                           for c in result.citations],
+            "snippets": [{"chunk_id": s.chunk.id, "title": s.chunk.title, "location": prompts.locator(s.chunk),
+                          "deep_link": s.chunk.deep_link, "text": s.text} for s in result.snippets],
         }
 
     @router.get("/courses/{course_id}/tutor/sessions/{session_id}")
