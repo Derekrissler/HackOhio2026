@@ -1,0 +1,20 @@
+{
+  "course_code": "VIBE 101",
+  "note": "Proposed chapter -> syllabus outcome map, used by outcome_mapper.py for questions that have no instructor-stated outcomes. Every mapping it writes is needs_review=true until an instructor confirms it.",
+  "chapter_outcomes": {
+    "1": ["LO-01"],
+    "2": ["LO-02", "LO-06"],
+    "3": ["LO-03"],
+    "4": ["LO-04"],
+    "5": ["LO-05"],
+    "6": ["LO-07"]
+  },
+  "rationale": {
+    "1": "Ch. 1 'What Is Vibe Coding?' -> LO-01 explain what vibe coding is, where it works and fails",
+    "2": "Ch. 2 'Prompting as Specification' -> LO-02 write precise prompts/specs; LO-06 prompt logs and iteration (2.4, 2.5)",
+    "3": "Ch. 3 'Reading Code You Didn't Write' -> LO-03 read and critique AI-generated code",
+    "4": "Ch. 4 'Tests First, Vibes Second' -> LO-04 test and debug AI-generated code",
+    "5": "Ch. 5 'Security, Privacy, and Ethics' -> LO-05 identify and mitigate security, privacy and licensing risks",
+    "6": "Ch. 6 'Agents, Tools, and Automation' -> LO-07 evaluate when to use AI assistance (6.4 When Not to Use AI)"
+  }
+}

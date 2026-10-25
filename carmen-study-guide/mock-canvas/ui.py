@@ -7,11 +7,15 @@ other fixture string goes through esc().
 import re
 from datetime import datetime
 from html import escape as esc, unescape
+from urllib.parse import quote
 from math import cos, pi, sin
 
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse
 
+import ocr
+import uploads
+from ingest import QUESTION_PART
 from data import assignment, course, load_courses, self_user, submission
 
 router = APIRouter()
@@ -52,6 +56,7 @@ ICONS = {
     "bell": svg('<path d="M8 19V13a6 6 0 0 1 12 0v6l2 2H6z"/><path d="M12 23h4"/>', 18),
     "export": svg('<path d="M14 4v13M9 9l5-5 5 5M5 17v6h18v-6"/>', 18),
     "check": svg('<path d="M6 14l5 5 11-11"/>', 18),
+    "target": svg('<circle cx="14" cy="14" r="9"/><circle cx="14" cy="14" r="4.5"/><circle cx="14" cy="14" r="0.8"/>', 16),
 }
 ITEM_ICON = {"Assignment": "assignment", "Page": "page", "File": "file", "ExternalUrl": "link",
              "Discussion": "discussion", "Quiz": "assignment"}
@@ -171,7 +176,7 @@ COURSE_NAV = [("home", "Home", ""), ("announcements", "Announcements", "/announc
               ("grades", "Grades", "/grades"), ("people", "People", "/users"), ("pages", "Pages", "/pages"),
               ("textbook", "Textbook", "/textbook"),
               ("files", "Files", "/files"), ("syllabus", "Syllabus", "/assignments/syllabus"),
-              ("modules", "Modules", "/modules")]
+              ("modules", "Modules", "/modules"), ("scans", "Scanned Work", "/scans")]
 
 
 def shell(title: str, body: str, *, active_global="courses", head="", scripts="") -> HTMLResponse:
@@ -188,6 +193,11 @@ def shell(title: str, body: str, *, active_global="courses", head="", scripts=""
 </body></html>""")
 
 
+def sync_badge(cid: str) -> str:
+    """Status line for the background database sync that canvas.js starts on every page load."""
+    return f'<span class="sync-status" data-sync="/analytics/sync/{cid}" role="status" aria-live="polite"></span>'
+
+
 def export_button(cid: str, a: dict) -> str:
     """Export button for one assessment, labeled with it ('Export Quiz 1 for analytics')."""
     short = a["name"].split(":")[0].strip()
@@ -200,6 +210,15 @@ def export_button(cid: str, a: dict) -> str:
   </div>"""
 
 
+def goal_button(cid, aid, code: str, label: str = "Analyze goals") -> str:
+    """Ask Claude which learning outcomes this question assesses, and how much (claude_mapper.py)."""
+    what = "this assignment" if code == "WHOLE" else code
+    return f"""<span class="goal-wrap">
+  <button type="button" class="goal-btn" data-goals="/analytics/outcomes/{cid}/assignments/{aid}/questions/{quote(code)}"
+          title="Ask Claude which learning outcomes {esc(what)} assesses, and how much">{ICONS["target"]}<span>{esc(label)}</span></button>
+  <div class="goal-panel" role="status" hidden></div></span>"""
+
+
 def course_page(c: dict, section: str, crumbs: list[str], main: str, right: str = "",
                 export_for: dict | None = None, **kw) -> HTMLResponse:
     cid = str(c["course"]["id"])
@@ -210,7 +229,7 @@ def course_page(c: dict, section: str, crumbs: list[str], main: str, right: str 
     body = f"""
 <header class="course-header">
   <button class="hamburger" id="course-nav-toggle" aria-label="Hide course navigation">{ICONS["hamburger"]}</button>
-  <nav class="breadcrumbs">{' <span class="sep">&rsaquo;</span> '.join(trail)}</nav>{export_button(cid, export_for) if export_for else ""}
+  <nav class="breadcrumbs">{' <span class="sep">&rsaquo;</span> '.join(trail)}</nav>{sync_badge(cid)}{export_button(cid, export_for) if export_for else ""}
 </header>
 <div class="course-body{' has-right' if right else ''}">
   <nav class="course-nav" aria-label="Course"><div class="term muted small">{esc(c["course"].get("term", "Autumn 2026"))}</div><ul>{nav}</ul></nav>
@@ -264,7 +283,7 @@ def dashboard():
   <div class="muted small">{esc(c["course"].get("term", "Autumn 2026"))}</div></div>
 </a>""" for cid, c in load_courses().items())
     body = f"""
-<header class="page-header"><h1>Dashboard</h1></header>
+<header class="page-header"><h1>Dashboard</h1>{"".join(sync_badge(cid) for cid in load_courses())}</header>
 <div class="dash"><main class="content"><div class="card-grid">{cards}</div></main>
 <aside class="right-side">{"".join(todo_and_feedback(c) for c in load_courses().values())}</aside></div>"""
     return shell("Dashboard", body, active_global="dashboard")
@@ -463,7 +482,7 @@ def quiz_attempt(c: dict, a: dict) -> str:
               <b>Review note</b><p>{esc(response.get("feedback", "Review the key ideas in your response."))}</p></div>'''
         cards.append(f"""
 <section class="quiz-question-card quiz-review-card" id="question-{number}">
-  <header class="quiz-question-head"><h2>Question {number}</h2><span class="quiz-question-result {"is-correct" if is_correct else "is-incorrect" if correct is not None else "is-reviewed"}">{status} · {fmt_score(earned)} / {fmt_score(possible)} pts</span></header>
+  <header class="quiz-question-head"><h2>Question {number}</h2>{goal_button(cid, a["id"], f"Q{number}")}<span class="quiz-question-result {"is-correct" if is_correct else "is-incorrect" if correct is not None else "is-reviewed"}">{status} · {fmt_score(earned)} / {fmt_score(possible)} pts</span></header>
   <div class="quiz-question-body"><div class="quiz-question-stem">{question['stem']}</div>{answer_review}</div>
 </section>""")
         nav.append(f'<a class="quiz-number" href="#question-{number}" aria-label="Go to question {number}">{number}</a>')
@@ -481,7 +500,7 @@ def quiz_attempt(c: dict, a: dict) -> str:
 
 
 @router.get("/courses/{course_id}/assignments/{assignment_id}", response_class=HTMLResponse)
-def assignment_page(course_id: str, assignment_id: str):
+def assignment_page(course_id: str, assignment_id: str, upload: str | None = None):
     c = course(course_id)
     a = assignment(c, assignment_id)
     if is_quiz(a):
@@ -492,7 +511,8 @@ def assignment_page(course_id: str, assignment_id: str):
     assessed = s.get("rubric_assessment", {})
 
     rubric_rows = "".join(f"""
-<tr><td>{esc(r["description"])}</td>
+<tr><td>{esc(r["description"])}{goal_button(course_id, a["id"], r["description"].split(":")[0].strip()[:60])
+                                   if QUESTION_PART.match(r["description"] or "") else ""}</td>
 <td class="rating">{f'<div>{rich(assessed[r["id"]].get("comments", ""))}</div>' if assessed.get(r["id"], {}).get("comments") else '<span class="muted">-</span>'}</td>
 <td class="pts">{f'{fmt_score(assessed[r["id"]].get("points"))} / ' if r["id"] in assessed else ''}{fmt_score(r["points"])} pts</td></tr>"""
                           for r in a.get("rubric", []))
@@ -511,6 +531,7 @@ def assignment_page(course_id: str, assignment_id: str):
   <li><b>Due</b> {fmt_due(a.get("due_at"))}</li>
   <li><b>Points</b> {fmt_score(a.get("points_possible"))}</li>
   <li><b>Submitting</b> {SUBMITTING.get((a.get("submission_types") or ["online_upload"])[0], "a file upload")}</li>
+  <li>{goal_button(course_id, a["id"], "WHOLE", "Analyze goals for the whole assignment")}</li>
 </ul>
 <div class="user-content">{a.get("description", "")}</div>
 {rubric}"""
@@ -529,7 +550,80 @@ def assignment_page(course_id: str, assignment_id: str):
 {f'<ul class="comments">{comments}</ul>' if comments else '<p class="muted">No comments</p>'}"""
     else:
         right = '<h2 class="side-h">Submission</h2><p class="muted">Not submitted yet.</p>'
+    right += upload_box(c, a, upload)
     return course_page(c, "assignments", ["Assignments", a["name"]], main, right, export_for=a)
+
+
+def upload_notice(status: str | None) -> str:
+    if not status:
+        return ""
+    if status == "uploaded":
+        return '<p class="notice ok">File uploaded. It will be read (OCR) and synced to the database in the background.</p>'
+    return f'<p class="notice err">{esc(status.removeprefix("error:"))}</p>'
+
+
+def upload_box(c: dict, a: dict, status: str | None) -> str:
+    """Submit Assignment: the mock student uploads a PDF or image (scanned or typed work)."""
+    cid = c["course"]["id"]
+    files = uploads.for_submission(cid, a["id"], self_user(c)["id"])
+    items = "".join(f'<li>{ICONS["file"]} <a href="/files/{f["id"]}/download" target="_blank">{esc(f["filename"])}</a>'
+                    f'<div class="muted small">{fmt_when(f["uploaded_at"])}</div></li>' for f in files)
+    return f"""
+<h3 class="side-sub">Your files</h3>{upload_notice(status)}
+{f'<ul class="file-list">{items}</ul>' if items else '<p class="muted small">No files submitted.</p>'}
+<form class="upload-form" method="post" action="/courses/{cid}/assignments/{a['id']}/submit" enctype="multipart/form-data">
+  <input type="file" name="file" accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg" required>
+  <button class="btn btn-primary" type="submit">Submit Assignment</button>
+  <div class="muted small">PDF, PNG or JPEG. Scans of handwritten work are read with OCR.</div>
+</form>"""
+
+
+def ocr_details(f: dict) -> str:
+    """OCR result for one uploaded file: summary line plus every extracted line, low-confidence ones highlighted."""
+    try:
+        r = ocr.analyze(uploads.read(f), f["content_type"], f["sha256"])
+    except Exception as e:
+        return f'<span class="err small">OCR failed: {esc(str(e)[:200])}</span>'
+    conf = f'{r["mean_confidence"]:.0f}% confidence' if r["mean_confidence"] is not None else "text layer (no OCR needed)"
+    flags = "".join(f'<span class="flag">{esc(fl.replace("_", " "))}</span>' for fl in r["flags"])
+    pages = "".join(
+        f'<div class="ocr-page"><div class="muted small">Page {pg["page"]} &middot; {esc(pg["method"].replace("_", " "))}</div>'
+        + "".join(f'<div class="ocr-line{" low" if l.get("low_confidence") else ""}"'
+                  f'{f" title=" + chr(34) + "confidence " + str(l["confidence"]) + chr(34) if l["confidence"] is not None else ""}>'
+                  f'{esc(l["text"])}</div>' for l in pg["lines"])
+        + "</div>" for pg in r["pages"])
+    return f"""<details class="ocr"><summary>{r["page_count"]} page(s) &middot; {conf} {flags}</summary>
+<p class="muted small">Highlighted lines are low confidence. On handwriting, Tesseract can also be wrong while
+confident, so check the original.</p>{pages}</details>"""
+
+
+@router.get("/courses/{course_id}/scans", response_class=HTMLResponse)
+def scans_page(course_id: str, upload: str | None = None):
+    """Instructor/TA page: upload scanned paper work for a student, and review what OCR read."""
+    c = course(course_id)
+    students = [u for u in c.get("users", []) if u.get("role", "Student") == "Student"]
+    names = {u["id"]: u["name"] for u in c.get("users", [])}
+    titles = {a["id"]: a["name"] for a in c.get("assignments", [])}
+    student_opts = "".join(f'<option value="{u["id"]}">{esc(u["name"])}</option>' for u in students)
+    assignment_opts = "".join(f'<option value="{a["id"]}">{esc(a["name"])}</option>'
+                              for a in c.get("assignments", []) if not is_quiz(a))
+    rows = "".join(f"""
+<tr><td>{esc(names.get(f["user_id"], str(f["user_id"])))}</td><td>{esc(titles.get(f["assignment_id"], ""))}</td>
+<td><a href="/files/{f["id"]}/download" target="_blank">{esc(f["filename"])}</a>
+<div class="muted small">{"Instructor scan" if f["source"] == "instructor_scan" else "Student upload"} &middot; {fmt_when(f["uploaded_at"])}</div></td>
+<td>{ocr_details(f)}</td></tr>""" for f in reversed(uploads.for_course(course_id)))
+    main = f"""<h1>Scanned Work</h1>{upload_notice(upload)}
+<form class="scan-form card-form" method="post" action="/courses/{c['course']['id']}/scans" enctype="multipart/form-data">
+  <label>Student <select name="user_id" required>{student_opts}</select></label>
+  <label>Assignment <select name="assignment_id" required>{assignment_opts}</select></label>
+  <label>File <input type="file" name="file" accept=".pdf,.png,.jpg,.jpeg" required></label>
+  <button class="btn btn-primary" type="submit">Upload scan</button>
+</form>
+<p class="muted small">Uploads attach to the student's submission. They're read with OCR (typed PDFs use their own
+text) and synced to the database with page and line locations for each piece of text.</p>
+<table class="table"><thead><tr><th>Student</th><th>Assignment</th><th>File</th><th>What OCR read</th></tr></thead>
+<tbody>{rows or '<tr><td colspan="4" class="muted">No submitted files yet.</td></tr>'}</tbody></table>"""
+    return course_page(c, "scans", ["Scanned Work"], main)
 
 
 @router.get("/courses/{course_id}/quizzes/{quiz_id}", response_class=HTMLResponse)

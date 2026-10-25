@@ -122,8 +122,17 @@ body.course-nav-hidden .course-body.has-right { grid-template-columns: minmax(0,
 .content.padded { padding: 24px; }
 .dash { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 32px; padding: 24px; }
 
-/* ---------- analytics export (course header, top right) ---------- */
+/* ---------- database sync status + analytics export (course header, top right) ---------- */
+.sync-status { margin-left: auto; font-size: .85rem; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+.sync-status:empty { display: none; }
+.sync-status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+.sync-status.ok::before { background: var(--success); }
+.sync-status.busy::before { background: #d97900; }
+.sync-status.err { color: #b00; }
+.sync-status.err::before { background: #b00; }
+.sync-status ~ .sync-status { margin-left: 16px; }
 .export-wrap { margin-left: auto; position: relative; }
+.sync-status + .export-wrap { margin-left: 16px; }
 .export-panel {
   position: absolute; right: 0; top: calc(100% + 8px); width: 340px; z-index: 50; background: #fff;
   border: 1px solid var(--border); border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,.15); padding: 14px 16px;
@@ -372,3 +381,41 @@ body.dyslexia-font, body.dyslexia-font button { font-family: "OpenDyslexic", "Co
   .quiz-overview-head, .quiz-attempt-top { align-items: flex-start; flex-direction: column; }
   .quiz-time { align-items: flex-start; }
 }
+
+/* ---------- submission uploads + OCR review ---------- */
+.upload-form { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 0; }
+.upload-form input[type=file] { font-size: .85rem; }
+.file-list { list-style: none; margin: 0; padding: 0; }
+.file-list li { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 4px 0; }
+.file-list li .muted { flex-basis: 100%; padding-left: 24px; }
+.notice { padding: 8px 12px; border-radius: 4px; font-size: .9rem; }
+.notice.ok { background: #e6f4ea; color: var(--success); }
+.notice.err { background: #fdecea; color: #b00; }
+.card-form { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: flex-end; padding: 16px; margin: 0 0 12px;
+  border: 1px solid var(--border); border-radius: 6px; background: var(--panel); }
+.card-form label { display: flex; flex-direction: column; gap: 4px; font-weight: 700; font-size: .9rem; }
+.card-form select, .card-form input { font: inherit; font-weight: 400; padding: 4px; }
+details.ocr summary { cursor: pointer; }
+.ocr-page { margin: 8px 0; padding: 8px 10px; border: 1px solid var(--border-light); border-radius: 4px;
+  font-family: ui-monospace, Menlo, monospace; font-size: .8rem; white-space: pre-wrap; max-height: 320px; overflow: auto; }
+.ocr-line.low { background: #fff3cd; }
+.flag { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 999px; background: #fff3cd; color: #7a5a00; font-size: .75rem; }
+
+/* ---------- "Analyze goals" (Claude outcome weights per question) ---------- */
+.goal-wrap { position: relative; display: inline-block; margin-left: 8px; vertical-align: middle; }
+.goal-btn { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; font: inherit; font-size: .8rem;
+  color: var(--link); background: #fff; border: 1px solid var(--btn-border); border-radius: 12px; cursor: pointer; }
+.quiz-question-head .goal-btn span { color: var(--link); }
+.goal-btn:hover:not(:disabled) { background: #eef6fb; border-color: var(--link); }
+.goal-btn:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.goal-btn:disabled { color: var(--muted); cursor: progress; }
+.goal-panel { position: absolute; z-index: 60; top: calc(100% + 6px); left: 0; width: min(380px, 80vw);
+  padding: 12px 14px; background: #fff; border: 1px solid var(--border); border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.14); text-align: left; white-space: normal; font-size: .9rem; color: var(--text); }
+.goal-list { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 12px; }
+.goal-list p { margin: 4px 0 0; }
+.goal-head { display: flex; justify-content: space-between; align-items: baseline; }
+.goal-pct { font-variant-numeric: tabular-nums; color: var(--muted); }
+.goal-bar { height: 6px; margin: 3px 0 4px; background: var(--border-light); border-radius: 3px; overflow: hidden; }
+.goal-bar i { display: block; height: 100%; background: var(--primary); }
+.goal-panel .err { color: #b00020; }

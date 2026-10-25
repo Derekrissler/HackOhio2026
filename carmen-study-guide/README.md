@@ -36,12 +36,45 @@ those chapters. Each document records why it was included. It writes one JSON bu
 `mock-canvas/exports/<export_id>/bundle.json`, with the original files in `files/`, for the analytics pipeline. The format is in
 [mock-canvas/INGEST_CONTRACT.md](mock-canvas/INGEST_CONTRACT.md).
 
-When `SUPABASE_SERVICE_ROLE_KEY` is set in `mock-canvas/.env`, the button also stores the export in the team's
+**The database mirrors the course automatically.** Every course page and the dashboard start a background
+sync of the whole course into the team's Supabase Postgres when they open or reload (`sync.py`). The header shows
+"Syncing… / Database up to date". Nothing is written if nothing changed since the last sync. The sync covers every
+student's grades, quiz answers per question, feedback, questions, the protected quiz answer keys, outcomes, and
+materials. Rows for content deleted from the course aren't removed.
+
+**Analytics-ready data (LERs).** After storing, every sync also does two things:
+- `outcome_mapper.py` proposes outcome mappings for questions with none. It uses the chapter rule in
+  `mappings/vibe101.json` and marks every mapping `needs_review`. Instructor-stated mappings are never touched.
+- `ler_builder.py` writes one Learning Evidence Record per graded response, linked to its outcomes and
+  evidence. LERs are append-only: changed data adds a revision, and the database supersedes the old one.
+
+`analytics_bridge.py` loads the current LERs as the envelopes Richard's analytics expects
+(`apps/api/app/analytics`). Run `.venv/bin/python analytics_bridge.py "VIBE 101"` to put the real data through
+his adapter, features and statistics. Error metrics stay empty until there's an agreed error taxonomy and
+classifier.
+
+**Submitted work and OCR.** Assignment pages have a **Submit Assignment** upload (PDF, PNG or JPEG), and
+**Scanned Work** in the course menu lets an instructor upload a scan for any student and review what OCR read.
+Text comes from the PDF's own text layer when it has one, and otherwise from Tesseract (`brew install tesseract`).
+Each line keeps its page, bounding box and confidence, and pages with shaky text are flagged for review. The sync
+stores originals in the private `source-files` bucket, each line as an evidence reference, and the text as the
+student's response. To make fictional test scans, run `.venv/bin/python make_sample_scans.py --upload`.
+
+When `SUPABASE_SERVICE_ROLE_KEY` (or `SUPABASE_SECRET_KEY`) is set in `mock-canvas/.env`, the button also stores the export in the team's
 Supabase Postgres (`db_store.py`), and re-clicking is safe. It writes the course, learners, outcomes, documents
 (with the originals uploaded to the `course-materials` bucket), chunks, assessments, questions, attempts,
 responses, evidence and feedback, and logs an `ingestion_jobs` row. To store an existing export by hand, run
 `.venv/bin/python db_store.py exports/<export_id>/bundle.json`. To run the same export against real Canvas:
 `CANVAS_BASE_URL=https://osu.instructure.com CANVAS_TOKEN=<token> .venv/bin/python ingest.py <course_id>`.
+
+**Analyze goals (Claude).** Every quiz question, exam part (FRQ / Part rows of the rubric) and assignment has an
+**Analyze goals** button. It sends Claude (`claude-opus-5-5`) the syllabus outcomes, all released course material
+in Supabase and the question, and gets back which outcomes the question assesses with a share for each (adding to
+100%), a reason and the material it relied on. The shares are saved as `question_outcomes` weights (provenance `ai`,
+`needs_review` true) and the LERs are rebuilt, so the analytics use them right away. Instructor-stated or reviewed
+mappings are never changed, and the automatic chapter rule never overwrites Claude's. Needs `ANTHROPIC_API_KEY` in
+`mock-canvas/.env`; a click costs a few cents. From the terminal:
+`.venv/bin/python claude_mapper.py "VIBE 101" 2201 "FRQ 1 (a)"`.
 
 ## Where things live
 | File | Job |

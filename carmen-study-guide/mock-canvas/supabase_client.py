@@ -40,6 +40,20 @@ def user_client(access_token: str | None = None) -> Client:
     return client
 
 
+def select_all(db: Client, table: str, columns: str, **eq) -> list[dict]:
+    """Every matching row, paging past PostgREST's 1000-row default limit."""
+    out, start = [], 0
+    while True:
+        q = db.table(table).select(columns)
+        for k, v in eq.items():
+            q = q.eq(k, v)
+        page = q.range(start, start + 999).execute().data
+        out += page
+        if len(page) < 1000:
+            return out
+        start += 1000
+
+
 @lru_cache(maxsize=1)
 def service_client() -> Client:
     """Service role: bypasses RLS. Server-side writes only."""

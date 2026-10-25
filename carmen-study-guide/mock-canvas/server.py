@@ -9,16 +9,20 @@ Run (from this folder):  .venv/bin/uvicorn server:app --reload --port 8001
 """
 
 import re
+from datetime import datetime, timedelta
 from pathlib import Path
 from urllib.parse import urlencode
 
-from fastapi import FastAPI, HTTPException, Request, Response
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi import FastAPI, File, Form, HTTPException, Request, Response, UploadFile
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
+import claude_mapper
 import db_store
 import ingest
+import sync
 import ui
+import uploads
 from data import assignment, course, load_courses, self_user, submission
 
 HERE = Path(__file__).resolve().parent
@@ -171,6 +175,10 @@ def list_files(course_id: str, request: Request):
 @app.get("/files/{file_id}/download")
 @app.get("/courses/{course_id}/files/{file_id}")
 def download_file(file_id: int, course_id: str | None = None):
+    row = uploads.get(file_id)  # a submitted file (no auth in the mock; real Canvas checks access)
+    if row:
+        return Response(uploads.read(row), media_type=row["content_type"],
+                        headers={"Content-Disposition": f'inline; filename="{row["filename"]}"'})
     for c in load_courses().values():
         for f in c.get("files", []):
             if f["id"] == file_id:
@@ -187,8 +195,9 @@ def group_ids(c: dict) -> dict[str, int]:
 
 
 def assignment_json(c: dict, a: dict) -> dict:
+    quiz = {"quiz_id": a["id"], "is_quiz_assignment": True} if ui.is_quiz(a) else {}
     return {**a, "assignment_group_id": group_ids(c)[a.get("assignment_group", "Assignments")],
-            "course_id": c["course"]["id"], "published": True}
+            "course_id": c["course"]["id"], "published": True, **quiz}
 
 
 @app.get("/api/v1/courses/{course_id}/users")
@@ -230,6 +239,11 @@ def submission_json(c: dict, a: dict, request: Request) -> dict:
     sub = {"id": int(f"{a['id']}{sub['user_id']}"), "assignment_id": a["id"], "attempt": 1 if sub.get("submitted_at") else None,
            "submission_type": (a.get("submission_types") or [None])[0], "body": None, "attachments": [],
            "submission_comments": [], "rubric_assessment": {}, **sub}
+    files = uploads.for_submission(c["course"]["id"], a["id"], sub["user_id"])
+    if files:
+        sub["attachments"] = [uploads.attachment_json(base(request), f) for f in files]
+        sub["attempt"] = sub["attempt"] or 1
+        sub["submitted_at"] = sub.get("submitted_at") or files[-1]["uploaded_at"]
     includes = request.query_params.getlist("include[]")
     if "submission_comments" not in includes:
         sub.pop("submission_comments")
@@ -240,18 +254,85 @@ def submission_json(c: dict, a: dict, request: Request) -> dict:
     return sub
 
 
+def quiz_submission_json(a: dict, attempt: dict, request: Request) -> dict:
+    """A quiz attempt in Canvas's shape: per-question answers live in submission_history[].submission_data."""
+    sub = {"id": int(f"{a['id']}{attempt['user_id']}"), "assignment_id": a["id"], "user_id": attempt["user_id"],
+           "attempt": 1, "submission_type": "online_quiz", "workflow_state": attempt.get("workflow_state"),
+           "score": attempt.get("score"), "submitted_at": attempt.get("submitted_at"), "graded_at": None,
+           "late": False, "missing": False, "body": None, "attachments": [],
+           "submission_comments": [], "rubric_assessment": {}}
+    if "submission_history" in request.query_params.getlist("include[]"):
+        data = []
+        for qid, r in sorted(attempt.get("responses", {}).items(), key=lambda kv: int(kv[0])):
+            earned, possible = r.get("earned"), r.get("possible")
+            data.append({"question_id": int(qid), "answer_id": r.get("selected_index"), "text": r.get("text"),
+                         "points": earned, "correct": True if earned == possible else ("partial" if earned else False),
+                         "more_comments": r.get("feedback")})
+        sub["submission_history"] = [{"attempt": 1, "submission_data": data}]
+    return sub
+
+
+def synthetic_submit_time(a: dict, g: dict) -> str | None:
+    if g.get("missing") or not a.get("due_at"):
+        return None
+    due = datetime.fromisoformat(a["due_at"].replace("Z", "+00:00"))
+    return (due + timedelta(days=1) if g.get("late") else due).isoformat()
+
+
+def grade_submission_json(c: dict, a: dict, user_id: str, g: dict, request: Request) -> dict:
+    """Another student's submission, built from the gradebook (no comments or rubric in the fixture)."""
+    files = uploads.for_submission(c["course"]["id"], a["id"], user_id)
+    return {"id": int(f"{a['id']}{user_id}"), "assignment_id": a["id"], "user_id": int(user_id),
+            "attempt": 1 if files or not g.get("missing") else None,
+            "submission_type": (a.get("submission_types") or [None])[0],
+            "workflow_state": g.get("status"), "score": g.get("score"),
+            # The gradebook fixture has no submit time; mock it as the due date (synthetic) so the
+            # analytics have a real timestamp. A late submission is placed one day after the deadline.
+            "submitted_at": files[-1]["uploaded_at"] if files else synthetic_submit_time(a, g),
+            "graded_at": g.get("graded_at"), "late": g.get("late", False), "missing": g.get("missing", False),
+            "body": None, "attachments": [uploads.attachment_json(base(request), f) for f in files],
+            "submission_comments": [], "rubric_assessment": {}}
+
+
 @app.get("/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions")
 def list_submissions(course_id: str, assignment_id: str, request: Request):
+    """Instructor view: every student's submission for one assignment."""
     c = course(course_id)
     a = assignment(c, assignment_id)
-    if "online_quiz" in (a.get("submission_types") or []):
+    if ui.is_quiz(a):
         attempts = c.get("quiz_results", {}).get(str(a["id"]), {}).values()
-        submissions = [{"id": int(f"{a['id']}{attempt['user_id']}"), "assignment_id": a["id"],
-                        "attempt": 1, "submission_type": "online_quiz", "attachments": [],
-                        "submission_comments": [], "rubric_assessment": {}, **attempt}
-                       for attempt in attempts]
-        return paginate(request, submissions)
-    return paginate(request, [submission_json(c, a, request)])
+        return paginate(request, [quiz_submission_json(a, att, request) for att in attempts])
+    subs = [submission_json(c, a, request)]  # the mock student's, with comments and rubric
+    for uid, grades in c.get("student_grades", {}).items():
+        g = next((g for g in grades if g["assignment_id"] == a["id"]), None)
+        if g and int(uid) != subs[0]["user_id"]:
+            subs.append(grade_submission_json(c, a, uid, g, request))
+    return paginate(request, subs)
+
+
+@app.get("/api/v1/courses/{course_id}/quizzes/{quiz_id}/questions")
+def list_quiz_questions(course_id: str, quiz_id: str, request: Request):
+    """Classic Quizzes question list (instructor only in Canvas): correct answers carry weight 100."""
+    c = course(course_id)
+    a = assignment(c, quiz_id)
+    if not ui.is_quiz(a):
+        raise HTTPException(404, "quiz not found")
+    correct: dict[int, int] = {}
+    for att in c.get("quiz_results", {}).get(str(a["id"]), {}).values():
+        for qid, r in att.get("responses", {}).items():
+            if r.get("correct_index") is not None:
+                correct.setdefault(int(qid), r["correct_index"])
+    questions = []
+    for q in ui.quiz_questions(a.get("description", ""), a.get("points_possible") or 0):
+        n = q["number"]
+        questions.append({
+            "id": n, "quiz_id": a["id"], "position": n, "question_name": f"Question {n}",
+            "question_text": q["stem"], "points_possible": q["points"],
+            "question_type": "multiple_choice_question" if q["options"] else "essay_question",
+            "answers": [{"id": i, "text": ingest.text_of(opt), "weight": 100 if correct.get(n) == i else 0}
+                        for i, opt in enumerate(q["options"])],
+        })
+    return paginate(request, questions)
 
 
 @app.get("/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/self")
@@ -291,6 +372,64 @@ def analytics_export(course_id: str, request: Request):
     """Whole-course export (no button; for scripts)."""
     course(course_id)
     return run_export(request, course_id)
+
+
+# ---------------------------------------------------------------- submission uploads (uploads.py)
+
+async def _save_upload(course_id: str, assignment_id: str, user_id: int, file: UploadFile, source: str) -> str:
+    try:
+        uploads.add(course_id, assignment_id, user_id, file.filename, file.content_type or "", await file.read(), source)
+        return "uploaded"
+    except ValueError as e:
+        return f"error:{e}"
+
+
+@app.post("/courses/{course_id}/assignments/{assignment_id}/submit")
+async def submit_assignment(course_id: str, assignment_id: str, file: UploadFile = File(...)):
+    """Student 'Submit Assignment': a PDF or image, submitted as the mock student."""
+    c = course(course_id)
+    assignment(c, assignment_id)
+    result = await _save_upload(course_id, assignment_id, self_user(c)["id"], file, "student_submission")
+    return RedirectResponse(f"/courses/{course_id}/assignments/{assignment_id}?upload={result}", status_code=303)
+
+
+@app.post("/courses/{course_id}/scans")
+async def upload_scan(course_id: str, user_id: int = Form(...), assignment_id: str = Form(...),
+                      file: UploadFile = File(...)):
+    """Instructor/TA upload of a scanned paper submission on a student's behalf."""
+    c = course(course_id)
+    assignment(c, assignment_id)
+    if not any(u["id"] == user_id and u.get("role", "Student") == "Student" for u in c.get("users", [])):
+        raise HTTPException(400, "unknown student")
+    result = await _save_upload(course_id, assignment_id, user_id, file, "instructor_scan")
+    return RedirectResponse(f"/courses/{course_id}/scans?upload={result}", status_code=303)
+
+
+# ---------------------------------------------------------------- database sync (sync.py)
+
+@app.post("/analytics/sync/{course_id}")
+def sync_course(course_id: str, request: Request):
+    """Called by every course page on load: mirror the whole course into Supabase in the background."""
+    course(course_id)
+    return sync.request_sync(base(request), course_id)
+
+
+@app.get("/analytics/sync/{course_id}")
+def sync_status(course_id: str):
+    return sync.status(course_id)
+
+
+# ---------------------------------------------------------------- outcome weights (claude_mapper.py)
+
+@app.post("/analytics/outcomes/{course_id}/assignments/{assignment_id}/questions/{code:path}")
+def analyze_question_goals(course_id: str, assignment_id: str, code: str):
+    """The 'Analyze goals' button: Claude proposes which outcomes this question assesses, with weights."""
+    c = course(course_id)
+    assignment(c, assignment_id)
+    try:
+        return claude_mapper.map_question(c["course"]["course_code"], assignment_id, code)
+    except claude_mapper.MappingError as e:
+        return JSONResponse({"status": "error", "message": str(e)}, status_code=422)
 
 
 @app.get("/analytics/exports/{export_id}/bundle.json")

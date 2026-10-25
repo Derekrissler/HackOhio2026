@@ -1,5 +1,6 @@
 """
 Store an ingestion bundle (ingest.py) in the team's Supabase Postgres, using the service role.
+sync.py calls this on every course page load so the database mirrors the mock Carmen site.
 
 Writes source facts only: course, pseudonymous learners, outcomes, documents (originals uploaded to the
 private 'course-materials' bucket), resource chunks, assessments, questions, attempts, responses,
@@ -74,6 +75,19 @@ class Store:
             out += self.db.table(table).upsert(rows[i:i + BATCH], on_conflict=on_conflict).execute().data
         self._count(table, len(out))
         return out
+
+    def select_all(self, table: str, columns: str, **eq) -> list[dict]:
+        """Every matching row, paging past PostgREST's 1000-row default limit."""
+        out, start = [], 0
+        while True:
+            q = self.db.table(table).select(columns)
+            for k, v in eq.items():
+                q = q.eq(k, v)
+            page = q.range(start, start + 999).execute().data
+            out += page
+            if len(page) < 1000:
+                return out
+            start += 1000
 
     def insert(self, table: str, rows: list[dict]) -> list[dict]:
         out = []
@@ -184,7 +198,8 @@ class Store:
             rows.append({"course_id": self.cid, "assessment_id": aid, "code": WHOLE, "position": 0,
                          "text": a["description_text"], "question_type": "assignment_level",
                          "points_possible": a["points_possible"], "canvas_id": str(a["canvas_id"]),
-                         "locator": {"canvas_api": a["source_ref"]["api_path"], "scope": "assessment"}})
+                         "locator": {"canvas_api": a["source_ref"]["api_path"], "scope": "assessment",
+                                     "chapters_covered": a.get("chapters_covered", [])}})
             for i, r in enumerate((r for r in a["rubric"] if r["kind"] == "question_part"), 1):
                 rows.append({"course_id": self.cid, "assessment_id": aid,
                              "code": r["description"].split(":")[0].strip()[:60], "position": i,
@@ -192,9 +207,23 @@ class Store:
                              "points_possible": r["points"], "canvas_id": r["criterion_id"],
                              "locator": {"canvas_api": a["source_ref"]["api_path"],
                                          "rubric_criterion_id": r["criterion_id"]}})
+            for q in a.get("questions", []):  # quiz questions (question text + choices; no answers)
+                rows.append({"course_id": self.cid, "assessment_id": aid, "code": q["question_id"],
+                             "position": q["position"], "text": q["text"], "question_type": q["type"],
+                             "points_possible": q["points_possible"], "canvas_id": f"quiz_question:{q['canvas_id']}",
+                             "locator": {"canvas_api": f"/courses/{self.b['course']['canvas_id']}/quizzes/"
+                                                       f"{a['canvas_id']}/questions", "choices": q["choices"]}})
         saved = self.upsert("questions", rows, "assessment_id,code")
         self.question = {(r["assessment_id"], r["canvas_id"] if r["code"] != WHOLE else WHOLE): r["id"]
                          for r in saved}
+        self.qcode = {(r["assessment_id"], r["code"]): r["id"] for r in saved}
+
+        # Quiz answer keys go only to the protected table (RLS: staff only, never student retrieval).
+        keys = [{"question_id": self.qcode[(self.assessment[k["assessment_id"]], k["question_id"])],
+                 "course_id": self.cid, "answer": k["answer"]}
+                for k in self.b.get("answer_keys", [])
+                if (self.assessment.get(k["assessment_id"]), k["question_id"]) in self.qcode]
+        self.upsert("question_answer_keys", keys, "question_id")
 
         # Outcomes the instructor stated in the assignment text apply to its assignment-level question.
         links = [{"question_id": self.question[(self.assessment[a["assessment_id"]], WHOLE)],
@@ -223,12 +252,17 @@ class Store:
             # evidence_ref_id is export-local; leave it out so re-exports don't look like grade changes
             rubric = [{k: v for k, v in r.items() if k != "evidence_ref_id"} for r in s["rubric_assessment"]]
             base = {"course_id": self.cid, "attempt_id": att, "learner_id": lid}
+            text = s["response"]["body_text"] or s["response"].get("extracted_text")
+            ocr = [{"document_id": x["document_id"], "page": pg["page"], "method": pg["method"],
+                    "mean_confidence": pg["mean_confidence"], "flags": pg["flags"]}
+                   for x in self.b.get("extractions", []) if x["submission_id"] == s["submission_id"]
+                   for pg in x["pages"]]
             responses.append({**base, "question_id": self.question[(aid, WHOLE)],
-                              "response_text": s["response"]["body_text"], "points_earned": s["score"],
+                              "response_text": text, "points_earned": s["score"],
                               "rubric": rubric,
-                              "content_hash": _hash(s["response"]["body_text"], s["score"], rubric),
+                              "content_hash": _hash(text, s["score"], rubric),
                               "locator": {"canvas_api": s["source_ref"]["api_path"],
-                                          "attachments": s["response"]["attachments"]}})
+                                          "attachments": s["response"]["attachments"], "extraction": ocr}})
             for r in rubric:
                 qid = self.question.get((aid, r["criterion_id"]))
                 if qid and r["kind"] == "question_part":
@@ -236,6 +270,17 @@ class Store:
                                       "points_earned": r["points"], "rubric": [r], "content_hash": _hash(None, r["points"], [r]),
                                       "locator": {"canvas_api": s["source_ref"]["api_path"],
                                                   "rubric_criterion_id": r["criterion_id"]}})
+            for qr in s.get("question_responses", []):
+                qid = self.qcode.get((aid, qr["question_id"]))
+                if not qid:
+                    continue
+                scoring = [{"kind": "auto_graded", "correct": qr["correct"], "points": qr["points"],
+                            "points_possible": qr["points_possible"], "answer_choice_id": qr["answer_choice_id"]}]
+                responses.append({**base, "question_id": qid, "response_text": qr["response_text"],
+                                  "points_earned": qr["points"], "rubric": scoring,
+                                  "content_hash": _hash(qr["response_text"], qr["points"], scoring),
+                                  "locator": {"canvas_api": s["source_ref"]["api_path"],
+                                              "quiz_question_id": qr["question_id"]}})
         saved = self.upsert("responses", responses, "attempt_id,question_id")
         self.response = {(r["attempt_id"], r["question_id"]): r["id"] for r in saved}
         self.attempt = attempt
@@ -243,9 +288,8 @@ class Store:
     def feedback(self):
         """One evidence ref + one feedback row per grader comment / rubric note; existing ones are kept."""
         evidence = {e["id"]: e for e in self.b["evidence_refs"]}
-        existing = {(r["canvas_ref"], r["content_hash"]) for r in self.db.table("evidence_refs")
-                    .select("canvas_ref,content_hash").eq("course_id", self.cid).eq("source_type", "canvas_api")
-                    .execute().data}
+        existing = {(r["canvas_ref"], r["content_hash"])
+                    for r in self.select_all("evidence_refs", "canvas_ref,content_hash", course_id=self.cid)}
         pending = []  # (evidence row, feedback row without evidence id)
         for s in self.b["submissions"]:
             aid, lid = self.assessment[s["assessment_id"]], self.learner[s["student_id"]]
@@ -259,6 +303,11 @@ class Store:
                     part = self.question.get((aid, r["criterion_id"])) if r["kind"] == "question_part" else None
                     items.append(({"text": r["comments"], "evidence_ref_id": r["evidence_ref_id"], "created_at": None},
                                   "rubric_note", self.response.get((att, part)) if part else whole))
+            for qr in s.get("question_responses", []):
+                rid = self.response.get((att, self.qcode.get((aid, qr["question_id"]))))
+                if qr["evidence_ref_id"] and rid:
+                    items.append(({"text": qr["comments"], "evidence_ref_id": qr["evidence_ref_id"], "created_at": None},
+                                  "comment", rid))
             for f, kind, response_id in items:
                 ev = evidence[f["evidence_ref_id"]]
                 ref = f"{ev['api_path']}#" + "&".join(f"{k}={v}" for k, v in ev["canvas_ids"].items())
@@ -276,10 +325,60 @@ class Store:
         self.insert("feedback", with_dates)  # separate batches: every row in a batch needs the same columns
         self.insert("feedback", without)
 
+    def scans(self):
+        """Submitted files: original to the private source-files bucket, one evidence ref per extracted line."""
+        files = self.b.get("submission_files", [])
+        if not files:
+            return
+        rows = {}
+        for f in files:
+            sha = _hex(f["sha256"])
+            ext = Path(f["stored_path"]).suffix
+            path = f"{self.course_slug}/submissions/{sha}{ext}"
+            self.db.storage.from_("source-files").upload(path, (self.dir / f["stored_path"]).read_bytes(),
+                                                         {"content-type": f["content_type"] or "application/octet-stream",
+                                                          "upsert": "true"})
+            self._count("files_uploaded", 1)
+            extraction = next((x for x in self.b.get("extractions", []) if x["document_id"] == f["document_id"]), {})
+            rows[sha] = {"course_id": self.cid, "title": f"{f['filename']} ({f['assessment_id']})",
+                         "doc_type": "submission_scan", "storage_bucket": "source-files", "storage_path": path,
+                         "sha256": sha, "mime_type": f["content_type"], "page_count": extraction.get("page_count"),
+                         "canvas_id": f"canvas_attachment:{f['canvas_file_id']}",
+                         "learner_id": self.learner[f["student_id"]],
+                         "publication_status": "restricted", "rights_cleared": False}
+        saved = {r["sha256"]: r["id"] for r in self.upsert("documents", list(rows.values()), "course_id,sha256")}
+
+        existing = {(r["canvas_ref"], r["content_hash"])
+                    for r in self.select_all("evidence_refs", "canvas_ref,content_hash", course_id=self.cid)}
+        refs = []
+        for x in self.b.get("extractions", []):
+            f = next(f for f in files if f["document_id"] == x["document_id"])
+            sha = _hex(f["sha256"])
+            source = "image" if (f["content_type"] or "").startswith("image/") else "pdf"
+            for pg in x["pages"]:
+                for i, line in enumerate(pg["lines"], 1):
+                    ref, h = f"{x['extractor_version']}:{sha}#page={pg['page']}&line={i}", _hash(line["text"])
+                    if (ref, h) in existing:
+                        continue
+                    refs.append({"course_id": self.cid, "learner_id": self.learner[f["student_id"]],
+                                 "source_type": source, "document_id": saved[sha], "canvas_ref": ref,
+                                 "page": pg["page"], "bbox_norm": line["bbox_norm"], "excerpt": line["text"],
+                                 "content_hash": h})
+        self.insert("evidence_refs", refs)
+
     # ---------------------------------------------------------------- run
 
-    def run(self) -> dict:
+    def unchanged(self) -> bool:
+        """True when the last successful whole-course sync stored exactly this content."""
+        jobs = self.db.table("ingestion_jobs").select("input").eq("course_id", self.cid).eq("kind", "ingest") \
+            .eq("status", "succeeded").order("created_at", desc=True).limit(25).execute().data
+        last = next((j for j in jobs if (j["input"].get("scope") or {}).get("level") == "course"), None)
+        return bool(last) and last["input"].get("content_hash") == self.b["export"]["content_hash"]
+
+    def run(self, skip_if_unchanged: bool = False) -> dict:
         self.course()
+        if skip_if_unchanged and self.b.get("scope", {}).get("level") == "course" and self.unchanged():
+            return {"status": "unchanged", "course_db_id": self.cid}
         exp = self.b["export"]
         job = self.db.table("ingestion_jobs").insert({
             "course_id": self.cid, "source": self.source, "kind": "ingest", "status": "running", "attempts": 1,
@@ -289,7 +388,7 @@ class Store:
         }).execute().data[0]
         try:
             for step in (self.learners, self.documents, self.chunks, self.outcomes, self.assessments,
-                         self.questions, self.submissions, self.feedback):
+                         self.questions, self.submissions, self.feedback, self.scans):
                 step()
         except Exception as e:
             self.db.table("ingestion_jobs").update({"status": "failed", "error": str(e)[:2000],
@@ -304,11 +403,11 @@ class Store:
         return {"status": "stored", "job_id": job["id"], "course_db_id": self.cid, "rows_written": self.counts}
 
 
-def store_export(bundle: dict, export_dir: Path) -> dict:
+def store_export(bundle: dict, export_dir: Path, skip_if_unchanged: bool = False) -> dict:
     reason = configured()
     if reason:
         return {"status": "skipped", "reason": reason}
-    return Store(bundle, export_dir).run()
+    return Store(bundle, export_dir).run(skip_if_unchanged)
 
 
 if __name__ == "__main__":

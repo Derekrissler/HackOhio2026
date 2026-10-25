@@ -31,9 +31,12 @@ import requests
 from dotenv import load_dotenv
 from pypdf import PdfReader
 
+import ocr
+
 HERE = Path(__file__).resolve().parent
 EXPORTS = HERE / "exports"
-SCHEMA_VERSION = "ingest-1.1"
+SCHEMA_VERSION = "ingest-1.4"
+QUESTION_PART = re.compile(r"(FRQ|Part|Question|Q)\s*[\dIVX]")  # rubric rows that are exam questions
 ADAPTER = "canvas_rest_v1"
 PDF_EXTRACTOR = "pypdf-text-1"
 HTML_EXTRACTOR = "html-sections-1"
@@ -135,6 +138,9 @@ class Exporter:
         self.files_dir = out_dir / "files"
         self.evidence: list[dict] = []
         self.warnings: list[str] = []
+        self.answer_keys: list[dict] = []  # instructor-only; never part of student-visible data
+        self.submission_files: list[dict] = []  # student work: instructor + owner only, never indexed
+        self.extractions: list[dict] = []
 
     def evidence_ref(self, source_type: str, api_path: str, excerpt: str, **ids) -> str:
         ref_id = f"EV-{len(self.evidence) + 1:04d}"
@@ -206,10 +212,8 @@ class Exporter:
                 include[key].append(reason)
 
         ref = {"kind": "assignment", "canvas_id": a["canvas_id"]}
-        home = [m for m in modules if any(it["ref"] == ref for it in m["items"])][:1]
-        text = " ".join([a["name"], a["description_text"] or ""] +
-                        [it["title"] for m in home for it in m["items"] if it["type"] == "SubHeader"])
-        chapters = chapter_refs(text)
+        home = home_module(a, modules)
+        chapters = chapter_scope(a, home)
 
         for m in home:
             for it in m["items"]:
@@ -340,7 +344,7 @@ class Exporter:
 
     # ---- assessments + submissions
 
-    def assessments(self, outcomes: list[dict], where: dict) -> list[dict]:
+    def assessments(self, outcomes: list[dict], where: dict, modules: list[dict] | None = None) -> list[dict]:
         groups = {g["id"]: g for g in self.cv.get_all(f"/courses/{self.cid}/assignment_groups", optional=True) or []}
         out = []
         source = [self.cv.get_one(f"/courses/{self.cid}/assignments/{self.only}")] if self.only else \
@@ -359,13 +363,40 @@ class Exporter:
                 "description_html": a.get("description"), "description_text": desc_text or None,
                 "rubric": [{"criterion_id": r["id"], "description": r.get("description"),
                             "long_description": r.get("long_description"), "points": r.get("points"),
-                            "kind": "question_part" if re.match(r"(FRQ|Part|Question|Q)\s*[\dIVX]", r.get("description") or "")
+                            "kind": "question_part" if QUESTION_PART.match(r.get("description") or "")
                             else "rubric_dimension"}
                            for r in a.get("rubric") or []],
                 "stated_outcome_ids": stated_outcomes(desc_text, outcomes),
+                "questions": self.quiz_questions(a),
+                "chapters_covered": chapter_scope({"name": a["name"], "description_text": desc_text},
+                                                  home_module({"canvas_id": a["id"]}, modules or [])),
                 "publication_status": published(a), "access_roles": ["student", "instructor"],
                 "source_ref": {"api_path": f"/courses/{self.cid}/assignments/{a['id']}", "html_url": a.get("html_url")},
             })
+        return out
+
+    def quiz_questions(self, a: dict) -> list[dict]:
+        """Classic quiz questions and choices. Correct answers go to self.answer_keys (instructor-only), not here."""
+        if not a.get("quiz_id"):
+            return []
+        path = f"/courses/{self.cid}/quizzes/{a['quiz_id']}/questions"
+        qs = self.cv.get_all(path, optional=True)
+        if qs is None:
+            self.warnings.append(f"{a['name']}: quiz questions need an instructor token; question text and keys skipped.")
+            return []
+        out = []
+        for q in sorted(qs, key=lambda q: q.get("position") or 0):
+            qid = f"Q{q.get('position') or q['id']}"
+            choices = [{"choice_id": ans["id"], "text": text_of(ans.get("text") or ans.get("html"))}
+                       for ans in q.get("answers") or []]
+            correct = [text_of(ans.get("text") or ans.get("html")) for ans in q.get("answers") or []
+                       if (ans.get("weight") or 0) >= 100]
+            if correct:
+                self.answer_keys.append({"assessment_id": f"A-{a['id']}", "question_id": qid, "answer": correct[0],
+                                         "access_roles": ["instructor"], "source_ref": {"api_path": path}})
+            out.append({"question_id": qid, "canvas_id": q["id"], "position": q.get("position"),
+                        "text": text_of(q.get("question_text")), "type": q.get("question_type"),
+                        "points_possible": q.get("points_possible"), "choices": choices})
         return out
 
     def students(self) -> tuple[list[dict], bool]:
@@ -377,7 +408,7 @@ class Exporter:
 
     def submissions(self, assessments: list[dict], instructor_view: bool) -> list[dict]:
         out = []
-        include = {"include[]": ["submission_comments", "rubric_assessment"]}
+        include = {"include[]": ["submission_comments", "rubric_assessment", "submission_history"]}
         for a in assessments:
             path = f"/courses/{self.cid}/assignments/{a['canvas_id']}/submissions"
             subs = self.cv.get_all(path, include, optional=True) if instructor_view else None
@@ -406,7 +437,27 @@ class Exporter:
                         "text": text, "created_at": cm.get("created_at"),
                         "evidence_ref_id": self.evidence_ref("canvas_submission_comment", path, text,
                                                              submission_id=s.get("id"), comment_id=cm.get("id"))})
+                # Quiz attempts: per-question answers from the latest attempt's submission_data
+                questions = {q["canvas_id"]: q for q in a.get("questions", [])}
+                history = s.get("submission_history") or []
+                question_responses = []
+                for item in (history[-1].get("submission_data") or []) if history else []:
+                    q = questions.get(item.get("question_id"), {})
+                    choice = next((ch["text"] for ch in q.get("choices", []) if ch["choice_id"] == item.get("answer_id")), None)
+                    note = (item.get("more_comments") or "").strip()
+                    question_responses.append({
+                        "question_id": q.get("question_id") or f"Q{item.get('question_id')}",
+                        "answer_choice_id": item.get("answer_id"), "response_text": item.get("text") or choice,
+                        "points": item.get("points"), "points_possible": q.get("points_possible"),
+                        "correct": item.get("correct"), "comments": note or None,
+                        "evidence_ref_id": self.evidence_ref("canvas_quiz_question_comment", path, note,
+                                                             submission_id=s.get("id"),
+                                                             question_id=item.get("question_id")) if note else None})
                 body = text_of(s.get("body"))
+                sub_id = f"SUB-{a['canvas_id']}-{student}"
+                attachments = [self.attachment(att, a, student, sub_id) for att in s.get("attachments") or []]
+                extracted = "\n\n".join(x["text"] for x in self.extractions
+                                         if x["submission_id"] == sub_id and x["text"]) or None
                 out.append({
                     "submission_id": f"SUB-{a['canvas_id']}-{student}", "canvas_id": s.get("id"),
                     "assessment_id": a["assessment_id"], "student_id": student,
@@ -415,14 +466,50 @@ class Exporter:
                     "submitted_at": s.get("submitted_at"), "graded_at": s.get("graded_at"),
                     "score": s.get("score"), "points_possible": a["points_possible"],
                     "response": {"submission_type": s.get("submission_type"), "body_text": body or None,
-                                 "attachments": [{"canvas_file_id": att.get("id"), "filename": att.get("filename"),
-                                                  "content_type": att.get("content-type"), "url": att.get("url"),
-                                                  "access_roles": ["instructor", "owner"]}
-                                                 for att in s.get("attachments") or []]},
-                    "rubric_assessment": rubric, "feedback": feedback,
+                                 "attachments": attachments, "extracted_text": extracted},
+                    "rubric_assessment": rubric, "feedback": feedback, "question_responses": question_responses,
                     "source_ref": {"api_path": path},
                 })
         return out
+
+    def attachment(self, att: dict, a: dict, student: str, sub_id: str) -> dict:
+        """Download one submitted file, keep the original, and extract its text (native text layer or OCR)."""
+        doc_id = f"SUBDOC-{att.get('id')}"
+        ctype = att.get("content-type") or att.get("content_type") or ""
+        ref = {"canvas_file_id": att.get("id"), "document_id": doc_id, "filename": att.get("filename"),
+               "content_type": ctype, "upload_source": att.get("upload_source")}
+        if (att.get("size") or 0) > MAX_FILE_BYTES:
+            self.warnings.append(f"{a['name']}: {att.get('filename')} is too large to analyze.")
+            return ref
+        try:
+            data = self.cv.download(att["url"])
+        except requests.RequestException as e:
+            self.warnings.append(f"{a['name']}: couldn't download {att.get('filename')} ({e}).")
+            return ref
+        ext = Path(att.get("filename") or "").suffix or ".bin"
+        self.files_dir.mkdir(parents=True, exist_ok=True)
+        (self.files_dir / f"{doc_id}{ext}").write_bytes(data)
+        digest = sha256(data)
+        self.submission_files.append({
+            "document_id": doc_id, "canvas_file_id": att.get("id"), "submission_id": sub_id,
+            "assessment_id": a["assessment_id"], "student_id": student, "filename": att.get("filename"),
+            "content_type": ctype, "size_bytes": len(data), "sha256": digest, "stored_path": f"files/{doc_id}{ext}",
+            "upload_source": att.get("upload_source"), "uploaded_at": att.get("created_at"),
+            "access_roles": ["instructor", "owner"]})
+        if ctype == "application/pdf" or ctype.startswith("image/"):
+            try:
+                r = ocr.analyze(data, ctype, digest.split(":", 1)[1])
+            except Exception as e:
+                self.warnings.append(f"{a['name']}: text extraction failed for {att.get('filename')} ({e}).")
+                return ref
+            self.extractions.append({
+                "extraction_id": f"EXT-{att.get('id')}", "document_id": doc_id, "submission_id": sub_id,
+                "assessment_id": a["assessment_id"], "student_id": student, **r,
+                "text": "\n\n".join(pg["text"] for pg in r["pages"] if pg["text"])})
+            if r["flags"]:
+                self.warnings.append(f"{a['name']} ({student}): {att.get('filename')} flagged "
+                                     f"{', '.join(r['flags'])}; check the extracted text against the original.")
+        return ref
 
     # ---- bundle
 
@@ -430,7 +517,7 @@ class Exporter:
         course = self.course()
         outcomes, outcome_source = self.outcomes(course["syllabus_html"])
         modules, where = self.modules()
-        assessments = self.assessments(outcomes, where)
+        assessments = self.assessments(outcomes, where, modules)
         scope = {"level": "course"}
         include = None
         if self.only:
@@ -451,9 +538,10 @@ class Exporter:
 
         if os.environ.get("ANON_SALT", DEV_SALT) == DEV_SALT:
             self.warnings.append("ANON_SALT is not set; pseudonyms use the development salt.")
-        if submissions and not any(s["response"]["body_text"] or s["response"]["attachments"] for s in submissions):
-            self.warnings.append("No submission bodies or attachments: student responses are not available, so "
-                                 "evidence is assignment- and rubric-level (no question-level response text).")
+        if submissions and not any(s["response"]["body_text"] or s["response"]["extracted_text"] or s["question_responses"]
+                                   for s in submissions):
+            self.warnings.append("No submission bodies, attachments or quiz answers: student responses are not available, "
+                                 "so evidence is assignment- and rubric-level (no question-level response text).")
         if not instructor_view:
             self.warnings.append("Token can't list course enrollments; only the token owner's submissions are included.")
 
@@ -469,6 +557,9 @@ class Exporter:
             "students": students,
             "submissions": submissions,
             "evidence_refs": self.evidence,
+            "answer_keys": self.answer_keys,  # instructor-only: never index these for student retrieval
+            "submission_files": self.submission_files,  # student work: instructor + owner only
+            "extractions": self.extractions,
             "documents": documents,
             "resource_chunks": chunks,
             "quality": {
@@ -480,6 +571,11 @@ class Exporter:
                            "graded_submissions": sum(s["score"] is not None for s in submissions),
                            "feedback_comments": sum(len(s["feedback"]) for s in submissions),
                            "rubric_notes": sum(1 for s in submissions for r in s["rubric_assessment"] if r["comments"]),
+                           "quiz_question_responses": sum(len(s["question_responses"]) for s in submissions),
+                           "quiz_answer_keys": len(self.answer_keys),
+                           "submission_files": len(self.submission_files),
+                           "extracted_pages": sum(x["page_count"] for x in self.extractions),
+                           "flagged_extractions": sum(1 for x in self.extractions if x["flags"]),
                            "documents": len(documents), "resource_chunks": len(chunks),
                            "evidence_refs": len(self.evidence)},
             },
@@ -522,16 +618,30 @@ def chapter_refs(text: str) -> list[int]:
     return sorted(found)
 
 
+def home_module(a: dict, modules: list[dict]) -> list[dict]:
+    """The module where an assessment is first placed (its week), as a 0- or 1-item list."""
+    ref = {"kind": "assignment", "canvas_id": a["canvas_id"]}
+    return [m for m in modules if any(it["ref"] == ref for it in m["items"])][:1]
+
+
+def chapter_scope(a: dict, home: list[dict]) -> list[int]:
+    """Chapters an assessment covers, as named in its title, description or its module's headings."""
+    text = " ".join([a["name"], a.get("description_text") or ""] +
+                    [it["title"] for m in home for it in m["items"] if it["type"] == "SubHeader"])
+    return chapter_refs(text)
+
+
 def chapter_number(title: str) -> int | None:
     m = re.search(r"\bChapter\s+(\d+)\b", title or "", flags=re.I)
     return int(m.group(1)) if m else None
 
 
-def export_course(base_url: str, token: str, course_id: str, assessment_id: str | None = None) -> tuple[dict, Path]:
+def export_course(base_url: str, token: str, course_id: str, assessment_id: str | None = None,
+                  root: Path = EXPORTS) -> tuple[dict, Path]:
     """Export a whole course, or (with assessment_id) one assessment and the material related to it."""
     scope = f"-A{assessment_id}" if assessment_id else ""
     export_id = f"EXP-{course_id}{scope}-{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}"
-    out_dir = EXPORTS / export_id
+    out_dir = root / export_id
     out_dir.mkdir(parents=True, exist_ok=True)
     bundle = Exporter(Canvas(base_url, token), course_id, out_dir, assessment_id).run()
     path = out_dir / "bundle.json"
