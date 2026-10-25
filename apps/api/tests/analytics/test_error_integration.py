@@ -238,7 +238,23 @@ def test_tutor_bridge_consumes_fresh_schema_11_and_blocks_stale():
     identity = SimpleNamespace(course_id=str(export.course_id), learner_id=sdk.tables['learners'][0]['id'])
     user = Client(sdk.tables, learner_id=identity.learner_id)
     assert len(bridge.weak_outcomes(sdk, user, identity)) == 2
+    assert len(bridge.weak_outcomes(sdk, user, identity)) == 2  # valid cache reuse
     sdk.tables['responses'][0]['points_earned'] = '0'
+    assert bridge.weak_outcomes(sdk, user, identity) == []
+
+
+def test_tutor_cached_context_is_not_reused_after_rls_visibility_changes():
+    sdk, repo, export = source()
+    bundle = analyze_course(repo, export.course_id)
+    persist_analysis(repo, bundle, exclusive_course_access=True)
+    path = Path(__file__).resolve().parents[4] / 'carmen-study-guide/mock-canvas/tutor/analytics_bridge.py'
+    spec = importlib.util.spec_from_file_location('visibility_tested_bridge', path)
+    bridge = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(bridge)
+    identity = SimpleNamespace(course_id=str(export.course_id), learner_id=sdk.tables['learners'][0]['id'])
+    user = Client(sdk.tables, learner_id=identity.learner_id)
+    assert len(bridge.weak_outcomes(sdk, user, identity)) == 2
+    user.learner_id = 'unrelated-learner'
     assert bridge.weak_outcomes(sdk, user, identity) == []
 
 

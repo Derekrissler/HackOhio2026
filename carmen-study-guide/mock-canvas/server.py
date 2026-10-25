@@ -17,6 +17,7 @@ from fastapi import FastAPI, File, Form, HTTPException, Request, Response, Uploa
 from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
+import carmen_session
 import claude_mapper
 import db_store
 import ingest
@@ -507,6 +508,8 @@ def export_download(export_id: str):
 
 
 app.include_router(tutor_host.router)
+app.include_router(carmen_session.router)
+app.middleware("http")(carmen_session.require_login)
 
 # HTML pages last, so the API routes above win on any overlap.
 app.include_router(ui.router)

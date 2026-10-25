@@ -17,6 +17,7 @@ import ocr
 import uploads
 from ingest import QUESTION_PART
 from data import assignment, course, load_courses, self_user, submission
+from tutor.auth import demo_enabled
 
 router = APIRouter()
 
@@ -142,7 +143,7 @@ def trays() -> str:
   <div class="tray-profile">
     <div class="avatar-lg">{esc(initials(user["name"]))}</div>
     <h2>{esc(user["name"])}</h2>
-    <button class="btn">Logout</button>
+    <form method="post" action="/logout"><button class="btn" type="submit">Logout</button></form>
   </div>
   <hr>
   <ul class="tray-links">
@@ -220,11 +221,16 @@ def goal_button(cid, aid, code: str, title: str) -> str:
   data-goal="{esc(what)}" data-goal-title="{esc(title)}" title="{tip}" aria-label="{tip}">{ICONS["target"]}</button>"""
 
 
-def hue_dock(cid: str, open_as: str = "") -> str:
+def hue_dock(cid: str, open_as: str = "", assignment: str = "") -> str:
     """Hue, the course assistant (hue.js): a chat box at the side of every course page that shows "Analyze goals"
-    answers and opens into the study tutor window. open_as='expanded' starts it open as that window (the Hue page)."""
+    answers and opens into the study tutor window. open_as='expanded' starts it open as that window (the Hue page);
+    assignment (a canvas id) preselects what the student is working on.
+
+    Students sign in to Carmen before it opens, so Hue has no sign-in of its own: it reuses that course session, and in
+    demo mode (TUTOR_DEMO_AUTO_SIGNIN) asks the server to start it."""
     return f"""
-<aside class="hue" id="hue" data-course="{esc(cid)}" data-open="{esc(open_as)}" aria-label="Hue, course assistant">
+<aside class="hue" id="hue" data-course="{esc(cid)}" data-open="{esc(open_as)}" data-assignment="{esc(str(assignment))}"
+       data-demo="{'1' if demo_enabled() else ''}" aria-label="Hue, course assistant">
   <button type="button" class="hue-launcher" id="hue-launcher" aria-controls="hue-box" aria-expanded="false">
     <span class="hue-avatar" aria-hidden="true"></span>Ask Hue</button>
   <section class="hue-box" id="hue-box" aria-labelledby="hue-title" hidden>
@@ -235,25 +241,19 @@ def hue_dock(cid: str, open_as: str = "") -> str:
       <button type="button" class="hue-icon-btn" id="hue-close" title="Close Hue" aria-label="Close Hue">{ICONS["close"]}</button>
     </header>
     <div class="hue-log" id="hue-log" aria-live="polite">
-      <div class="hue-msg hue-bot"><p>Hi, I'm Hue. Click the target icon on a question to see which learning goals it assesses, or sign in and ask me about the course material.</p></div>
+      <div class="hue-msg hue-bot"><p>Hi, I'm Hue. Ask me about the slides, notes and readings, or click the target icon on a question to see which learning goals it assesses.</p></div>
     </div>
     <div class="hue-tutor">
       <p class="hue-status" id="hue-status" role="status"></p>
-      <button type="button" class="btn hue-when-out hue-when-compact" id="hue-signin">Sign in to chat with Hue</button>
-      <form class="hue-login hue-when-out hue-when-expanded" id="hue-login">
-        <label>Email <input name="email" type="email" autocomplete="username" required></label>
-        <label>Password <input name="password" type="password" autocomplete="current-password" required></label>
-        <button type="submit" class="btn btn-primary">Sign in</button>
-      </form>
-      <div class="hue-context hue-when-in hue-when-expanded">
+      <div class="hue-context hue-when-ready hue-when-expanded">
         <label for="hue-assessment">Working on</label>
         <select id="hue-assessment"><option value="">General study (no assignment)</option></select>
-        <button type="button" class="hue-link" id="hue-signout">Sign out</button>
       </div>
-      <form class="hue-form hue-when-in" id="hue-form">
+      <p class="hue-banner hue-when-ready hue-when-expanded" id="hue-banner"></p>
+      <form class="hue-form" id="hue-form">
         <textarea id="hue-input" rows="2" maxlength="4000" placeholder="Ask Hue about the course…" aria-label="Message Hue"
-                  required></textarea>
-        <button type="submit" class="btn btn-primary">Send</button>
+                  required disabled></textarea>
+        <button type="submit" class="btn btn-primary" disabled>Send</button>
       </form>
     </div>
   </section>
@@ -261,8 +261,8 @@ def hue_dock(cid: str, open_as: str = "") -> str:
 
 
 def course_page(c: dict, section: str, crumbs: list[str], main: str, right: str = "",
-                export_for: dict | None = None, hue: str = "", head: str = "", scripts: str = "",
-                **kw) -> HTMLResponse:
+                export_for: dict | None = None, hue: str = "", hue_assignment: str = "", head: str = "",
+                scripts: str = "", **kw) -> HTMLResponse:
     cid = str(c["course"]["id"])
     nav = "".join(f'<li><a class="{"active" if key == section else ""}" href="/courses/{cid}{path}">{label}</a></li>'
                   for key, label, path in COURSE_NAV)
@@ -277,7 +277,7 @@ def course_page(c: dict, section: str, crumbs: list[str], main: str, right: str 
   <nav class="course-nav" aria-label="Course"><div class="term muted small">{esc(c["course"].get("term", "Autumn 2026"))}</div><ul>{nav}</ul></nav>
   <main class="content">{main}</main>
   {f'<aside class="right-side">{right}</aside>' if right else ''}
-</div>{hue_dock(cid, hue)}"""
+</div>{hue_dock(cid, hue, hue_assignment or (export_for or {}).get("id", ""))}"""
     return shell(f"{crumbs[-1] if crumbs else 'Home'}: {c['course']['name']}", body,
                  head='<link rel="stylesheet" href="/static/hue.css">' + head,
                  scripts=scripts + '<script src="/static/hue.js"></script>', **kw)

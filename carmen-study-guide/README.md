@@ -108,7 +108,7 @@ Each message goes through `tutor/service.py`:
 5. **Log**: `tutor_sessions` and `tutor_turns`, including the mode, the reason and any rejected drafts.
 
 Setup: add the Supabase service key and either `ANTHROPIC_API_KEY` (Claude) or `TUTOR_LLM=ollama` (free, local:
-install Ollama, then `ollama pull qwen2.5:7b` and `ollama pull qwen2.5:3b`) to `mock-canvas/.env`, install `requirements.txt`, and
+install Ollama, then `ollama pull qwen2.5:7b` and `ollama pull qwen2.5:3b`) or `TUTOR_LLM=bedrock` plus AWS credentials (AWS credits: Amazon Nova Pro for replies, Nova 2 Lite for checks) to `mock-canvas/.env`, install `requirements.txt`, and
 export the course once (the **Export for analytics** button). To give every mode something to show, run
 `.venv/bin/python -m tutor.demo_setup --apply` once. It makes Assignment 2 guided homework, releases Quiz 1, and adds a
 fictional Quiz 2 answer key. Without the keys, the page loads and explains what's missing.

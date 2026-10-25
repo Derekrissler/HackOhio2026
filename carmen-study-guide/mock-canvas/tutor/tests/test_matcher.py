@@ -33,6 +33,25 @@ def test_shared_course_phrase_alone_is_left_to_the_classifier():
     assert referenced_assessments(pasted, [midterm]) == [midterm]
 
 
+QUIZ2_FULL = Assessment(
+    id="q2", code="Quiz 2", title="Quiz 2", integrity_status="active_protected", answers_released=False,
+    text='Multiple Choice\n\n2. What is a "hallucinated API"?\n\nA. An API that responds slowly\n\n'
+         'C. A call to a function or library that does not exist\n\n'
+         '8. What is a regression test?\n\nA. A test written in a statistical regression library',
+)
+
+
+def test_asking_an_open_items_exact_question_matches_even_when_short():
+    assert referenced_assessments("What is a hallucinated API?", [QUIZ2_FULL]) == [QUIZ2_FULL]
+    assert referenced_assessments("quick q: what is a regression test? thanks", [QUIZ2_FULL]) == [QUIZ2_FULL]
+
+
+def test_concept_questions_that_differ_from_the_item_do_not_match():
+    for msg in ("Explain AI hallucinations in generated code", "What is a test?", "what is an API",
+                "how do I write a regression test for my bug fix"):
+        assert referenced_assessments(msg, [QUIZ2_FULL]) == [], msg
+
+
 def test_unrelated_question_does_not_match():
     assert referenced_assessments("why are mutable default arguments risky in general?", [QUIZ2]) == []
 

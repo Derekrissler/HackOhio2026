@@ -57,17 +57,37 @@
 .hue-goal-bar { height: 6px; margin: 3px 0 4px; background: var(--border-light); border-radius: 3px; overflow: hidden; }
 .hue-goal-bar i { display: block; height: 100%; background: var(--primary); }
 
-/* Tutor controls. In the chat box: just the message field (or a sign-in button); the tutor window adds the rest. */
+/* Tutor replies: safe markdown subset, slide quote cards, suggestions, thinking dots (hue.js) */
+.hue-text p + p { margin-top: 8px; }
+.hue-text ul, .hue-text ol { margin: 6px 0 0; padding-left: 20px; }
+.hue-text code, .hue-next code { padding: 1px 4px; background: #eef1f3; border-radius: 3px; font-size: .9em; }
+.hue-snippet { margin: 8px 0 0; padding: 8px 10px; background: #f7f9fb; border: 1px solid var(--border-light);
+  border-left: 3px solid var(--primary); border-radius: 4px; }
+.hue-snippet blockquote { margin: 0; white-space: pre-wrap; }
+.hue-snippet figcaption { margin-top: 4px; color: var(--muted); font-size: .8rem; }
+.hue-snippet-open { margin-left: 4px; font-weight: 700; }
+.hue-suggest { display: flex; flex-wrap: wrap; gap: 6px; color: var(--muted); font-size: .85rem; }
+.hue-suggest p { flex-basis: 100%; margin: 0; }
+.hue-chip { padding: 5px 10px; font: inherit; color: var(--text); background: #fff; border: 1px solid var(--btn-border);
+  border-radius: 14px; cursor: pointer; text-align: left; }
+.hue-chip:hover { border-color: var(--link); color: var(--link); }
+.hue-dots::after { content: ""; display: inline-block; width: 1.2em; animation: hue-dots 1.2s steps(4, end) infinite; }
+@keyframes hue-dots { 0% { content: ""; } 25% { content: "."; } 50% { content: ".."; } 75% { content: "..."; } }
+
+/* Tutor controls. The chat box shows the message field; the tutor window adds the assignment and its mode. */
 .hue-tutor { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 10px 12px 12px;
   border-top: 1px solid var(--border-light); }  /* minmax: a long assignment name must not widen the box */
-.hue-status { margin: 0; color: #a3000f; font-size: .82rem; }
+.hue-status { margin: 0; color: var(--muted); font-size: .82rem; }
 .hue-status:empty { display: none; }
-.hue-login { display: grid; gap: 8px; }
-.hue-login label { display: grid; gap: 2px; font-size: .85rem; font-weight: 700; }
-.hue-login input, .hue-context select, .hue-form textarea { padding: 7px 9px; font: inherit; font-weight: 400;
+.hue-banner { margin: 0; padding: 7px 10px; border-left: 3px solid; border-radius: 4px; font-size: .82rem; }
+.hue-banner-protected_assessment { background: #fdecea; border-color: #c4161c; color: #7a0c10; }
+.hue-banner-guided_homework { background: #fff4e0; border-color: #d97a00; color: #6b4100; }
+.hue-banner-independent_study { background: #e6f4ea; border-color: #2b8a4b; color: #1e4d2b; }
+.hue-context select, .hue-form textarea { padding: 7px 9px; font: inherit; font-weight: 400;
   border: 1px solid var(--btn-border); border-radius: 4px; }
-.hue-login input:focus, .hue-context select:focus, .hue-form textarea:focus { outline: 2px solid var(--link);
-  outline-offset: -1px; border-color: var(--link); }
+.hue-context select:focus, .hue-form textarea:focus { outline: 2px solid var(--link); outline-offset: -1px;
+  border-color: var(--link); }
+.hue-form textarea:disabled { background: var(--panel); }
 .hue-context { display: flex; align-items: center; gap: 8px; font-size: .85rem; }
 .hue-context label { font-weight: 700; white-space: nowrap; }
 .hue-context select { flex: 1; min-width: 0; }
@@ -75,8 +95,7 @@
 .hue-form textarea { flex: 1; resize: none; }
 .hue-link { padding: 0; font: inherit; font-size: .85rem; color: var(--link); background: none; border: 0; cursor: pointer; }
 .hue-link:hover { text-decoration: underline; }
-.hue.is-signed-in .hue-when-out, .hue:not(.is-signed-in) .hue-when-in,
-.hue.is-expanded .hue-when-compact, .hue:not(.is-expanded) .hue-when-expanded { display: none; }
+.hue:not(.is-ready) .hue-when-ready, .hue:not(.is-expanded) .hue-when-expanded { display: none; }
 
 @media (max-width: 640px) {  /* a sheet beside the global nav, which stays usable */
   .hue-launcher { right: 12px; bottom: 12px; }

@@ -1,20 +1,40 @@
 // Hue, the course assistant docked on every course page (ui.hue_dock): a chat box at the side that shows
-// "Analyze goals" answers and opens into the study tutor window. Hue's text is model output: render it with
-// textContent only, never innerHTML.
+// "Analyze goals" answers and opens into the study tutor window. Hue's text is model output: it is only ever set
+// with textContent (formatting builds elements, never HTML), and links are limited to this site.
+//
+// Students sign in to Carmen before it opens, so Hue never asks for a password: it reuses that course session, and in
+// demo mode (data-demo, TUTOR_DEMO_AUTO_SIGNIN) asks the server to start it.
 (() => {
   const root = document.getElementById("hue");
   if (!root) return;
   const course = encodeURIComponent(root.dataset.course);
+  const api = (path) => `/courses/${course}/tutor${path}`;
+  const demoOn = root.dataset.demo === "1";
   const byId = (id) => document.getElementById(id);
   const box = byId("hue-box"), launcher = byId("hue-launcher"), log = byId("hue-log");
   const expandBtn = byId("hue-expand"), closeBtn = byId("hue-close");
-  const status = byId("hue-status"), signinBtn = byId("hue-signin"), loginForm = byId("hue-login");
-  const select = byId("hue-assessment"), signout = byId("hue-signout");
+  const status = byId("hue-status"), select = byId("hue-assessment"), banner = byId("hue-banner");
   const form = byId("hue-form"), input = byId("hue-input"), send = form.querySelector("button");
   const MODES = {
-    protected_assessment: "Protected: concept help only",
-    guided_homework: "Guided: hints, not answers",
-    independent_study: "Independent study",
+    protected_assessment: {
+      label: "Protected: concept help only",
+      explain: "This work is open and graded. Hue will explain the ideas behind it and point you to the slides, " +
+               "but won't help with its questions or answers.",
+    },
+    guided_homework: {
+      label: "Guided: hints, not answers",
+      explain: "You'll get guiding questions and step-by-step hints. Hue won't write your answers for you.",
+    },
+    independent_study: {
+      label: "Independent study",
+      explain: "Full explanations and examples from the course material.",
+    },
+  };
+  const SUGGESTIONS = {
+    independent_study: ["What does lecture 2 say a good prompt needs?", "What is vibe coding, according to the slides?",
+                        "How should I review code an AI wrote for me?"],
+    guided_homework: ["Where should I start?", "Which slides cover this?", "Can you give me a small hint?"],
+    protected_assessment: ["Which slides cover the ideas behind this?", "Can you explain the main concept here?"],
   };
 
   function el(tag, cls, text) {
@@ -31,7 +51,7 @@
 
   // ---- open, close, expand. The state is remembered for this tab, so Hue stays put while you move between pages.
   let expanded = false;
-  let contextLoaded = false;
+  let connecting = null;
   function remember() {
     try { sessionStorage.setItem("hue", JSON.stringify({ open: !box.hidden, expanded })); } catch { /* storage off */ }
   }
@@ -44,10 +64,7 @@
     box.hidden = !open;
     launcher.hidden = open;
     launcher.setAttribute("aria-expanded", String(open));
-    if (open && !contextLoaded) {
-      contextLoaded = true;
-      loadContext().catch(() => setSignedIn(false));
-    }
+    if (open && !connecting) connecting = connect();
     sync();
   }
   function setExpanded(value) {
@@ -61,7 +78,7 @@
   }
   launcher.addEventListener("click", () => {
     setOpen(true);
-    (signedIn ? input : closeBtn).focus();
+    (ready ? input : closeBtn).focus();
   });
   closeBtn.addEventListener("click", () => {
     setOpen(false);
@@ -74,70 +91,120 @@
     launcher.focus();
   });
 
-  // ---- study tutor: sign-in, what the student is working on, and the chat (tutor/router.py)
-  let signedIn = false;
-  let authGeneration = 0;
+  // ---- course session and what the student is working on (tutor_host.py, tutor/router.py)
+  let ready = false;
+  let assessments = [];
   let sessionId = null;
   let generation = 0; // bumped on context switch so late replies from the old context are dropped
+  let contextGeneration = 0;
 
-  function setSignedIn(value) {
-    signedIn = value;
-    generation++; sessionId = null;
-    log.querySelectorAll(".hue-chat").forEach((n) => n.remove()); // tutor turns belong to the signed-in student
-    root.classList.toggle("is-signed-in", value);
-    send.disabled = !value;
-    status.textContent = "";
+  function setReady(value, message = "") {
+    ready = value;
+    root.classList.toggle("is-ready", value);
+    input.disabled = send.disabled = !value;
+    status.textContent = message;
   }
-  async function loadContext() {
-    const requested = ++authGeneration;
-    const res = await fetch(`/courses/${course}/tutor/context`, { cache: "no-store" });
-    if (requested !== authGeneration) return;
-    if (!res.ok) { setSignedIn(false); return; }
-    const data = await res.json();
-    if (requested !== authGeneration) return;
-    setSignedIn(true);
-    select.replaceChildren(new Option("General study (no assignment)", ""));
-    for (const a of data.assessments) select.add(new Option(`${a.title} (${MODES[a.mode]})`, a.id));
-  }
-  signinBtn.addEventListener("click", () => {
-    setExpanded(true);
-    loginForm.querySelector("input").focus();
-  });
-  loginForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    authGeneration++;
-    const values = new FormData(loginForm);
-    const button = loginForm.querySelector("button");
-    button.disabled = true;
-    const body = JSON.stringify({ email: values.get("email"), password: values.get("password") });
-    loginForm.reset();
+  async function connect() {
+    setReady(false, "Connecting to Hue…");
     try {
-      const res = await fetch(`/courses/${course}/tutor/auth/login`, {
-        method: "POST", headers: { "Content-Type": "application/json", "X-Tutor-Request": "1" }, body,
-      });
-      if (!res.ok) throw new Error();
-      await loadContext();
-      if (signedIn) input.focus();
-      else status.textContent = "This account needs a course enrollment and learner identity mapping.";
-    } catch { status.textContent = "Sign-in failed. Check your course account and configuration."; }
-    finally { button.disabled = false; }
-  });
-  signout.addEventListener("click", async () => {
-    authGeneration++;
-    setSignedIn(false);
-    try {
-      const res = await fetch(`/courses/${course}/tutor/auth/logout`, { method: "POST", headers: { "X-Tutor-Request": "1" } });
-      if (!res.ok) throw new Error();
+      const result = await loadContext();
+      if (result === true) return;
+      if (result === 401 && demoOn && await startDemoSession()) return;
+      if (!ready && result !== "handled") unavailable(result === 403 ? "Your course account isn't linked to a student in this course." : "");
     } catch {
-      root.classList.add("is-signed-in");
-      status.textContent = "Sign-out failed. Retry signing out before leaving this browser.";
+      unavailable("");
     }
-  });
-  select.addEventListener("change", () => {
+  }
+  function unavailable(message) {
     generation++; sessionId = null;
-    add(el("div", "hue-divider hue-chat", `Now helping with: ${select.selectedOptions[0].text}`));
-  });
+    setReady(false, `${message || "Hue can't reach your course session right now."} Refresh the page to try again.`);
+  }
+  async function startDemoSession() {
+    const res = await fetch(api("/auth/demo"), { method: "POST", headers: { "X-Tutor-Request": "1" } });
+    if (res.status === 401) { location.href = "/logged-out"; return false; } // logged out of Carmen
+    if (!res.ok) {
+      const detail = await res.json().then((d) => (typeof d.detail === "string" ? d.detail : ""), () => "");
+      unavailable(detail ? `${detail}.` : `Hue couldn't start (${res.status}).`);
+      return false;
+    }
+    return (await loadContext()) === true;
+  }
+  // true when connected; otherwise the HTTP status, so connect() can decide what to do next.
+  async function loadContext() {
+    const requested = ++contextGeneration;
+    const res = await fetch(api("/context"), { cache: "no-store" });
+    if (requested !== contextGeneration) return "handled";
+    if (!res.ok) return res.status;
+    const data = await res.json();
+    if (requested !== contextGeneration) return "handled";
+    assessments = data.assessments || [];
+    select.replaceChildren(new Option("General study (no assignment)", ""));
+    for (const a of assessments) select.add(new Option(`${a.title} (${MODES[a.mode]?.label || a.mode})`, a.id));
+    // Preselect the assignment this page is about (or ?assignment= on the Hue page).
+    const wanted = assessments.find((a) => a.canvas_id && String(a.canvas_id) === root.dataset.assignment);
+    if (wanted) select.value = wanted.id;
+    setReady(true);
+    startConversation(false);
+    return true;
+  }
+  function currentMode() {
+    return assessments.find((a) => a.id === select.value)?.mode || "independent_study";
+  }
+  function startConversation(announce) {
+    generation++; sessionId = null;
+    const mode = currentMode();
+    banner.className = `hue-banner hue-banner-${mode} hue-when-ready hue-when-expanded`;
+    banner.replaceChildren(el("strong", null, MODES[mode].label), ` · ${MODES[mode].explain}`);
+    log.querySelector(".hue-suggest")?.remove();
+    if (announce) add(el("div", "hue-divider", `Now helping with: ${select.selectedOptions[0].text}`));
+    add(suggestions(mode));
+  }
+  function suggestions(mode) {
+    const wrap = el("div", "hue-suggest");
+    wrap.append(el("p", null, "Try asking:"));
+    for (const q of SUGGESTIONS[mode]) {
+      const chip = el("button", "hue-chip", q);
+      chip.type = "button";
+      chip.addEventListener("click", () => { input.value = q; form.requestSubmit(); });
+      wrap.append(chip);
+    }
+    return wrap;
+  }
+  select.addEventListener("change", () => startConversation(true));
 
+  // ---- formatting: a safe subset of markdown, built as elements
+  function inline(text) {
+    const frag = document.createDocumentFragment();
+    for (const part of String(text).split(/(\*\*[^*]+\*\*|`[^`]+`)/)) {
+      if (/^\*\*[^*]+\*\*$/.test(part)) frag.append(el("strong", null, part.slice(2, -2)));
+      else if (/^`[^`]+`$/.test(part)) frag.append(el("code", null, part.slice(1, -1)));
+      else if (part) frag.append(document.createTextNode(part));
+    }
+    return frag;
+  }
+  function rich(text) {
+    const out = el("div", "hue-text");
+    let list = null, para = null;
+    for (const raw of String(text).split("\n")) {
+      const line = raw.trimEnd();
+      const item = line.match(/^\s*(?:[-*•]|\d+[.)])\s+(.*)$/);
+      if (item) {
+        const ordered = /^\s*\d/.test(line);
+        if (!list || list.tagName !== (ordered ? "OL" : "UL")) { list = el(ordered ? "ol" : "ul"); out.append(list); }
+        const li = el("li");
+        li.append(inline(item[1]));
+        list.append(li);
+        para = null;
+      } else if (!line.trim()) {
+        list = null; para = null;
+      } else {
+        list = null;
+        if (!para) { para = el("p"); out.append(para); } else para.append(document.createElement("br"));
+        para.append(inline(line));
+      }
+    }
+    return out;
+  }
   function sameSite(link) {
     if (typeof link !== "string") return null;
     try {
@@ -149,49 +216,73 @@
       return null;
     }
   }
+
+  // ---- chat
   function addTutor(data) {
-    const msg = el("div", "hue-msg hue-bot hue-chat");
-    msg.append(el("span", `hue-mode hue-mode-${data.mode}`, MODES[data.mode] || data.mode));
-    msg.append(el("p", "hue-text", data.message));
-    if (data.next_step) msg.append(el("p", "hue-next", `Next: ${data.next_step}`));
-    if (data.citations?.length) {
-      const list = el("ul", "hue-cites");
-      for (const c of data.citations) {
-        const li = el("li");
-        const label = `${c.title} (${c.location})`;
+    const msg = el("div", "hue-msg hue-bot");
+    msg.append(el("span", `hue-mode hue-mode-${data.mode}`, MODES[data.mode]?.label || data.mode));
+    msg.append(rich(data.message));
+    const quoted = new Set();
+    for (const s of data.snippets || []) {
+      quoted.add(s.chunk_id);
+      const card = el("figure", "hue-snippet");
+      card.append(el("blockquote", null, s.text));
+      const caption = el("figcaption", null, `${s.title} · ${s.location}`);
+      const href = sameSite(s.deep_link);
+      if (href) {
+        const open = el("a", "hue-snippet-open", s.location.startsWith("slide") ? "Open slide ↗" : "Open page ↗");
+        Object.assign(open, { href, target: "_blank", rel: "noopener" });
+        caption.append(" ", open);
+      }
+      card.append(caption);
+      msg.append(card);
+    }
+    if (data.next_step) {
+      const next = el("p", "hue-next");
+      next.append(el("strong", null, "Next step: "), inline(data.next_step));
+      msg.append(next);
+    }
+    const sources = (data.citations || []).filter((c) => !quoted.has(c.id));
+    if (sources.length) {
+      const wrap = el("p", "hue-note");
+      wrap.append("Sources: ");
+      sources.forEach((c, i) => {
         // Only links to this site: a link from data must never become javascript: or an external URL.
         const href = sameSite(c.deep_link);
-        if (href) {
-          const a = el("a", null, label);
-          a.href = href;
-          li.append(a);
-        } else {
-          li.textContent = label;
-        }
-        list.append(li);
-      }
-      msg.append(list);
+        const label = `${c.title} (${c.location})`;
+        wrap.append(href ? Object.assign(el("a", null, label), { href, target: "_blank", rel: "noopener" }) : label,
+                    i < sources.length - 1 ? " · " : "");
+      });
+      msg.append(wrap);
     }
-    if (data.fallback) msg.append(el("p", "hue-note", "Hue gave a safe default answer this time."));
+    if (data.fallback) msg.append(el("p", "hue-note", "Showing a safe default answer. Try rephrasing your question."));
     add(msg);
   }
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const message = input.value.trim();
-    if (!message || send.disabled) return;
+    if (!message || send.disabled || !ready) return;
     const sent = generation;
     send.disabled = true;
-    add(el("div", "hue-msg hue-me hue-chat", message));
+    log.querySelector(".hue-suggest")?.remove();
+    add(el("div", "hue-msg hue-me", message));
     input.value = "";
+    const thinking = add(el("div", "hue-msg hue-bot is-thinking"));
+    thinking.append(el("span", "hue-dots", "Hue is thinking"));
     try {
-      const res = await fetch(`/courses/${course}/tutor/turn`, {
+      const res = await fetch(api("/turn"), {
         method: "POST",
         headers: { "Content-Type": "application/json", "X-Tutor-Request": "1" },
         body: JSON.stringify({ message, session_id: sessionId, assessment_id: select.value || null }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        if (res.status === 401) setSignedIn(false);
+        if (res.status === 401 && demoOn) {
+          // The course session expired: reconnect quietly, then ask the student to resend.
+          if (await startDemoSession()) throw new Error("Reconnected to Hue. Please send your message again.");
+          return;
+        }
+        if (res.status === 401) { unavailable("Your course session has ended."); return; }
         const detail = Array.isArray(data.detail) ? data.detail.map((d) => d.msg).join("; ") : data.detail;
         throw new Error(detail || `Request failed (${res.status})`);
       }
@@ -199,10 +290,11 @@
       sessionId = data.session_id;
       addTutor(data);
     } catch (err) {
-      if (sent === generation) add(el("div", "hue-msg hue-error hue-chat", err.message));
+      if (sent === generation) add(el("div", "hue-msg hue-error", err.message));
     } finally {
-      send.disabled = !signedIn;
-      input.focus();
+      thinking.remove();
+      send.disabled = !ready;
+      if (ready) input.focus();
     }
   });
   input.addEventListener("keydown", (e) => {
@@ -277,7 +369,6 @@
   }
 
   // ---- start: the Hue page opens as the tutor window; elsewhere, restore how this tab left Hue
-  setSignedIn(false);
   let saved = {};
   try { saved = JSON.parse(sessionStorage.getItem("hue") || "{}"); } catch { /* storage off */ }
   if (root.dataset.open === "expanded") saved = { open: true, expanded: true };

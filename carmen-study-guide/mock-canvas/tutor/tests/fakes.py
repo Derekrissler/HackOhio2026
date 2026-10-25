@@ -81,6 +81,7 @@ class FakeLLM:
         self.reference_codes = list(references)
         self.requests: list[dict] = []
         self.leak_checks = 0
+        self.leak_questions: list = []
         self.reference_calls = 0
 
     def reply(self, system, messages):
@@ -90,8 +91,9 @@ class FakeLLM:
             raise r
         return r
 
-    def leaks_answer(self, text, answer_texts):
+    def leaks_answer(self, text, answer_texts, question=None):
         self.leak_checks += 1
+        self.leak_questions.append(question)
         return self.leak_verdicts.pop(0) if self.leak_verdicts else False
 
     def references(self, message, candidates, current=None):
@@ -102,5 +104,5 @@ class FakeLLM:
 
 def good(**kw) -> TutorReply:
     base = dict(message="What do you think happens to the list between calls?", move="ask", hint_level=0,
-                cited_chunk_ids=["c1"], next_step="Re-read slide 5.")
+                cited_chunk_ids=["c1"], next_step="Re-read slide 5.", snippets=[])
     return TutorReply(**{**base, **kw})

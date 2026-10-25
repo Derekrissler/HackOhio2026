@@ -15,6 +15,8 @@ implemented handoff, two review stages, authenticated tutor bridge and offline d
 The [comprehensive project-state audit](docs/project-state-2026-10-24.md) compares
 the implementation with the pipeline specification and documents live data,
 remaining work, debugging procedures and technical improvements.
+The [source repair workflow](docs/analytics-source-repairs.md) adds append-only
+evidence repair and explicit error/outcome review without schema changes.
 
 | Part | Stack | Folder |
 |---|---|---|

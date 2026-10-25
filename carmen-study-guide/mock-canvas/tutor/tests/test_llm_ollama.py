@@ -45,7 +45,8 @@ def test_reply_sends_system_prompt_history_and_schema_and_parses_it():
     assert http.posts[0]["url"].endswith("/api/chat") and body["model"] == "qwen2.5:7b"
     assert body["messages"][0] == {"role": "system", "content": "SYSTEM"}
     assert [m["role"] for m in body["messages"]] == ["system", "user", "system"]
-    assert set(body["format"]["properties"]) == {"message", "move", "hint_level", "cited_chunk_ids", "next_step"}
+    assert set(body["format"]["properties"]) == {"message", "move", "hint_level", "cited_chunk_ids", "next_step",
+                                                 "snippets"}
     assert "$defs" not in body["format"] and "$ref" not in json.dumps(body["format"])  # inlined for Ollama
     assert body["format"]["properties"]["move"]["enum"][0] == "ask"
     assert body["stream"] is False
