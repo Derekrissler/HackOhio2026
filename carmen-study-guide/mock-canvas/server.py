@@ -494,9 +494,15 @@ def analyze_question_goals(course_id: str, assignment_id: str, code: str):
     c = course(course_id)
     assignment(c, assignment_id)
     try:
-        return claude_mapper.map_question(c["course"]["course_code"], assignment_id, code)
+        result = claude_mapper.map_question(c["course"]["course_code"], assignment_id, code)
     except claude_mapper.MappingError as e:
         return JSONResponse({"status": "error", "message": str(e)}, status_code=422)
+    links = {it["title"]: ui.item_url("", course_id, it) for m in c.get("modules", []) for it in m.get("items", [])
+             if it["type"] in ("Page", "File")}
+    for m in result.get("mappings", []):
+        # Sources are material titles, optionally "Title / Section"; link the title to its page or file.
+        m["source_links"] = [{"title": s, "url": links.get(s.split(" / ")[0].strip())} for s in m.get("sources", [])]
+    return result
 
 
 @app.get("/analytics/exports/{export_id}/bundle.json")

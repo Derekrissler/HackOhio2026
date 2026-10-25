@@ -153,10 +153,9 @@
   function startConversation(announce) {
     generation++; sessionId = null;
     const mode = currentMode();
-    banner.className = `hue-banner hue-banner-${mode} hue-when-ready hue-when-expanded`;
-    banner.replaceChildren(el("strong", null, MODES[mode].label), ` · ${MODES[mode].explain}`);
+    banner.className = "hue-banner";
+    banner.replaceChildren();
     log.querySelector(".hue-suggest")?.remove();
-    if (announce) add(el("div", "hue-divider", `Now helping with: ${select.selectedOptions[0].text}`));
     add(suggestions(mode));
   }
   function suggestions(mode) {
@@ -220,7 +219,6 @@
   // ---- chat
   function addTutor(data) {
     const msg = el("div", "hue-msg hue-bot");
-    msg.append(el("span", `hue-mode hue-mode-${data.mode}`, MODES[data.mode]?.label || data.mode));
     msg.append(rich(data.message));
     const quoted = new Set();
     for (const s of data.snippets || []) {
@@ -336,7 +334,20 @@
           li.append(head, bar);
           if (m.text) li.append(el("div", "hue-note", m.text));
           if (m.reason) li.append(el("p", null, m.reason));
-          if (m.sources?.length) li.append(el("div", "hue-note", `Sources: ${m.sources.join(" · ")}`));
+          const srcs = m.source_links || (m.sources || []).map((title) => ({ title }));
+          if (srcs.length) {
+            const note = el("div", "hue-note", "Sources: ");
+            srcs.forEach((s, i) => {
+              const href = sameSite(s.url);
+              if (href) {
+                const a = el("a", null, s.title);
+                Object.assign(a, { href, target: "_blank", rel: "noopener" });
+                note.append(a);
+              } else note.append(s.title);
+              if (i < srcs.length - 1) note.append(" · ");
+            });
+            li.append(note);
+          }
           list.append(li);
         }
         const note = d.status === "kept"

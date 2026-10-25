@@ -179,7 +179,7 @@ COURSE_NAV = [("home", "Home", ""), ("announcements", "Announcements", "/announc
               ("grades", "Grades", "/grades"), ("people", "People", "/users"), ("pages", "Pages", "/pages"),
               ("textbook", "Textbook", "/textbook"),
               ("files", "Files", "/files"), ("syllabus", "Syllabus", "/assignments/syllabus"),
-              ("modules", "Modules", "/modules"), ("scans", "Scanned Work", "/scans"), ("tutor", "Hue", "/tutor")]
+              ("modules", "Modules", "/modules"), ("scans", "Scanned Work", "/scans"), ("tutor", "Hue Insights", "/tutor")]
 
 
 def shell(title: str, body: str, *, active_global="courses", head="", scripts="") -> HTMLResponse:

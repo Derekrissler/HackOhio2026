@@ -148,8 +148,12 @@ def build_slides():
         current["slides"].append(pdf_safe(plain(slide)))
     files = []
     for d in decks:
-        files.append({"id": 300 + d["n"], "display_name": f"Lecture{d['n']:02d}-{re.sub(r'[^A-Za-z]+', '-', d['title']).strip('-')}.pdf",
-                      "title": f"Lecture {d['n']} slides: {d['title']}", "pages": d["slides"]})
+        name = f"Lecture{d['n']:02d}-{re.sub(r'[^A-Za-z]+', '-', d['title']).strip('-')}.pdf"
+        f = {"id": 300 + d["n"], "display_name": name, "title": f"Lecture {d['n']} slides: {d['title']}",
+             "pages": d["slides"]}
+        if (HERE / "fixtures" / "slides" / name).exists():  # designed deck (fixtures/slides/*.html), served as-is
+            f["path"] = f"slides/{name}"
+        files.append(f)
     return files
 
 

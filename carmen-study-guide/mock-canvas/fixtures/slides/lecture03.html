@@ -1,0 +1,466 @@
+<!doctype html>
+<!-- Source for Lecture03-Reading-Code-You-Didn-t-Write.pdf. One page per slide, so slide-N citations stay aligned.
+     Re-render: Chrome --headless=new --no-pdf-header-footer --print-to-pdf=<pdf> file://<this file> -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lecture 3: Reading Code You Didn't Write</title>
+<style>
+@page { size: 8.5in 11in; margin: 0; }
+:root {
+  --ink: #1f2a33; --ink-2: #4a5763; --muted: #7a8690; --rule: #dfe3e6; --tint: #f5f7f8;
+  --red: #e0061f; --orange: #d08a00; --green: #22813c; --blue: #0374b5; --purple: #a8459c;
+  --code-bg: #f5f7f9;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e9ecef; }
+body {
+  font-family: Charter, "Bitstream Charter", Georgia, serif; font-size: 11pt; line-height: 1.5; color: var(--ink);
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.page {
+  position: relative; width: 8.5in; height: 11in; padding: 0.95in 0.85in 0.85in; background: #fff;
+  overflow: hidden; break-after: page;
+}
+.page:last-child { break-after: auto; }
+@media screen { .page { margin: 24px auto; box-shadow: 0 2px 14px rgba(0,0,0,.12); } }
+
+.run-head {
+  position: absolute; top: 0.45in; left: 0.85in; right: 0.85in; display: flex; justify-content: space-between;
+  padding-bottom: 7px; border-bottom: 0.75pt solid var(--rule);
+  font: 600 7.5pt/1 "Avenir Next", "Helvetica Neue", sans-serif; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--muted);
+}
+.run-foot {
+  position: absolute; bottom: 0.45in; left: 0.85in; right: 0.85in; display: flex; justify-content: space-between;
+  align-items: center; font: 500 8pt/1 "Avenir Next", "Helvetica Neue", sans-serif; color: var(--muted);
+}
+.run-foot .num { font-weight: 700; color: var(--ink); font-size: 9pt; }
+
+h1, h2, h3, .sans { font-family: "Avenir Next", "Helvetica Neue", Helvetica, sans-serif; }
+h1, h2, h3 { margin: 0; color: var(--ink); }
+h2 { font-size: 28pt; font-weight: 700; line-height: 1.12; letter-spacing: -.01em; margin-bottom: 12px; }
+h3 { font-size: 12pt; font-weight: 700; line-height: 1.3; }
+p { margin: 0 0 10px; }
+.kicker {
+  margin: 0 0 10px; font: 700 9pt/1 "Avenir Next", sans-serif; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--accent);
+}
+.lead { font-size: 12.5pt; line-height: 1.6; color: var(--ink-2); margin-bottom: 20px; }
+code, pre { font-family: Menlo, "SF Mono", Consolas, monospace; }
+p code, li code, td code, dd code, .card code { font-size: 9.5pt; background: var(--code-bg); padding: 1px 2px; border-radius: 3px; }
+
+pre.code {
+  margin: 0 0 18px; padding: 16px 20px; background: var(--code-bg); border: 1px solid #e3e8ec;
+  border-left: 4px solid var(--accent); border-radius: 6px; font-size: 12pt; line-height: 1.7; white-space: pre;
+}
+.code-label { font: 600 8pt/1 "Avenir Next", sans-serif; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin: 0 0 7px; }
+.k { color: #8250df; font-weight: 700; } .f { color: #0550ae; } .b { color: #0a7a5a; } .s { color: #0a3069; }
+
+figure { margin: 0; }
+figcaption { margin-top: 8px; font: 9pt/1.45 "Avenir Next", sans-serif; color: var(--ink-2); }
+figcaption b { color: var(--ink); }
+
+.callout { border-radius: 8px; padding: 14px 18px; font-size: 11.5pt; margin-bottom: 18px; }
+.callout p:last-child { margin: 0; }
+.callout .tag {
+  display: block; margin-bottom: 5px; font: 700 8pt/1 "Avenir Next", sans-serif; letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.try { background: #fff8e8; border: 1px solid #f0dcae; }
+.try .tag { color: #855700; }
+.answer { background: #eef7f1; border: 1px solid #c3e1cc; }
+.answer .tag { color: #1c6b33; }
+.link-note {
+  display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-top: 1px solid var(--rule);
+  font: 10.5pt/1.5 "Avenir Next", sans-serif; color: var(--ink-2);
+}
+.link-note .pill {
+  flex: none; margin-top: 1px; padding: 4px 10px; border-radius: 999px; background: var(--accent); color: #fff;
+  font-weight: 700; font-size: 8pt; letter-spacing: .04em; text-transform: uppercase;
+}
+
+/* page 1: chapter opener */
+.rainbow { position: absolute; top: 0; left: 0; right: 0; height: 10px;
+  background: linear-gradient(90deg, var(--red), var(--orange), var(--green), var(--blue), var(--purple)); }
+.opener-kicker { margin: 0.1in 0 14px; }
+.opener h1 { font-size: 36pt; font-weight: 700; line-height: 1.05; letter-spacing: -.02em; text-wrap: balance; }
+.opener h1 .lec { display: block; font-size: 15pt; font-weight: 600; letter-spacing: 0; color: var(--accent); margin-bottom: 8px; }
+.opener .sub { margin: 12px 0 22px; font: 500 11pt/1 "Avenir Next", sans-serif; color: var(--ink-2); }
+.hero { margin-bottom: 22px; }
+.hero svg { display: block; width: 100%; height: auto; }
+.opener-cols { display: grid; grid-template-columns: 1.15fr 1fr; gap: 28px; align-items: start; }
+.objectives { background: var(--tint); border-radius: 10px; padding: 16px 20px; }
+.objectives h3 { font-size: 8.5pt; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.objectives ul { margin: 0; padding-left: 18px; }
+.objectives li { margin: 4px 0; font-size: 10.5pt; }
+.terms { margin-top: 26px; padding-top: 16px; border-top: 1px solid var(--rule); }
+.terms h3 { font-size: 8.5pt; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.terms dl { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 30px; }
+.terms dt { font: 700 10.5pt/1.3 "Avenir Next", sans-serif; color: var(--ink); }
+.terms dd { margin: 2px 0 0; font-size: 10pt; line-height: 1.45; color: var(--ink-2); }
+blockquote.pull {
+  margin: 0; padding: 4px 0 4px 18px; border-left: 3px solid var(--accent);
+  font-size: 14pt; line-height: 1.45; font-style: italic; color: var(--ink);
+}
+blockquote.pull cite { display: block; margin-top: 10px; font: normal 600 8.5pt/1 "Avenir Next", sans-serif; color: var(--muted); letter-spacing: .04em; }
+
+/* page 2: checklist */
+.steps { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.step {
+  display: grid; grid-template-columns: 52px 1fr; gap: 16px; align-items: start; padding: 18px 18px 20px;
+  border: 1px solid var(--rule); border-radius: 10px; background: #fff;
+}
+.icon {
+  width: 52px; height: 52px; border-radius: 12px; display: grid; place-items: center; color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 11%, white);
+}
+.icon svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.step .n { font: 700 8.5pt/1 "Avenir Next", sans-serif; letter-spacing: .05em; color: var(--accent); margin-bottom: 5px; }
+.step h3 { margin-bottom: 5px; }
+.step p { margin: 0; font-size: 10.5pt; line-height: 1.5; color: var(--ink-2); }
+.margin-tip {
+  margin-top: 22px; display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center;
+  padding: 16px 20px; border-radius: 10px; background: var(--tint);
+}
+.margin-tip .big { font: 700 28pt/1 "Avenir Next", sans-serif; color: var(--accent); }
+.margin-tip p { margin: 0; font-size: 11pt; }
+
+/* page 3: trace table */
+table.trace { width: 100%; border-collapse: separate; border-spacing: 0; font: 11pt/1.4 "Avenir Next", sans-serif; }
+table.trace th, table.trace td { padding: 11px 12px; text-align: left; border-bottom: 1px solid var(--rule); }
+table.trace thead th { font-size: 8.5pt; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); border-bottom: 1.5px solid var(--ink); }
+table.trace thead th code { text-transform: none; letter-spacing: 0; font-size: 9.5pt; color: var(--ink); background: none; padding: 0; }
+table.trace tbody th { font-family: Menlo, monospace; font-size: 10.5pt; font-weight: 400; color: var(--ink-2); width: 30%; }
+table.trace td { font-family: Menlo, monospace; font-size: 11pt; }
+table.trace td.ok { color: var(--green); font-weight: 700; }
+table.trace td.boom { background: #fdecee; color: #a3000f; font-weight: 700; border-radius: 0 0 6px 0; }
+table.trace td.boom svg { width: 16px; height: 16px; vertical-align: -3px; margin-right: 6px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+.trace-figure { padding: 18px 20px 16px; border: 1px solid var(--rule); border-radius: 10px; margin-bottom: 18px; }
+
+/* page 4: console + memory diagram */
+.two { display: grid; grid-template-columns: 1fr 1.25fr; gap: 20px; align-items: start; margin-bottom: 18px; }
+pre.console {
+  margin: 0; padding: 16px 18px; background: #1f2a33; color: #e8edf1; border-radius: 8px;
+  font-size: 11pt; line-height: 1.75; white-space: pre;
+}
+pre.console .pr { color: #8fa1ad; } pre.console .s { color: #a7e3b6; } pre.console .out { color: #ffd38a; }
+.memory { border: 1px solid var(--rule); border-radius: 10px; padding: 10px 12px 12px; }
+.memory svg { display: block; width: 100%; height: auto; }
+.why { font-size: 11pt; margin-bottom: 16px; }
+
+/* page 5: failure modes */
+.modes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 22px; }
+.card { display: grid; grid-template-columns: 52px 1fr; gap: 16px; padding: 18px 18px; border: 1px solid var(--rule); border-radius: 10px; }
+.card h3 { margin-bottom: 4px; }
+.card p { margin: 0 0 8px; font-size: 10.5pt; line-height: 1.45; color: var(--ink-2); }
+.card .catch { font: 600 8.5pt/1.35 "Avenir Next", sans-serif; color: var(--ink); }
+.card .catch span { color: var(--accent); letter-spacing: .04em; text-transform: uppercase; font-size: 8pt; margin-right: 4px; }
+.takeaways { border-radius: 12px; padding: 18px 22px 16px; background: var(--tint); position: relative; overflow: hidden; }
+.takeaways::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  background: linear-gradient(var(--red), var(--orange), var(--green), var(--blue), var(--purple)); }
+.takeaways h3 { font-size: 8.5pt; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); margin-bottom: 6px; }
+.takeaways ul { margin: 0; padding-left: 18px; }
+.takeaways li { margin: 5px 0; font-size: 11pt; }
+.next { margin-top: 16px; font: 600 10pt/1 "Avenir Next", sans-serif; color: var(--ink-2); }
+.next b { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- ============================== 1. Opener ============================== -->
+<section class="page opener" style="--accent: var(--blue)">
+  <div class="rainbow"></div>
+  <p class="kicker opener-kicker">VIBE 101 · Week 4</p>
+  <h1><span class="lec">Lecture 3:</span> Reading Code You Didn't Write</h1>
+  <p class="sub">Textbook: Chapter 3 · Sections 3.1–3.8</p>
+
+  <figure class="hero">
+    <svg viewBox="0 0 680 290" role="img" aria-label="A magnifying glass over AI-suggested code, finding a bug">
+      <rect x="0" y="0" width="680" height="290" rx="16" fill="#f3f6f9"/>
+      <!-- editor -->
+      <rect x="36" y="30" width="420" height="230" rx="10" fill="#fff" stroke="#d5dbe0" stroke-width="1.5"/>
+      <path d="M36 40a10 10 0 0 1 10-10h400a10 10 0 0 1 10 10v20H36z" fill="#eef1f4"/>
+      <circle cx="54" cy="45" r="5" fill="#e0061f"/><circle cx="70" cy="45" r="5" fill="#d08a00"/><circle cx="86" cy="45" r="5" fill="#22813c"/>
+      <text x="108" y="49" font-family="Menlo, monospace" font-size="11" fill="#7a8690">ai_suggestion.py</text>
+      <g stroke-linecap="round" stroke-width="9">
+        <line x1="60" y1="84" x2="88" y2="84" stroke="#8250df"/><line x1="98" y1="84" x2="172" y2="84" stroke="#0550ae"/><line x1="182" y1="84" x2="214" y2="84" stroke="#c4ccd3"/>
+        <line x1="84" y1="108" x2="134" y2="108" stroke="#8250df"/><line x1="144" y1="108" x2="230" y2="108" stroke="#c4ccd3"/>
+        <line x1="84" y1="132" x2="122" y2="132" stroke="#0a7a5a"/><line x1="132" y1="132" x2="196" y2="132" stroke="#c4ccd3"/><line x1="206" y1="132" x2="250" y2="132" stroke="#0a3069"/>
+        <rect x="52" y="146" width="396" height="24" rx="5" fill="#fdecee" stroke="none"/>
+        <line x1="84" y1="158" x2="132" y2="158" stroke="#8250df"/><line x1="142" y1="158" x2="196" y2="158" stroke="#0a7a5a"/><line x1="206" y1="158" x2="290" y2="158" stroke="#c4ccd3"/>
+        <line x1="60" y1="190" x2="88" y2="190" stroke="#8250df"/><line x1="98" y1="190" x2="160" y2="190" stroke="#0550ae"/>
+        <line x1="84" y1="214" x2="150" y2="214" stroke="#c4ccd3"/><line x1="160" y1="214" x2="214" y2="214" stroke="#0a3069"/>
+        <line x1="84" y1="238" x2="120" y2="238" stroke="#8250df"/><line x1="130" y1="238" x2="200" y2="238" stroke="#c4ccd3"/>
+      </g>
+      <path d="M206 170q5 -5 10 0t10 0t10 0t10 0t10 0t10 0t10 0t10 0" fill="none" stroke="#e0061f" stroke-width="2.2"/>
+      <!-- magnifier -->
+      <line x1="482" y1="206" x2="548" y2="272" stroke="#1f2a33" stroke-width="18" stroke-linecap="round"/>
+      <circle cx="430" cy="156" r="74" fill="#fff" stroke="#1f2a33" stroke-width="10"/>
+      <text x="430" y="146" text-anchor="middle" font-family="Menlo, monospace" font-size="19" fill="#1f2a33"><tspan fill="#1f2a33">/ </tspan><tspan fill="#0a7a5a">len</tspan>(nums)</text>
+      <path d="M375 156q6 -6 12 0t12 0t12 0t12 0t12 0t12 0t12 0t12 0t12 0" fill="none" stroke="#e0061f" stroke-width="2.6"/>
+      <g transform="translate(430 192)" stroke="#e0061f" stroke-width="2.4" stroke-linecap="round" fill="none">
+        <ellipse cx="0" cy="4" rx="9" ry="12" fill="#fdecee"/><circle cx="0" cy="-11" r="5" fill="#fdecee"/>
+        <path d="M-9 -2h-8M9 -2h8M-9 6h-9M9 6h9M-8 13l-7 5M8 13l7 5M-3 -15l-4 -6M3 -15l4 -6M0 -6v22"/>
+      </g>
+      <!-- checklist card -->
+      <rect x="568" y="54" width="86" height="132" rx="10" fill="#fff" stroke="#d5dbe0" stroke-width="1.5"/>
+      <g stroke-linecap="round">
+        <circle cx="590" cy="84" r="9" fill="#22813c"/><path d="M585 84l3.5 3.5 6-7" stroke="#fff" stroke-width="2.4" fill="none"/>
+        <line x1="606" y1="84" x2="638" y2="84" stroke="#c4ccd3" stroke-width="7"/>
+        <circle cx="590" cy="120" r="9" fill="#22813c"/><path d="M585 120l3.5 3.5 6-7" stroke="#fff" stroke-width="2.4" fill="none"/>
+        <line x1="606" y1="120" x2="632" y2="120" stroke="#c4ccd3" stroke-width="7"/>
+        <circle cx="590" cy="156" r="9" fill="#e0061f"/><path d="M590 150v7M590 161v0.5" stroke="#fff" stroke-width="2.6" fill="none"/>
+        <line x1="606" y1="156" x2="640" y2="156" stroke="#c4ccd3" stroke-width="7"/>
+      </g>
+    </svg>
+  </figure>
+
+  <div class="opener-cols">
+    <div class="objectives">
+      <h3>In this lecture you will</h3>
+      <ul>
+        <li>Explain why reading AI-written code is its own step</li>
+        <li>Apply the six-step reading checklist</li>
+        <li>Trace real values to expose boundary bugs</li>
+        <li>Recognize six common AI failure modes</li>
+      </ul>
+    </div>
+    <blockquote class="pull">
+      “When an assistant writes it, understanding is a separate step that you must do deliberately.”
+      <cite>TEXTBOOK §3.1</cite>
+    </blockquote>
+  </div>
+
+  <div class="terms">
+    <h3>Key terms</h3>
+    <dl>
+      <div><dt>Spec</dt><dd>The written requirements the code has to meet.</dd></div>
+      <div><dt>Trace</dt><dd>Following concrete values through code, one step at a time.</dd></div>
+      <div><dt>Boundary</dt><dd>An edge input, such as an empty list, a single element, or <code>None</code>.</dd></div>
+      <div><dt>Code smell</dt><dd>A surface sign of a deeper problem, like duplicated logic or a swallowed exception.</dd></div>
+    </dl>
+  </div>
+
+  <div class="run-foot"><span>Week 4 · Textbook Chapter 3</span><span class="num">1</span></div>
+</section>
+
+<!-- ============================== 2. Checklist ============================== -->
+<section class="page" style="--accent: var(--green)">
+  <div class="run-head"><span>VIBE 101 · Vibe Coding 101</span><span>Lecture 3 · Reading Code You Didn't Write</span></div>
+  <p class="kicker">Section 3.2</p>
+  <h2>The Reading Checklist</h2>
+  <p class="lead">When you write code yourself, you understand it by default. When an assistant writes it, you have to
+  earn that understanding. Work through these six checks before you accept a suggestion.</p>
+
+  <figure>
+    <div class="steps">
+      <div class="step">
+        <div class="icon"><svg viewBox="0 0 48 48"><path d="M13 5h15l8 8v30H13z"/><path d="M28 5v8h8"/><path d="M18 28l4.5 4.5L31 23"/></svg></div>
+        <div><div class="n">STEP 1</div><h3>Matches the spec?</h3><p>Check each requirement, one at a time, against what the code actually does.</p></div>
+      </div>
+      <div class="step">
+        <div class="icon"><svg viewBox="0 0 48 48"><path d="M11 37l3-10L32 9l7 7-18 18z"/><path d="M28 13l7 7"/><path d="M11 37l10-3"/></svg></div>
+        <div><div class="n">STEP 2</div><h3>Trace by hand</h3><p>Follow one small, concrete input from the first line to the return value.</p></div>
+      </div>
+      <div class="step">
+        <div class="icon"><svg viewBox="0 0 48 48"><path d="M17 9h-7v30h7"/><path d="M31 9h7v30h-7"/><path d="M19 24h10" stroke-dasharray="2 4"/></svg></div>
+        <div><div class="n">STEP 3</div><h3>Check boundaries</h3><p>Empty input, a single element, maximum size, negative numbers, <code>None</code>.</p></div>
+      </div>
+      <div class="step">
+        <div class="icon"><svg viewBox="0 0 48 48"><path d="M4 24s7-12 20-12 20 12 20 12-7 12-20 12S4 24 4 24z"/><circle cx="24" cy="24" r="5"/></svg></div>
+        <div><div class="n">STEP 4</div><h3>Check hidden assumptions</h3><p>Does it assume sorted input, unique elements, or a specific encoding?</p></div>
+      </div>
+      <div class="step">
+        <div class="icon"><svg viewBox="0 0 48 48"><path d="M24 6l16 8v20l-16 8-16-8V14z"/><path d="M8 14l16 8 16-8"/><path d="M24 22v20"/></svg></div>
+        <div><div class="n">STEP 5</div><h3>Check dependencies</h3><p>Does every import exist? Assistants sometimes invent packages and APIs.</p></div>
+      </div>
+      <div class="step">
+        <div class="icon"><svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="12"/><path d="M29 29l11 11"/><path d="M14 18c2-2.5 4 2.5 6 0s4 2.5 6 0"/></svg></div>
+        <div><div class="n">STEP 6</div><h3>Look for smells</h3><p>Unused variables, duplicated logic, swallowed exceptions, magic numbers.</p></div>
+      </div>
+    </div>
+    <figcaption><b>Figure 3.1</b> The reading checklist. Steps 1–3 catch most bugs; steps 4–6 catch the ones that only
+    show up later, in production.</figcaption>
+  </figure>
+
+  <div class="margin-tip">
+    <div class="big">?</div>
+    <p><b>The ownership test.</b> If you can't explain why a line is there, you don't own it yet. Ask the assistant to
+    explain it, or simplify it, before you accept the change.</p>
+  </div>
+
+  <div class="run-foot"><span>Week 4 · Textbook Chapter 3</span><span class="num">2</span></div>
+</section>
+
+<!-- ============================== 3. Spot the Bug ============================== -->
+<section class="page" style="--accent: var(--red)">
+  <div class="run-head"><span>VIBE 101 · Vibe Coding 101</span><span>Lecture 3 · Reading Code You Didn't Write</span></div>
+  <p class="kicker">Worked example 3.1</p>
+  <h2>Spot the Bug</h2>
+  <p class="lead">An assistant suggests this function for averaging a list of numbers. It looks fine. Read it before you
+  run it.</p>
+
+  <p class="code-label">Suggested code</p>
+<pre class="code"><span class="k">def</span> <span class="f">average</span>(nums):
+    <span class="k">return</span> <span class="b">sum</span>(nums) / <span class="b">len</span>(nums)</pre>
+
+  <div class="callout try">
+    <span class="tag">Try it</span>
+    <p>What happens on <code>[]</code>? Trace it by hand before you read on.</p>
+  </div>
+
+  <figure class="trace-figure">
+    <table class="trace">
+      <thead><tr><th>Step</th><th><code>average([2, 4, 6])</code></th><th><code>average([])</code></th></tr></thead>
+      <tbody>
+        <tr><th>sum(nums)</th><td>12</td><td>0</td></tr>
+        <tr><th>len(nums)</th><td>3</td><td>0</td></tr>
+        <tr><th>sum / len</th><td class="ok">4.0</td>
+          <td class="boom"><svg viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg>0 / 0 → error</td></tr>
+      </tbody>
+    </table>
+    <figcaption><b>Figure 3.2</b> Trace data, not just lines. The happy-path input works. The empty list reaches a
+    boundary the code never checks.</figcaption>
+  </figure>
+
+  <div class="callout answer">
+    <span class="tag">Answer</span>
+    <p><b><code>ZeroDivisionError</code>.</b> Is that in the spec? If not, it's a bug.</p>
+  </div>
+
+  <div class="link-note"><span class="pill">Step 3</span><span><b>Check boundaries.</b> Whether an empty list should
+  raise an error, return a value, or never happen is a spec decision. Find it in the spec, or ask, before you accept the
+  code.</span></div>
+
+  <div class="run-foot"><span>Week 4 · Textbook Chapter 3</span><span class="num">3</span></div>
+</section>
+
+<!-- ============================== 4. Spot the Other Bug ============================== -->
+<section class="page" style="--accent: var(--purple)">
+  <div class="run-head"><span>VIBE 101 · Vibe Coding 101</span><span>Lecture 3 · Reading Code You Didn't Write</span></div>
+  <p class="kicker">Worked example 3.2</p>
+  <h2>Spot the Other Bug</h2>
+  <p class="lead">This one passes a quick test. Call it once and it works perfectly. The bug only shows up the second
+  time.</p>
+
+  <p class="code-label">Suggested code</p>
+<pre class="code"><span class="k">def</span> <span class="f">add_item</span>(item, items=[]):
+    items.append(item)
+    <span class="k">return</span> items</pre>
+
+  <div class="callout try">
+    <span class="tag">Try it</span>
+    <p>Call it twice. What do you get?</p>
+  </div>
+
+  <div class="two">
+    <div>
+      <p class="code-label">Python shell</p>
+<pre class="console"><span class="pr">&gt;&gt;&gt;</span> add_item(<span class="s">"apple"</span>)
+<span class="out">['apple']</span>
+<span class="pr">&gt;&gt;&gt;</span> add_item(<span class="s">"pear"</span>)
+<span class="out">['apple', 'pear']</span></pre>
+    </div>
+    <figure class="memory">
+      <svg viewBox="0 0 340 200" role="img" aria-label="Both calls point at the same default list">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0L10 5L0 10z" fill="#a8459c"/>
+          </marker>
+        </defs>
+        <g font-family="Menlo, monospace" font-size="13" fill="#1f2a33">
+          <rect x="4" y="16" width="160" height="58" rx="8" fill="#fff" stroke="#d5dbe0" stroke-width="1.5"/>
+          <text x="16" y="38" font-family="Avenir Next, sans-serif" font-size="11" font-weight="700" fill="#7a8690">1ST CALL</text>
+          <text x="16" y="60">add_item("apple")</text>
+          <rect x="4" y="126" width="160" height="58" rx="8" fill="#fff" stroke="#d5dbe0" stroke-width="1.5"/>
+          <text x="16" y="148" font-family="Avenir Next, sans-serif" font-size="11" font-weight="700" fill="#7a8690">2ND CALL</text>
+          <text x="16" y="170">add_item("pear")</text>
+          <path d="M166 45C190 45 186 92 206 96" fill="none" stroke="#a8459c" stroke-width="2.4" marker-end="url(#arr)"/>
+          <path d="M166 155C190 155 186 112 206 108" fill="none" stroke="#a8459c" stroke-width="2.4" marker-end="url(#arr)"/>
+          <text x="170" y="36" font-size="12" fill="#a8459c">items</text>
+          <text x="170" y="174" font-size="12" fill="#a8459c">items</text>
+          <rect x="210" y="78" width="126" height="46" rx="6" fill="#f6eef5" stroke="#a8459c" stroke-width="1.8"/>
+          <line x1="271" y1="78" x2="271" y2="124" stroke="#a8459c" stroke-width="1.2"/>
+          <text x="240.5" y="106" text-anchor="middle" font-size="12.5">"apple"</text>
+          <text x="303.5" y="106" text-anchor="middle" font-size="12.5">"pear"</text>
+          <text x="273" y="66" text-anchor="middle" font-family="Avenir Next, sans-serif" font-size="12.5" font-weight="700" fill="#1f2a33">one default list</text>
+          <text x="273" y="144" text-anchor="middle" font-family="Avenir Next, sans-serif" font-size="11" fill="#4a5763">created once,</text>
+          <text x="273" y="158" text-anchor="middle" font-family="Avenir Next, sans-serif" font-size="11" fill="#4a5763">when def runs</text>
+        </g>
+      </svg>
+      <figcaption><b>Figure 3.3</b> Both calls point at the same list object.</figcaption>
+    </figure>
+  </div>
+
+  <div class="callout answer">
+    <span class="tag">Answer</span>
+    <p>The default list is shared across calls. The second call returns both items.</p>
+  </div>
+
+  <p class="why"><b>Why it happens.</b> Python evaluates a default value once, when the <code>def</code> statement runs,
+  not each time the function is called. Every call that leaves out <code>items</code> reuses that same list, so changes
+  from one call leak into the next.</p>
+
+  <div class="link-note"><span class="pill">Step 2</span><span><b>Trace by hand, and trace more than one call.</b> A
+  single happy-path run would never show this bug.</span></div>
+
+  <div class="run-foot"><span>Week 4 · Textbook Chapter 3</span><span class="num">4</span></div>
+</section>
+
+<!-- ============================== 5. Failure modes ============================== -->
+<section class="page" style="--accent: var(--orange)">
+  <div class="run-head"><span>VIBE 101 · Vibe Coding 101</span><span>Lecture 3 · Reading Code You Didn't Write</span></div>
+  <p class="kicker">Section 3.3</p>
+  <h2>Common AI Failure Modes</h2>
+  <p class="lead">These patterns show up again and again in assistant-written code. Each one maps to a step on the
+  reading checklist.</p>
+
+  <div class="modes">
+    <div class="card">
+      <div class="icon"><svg viewBox="0 0 48 48"><path d="M12 41V22a12 12 0 0 1 24 0v19l-4-3-4 3-4-3-4 3-4-3z"/><circle cx="19" cy="22" r="1.6"/><circle cx="29" cy="22" r="1.6"/></svg></div>
+      <div><h3>Hallucinated APIs</h3><p>Calls to functions or packages that do not exist.</p>
+      <div class="catch"><span>Catch it</span>Step 5 · check the docs</div></div>
+    </div>
+    <div class="card">
+      <div class="icon"><svg viewBox="0 0 48 48"><circle cx="21" cy="27" r="15"/><circle cx="21" cy="27" r="6"/><path d="M43 5L32 16"/><path d="M32 16l1-6M32 16l6-1"/></svg></div>
+      <div><h3>Plausible but wrong logic</h3><p>Off-by-one errors and wrong comparison operators in code that reads well.</p>
+      <div class="catch"><span>Catch it</span>Step 2 · trace by hand</div></div>
+    </div>
+    <div class="card">
+      <div class="icon"><svg viewBox="0 0 48 48"><path d="M7 19h7l10-8v26l-10-8H7z"/><path d="M32 18l10 12M42 18L32 30"/></svg></div>
+      <div><h3>Silent <code>except: pass</code></h3><p>A bare <code>except: pass</code> hides every failure, so bugs vanish instead of surfacing.</p>
+      <div class="catch"><span>Catch it</span>Step 6 · look for smells</div></div>
+    </div>
+    <div class="card">
+      <div class="icon"><svg viewBox="0 0 48 48"><circle cx="10" cy="13" r="4.5"/><circle cx="10" cy="35" r="4.5"/><rect x="29" y="15" width="14" height="18" rx="2.5"/><path d="M14.5 13c9 0 8 9 14.5 9M14.5 35c9 0 8-9 14.5-9"/></svg></div>
+      <div><h3>Mutable default arguments</h3><p><code>def f(x, items=[])</code> shares one list across every call.</p>
+      <div class="catch"><span>Catch it</span>Step 2 · trace two calls</div></div>
+    </div>
+    <div class="card">
+      <div class="icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M24 13v11l7 4"/></svg></div>
+      <div><h3>Outdated practices</h3><p>Deprecated functions and APIs from older library versions.</p>
+      <div class="catch"><span>Catch it</span>Step 5 · check dependencies</div></div>
+    </div>
+    <div class="card">
+      <div class="icon"><svg viewBox="0 0 48 48"><path d="M24 7l17 8-17 8-17-8z"/><path d="M7 24l17 8 17-8"/><path d="M7 32l17 8 17-8"/></svg></div>
+      <div><h3>Overengineering</h3><p>A factory for a 10-line script. Extra layers make code harder to read and review.</p>
+      <div class="catch"><span>Catch it</span>Step 1 · check the spec</div></div>
+    </div>
+  </div>
+
+  <div class="takeaways">
+    <h3>Key takeaways</h3>
+    <ul>
+      <li>Reading AI-written code is a separate, deliberate step. You own what you accept.</li>
+      <li>Trace real values, including empty inputs and repeated calls.</li>
+      <li>If you can't explain a line, ask or simplify before you accept it.</li>
+    </ul>
+  </div>
+  <p class="next">Next · <b>Lecture 4: Tests First, Vibes Second</b> · Read Chapter 4</p>
+
+  <div class="run-foot"><span>Week 4 · Textbook Chapter 3</span><span class="num">5</span></div>
+</section>
+
+</body>
+</html>

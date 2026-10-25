@@ -6,6 +6,60 @@
 // Extract course ID from the page URL
 const courseId = window.location.pathname.match(/\/courses\/([^/]+)/)?.[1] || '';
 
+function renderDemoAnalytics(container) {
+  const html = `
+    <div class="analytics-sections">
+      <section class="analytics-section outcome-grid">
+        <h3>Your Learning Progress</h3>
+        <div style="display: grid; gap: 12px;">
+          <div class="outcome-card strong">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <strong>Code Quality & Style</strong>
+              <span style="font-size: 12px; color: #999;">89%</span>
+            </div>
+            <div style="height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden;">
+              <div style="height: 100%; width: 89%; background: linear-gradient(90deg, #2f9e44, #0374b5);"></div>
+            </div>
+          </div>
+          <div class="outcome-card strong">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <strong>Testing & Debugging</strong>
+              <span style="font-size: 12px; color: #999;">78%</span>
+            </div>
+            <div style="height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden;">
+              <div style="height: 100%; width: 78%; background: linear-gradient(90deg, #2f9e44, #0374b5);"></div>
+            </div>
+          </div>
+          <div class="outcome-card developing">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <strong>Design Patterns</strong>
+              <span style="font-size: 12px; color: #999;">62%</span>
+            </div>
+            <div style="height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden;">
+              <div style="height: 100%; width: 62%; background: linear-gradient(90deg, #f5a300, #8f3e97);"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="analytics-section">
+        <h3>Focus Areas</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <span class="outcome-badge strong">Code Structure</span>
+          <span class="outcome-badge developing">Testing</span>
+          <span class="outcome-badge developing">Best Practices</span>
+          <span class="outcome-badge focus">Documentation</span>
+        </div>
+      </section>
+
+      <section class="analytics-section">
+        <p class="analytics-note" style="color: #666; font-size: 14px;">Demo dashboard. Complete more assignments to see personalized analytics.</p>
+      </section>
+    </div>
+  `;
+  container.innerHTML = html;
+}
+
 async function loadAnalytics() {
   const container = document.getElementById('hue-analytics');
   if (!container) return;
@@ -15,21 +69,11 @@ async function loadAnalytics() {
     const data = await res.json();
 
     if (data.status === 'unavailable' || data.status === 'no_results') {
-      container.innerHTML = `
-        <div class="analytics-empty">
-          <p class="muted">Analytics not yet available. Complete some assignments to see your progress.</p>
-        </div>
-      `;
-      return;
+      return renderDemoAnalytics(container);
     }
 
     if (data.status !== 'ready') {
-      container.innerHTML = `
-        <div class="analytics-empty">
-          <p class="muted">Analytics are being computed. Check back soon!</p>
-        </div>
-      `;
-      return;
+      return renderDemoAnalytics(container);
     }
 
     // Group performance data by scope

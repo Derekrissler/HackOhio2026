@@ -5,49 +5,48 @@
 
 .hue-launcher { position: fixed; right: 20px; bottom: 20px; z-index: 55; display: inline-flex; align-items: center; gap: 8px;
   padding: 8px 16px 8px 8px; font: inherit; font-weight: 700; color: var(--text); background: #fff;
-  border: 1px solid var(--border); border-radius: 999px; box-shadow: 0 4px 14px rgba(0,0,0,.18); cursor: pointer; }
-.hue-launcher:hover { border-color: var(--link); }
+  border: 1px solid #e0e0e0; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,.15); cursor: pointer; }
+.hue-launcher:hover { border-color: #999; }
 .hue-launcher[hidden], .hue-box[hidden] { display: none; }
 
 /* Chat box: bottom-right corner. Tutor window (.is-expanded): full height on the right. */
 .hue-box { position: fixed; right: 20px; bottom: 20px; z-index: 55; display: flex; flex-direction: column;
-  width: 370px; height: min(560px, calc(100vh - 40px)); background: #fff; border: 1px solid var(--border);
-  border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.2); overflow: hidden; color: var(--text); }
+  width: 370px; height: min(560px, calc(100vh - 40px)); background: #fff; border: 1px solid #e0e0e0;
+  border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.15); overflow: hidden; color: #333; }
 .hue.is-expanded .hue-box { top: 0; right: 0; bottom: 0; width: min(460px, calc(100vw - var(--gnav-w))); height: auto;
-  border-width: 0 0 0 1px; border-radius: 0; box-shadow: -6px 0 20px rgba(0,0,0,.12); }
-/* Only screens wide enough to keep the page usable push it aside; narrower ones overlay it. */
+  border-width: 0 0 0 1px; border-radius: 0; box-shadow: -6px 0 20px rgba(0,0,0,.1); }
 @media (min-width: 1500px) { body.hue-docked #wrapper { margin-right: 460px; } }
 
-.hue-head { display: flex; align-items: center; gap: 4px; padding: 10px 10px 10px 14px; border-bottom: 1px solid var(--border-light); }
-.hue-head h2 { display: flex; align-items: center; gap: 8px; margin: 0 auto 0 0; font-size: 1.05rem; }
-.hue-icon-btn { display: grid; place-items: center; width: 34px; height: 34px; padding: 0; color: var(--muted);
+.hue-head { display: flex; align-items: center; gap: 4px; padding: 12px 14px; border-bottom: 1px solid #e0e0e0; }
+.hue-head h2 { display: flex; align-items: center; gap: 8px; margin: 0 auto 0 0; font-size: 1rem; font-weight: 600; }
+.hue-icon-btn { display: grid; place-items: center; width: 34px; height: 34px; padding: 0; color: #999;
   background: none; border: 0; border-radius: 6px; cursor: pointer; }
-.hue-icon-btn:hover { color: var(--text); background: var(--panel); }
+.hue-icon-btn:hover { color: #333; background: #f5f5f5; }
 .hue:not(.is-expanded) .ic-shrink, .hue.is-expanded .ic-expand { display: none; }
-.hue-launcher:focus-visible, .hue-icon-btn:focus-visible, .hue-link:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.hue-launcher:focus-visible, .hue-icon-btn:focus-visible, .hue-link:focus-visible { outline: 2px solid #666; outline-offset: 2px; }
 
-.hue-log { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 14px; overflow-y: auto; background: #f7f8f9; }
-.hue-msg { max-width: 92%; padding: 10px 12px; border-radius: 10px; font-size: .93rem; line-height: 1.45; }
+.hue-log { flex: 1; display: flex; flex-direction: column; gap: 8px; padding: 12px; overflow-y: auto; background: #fff; }
+.hue-msg { max-width: 92%; padding: 8px 12px; border-radius: 8px; font-size: .93rem; line-height: 1.45; }
 .hue-msg p { margin: 0; }
 .hue-msg > * + * { margin-top: 6px; }
-.hue-bot { align-self: flex-start; background: #fff; border: 1px solid var(--border-light); }
-.hue-me { align-self: flex-end; background: var(--primary); color: #fff; white-space: pre-wrap; }
-.hue-error { align-self: flex-start; background: #fdf2f3; border: 1px solid #f3c6cb; color: #a3000f; }
-.hue-divider { align-self: center; padding: 2px 10px; color: var(--muted); font-size: .8rem; }
+.hue-bot { align-self: flex-start; background: #f0f0f0; color: #333; }
+.hue-me { align-self: flex-end; background: #4a5568; color: #fff; white-space: pre-wrap; }
+.hue-error { align-self: flex-start; background: #f5f5f5; color: #d32f2f; }
+.hue-divider { display: none; }
 .hue-text { white-space: pre-wrap; }
-.hue-title { font-weight: 700; }
-.hue-next { font-weight: 700; }
-.hue-note { color: var(--muted); font-size: .82rem; }
+.hue-title { font-weight: 600; }
+.hue-next { font-weight: 600; }
+.hue-note { color: #999; font-size: .82rem; }
 .hue-cites { margin: 0; padding-left: 18px; font-size: .88rem; }
-.hue-bot.is-thinking { color: var(--muted); animation: hue-pulse 1.4s ease-in-out infinite; }
+.hue-bot.is-thinking { color: #999; animation: hue-pulse 1.4s ease-in-out infinite; }
 .hue-msg.is-flash { animation: hue-flash 1.2s ease-out; }
 @keyframes hue-pulse { 50% { opacity: .55; } }
-@keyframes hue-flash { from { box-shadow: 0 0 0 3px #9cc9e6; } to { box-shadow: 0 0 0 3px transparent; } }
+@keyframes hue-flash { from { box-shadow: 0 0 0 3px #ddd; } to { box-shadow: 0 0 0 3px transparent; } }
 
-.hue-mode { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: .75rem; font-weight: 700; }
-.hue-mode-protected_assessment { background: #fdecea; color: #a3000f; }
-.hue-mode-guided_homework { background: #fff4e0; color: #8a5300; }
-.hue-mode-independent_study { background: #e6f4ea; color: #1e6b34; }
+.hue-mode { display: none; }
+.hue-mode-protected_assessment { display: none; }
+.hue-mode-guided_homework { display: none; }
+.hue-mode-independent_study { display: none; }
 
 /* "Analyze goals" answers */
 .hue-goals { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
@@ -60,40 +59,38 @@
 /* Tutor replies: safe markdown subset, slide quote cards, suggestions, thinking dots (hue.js) */
 .hue-text p + p { margin-top: 8px; }
 .hue-text ul, .hue-text ol { margin: 6px 0 0; padding-left: 20px; }
-.hue-text code, .hue-next code { padding: 1px 4px; background: #eef1f3; border-radius: 3px; font-size: .9em; }
-.hue-snippet { margin: 8px 0 0; padding: 8px 10px; background: #f7f9fb; border: 1px solid var(--border-light);
-  border-left: 3px solid var(--primary); border-radius: 4px; }
+.hue-text code, .hue-next code { padding: 1px 4px; background: #f0f0f0; border-radius: 3px; font-size: .9em; }
+.hue-snippet { margin: 8px 0 0; padding: 8px 10px; background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; }
 .hue-snippet blockquote { margin: 0; white-space: pre-wrap; }
-.hue-snippet figcaption { margin-top: 4px; color: var(--muted); font-size: .8rem; }
-.hue-snippet-open { margin-left: 4px; font-weight: 700; }
-.hue-suggest { display: flex; flex-wrap: wrap; gap: 6px; color: var(--muted); font-size: .85rem; }
+.hue-snippet figcaption { margin-top: 4px; color: #999; font-size: .8rem; }
+.hue-snippet-open { margin-left: 4px; font-weight: 600; }
+.hue-suggest { display: flex; flex-wrap: wrap; gap: 6px; color: #999; font-size: .85rem; }
 .hue-suggest p { flex-basis: 100%; margin: 0; }
-.hue-chip { padding: 5px 10px; font: inherit; color: var(--text); background: #fff; border: 1px solid var(--btn-border);
+.hue-chip { padding: 5px 10px; font: inherit; color: #333; background: #fff; border: 1px solid #ddd;
   border-radius: 14px; cursor: pointer; text-align: left; }
-.hue-chip:hover { border-color: var(--link); color: var(--link); }
+.hue-chip:hover { border-color: #999; background: #f9f9f9; }
 .hue-dots::after { content: ""; display: inline-block; width: 1.2em; animation: hue-dots 1.2s steps(4, end) infinite; }
 @keyframes hue-dots { 0% { content: ""; } 25% { content: "."; } 50% { content: ".."; } 75% { content: "..."; } }
 
 /* Tutor controls. The chat box shows the message field; the tutor window adds the assignment and its mode. */
-.hue-tutor { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 10px 12px 12px;
-  border-top: 1px solid var(--border-light); }  /* minmax: a long assignment name must not widen the box */
-.hue-status { margin: 0; color: var(--muted); font-size: .82rem; }
+.hue-tutor { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 10px 12px 12px; border-top: 1px solid #e0e0e0; }
+.hue-status { margin: 0; color: #999; font-size: .82rem; }
 .hue-status:empty { display: none; }
-.hue-banner { margin: 0; padding: 7px 10px; border-left: 3px solid; border-radius: 4px; font-size: .82rem; }
-.hue-banner-protected_assessment { background: #fdecea; border-color: #c4161c; color: #7a0c10; }
-.hue-banner-guided_homework { background: #fff4e0; border-color: #d97a00; color: #6b4100; }
-.hue-banner-independent_study { background: #e6f4ea; border-color: #2b8a4b; color: #1e4d2b; }
+.hue-banner { display: none; }
+.hue-banner-protected_assessment { display: none; }
+.hue-banner-guided_homework { display: none; }
+.hue-banner-independent_study { display: none; }
 .hue-context select, .hue-form textarea { padding: 7px 9px; font: inherit; font-weight: 400;
-  border: 1px solid var(--btn-border); border-radius: 4px; }
-.hue-context select:focus, .hue-form textarea:focus { outline: 2px solid var(--link); outline-offset: -1px;
-  border-color: var(--link); }
-.hue-form textarea:disabled { background: var(--panel); }
-.hue-context { display: flex; align-items: center; gap: 8px; font-size: .85rem; }
-.hue-context label { font-weight: 700; white-space: nowrap; }
+  border: 1px solid #ddd; border-radius: 4px; }
+.hue-context select:focus, .hue-form textarea:focus { outline: 2px solid #666; outline-offset: -1px;
+  border-color: #666; }
+.hue-form textarea:disabled { background: #f5f5f5; }
+.hue-context { display: none; }
+.hue-context label { font-weight: 600; white-space: nowrap; }
 .hue-context select { flex: 1; min-width: 0; }
 .hue-form { display: flex; align-items: flex-end; gap: 8px; }
 .hue-form textarea { flex: 1; resize: none; }
-.hue-link { padding: 0; font: inherit; font-size: .85rem; color: var(--link); background: none; border: 0; cursor: pointer; }
+.hue-link { padding: 0; font: inherit; font-size: .85rem; color: #666; background: none; border: 0; cursor: pointer; }
 .hue-link:hover { text-decoration: underline; }
 .hue:not(.is-ready) .hue-when-ready, .hue:not(.is-expanded) .hue-when-expanded { display: none; }
 

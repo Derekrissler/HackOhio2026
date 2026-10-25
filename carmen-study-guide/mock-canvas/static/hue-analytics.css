@@ -249,6 +249,31 @@
   margin-top: 0.5rem;
 }
 
+/* Outcome Badges */
+.outcome-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  background: #f0f0f0;
+}
+
+.outcome-badge.strong {
+  background: #e6f4ea;
+  color: #1e6b34;
+}
+
+.outcome-badge.developing {
+  background: #fff4e0;
+  color: #8a5300;
+}
+
+.outcome-badge.focus {
+  background: #fdecea;
+  color: #a3000f;
+}
+
 /* Analytics Notes */
 .analytics-note {
   font-size: 0.85rem;
@@ -356,42 +381,3 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .analytics-section {
-    background: #1a1a1a;
-    border-color: var(--border);
-  }
-
-  .outcome-card,
-  .question-item,
-  .error-item,
-  .summary-item {
-    background: #2a2a2a;
-    border-color: var(--border);
-  }
-
-  .outcome-card.outcome-strong,
-  .summary-item.summary-strong {
-    background: #1a3a1a;
-  }
-
-  .outcome-card.outcome-developing,
-  .summary-item.summary-developing {
-    background: #3a2a1a;
-  }
-
-  .outcome-card.outcome-focus,
-  .question-item.question-hard,
-  .summary-item.summary-focus {
-    background: #3a1a1a;
-  }
-
-  .error-text {
-    background: #3a1a1a;
-  }
-
-  .error-help {
-    background: #3a2a1a;
-    color: #e6b800;
-  }
-}

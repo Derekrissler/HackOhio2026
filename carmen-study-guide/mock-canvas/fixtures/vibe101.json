@@ -673,6 +673,7 @@
     {
       "id": 303,
       "display_name": "Lecture03-Reading-Code-You-Didn-t-Write.pdf",
+      "path": "slides/Lecture03-Reading-Code-You-Didn-t-Write.pdf",
       "pages": [
         "Lecture 3: Reading Code You Didn't Write\nTextbook: Chapter 3",
         "The Reading Checklist\n1. Matches the spec?\n2. Trace by hand\n3. Check boundaries\n4. Check hidden assumptions\n5. Check dependencies\n6. Look for smells",

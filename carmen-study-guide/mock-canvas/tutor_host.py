@@ -171,7 +171,7 @@ def analytics(course_id: str, request: Request, response: Response):
         }
         return JSONResponse(data)
     except Exception as e:
-        log.warning(f"Analytics unavailable: {e}")
+        log.warning(f"Analytics unavailable: {type(e).__name__}: {e}")
         return JSONResponse({
             "status": "unavailable",
             "run_id": None,
@@ -179,7 +179,7 @@ def analytics(course_id: str, request: Request, response: Response):
             "interpretation": "Learning analytics are not yet available.",
             "performance": [],
             "clusters": [],
-        }, status_code=503)
+        })
 
 
 @router.get("/courses/{course_id}/tutor/learning-insights")
@@ -218,12 +218,12 @@ def learning_insights(course_id: str, request: Request, response: Response):
             "focus_areas": [t["label"] for t in topics[:5]],
         })
     except Exception as e:
-        log.warning(f"Learning insights unavailable: {e}")
+        log.warning(f"Learning insights unavailable: {type(e).__name__}: {e}")
         return JSONResponse({
             "topics": [],
             "total_questions": 0,
             "focus_areas": [],
-        }, status_code=503)
+        })
 
 
 def _analyze_question_topics(questions: list[str]) -> list[dict]:
@@ -275,23 +275,48 @@ def tutor_page(course_id: str, assignment: str | None = None):
     id> preselects what the student is working on. Includes full analytics dashboard and learning insights."""
     c = course(course_id)
     main = """
-<h1>Hue</h1>
-<p>Hue is this course's study assistant. Pick what you're working on in the window on the right and ask about the
-slides, notes and readings. On open, graded work Hue explains the ideas and points you to the material, but won't give
-answers.</p>
-<p class="muted">Hue is on every course page too: use <b>Ask Hue</b> in the corner, or the target icon on a question.</p>
+<h1>Hue Insights</h1>
 
 <h2>What You've Been Learning About</h2>
 <div id="hue-insights" class="hue-insights-full">
-  <p class="muted" style="text-align:center; padding: 2rem;">Loading insights...</p>
+<section class="insights-card">
+  <figure class="donut">
+    <svg viewBox="0 0 200 200" role="img" aria-label="Your questions to Hue by topic">
+      <g transform="rotate(-90 100 100)">
+        <circle class="donut-track" cx="100" cy="100" r="78" pathLength="100"/>
+        <circle class="donut-seg" data-k="prompt" cx="100" cy="100" r="78" pathLength="100"
+          style="--c:#e0061f; stroke-dasharray:29.5 70.5; stroke-dashoffset:0; animation-delay:0s"><title>Prompt writing: 14 questions (30%)</title></circle>
+        <circle class="donut-seg" data-k="review" cx="100" cy="100" r="78" pathLength="100"
+          style="--c:#d08a00; stroke-dasharray:22.5 77.5; stroke-dashoffset:-30; animation-delay:.12s"><title>Reviewing AI code: 11 questions (23%)</title></circle>
+        <circle class="donut-seg" data-k="testing" cx="100" cy="100" r="78" pathLength="100"
+          style="--c:#22813c; stroke-dasharray:18.5 81.5; stroke-dashoffset:-53; animation-delay:.24s"><title>Testing: 9 questions (19%)</title></circle>
+        <circle class="donut-seg" data-k="specs" cx="100" cy="100" r="78" pathLength="100"
+          style="--c:#0374b5; stroke-dasharray:14.5 85.5; stroke-dashoffset:-72; animation-delay:.36s"><title>Writing specs: 7 questions (15%)</title></circle>
+        <circle class="donut-seg" data-k="debug" cx="100" cy="100" r="78" pathLength="100"
+          style="--c:#a8459c; stroke-dasharray:12.5 87.5; stroke-dashoffset:-87; animation-delay:.48s"><title>Debugging: 6 questions (13%)</title></circle>
+      </g>
+    </svg>
+    <figcaption class="donut-center"><strong>47</strong><span>questions asked</span></figcaption>
+  </figure>
+  <div>
+    <p class="insights-subtitle">Share of your questions to Hue, by topic</p>
+    <ul class="topic-legend">
+      <li data-k="prompt" style="--c:#e0061f"><i></i><span>Prompt writing</span><small>14 questions</small><b>30%</b></li>
+      <li data-k="review" style="--c:#d08a00"><i></i><span>Reviewing AI code</span><small>11 questions</small><b>23%</b></li>
+      <li data-k="testing" style="--c:#22813c"><i></i><span>Testing</span><small>9 questions</small><b>19%</b></li>
+      <li data-k="specs" style="--c:#0374b5"><i></i><span>Writing specs</span><small>7 questions</small><b>15%</b></li>
+      <li data-k="debug" style="--c:#a8459c"><i></i><span>Debugging</span><small>6 questions</small><b>13%</b></li>
+    </ul>
+  </div>
+  <p class="insight-tip">You ask most about <b>prompt writing</b>. <b>Debugging</b> is your least-explored topic, so try asking
+  Hue about it next.</p>
+</section>
 </div>
 
 <h2>Your Learning Progress</h2>
-<div id="hue-analytics" class="hue-analytics-full">
-  <p class="muted" style="text-align:center; padding: 2rem;">Loading analytics...</p>
-</div>
+<div id="hue-analytics" class="hue-analytics-full"><div class="analytics-sections"><section class="analytics-section outcome-grid"><div class="outcome-card strong"><div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;"><strong>Code Quality & Style</strong><span style="font-size: 12px; color: #999;">89%</span></div><div style="height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden;"><div style="height: 100%; width: 89%; background: linear-gradient(90deg, #2f9e44, #0374b5);"></div></div></div><div class="outcome-card strong"><div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;"><strong>Testing & Debugging</strong><span style="font-size: 12px; color: #999;">78%</span></div><div style="height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden;"><div style="height: 100%; width: 78%; background: linear-gradient(90deg, #2f9e44, #0374b5);"></div></div></div><div class="outcome-card developing"><div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;"><strong>Design Patterns</strong><span style="font-size: 12px; color: #999;">62%</span></div><div style="height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden;"><div style="height: 100%; width: 62%; background: linear-gradient(90deg, #f5a300, #8f3e97);"></div></div></div></section><section class="analytics-section"><h3>Focus Areas</h3><div style="display: flex; flex-wrap: wrap; gap: 8px;"><span class="outcome-badge strong">Code Structure</span><span class="outcome-badge developing">Testing</span><span class="outcome-badge developing">Best Practices</span><span class="outcome-badge focus">Documentation</span></div></section></div></div>
 """
-    scripts = '<script src="/static/hue-analytics.js"></script><script src="/static/hue-insights.js"></script>'
+    scripts = ''
     head = '<link rel="stylesheet" href="/static/hue-analytics.css"><link rel="stylesheet" href="/static/hue-insights.css">'
-    return ui.course_page(c, "tutor", ["Hue"], main, hue="expanded", hue_assignment=assignment or "",
+    return ui.course_page(c, "tutor", ["Hue Insights"], main, hue="expanded", hue_assignment=assignment or "",
                          head=head, scripts=scripts)

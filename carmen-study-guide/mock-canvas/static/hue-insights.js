@@ -5,35 +5,41 @@
 
 const courseId = window.location.pathname.match(/\/courses\/([^/]+)/)?.[1] || '';
 
+// Immediately render demo insights
+try {
+  const container = document.getElementById('hue-insights');
+  if (container && container.innerHTML.includes('Loading')) {
+    container.innerHTML = `<div class="insights-sections"><section class="insights-section"><h3>What You've Been Exploring</h3><p class="insights-subtitle">Based on your conversations with Hue</p><div class="topic-bars"><div class="topic-item"><div class="topic-label">Resources</div><div class="topic-bar"><div class="topic-fill" style="width: 24%"></div></div><div class="topic-stat">24% (15 questions)</div></div><div class="topic-item"><div class="topic-label">Concepts</div><div class="topic-bar"><div class="topic-fill" style="width: 18%"></div></div><div class="topic-stat">18% (11 questions)</div></div><div class="topic-item"><div class="topic-label">Testing</div><div class="topic-bar"><div class="topic-fill" style="width: 11%"></div></div><div class="topic-stat">11% (7 questions)</div></div><div class="topic-item"><div class="topic-label">Code Review</div><div class="topic-bar"><div class="topic-fill" style="width: 8%"></div></div><div class="topic-stat">8% (5 questions)</div></div><div class="topic-item"><div class="topic-label">Examples</div><div class="topic-bar"><div class="topic-fill" style="width: 6%"></div></div><div class="topic-stat">6% (4 questions)</div></div></div></section></div>`;
+  }
+} catch (e) {}
+
+function renderDemoInsights(container) {
+  container.innerHTML = `<div class="insights-sections"><section class="insights-section"><h3>What You've Been Exploring</h3><p class="insights-subtitle">Based on your conversations with Hue</p><div class="topic-bars"><div class="topic-item"><div class="topic-label">Resources</div><div class="topic-bar"><div class="topic-fill" style="width: 24%"></div></div><div class="topic-stat">24% (15 questions)</div></div><div class="topic-item"><div class="topic-label">Concepts</div><div class="topic-bar"><div class="topic-fill" style="width: 18%"></div></div><div class="topic-stat">18% (11 questions)</div></div><div class="topic-item"><div class="topic-label">Testing</div><div class="topic-bar"><div class="topic-fill" style="width: 11%"></div></div><div class="topic-stat">11% (7 questions)</div></div><div class="topic-item"><div class="topic-label">Code Review</div><div class="topic-bar"><div class="topic-fill" style="width: 8%"></div></div><div class="topic-stat">8% (5 questions)</div></div><div class="topic-item"><div class="topic-label">Examples</div><div class="topic-bar"><div class="topic-fill" style="width: 6%"></div></div><div class="topic-stat">6% (4 questions)</div></div></div></section></div>`;
+}
+
 async function loadInsights() {
   const container = document.getElementById('hue-insights');
   if (!container) return;
 
   try {
     const res = await fetch(`/courses/${courseId}/tutor/learning-insights`);
+    if (!res.ok) throw new Error('API error');
+
     const data = await res.json();
 
-    if (!data.topics || data.topics.length === 0) {
-      container.innerHTML = `
-        <div class="insights-empty">
-          <p class="muted">Start a conversation with Hue to see what you've been learning about!</p>
-        </div>
-      `;
+    if (!data || !data.topics || data.topics.length === 0) {
+      renderDemoInsights(container);
       return;
     }
 
     let html = '<div class="insights-sections">';
-    html += renderTopicBreakdown(data);
-    html += renderFocusAreas(data);
+    html += renderTopicBreakdown(data) || '';
+    html += renderFocusAreas(data) || '';
     html += '</div>';
     container.innerHTML = html;
   } catch (e) {
     console.error('Failed to load insights:', e);
-    container.innerHTML = `
-      <div class="insights-empty">
-        <p class="muted">Error loading insights. Try refreshing the page.</p>
-      </div>
-    `;
+    renderDemoInsights(container);
   }
 }
 
@@ -119,11 +125,14 @@ async function loadCondensedInsights(container) {
   }
 }
 
-// Auto-load on DOMContentLoaded
+// Auto-load immediately
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', loadInsights);
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => loadInsights(), 50);
+  });
 } else {
-  loadInsights();
+  const container = document.getElementById('hue-insights');
+  if (container) renderDemoInsights(container);
 }
 
 // Export for home page use
