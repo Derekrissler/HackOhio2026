@@ -192,11 +192,15 @@ def document_from_row(row):
 def generate_arrs(
     statistics: StatisticsResult, *, records: list[AnalyticalInput], run_id: UUID,
     input_snapshot: str, computed_at, clustering: ClusteringResult | None = None, approved_clusters=None,
+    synthetic_provenance=None,
 ) -> list[ARRDocument]:
     documents = []
     provenance = {"method": METHOD, "input_snapshot": input_snapshot,
                   "configuration": statistics.config.model_dump(mode="json"),
                   "model": clustering.model.model_dump(mode="json") if clustering and clustering.model else None}
+    if synthetic_provenance is not None:
+        from .synthetic_inputs import SyntheticDemoProvenance
+        provenance["synthetic_demo_v1"] = SyntheticDemoProvenance.model_validate(synthetic_provenance).model_dump(mode="json")
 
     def append(scope, course_id, metrics, evidence, *, subject=None, outcome=None,
                assessment=None, question=None, token="", numerator=None, denominator=None,

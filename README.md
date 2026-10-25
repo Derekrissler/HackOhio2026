@@ -17,6 +17,9 @@ the implementation with the pipeline specification and documents live data,
 remaining work, debugging procedures and technical improvements.
 The [source repair workflow](docs/analytics-source-repairs.md) adds append-only
 evidence repair and explicit error/outcome review without schema changes.
+The [local synthetic-input preview](docs/analytics-synthetic-inputs.md) supplies
+clearly labeled hypothetical VIBE 101 classifications, with optional explicitly
+authorized ML-run storage in Supabase separate from published score results.
 
 | Part | Stack | Folder |
 |---|---|---|

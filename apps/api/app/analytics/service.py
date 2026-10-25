@@ -57,11 +57,19 @@ class AnalysisBundle(Contract):
             raise ValueError("snapshot manifest changed")
         if self.manifest.get("source_fingerprint") != self.source_fingerprint:
             raise ValueError("source fingerprint mismatch")
+        demo = self.manifest.get("synthetic_demo_v1")
+        if demo is not None:
+            from .synthetic_inputs import SyntheticDemoProvenance
+            demo = SyntheticDemoProvenance.model_validate(demo).model_dump(mode="json")
+            if self.source_kind != "offline_fixture":
+                raise ValueError("synthetic results must remain offline")
         records = [AnalyticalInput.model_validate(row) for row in self.manifest.get("records", [])]
         owners = {record.ler_id: (record.course_id, record.learner_id) for record in records}
         if len({doc.id for doc in self.documents}) != len(self.documents):
             raise ValueError("duplicate document ID")
         for doc in self.documents:
+            if doc.provenance.get("synthetic_demo_v1") != demo:
+                raise ValueError("synthetic result provenance mismatch")
             if doc.run_id != self.run_id or doc.course_id != self.course_id or doc.created_at != self.computed_at:
                 raise ValueError("document belongs to a different run")
             if doc.provenance.get("input_snapshot") != self.input_snapshot:
@@ -129,7 +137,8 @@ def analyze_course(
             raise ValueError("provide one excerpt input")
         from .reviewed_excerpts import ReviewedExcerptExport
         reviewed_export = ReviewedExcerptExport.model_validate(reviewed_export)
-        approved_excerpts = reviewed_export.approved_inputs(records, batch, live=getattr(source, "source_kind", "offline_fixture") == "supabase")
+        approved_excerpts = reviewed_export.approved_inputs(records, batch, live=getattr(source, "source_kind", "offline_fixture") == "supabase",
+            verify_source_rows=getattr(source, "requires_source_row_review", False))
     statistics = analyze_statistics(records, config, period)
     timestamp = computed_at or datetime.now(timezone.utc)
     clustering, prepared = None, None
@@ -158,6 +167,13 @@ def analyze_course(
                                "assistance": part.assistance, "status": part.status, "reason": part.reason}
                               for part in clustering.partitions] if clustering else [],
     })
+    demo = batch.source_manifest.get("synthetic_demo_v1")
+    if demo is not None:
+        from .synthetic_inputs import SyntheticDemoProvenance
+        if getattr(source, "source_kind", "offline_fixture") != "offline_fixture":
+            raise ValueError("synthetic inputs must remain offline")
+        demo = SyntheticDemoProvenance.model_validate(demo).model_dump(mode="json")
+        manifest["synthetic_demo_v1"] = demo
     snapshot = content_hash(manifest)
     approved_clusters = None
     if cluster:
@@ -173,7 +189,8 @@ def analyze_course(
             manifest["cluster_review"] = cluster_review.model_dump(mode="json")
         snapshot = content_hash(manifest)
     documents = generate_arrs(statistics, records=records, run_id=run_id, input_snapshot=snapshot,
-                              computed_at=computed_at, clustering=clustering, approved_clusters=approved_clusters)
+                              computed_at=computed_at, clustering=clustering, approved_clusters=approved_clusters,
+                              synthetic_provenance=demo)
     if cluster_review is not None:
         for doc in documents:
             if doc.scope == "misconception_cluster":
@@ -195,6 +212,8 @@ def persist_analysis(repository, bundle: AnalysisBundle, *, exclusive_course_acc
     """
     if not exclusive_course_access:
         raise ValueError("publication requires exclusive course access, including ingestion and metadata edits")
+    if "synthetic_demo_v1" in bundle.manifest or any("synthetic_demo_v1" in d.provenance for d in bundle.documents):
+        raise ValueError("synthetic demonstration results cannot be published")
     # Revalidate mutable DTOs before using privileged storage methods.
     bundle = AnalysisBundle.model_validate_json(bundle.model_dump_json())
     if bundle.source_kind != "supabase":

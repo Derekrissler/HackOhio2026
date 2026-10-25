@@ -32,7 +32,7 @@ class ReviewedExcerptExport(Contract):
     def digest(self):
         return content_hash(self)
 
-    def approved_inputs(self, records, batch, *, live=False):
+    def approved_inputs(self, records, batch, *, live=False, verify_source_rows=False):
         if self.course_id != batch.course_id:
             raise ValueError("review export belongs to another course")
         by_id = {record.ler_id: record for record in records}
@@ -46,7 +46,7 @@ class ReviewedExcerptExport(Contract):
             allowed = {ref for error in events for ref in error.evidence_ref_ids}
             if not events or record.errors_analyzed is not True or not set(entry.evidence_ref_ids) <= allowed:
                 raise ValueError("review export does not match classified error evidence")
-            if live:
+            if live or verify_source_rows or "synthetic_demo_v1" in batch.source_manifest:
                 source = error_rows.get(str(entry.ler_error_id))
                 if not source or source["ler_id"] != str(entry.ler_id) or source["code"] != entry.error_code or source["instructor_status"] == "rejected":
                     raise ValueError("review export references a different error")

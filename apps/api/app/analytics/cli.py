@@ -28,6 +28,30 @@ class FileEvidenceSource:
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
+    demo = commands.add_parser("demo", help="synthetic analytics; shared storage requires explicit authorization")
+    demo_commands = demo.add_subparsers(dest="demo_command", required=True)
+    snapshot = demo_commands.add_parser("snapshot", help="capture existing VIBE 101 with SELECT only")
+    snapshot.add_argument("--course", type=UUID, default=UUID("94c2f9d7-6940-463f-aa55-f09f66a35835"))
+    snapshot.add_argument("--output", type=Path, required=True)
+    generate = demo_commands.add_parser("generate", help="generate a deterministic local preview with pending reviews")
+    generate.add_argument("--snapshot", type=Path, required=True)
+    generate.add_argument("--seed", type=int, default=2026)
+    generate.add_argument("--target", type=int, default=60)
+    for name in ("validate", "review-text", "analyze", "finalize", "archive"):
+        operation = demo_commands.add_parser(name)
+        operation.add_argument("--snapshot", type=Path, required=True)
+        operation.add_argument("--dataset", type=Path, required=True)
+        if name != "validate":
+            operation.add_argument("--review", type=Path, required=True, help="completed, attributed text decisions")
+        if name in ("analyze", "finalize"):
+            operation.add_argument("--model-cache", type=Path, required=True)
+        if name in ("finalize", "archive"):
+            operation.add_argument("--candidate", type=Path, required=True)
+        if name == "finalize":
+            operation.add_argument("--group-review", type=Path, required=True)
+        if name == "archive":
+            operation.add_argument("--authorize-synthetic-storage", action="store_true", required=True)
+            operation.add_argument("--authorization-note", required=True)
     commands.add_parser("courses", help="read-only discovery of course UUIDs and Canvas IDs")
     repair = commands.add_parser('repair-plan', help='private source-grounded evidence repair preview; no database writes')
     repair.add_argument('--course', type=UUID, required=True)
@@ -55,6 +79,10 @@ def main(argv=None):
                          help="attest that ingestion and metadata writers are paused/serialized for this course")
     args = parser.parse_args(argv)
     try:
+        if args.command == "demo":
+            from .synthetic_source import run_demo_cli
+            print(json.dumps(run_demo_cli(args), indent=2))
+            return 0
         if args.command in ('repair-plan', 'repair-apply'):
             from .source_repairs import RepairPlan, apply_plan, build_plan, read_source, review_packet
             from .supabase_clients import create_pipeline_client
@@ -103,6 +131,8 @@ def main(argv=None):
             return 0
         if args.command == "publish":
             bundle = AnalysisBundle.model_validate_json(args.bundle.read_text(encoding="utf-8"))
+            if "synthetic_demo_v1" in bundle.manifest:
+                raise ValueError("synthetic demonstration results cannot be published")
             if not args.exclusive_course_access or bundle.source_kind != "supabase":
                 raise ValueError("publication preconditions not met")
             from .repository import SupabaseAnalysisRepository

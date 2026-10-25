@@ -124,6 +124,15 @@ class SupabaseEvidenceRepository:
         # Validate outcome ownership: FKs alone do not enforce same-course relationships.
         outcome_ids = [r["outcome_id"] for table in ("ler_outcomes", "question_outcomes") for r in manifest[table]]
         manifest["outcomes"] = self._rows("outcomes", "id,course_id", ids=outcome_ids, filters=course_filter)
+        return assemble_evidence_batch(course_id, manifest)
+
+    @staticmethod
+    def _assemble(course_id, manifest):
+        """Pure join assembly shared with complete offline source manifests."""
+        lers = manifest["lers"]
+        learner_ids = {row["id"] for row in manifest["learners"]}
+        related = {name: {row["id"]: row for row in manifest[table]}
+                   for name, (table, _, _) in RELATED.items()}
         outcomes = {row["id"] for row in manifest["outcomes"]}
         refs = {row["id"]: row for row in manifest["evidence_refs"]}
         children = {}
@@ -217,3 +226,8 @@ class SupabaseEvidenceRepository:
                             evidence_ref_ids=sorted(all_refs))
             batch.envelopes.append(envelope)
         return batch
+
+
+def assemble_evidence_batch(course_id, manifest):
+    """Apply the live repository's ownership and join rules without I/O."""
+    return SupabaseEvidenceRepository._assemble(UUID(str(course_id)), manifest)
