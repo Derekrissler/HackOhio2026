@@ -1,0 +1,104 @@
+"""Real Supabase identity; demo cookies/pseudonyms cannot authorize tutor data."""
+from collections import defaultdict, deque
+import time
+from uuid import UUID
+
+from fastapi import HTTPException, Request, Response
+from pydantic import BaseModel, Field, SecretStr
+
+from tutor.models import Learner
+
+COOKIE = "tutor_access_token"
+_logins = defaultdict(deque)
+
+
+def same_origin(request):
+    if request.headers.get("x-tutor-request") != "1":
+        raise HTTPException(403, "Same-origin tutor request required")
+    origin = request.headers.get("origin")
+    if origin and origin.rstrip("/") != str(request.base_url).rstrip("/"):
+        raise HTTPException(403, "Same-origin tutor request required")
+
+
+class LoginBody(BaseModel):
+    email: str = Field(min_length=1, max_length=320)
+    password: SecretStr
+
+
+def login(body: LoginBody, request: Request, response: Response):
+    same_origin(request)
+    now = time.monotonic()
+    attempts = _logins[request.client.host if request.client else "unknown"]
+    while attempts and attempts[0] < now - 60:
+        attempts.popleft()
+    if len(attempts) >= 10:
+        raise HTTPException(429, "Wait before trying to sign in again")
+    attempts.append(now)
+    try:
+        from supabase_client import user_client
+        result = user_client().auth.sign_in_with_password({"email": body.email, "password": body.password.get_secret_value()})
+        token = result.session.access_token
+        if not token:
+            raise ValueError()
+    except RuntimeError:
+        raise HTTPException(503, "Tutor sign-in is not configured") from None
+    except Exception:
+        raise HTTPException(401, "Course account sign-in failed") from None
+    response.set_cookie(COOKIE, token, httponly=True, secure=request.url.scheme == "https",
+                        samesite="strict", path="/courses", max_age=min(result.session.expires_in or 3600, 3600))
+    response.headers["Cache-Control"] = "no-store"
+    return {"signed_in": True}
+
+
+def logout(request: Request, response: Response):
+    same_origin(request)
+    response.delete_cookie(COOKIE, path="/courses", httponly=True, samesite="strict")
+    response.headers["Cache-Control"] = "no-store"
+    return {"signed_in": False}
+
+
+def identity(request: Request, canvas_course_id: str):
+    cached = getattr(request.state, "tutor_identity", None)
+    if cached is not None:
+        return cached
+    header = request.headers.get("authorization")
+    if header:
+        scheme, _, token = header.partition(" ")
+        if scheme.lower() != "bearer":
+            token = ""
+    else:
+        token = request.cookies.get(COOKIE, "")
+        if token and request.method not in ("GET", "HEAD"):
+            same_origin(request)
+    if not token:
+        raise HTTPException(401, "Supabase course-account sign-in required")
+    try:
+        from supabase_client import user_client
+        client = user_client(token)
+    except (RuntimeError, ValueError):
+        raise HTTPException(503, "Tutor authentication is not configured") from None
+    try:
+        uid = str(UUID(str(client.auth.get_user(token).user.id)))
+    except Exception:
+        raise HTTPException(401, "Course session is invalid or expired") from None
+    try:
+        courses = client.table("courses").select("id").eq("canvas_id", str(canvas_course_id)).limit(1).execute().data
+        if not courses:
+            raise HTTPException(403, "Not enrolled in this course")
+        cid = courses[0]["id"]
+        memberships = client.table("enrollments").select("role").eq("course_id", cid).eq("user_id", uid).execute().data
+        if len(memberships) != 1 or memberships[0]["role"] not in ("student", "instructor", "ta"):
+            raise HTTPException(403, "Not enrolled in this course")
+        mappings = client.table("learner_identities").select("learner_id").eq("course_id", cid).eq("user_id", uid).execute().data
+        if len(mappings) != 1:
+            raise HTTPException(403, "A course learner identity is required")
+        learners = client.table("learners").select("id,pseudonym").eq("course_id", cid).eq("id", mappings[0]["learner_id"]).execute().data
+        if len(learners) != 1:
+            raise HTTPException(403, "A course learner identity is required")
+    except HTTPException:
+        raise
+    except Exception:
+        raise HTTPException(503, "Course authentication is temporarily unavailable") from None
+    learner = Learner(cid, learners[0]["id"], learners[0]["pseudonym"], memberships[0]["role"])
+    request.state.tutor_identity = client, learner
+    return client, learner

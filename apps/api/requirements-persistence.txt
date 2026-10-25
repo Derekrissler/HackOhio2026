@@ -1,0 +1,3 @@
+-r requirements-analytics.txt
+supabase==2.33.0
+python-dotenv==1.2.4

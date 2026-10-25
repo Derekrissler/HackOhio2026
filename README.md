@@ -3,9 +3,18 @@
 A lightweight, Canvas-style LMS that will host learning analytics for students and instructors.
 The architecture and roadmap are in [docs/PHASE1_PLAN.md](docs/PHASE1_PLAN.md).
 
-**Current state: Phase 3.** Every Canvas tab (Home, Syllabus, Assignments, Quizzes, Grades,
-Files) shows seeded course data for students and the teacher. Learning Insights and
-Instructor Analytics are still placeholders (Phases 6–7).
+**Current state:** Every Canvas tab (Home, Syllabus, Assignments, Quizzes, Grades,
+Files) shows seeded course data for students and the teacher. Instructor Analytics
+now has authenticated Supabase ARR retrieval. The first live VIBE 101 score run
+was published and verified; user-session dashboard acceptance awaits Supabase
+enrollments. Learning Insights remains a placeholder. See
+[analytics setup and verification](docs/analytics-dashboard.md) and the
+[next integration roadmap](docs/analytics-roadmap.md).
+The [error/ML integration guide](docs/analytics-error-integration.md) covers the
+implemented handoff, two review stages, authenticated tutor bridge and offline demo.
+The [comprehensive project-state audit](docs/project-state-2026-10-24.md) compares
+the implementation with the pipeline specification and documents live data,
+remaining work, debugging procedures and technical improvements.
 
 | Part | Stack | Folder |
 |---|---|---|
@@ -22,8 +31,12 @@ the same, except for the venv path.
 
 ```powershell
 py -3 -m venv apps/api/.venv          # macOS/Linux: python3 -m venv apps/api/.venv
-npm run setup                         # root tools, web packages, API + dev packages
+py -3 -m venv carmen-study-guide/mock-canvas/.venv
+npm run setup                         # root tools, web packages, API + Carmen packages
 ```
+
+Carmen (the mock Canvas with the Study Tutor) also needs `carmen-study-guide/mock-canvas/.env`; see
+`carmen-study-guide/mock-canvas/.env.example`. Without its venv, `npm run dev` skips it and runs the rest.
 
 ## Run
 
@@ -34,6 +47,10 @@ npm run dev
 - Web: <http://localhost:5173>
 - API: <http://127.0.0.1:8000> (interactive docs at <http://127.0.0.1:8000/docs>), reached by
   the web app through Vite's `/api` proxy.
+- Carmen mock Canvas: <http://localhost:8001/courses/1001>, with the Study Tutor at
+  <http://localhost:8001/courses/1001/tutor>.
+
+One `Ctrl+C` stops all three. To run only Carmen and the tutor, use `npm run carmen`.
 
 The API builds `data/app.db` from the seed on first start, and again whenever the schema version
 changes.
@@ -65,8 +82,9 @@ question → outcome alignments and material kinds. See [data/seed/README.md](da
 
 ## Demo users
 
-There is no login. Open **Account** in the left navigation, type a name, and pick who to view
-the app as.
+The mock LMS uses demo identities. Open **Account** in the left navigation, type
+a name, and pick who to view the app as. Shared Supabase analytics requires a
+separate course-account sign-in on Instructor Analytics.
 
 | Id | Name | Role |
 |---|---|---|

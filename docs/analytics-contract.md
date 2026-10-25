@@ -1,10 +1,15 @@
-# Analytics contracts and pipeline (Phases 2–5)
+# Analytics contracts and pipeline (Phases 2–7)
 
 This package is independent of the mock Canvas SQLAlchemy database. It validates
 evidence, prepares features and calculates descriptive statistics. Phase 5 adds
-optional local semantic grouping; only explicitly opted-in public model downloads
-use the network. It does not generate LERs or persist ARRs. Use Supabase UUIDs, not
-local SQLite integer IDs. No schema migration is needed.
+optional local semantic grouping. Phase 6 adds explicit Supabase reads, versioned
+ARR generation, staged publication and guarded retrieval; dry-run/offline paths
+remain separate from database writes. Use Supabase UUIDs, not local SQLite integer
+IDs. No schema migration is needed. See [analytics-persistence.md](analytics-persistence.md)
+for the current output schema, upstream contract and publication limitations.
+Phase 7 adds JWT-authorized read endpoints and the instructor dashboard; see
+[analytics-dashboard.md](analytics-dashboard.md) for setup, access boundaries and
+the outstanding live acceptance checks.
 
 ## Input adapter
 

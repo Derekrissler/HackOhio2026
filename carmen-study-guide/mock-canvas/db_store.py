@@ -13,6 +13,8 @@ Safe to re-run:
 
 Assignment-level evidence (overall score, rubric, comments) hangs off one question per assessment with
 code 'WHOLE' and question_type 'assignment_level'. Exams also get real per-part questions from their rubric.
+Quiz attempts use one question and response row per quiz item. Instructor answer keys go only to the
+staff-protected question_answer_keys table; they are never copied into resource chunks.
 
     .venv/bin/python db_store.py exports/<export_id>/bundle.json
 """
@@ -58,6 +60,11 @@ def _slug(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 
 
+def _canvas_ref(evidence: dict) -> str:
+    ids = "&".join(f"{key}={value}" for key, value in evidence["canvas_ids"].items())
+    return f"{evidence['api_path']}#{ids}"
+
+
 class Store:
     def __init__(self, bundle: dict, export_dir: Path):
         self.b, self.dir = bundle, Path(export_dir)
@@ -70,6 +77,8 @@ class Store:
         self.counts[key] = self.counts.get(key, 0) + n
 
     def upsert(self, table: str, rows: list[dict], on_conflict: str) -> list[dict]:
+        if not rows:
+            return []
         out = []
         for i in range(0, len(rows), BATCH):
             out += self.db.table(table).upsert(rows[i:i + BATCH], on_conflict=on_conflict).execute().data
@@ -90,6 +99,8 @@ class Store:
             start += 1000
 
     def insert(self, table: str, rows: list[dict]) -> list[dict]:
+        if not rows:
+            return []
         out = []
         for i in range(0, len(rows), BATCH):
             out += self.db.table(table).insert(rows[i:i + BATCH]).execute().data
@@ -192,47 +203,81 @@ class Store:
         self.assessment = {a["assessment_id"]: saved[a["_code"]] for a in self.b["assessments"]}
 
     def questions(self):
-        rows = []
+        rows, quiz_items = [], {}
+        instructor_scope = self.b.get("quality", {}).get("scope") == "instructor"
         for a in self.b["assessments"]:
             aid = self.assessment[a["assessment_id"]]
-            rows.append({"course_id": self.cid, "assessment_id": aid, "code": WHOLE, "position": 0,
-                         "text": a["description_text"], "question_type": "assignment_level",
-                         "points_possible": a["points_possible"], "canvas_id": str(a["canvas_id"]),
-                         "locator": {"canvas_api": a["source_ref"]["api_path"], "scope": "assessment",
-                                     "chapters_covered": a.get("chapters_covered", [])}})
-            for i, r in enumerate((r for r in a["rubric"] if r["kind"] == "question_part"), 1):
-                rows.append({"course_id": self.cid, "assessment_id": aid,
-                             "code": r["description"].split(":")[0].strip()[:60], "position": i,
-                             "text": r["description"], "question_type": "rubric_question_part",
-                             "points_possible": r["points"], "canvas_id": r["criterion_id"],
-                             "locator": {"canvas_api": a["source_ref"]["api_path"],
-                                         "rubric_criterion_id": r["criterion_id"]}})
-            for q in a.get("questions", []):  # quiz questions (question text + choices; no answers)
-                rows.append({"course_id": self.cid, "assessment_id": aid, "code": q["question_id"],
-                             "position": q["position"], "text": q["text"], "question_type": q["type"],
-                             "points_possible": q["points_possible"], "canvas_id": f"quiz_question:{q['canvas_id']}",
-                             "locator": {"canvas_api": f"/courses/{self.b['course']['canvas_id']}/quizzes/"
-                                                       f"{a['canvas_id']}/questions", "choices": q["choices"]}})
+            if a["type"] == "quiz":
+                for s in self.b["submissions"]:
+                    if s["assessment_id"] != a["assessment_id"]:
+                        continue
+                    for item in s.get("question_responses", []):
+                        qid = str(item["question_id"])
+                        quiz_items.setdefault((aid, qid), item)
+                choices = {q["question_number"]: [{"text": c} for c in q["choices"]] for q in a.get("questions", [])}
+                for (question_assessment_id, qid), item in quiz_items.items():
+                    if question_assessment_id != aid:
+                        continue
+                    rows.append({"course_id": self.cid, "assessment_id": aid, "code": f"Q{item.get('question_number')}",
+                                 "position": item.get("question_number"), "text": item.get("question_text"),
+                                 "question_type": "quiz_item", "points_possible": item.get("points_possible"),
+                                 "canvas_id": qid,
+                                 "locator": {"canvas_api": a["source_ref"]["api_path"],
+                                             "question_id": qid,
+                                             "choices": choices.get(item.get("question_number"), [])}})
+                if not any(question_assessment_id == aid for question_assessment_id, _ in quiz_items):
+                    rows.append({"course_id": self.cid, "assessment_id": aid, "code": WHOLE, "position": 0,
+                                 "text": a["description_text"], "question_type": "assignment_level",
+                                 "points_possible": a["points_possible"], "canvas_id": str(a["canvas_id"]),
+                                 "locator": {"canvas_api": a["source_ref"]["api_path"], "scope": "assessment",
+                                             "chapters_covered": a.get("chapters_covered", [])}})
+            else:
+                rows.append({"course_id": self.cid, "assessment_id": aid, "code": WHOLE, "position": 0,
+                             "text": a["description_text"], "question_type": "assignment_level",
+                             "points_possible": a["points_possible"], "canvas_id": str(a["canvas_id"]),
+                             "locator": {"canvas_api": a["source_ref"]["api_path"], "scope": "assessment",
+                                             "chapters_covered": a.get("chapters_covered", [])}})
+                for i, r in enumerate((r for r in a["rubric"] if r["kind"] == "question_part"), 1):
+                    rows.append({"course_id": self.cid, "assessment_id": aid,
+                                 "code": r["description"].split(":")[0].strip()[:60], "position": i,
+                                 "text": r["description"], "question_type": "rubric_question_part",
+                                 "points_possible": r["points"], "canvas_id": r["criterion_id"],
+                                 "locator": {"canvas_api": a["source_ref"]["api_path"],
+                                             "rubric_criterion_id": r["criterion_id"]}})
         saved = self.upsert("questions", rows, "assessment_id,code")
         self.question = {(r["assessment_id"], r["canvas_id"] if r["code"] != WHOLE else WHOLE): r["id"]
                          for r in saved}
-        self.qcode = {(r["assessment_id"], r["code"]): r["id"] for r in saved}
 
-        # Quiz answer keys go only to the protected table (RLS: staff only, never student retrieval).
-        keys = [{"question_id": self.qcode[(self.assessment[k["assessment_id"]], k["question_id"])],
-                 "course_id": self.cid, "answer": k["answer"]}
-                for k in self.b.get("answer_keys", [])
-                if (self.assessment.get(k["assessment_id"]), k["question_id"]) in self.qcode]
-        self.upsert("question_answer_keys", keys, "question_id")
+        # The answer key is intentionally kept out of the ordinary questions and retrieval tables.
+        answer_keys = []
+        if instructor_scope:
+            for (aid, qid), item in quiz_items.items():
+                key = item.get("correct_answer")
+                question_id = self.question.get((aid, qid))
+                if key is not None and question_id:
+                    answer_keys.append({"question_id": question_id, "course_id": self.cid,
+                                        "answer": json.dumps(key, ensure_ascii=False)})
+        self.upsert("question_answer_keys", answer_keys, "question_id")
 
         # Outcomes the instructor stated in the assignment text apply to its assignment-level question.
-        links = [{"question_id": self.question[(self.assessment[a["assessment_id"]], WHOLE)],
-                  "outcome_id": self.outcome[o["outcome_id"]], "provenance": "instructor", "confidence": None,
-                  "rationale": o["excerpt"], "needs_review": False}
-                 for a in self.b["assessments"] for o in a["stated_outcome_ids"] if o["outcome_id"] in self.outcome]
+        links = []
+        for a in self.b["assessments"]:
+            aid = self.assessment[a["assessment_id"]]
+            targets = [qid for (question_aid, qid) in quiz_items if question_aid == aid]
+            if not targets:
+                targets = [WHOLE]
+            for outcome in a["stated_outcome_ids"]:
+                if outcome["outcome_id"] not in self.outcome:
+                    continue
+                for target in targets:
+                    links.append({"question_id": self.question[(aid, target)],
+                                  "outcome_id": self.outcome[outcome["outcome_id"]],
+                                  "provenance": "instructor", "confidence": None,
+                                  "rationale": outcome["excerpt"], "needs_review": False})
         self.upsert("question_outcomes", links, "question_id,outcome_id")
 
     def submissions(self):
+        evidence = {e["id"]: e for e in self.b["evidence_refs"]}
         attempts = []
         for s in self.b["submissions"]:
             if s["attempt_id"] is None:
@@ -241,28 +286,50 @@ class Store:
                              "learner_id": self.learner[s["student_id"]], "attempt_number": int(s["attempt_id"]),
                              "submitted_at": s["submitted_at"], "canvas_id": str(s["canvas_id"])})
         saved = self.upsert("attempts", attempts, "assessment_id,learner_id,attempt_number")
-        attempt = {(r["assessment_id"], r["learner_id"]): r["id"] for r in saved}
+        attempt = {(r["assessment_id"], r["learner_id"], int(r["attempt_number"])): r["id"] for r in saved}
 
-        responses, self.response_for = [], {}
+        responses = []
         for s in self.b["submissions"]:
             aid, lid = self.assessment[s["assessment_id"]], self.learner[s["student_id"]]
-            att = attempt.get((aid, lid))
+            number = int(s["attempt_id"] or 1)
+            att = attempt.get((aid, lid, number))
             if not att:
                 continue
             # evidence_ref_id is export-local; leave it out so re-exports don't look like grade changes
             rubric = [{k: v for k, v in r.items() if k != "evidence_ref_id"} for r in s["rubric_assessment"]]
             base = {"course_id": self.cid, "attempt_id": att, "learner_id": lid}
-            text = s["response"]["body_text"] or s["response"].get("extracted_text")
-            ocr = [{"document_id": x["document_id"], "page": pg["page"], "method": pg["method"],
-                    "mean_confidence": pg["mean_confidence"], "flags": pg["flags"]}
-                   for x in self.b.get("extractions", []) if x["submission_id"] == s["submission_id"]
-                   for pg in x["pages"]]
-            responses.append({**base, "question_id": self.question[(aid, WHOLE)],
-                              "response_text": text, "points_earned": s["score"],
-                              "rubric": rubric,
-                              "content_hash": _hash(text, s["score"], rubric),
-                              "locator": {"canvas_api": s["source_ref"]["api_path"],
-                                          "attachments": s["response"]["attachments"], "extraction": ocr}})
+            question_responses = s.get("question_responses", [])
+            whole_question_id = self.question.get((aid, WHOLE))
+            if whole_question_id:
+                text = s["response"]["body_text"] or s["response"].get("extracted_text")
+                ocr = [{"document_id": x["document_id"], "page": pg["page"], "method": pg["method"],
+                        "mean_confidence": pg["mean_confidence"], "flags": pg["flags"]}
+                       for x in self.b.get("extractions", []) if x["submission_id"] == s["submission_id"]
+                       for pg in x["pages"]]
+                responses.append({**base, "question_id": whole_question_id,
+                                  "response_text": text, "points_earned": s["score"], "rubric": rubric,
+                                  "content_hash": _hash(text, s["score"], rubric),
+                                  "locator": {"canvas_api": s["source_ref"]["api_path"],
+                                              "attachments": s["response"]["attachments"], "extraction": ocr}})
+            for item in question_responses:
+                qid = self.question.get((aid, str(item["question_id"])))
+                if not qid:
+                    continue
+                answer = item.get("response") or {}
+                answer_text = answer.get("text")
+                item_evidence = evidence.get(item.get("evidence_ref_id"))
+                item_rubric = {"correct": item.get("correct"),
+                               "points_possible": item.get("points_possible")}
+                responses.append({**base, "question_id": qid, "response_text": answer_text,
+                                  "points_earned": item.get("points_earned"), "rubric": item_rubric,
+                                  "content_hash": _hash(answer_text, item.get("points_earned"), item_rubric),
+                                  "locator": {"canvas_api": s["source_ref"]["api_path"],
+                                              "canvas_submission_id": s["canvas_id"],
+                                              "question_id": item["question_id"],
+                                              "evidence_ref_id": item.get("evidence_ref_id"),
+                                              "canvas_ref": _canvas_ref(item_evidence) if item_evidence else None,
+                                              "evidence_content_hash": _hex(item_evidence.get("content_hash"))
+                                              if item_evidence else None}})
             for r in rubric:
                 qid = self.question.get((aid, r["criterion_id"]))
                 if qid and r["kind"] == "question_part":
@@ -270,51 +337,74 @@ class Store:
                                       "points_earned": r["points"], "rubric": [r], "content_hash": _hash(None, r["points"], [r]),
                                       "locator": {"canvas_api": s["source_ref"]["api_path"],
                                                   "rubric_criterion_id": r["criterion_id"]}})
-            for qr in s.get("question_responses", []):
-                qid = self.qcode.get((aid, qr["question_id"]))
-                if not qid:
-                    continue
-                scoring = [{"kind": "auto_graded", "correct": qr["correct"], "points": qr["points"],
-                            "points_possible": qr["points_possible"], "answer_choice_id": qr["answer_choice_id"]}]
-                responses.append({**base, "question_id": qid, "response_text": qr["response_text"],
-                                  "points_earned": qr["points"], "rubric": scoring,
-                                  "content_hash": _hash(qr["response_text"], qr["points"], scoring),
-                                  "locator": {"canvas_api": s["source_ref"]["api_path"],
-                                              "quiz_question_id": qr["question_id"]}})
         saved = self.upsert("responses", responses, "attempt_id,question_id")
         self.response = {(r["attempt_id"], r["question_id"]): r["id"] for r in saved}
         self.attempt = attempt
+        self.response_for_attempt = {}
+        for s in self.b["submissions"]:
+            aid, lid = self.assessment[s["assessment_id"]], self.learner[s["student_id"]]
+            att = attempt.get((aid, lid, int(s["attempt_id"] or 1)))
+            if not att:
+                continue
+            whole = self.question.get((aid, WHOLE))
+            response_id = self.response.get((att, whole)) if whole else None
+            if response_id is None:
+                for item in s.get("question_responses", []):
+                    qid = self.question.get((aid, str(item["question_id"])))
+                    response_id = self.response.get((att, qid)) if qid else None
+                    if response_id:
+                        break
+            if response_id:
+                self.response_for_attempt[att] = response_id
 
     def feedback(self):
         """One evidence ref + one feedback row per grader comment / rubric note; existing ones are kept."""
         evidence = {e["id"]: e for e in self.b["evidence_refs"]}
-        existing = {(r["canvas_ref"], r["content_hash"])
-                    for r in self.select_all("evidence_refs", "canvas_ref,content_hash", course_id=self.cid)}
+        existing = {(r["canvas_ref"], r["content_hash"]) for r in
+                    self.select_all("evidence_refs", "canvas_ref,content_hash", course_id=self.cid, source_type="canvas_api")}
+        question_evidence = []
+        for s in self.b["submissions"]:
+            lid = self.learner[s["student_id"]]
+            for item in s.get("question_responses", []):
+                ev = evidence.get(item.get("evidence_ref_id"))
+                if not ev:
+                    continue
+                ref, content_hash = _canvas_ref(ev), _hex(ev.get("content_hash"))
+                if (ref, content_hash) in existing:
+                    continue
+                existing.add((ref, content_hash))
+                question_evidence.append({"course_id": self.cid, "learner_id": lid, "source_type": "canvas_api",
+                                          "canvas_ref": ref, "excerpt": ev["excerpt"],
+                                          "content_hash": content_hash})
+        self.insert("evidence_refs", question_evidence)
         pending = []  # (evidence row, feedback row without evidence id)
         for s in self.b["submissions"]:
             aid, lid = self.assessment[s["assessment_id"]], self.learner[s["student_id"]]
-            att = self.attempt.get((aid, lid))
+            att = self.attempt.get((aid, lid, int(s["attempt_id"] or 1)))
             if not att:
                 continue
-            whole = self.response[(att, self.question[(aid, WHOLE)])]
+            whole = self.response_for_attempt.get(att)
+            if not whole:
+                continue
             items = [(f, "canvas_comment", whole) for f in s["feedback"] if f["author_role"] == "grader"]
             for r in s["rubric_assessment"]:
                 if r["evidence_ref_id"]:
                     part = self.question.get((aid, r["criterion_id"])) if r["kind"] == "question_part" else None
                     items.append(({"text": r["comments"], "evidence_ref_id": r["evidence_ref_id"], "created_at": None},
                                   "rubric_note", self.response.get((att, part)) if part else whole))
-            for qr in s.get("question_responses", []):
-                rid = self.response.get((att, self.qcode.get((aid, qr["question_id"]))))
-                if qr["evidence_ref_id"] and rid:
-                    items.append(({"text": qr["comments"], "evidence_ref_id": qr["evidence_ref_id"], "created_at": None},
-                                  "comment", rid))
+            for item in s.get("question_responses", []):  # per-question grader comments on quiz items
+                rid = self.response.get((att, self.question.get((aid, str(item["question_id"])))))
+                if item.get("comment_evidence_ref_id") and rid:
+                    items.append(({"text": item["comments"], "evidence_ref_id": item["comment_evidence_ref_id"],
+                                   "created_at": None}, "comment", rid))
             for f, kind, response_id in items:
                 ev = evidence[f["evidence_ref_id"]]
-                ref = f"{ev['api_path']}#" + "&".join(f"{k}={v}" for k, v in ev["canvas_ids"].items())
-                if (ref, _hex(ev["content_hash"])) in existing:
+                ref, content_hash = _canvas_ref(ev), _hex(ev["content_hash"])
+                if (ref, content_hash) in existing:
                     continue
+                existing.add((ref, content_hash))
                 pending.append(({"course_id": self.cid, "learner_id": lid, "source_type": "canvas_api",
-                                 "canvas_ref": ref, "excerpt": ev["excerpt"], "content_hash": _hex(ev["content_hash"])},
+                                 "canvas_ref": ref, "excerpt": ev["excerpt"], "content_hash": content_hash},
                                 {"course_id": self.cid, "response_id": response_id, "learner_id": lid, "kind": kind,
                                  "text": f["text"], **({"created_at": f["created_at"]} if f.get("created_at") else {})}))
         if not pending:

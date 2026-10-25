@@ -18,6 +18,15 @@ export async function apiGet<T>(path: string, userId?: number): Promise<T> {
   return res.json() as Promise<T>
 }
 
+/** Real analytics identity is a Supabase JWT, independent of X-Demo-User. */
+export async function analyticsGet<T>(path: string, token: string, signal?: AbortSignal): Promise<T> {
+  const res = await fetch(`/api/analytics${path}`, {
+    headers: { Authorization: `Bearer ${token}` }, signal, cache: 'no-store',
+  })
+  if (!res.ok) throw new ApiError(res.status, 'Analytics request failed')
+  return res.json() as Promise<T>
+}
+
 /** Retry server/network errors, never 4xx: a 403 won't fix itself. */
 export function shouldRetry(failureCount: number, error: unknown): boolean {
   if (error instanceof ApiError && error.status < 500) return false

@@ -12,3 +12,5 @@ python-multipart>=0.0.9
 pandas>=2.2,<4
 numpy>=2,<3
 anthropic>=2.3
+# Shared validated ARR reader and freshness checks.
+-r ../../apps/api/requirements-persistence.txt

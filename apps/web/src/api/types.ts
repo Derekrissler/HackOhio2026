@@ -32,6 +32,55 @@ export interface AnalyticsSummary {
   status: string
 }
 
+export interface AnalyticsCourse {
+  id: string
+  code: string
+  title: string
+  canvas_id: string | null
+  role: 'student' | 'instructor' | 'ta'
+}
+
+export interface AnalyticsPerformance {
+  id: string
+  scope: 'class_outcome' | 'assessment_question' | 'student_outcome'
+  outcome_id: string | null
+  assessment_id: string | null
+  question_id: string | null
+  label: string
+  mean_student_ratio: number | null
+  pooled_score_ratio: number | null
+  observed_score_ratio: number | null
+  eligible_students: number | null
+  assessed_students: number | null
+  evidence_coverage_ratio: number | null
+  score_observations: number | null
+  evidence_count: number | null
+  insufficient_evidence: boolean
+  suppressed: boolean
+  errors: { code: string; occurrence_count: number | null; affected_students: number | null;
+    assessed_students: number | null; prevalence: number | null; recurring: boolean | null }[]
+  error_classification_observations: number | null
+}
+
+export interface AnalyticsDashboard {
+  course_id: string
+  status: 'ready' | 'no_results' | 'stale' | 'incomplete' | 'insufficient_evidence'
+  run_id: string | null
+  computed_at: string | null
+  performance: AnalyticsPerformance[]
+  clusters: {
+    id: string
+    error_code: string
+    unique_students: number
+    evidence_count: number
+    assessment_origin: string
+    assistance: string
+    interpretation_limit: string
+    representative_text: string | null
+  }[]
+  interpretation: string
+}
+
 export interface Feedback {
   id: number
   kind: 'submission_comment' | 'question_comment' | 'rubric_comment'

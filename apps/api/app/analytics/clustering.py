@@ -183,11 +183,15 @@ def discover_misconceptions(
                 reason=partition.reason,
             ) for item in observations]
         result.partitions.append(partition)
+    result.input_snapshot = clustering_snapshot(prepared, config, result.model, result.package_versions)
+    return result
+
+
+def clustering_snapshot(prepared, config, model, package_versions):
     snapshot = {
         "observations": [item.model_dump(mode="json") for item in sorted(prepared.observations, key=lambda item: item.observation_id)],
         "normalization_version": prepared.normalization_version, "config": config.model_dump(mode="json"),
-        "model": result.model.model_dump(mode="json") if result.model else None,
-        "package_versions": result.package_versions,
+        "model": model.model_dump(mode="json") if model else None,
+        "package_versions": package_versions,
     }
-    result.input_snapshot = "sha256:" + hashlib.sha256(json.dumps(snapshot, sort_keys=True).encode()).hexdigest()
-    return result
+    return "sha256:" + hashlib.sha256(json.dumps(snapshot, sort_keys=True).encode()).hexdigest()

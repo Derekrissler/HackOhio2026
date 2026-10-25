@@ -2,7 +2,7 @@
 Mock Canvas: a local stand-in for Canvas (Carmen).
 
 - JSON API (this file): same shapes and Link-header pagination as osu.instructure.com,
-  served from the JSON files in fixtures/ (one course per file). Any bearer token works.
+  served from the JSON files in fixtures/ (one course per file). Local demo tokens model staff and student access.
 - HTML pages (ui.py): Canvas-styled dashboard, modules, assignments, grades, pages, files.
 
 Run (from this folder):  .venv/bin/uvicorn server:app --reload --port 8001
@@ -21,6 +21,7 @@ import claude_mapper
 import db_store
 import ingest
 import sync
+import tutor_host
 import ui
 import uploads
 from data import assignment, course, load_courses, self_user, submission
@@ -29,6 +30,41 @@ HERE = Path(__file__).resolve().parent
 
 app = FastAPI(title="Mock Canvas")
 app.mount("/static", StaticFiles(directory=HERE / "static"), name="static")
+
+
+@app.middleware("http")
+async def demo_api_auth(request: Request, call_next):
+    """Require a declared local demo token for the Canvas-shaped JSON API."""
+    match = re.match(r"^/api/v1/courses/([^/]+)(?:/|$)", request.url.path)
+    if request.url.path.startswith("/api/v1/"):
+        scheme, separator, token = request.headers.get("authorization", "").partition(" ")
+        if not separator or scheme.lower() != "bearer" or not token.strip():
+            return JSONResponse({"detail": "A Bearer token is required"}, status_code=401)
+        token = token.strip()
+        if match:
+            try:
+                c = course(match.group(1))
+            except HTTPException as exc:
+                return JSONResponse({"detail": exc.detail}, status_code=exc.status_code)
+        elif request.url.path.rstrip("/") == "/api/v1/courses":
+            c = None
+        else:
+            return JSONResponse({"detail": "Unknown course scope"}, status_code=404)
+        if token in {"dev", "mock"}:
+            request.state.demo_role = "teacher"
+            request.state.demo_user_id = None
+        else:
+            student_match = re.fullmatch(r"student-(\d+)", token)
+            courses = [c] if c else list(load_courses().values())
+            person = next((u for course_data in courses for u in course_data.get("users", [])
+                           if student_match and int(student_match.group(1)) == int(u["id"])
+                           and u.get("role") == "Student"), None)
+            if not person or person.get("role") != "Student":
+                return JSONResponse({"detail": "Use the local demo token or an enrolled student token"},
+                                    status_code=401)
+            request.state.demo_role = "student"
+            request.state.demo_user_id = int(person["id"])
+    return await call_next(request)
 
 
 def base(request: Request) -> str:
@@ -125,7 +161,11 @@ def course_json(c: dict, request: Request) -> dict:
 
 @app.get("/api/v1/courses")
 def list_courses(request: Request):
-    return paginate(request, [course_json(c, request) for c in load_courses().values()])
+    courses = list(load_courses().values())
+    if request.state.demo_role == "student":
+        courses = [c for c in courses if any(u.get("id") == request.state.demo_user_id
+                                             and u.get("role") == "Student" for u in c.get("users", []))]
+    return paginate(request, [course_json(c, request) for c in courses])
 
 
 @app.get("/api/v1/courses/{course_id}")
@@ -203,6 +243,8 @@ def assignment_json(c: dict, a: dict) -> dict:
 @app.get("/api/v1/courses/{course_id}/users")
 def list_users(course_id: str, request: Request):
     c = course(course_id)
+    if request.state.demo_role != "teacher":
+        raise HTTPException(403, "Only course staff can list all course users")
     types = request.query_params.getlist("enrollment_type[]") or ["student"]
     type_roles = {"student": "Student", "teacher": "Teacher", "ta": "Teaching Assistant"}
     users = []
@@ -233,10 +275,67 @@ def get_assignment(course_id: str, assignment_id: str):
     return assignment_json(c, assignment(c, assignment_id))
 
 
-def submission_json(c: dict, a: dict, request: Request) -> dict:
-    sub = submission(c, a["id"]) or {"user_id": c.get("self_user_id", 1), "score": None,
-                                     "workflow_state": "unsubmitted"}
-    sub = {"id": int(f"{a['id']}{sub['user_id']}"), "assignment_id": a["id"], "attempt": 1 if sub.get("submitted_at") else None,
+def quiz_responses_json(a: dict, responses: dict, graded: bool, instructor_view: bool) -> list[dict]:
+    items = []
+    for number, response in sorted(responses.items(), key=lambda row: int(row[0])):
+        selected = response.get("selected_index")
+        correct = response.get("correct_index")
+        item = {
+            "question_id": f"Q-{a['id']}-{int(number):02d}",
+            "question_number": int(number),
+            "answer_index": selected,
+            "response_text": response.get("text"),
+            "correct": selected == correct if graded and selected is not None and correct is not None else None,
+            "points_earned": response.get("earned") if graded else None,
+            "points_possible": response.get("possible"),
+            "comments": response.get("feedback") if graded else None,
+        }
+        if instructor_view and graded and correct is not None:
+            item["correct_answer_index"] = correct
+        items.append(item)
+    return items
+
+
+def synthetic_submit_time(a: dict, g: dict) -> str | None:
+    """The gradebook fixture has no submit time: use the due date (a late one, a day after; missing, none)."""
+    if g.get("missing") or not a.get("due_at"):
+        return None
+    due = datetime.fromisoformat(a["due_at"].replace("Z", "+00:00"))
+    return (due + timedelta(days=1) if g.get("late") else due).isoformat()
+
+
+def student_submission(c: dict, a: dict, user_id: int) -> dict:
+    if "online_quiz" in (a.get("submission_types") or []):
+        result = c.get("quiz_results", {}).get(str(a["id"]), {}).get(str(user_id))
+        if result:
+            return {"user_id": user_id, "attempt": 1, "workflow_state": result.get("workflow_state"),
+                    "score": result.get("score"), "submitted_at": result.get("submitted_at"),
+                    "graded_at": result.get("graded_at"), "responses": result.get("responses", {})}
+    grade = next((item for item in c.get("student_grades", {}).get(str(user_id), [])
+                  if str(item.get("assignment_id")) == str(a["id"])), None)
+    if user_id == c.get("self_user_id"):
+        own = submission(c, a["id"])
+        if own and (own.get("score") is not None or not grade):
+            return own
+        if own and grade:
+            return {**own, "workflow_state": "graded", "score": grade["score"],
+                    "submitted_at": own.get("submitted_at") or synthetic_submit_time(a, grade),
+                    "graded_at": grade.get("graded_at"), "late": grade.get("late", False),
+                    "missing": grade.get("missing", False)}
+    if grade:
+        return {"user_id": user_id, "attempt": None if grade.get("missing") else 1,
+                "workflow_state": "graded", "score": grade["score"],
+                "submitted_at": synthetic_submit_time(a, grade), "graded_at": grade.get("graded_at"),
+                "late": grade.get("late", False), "missing": grade.get("missing", False)}
+    return {"user_id": user_id, "attempt": None, "workflow_state": "unsubmitted", "score": None}
+
+
+def submission_json(c: dict, a: dict, request: Request, user_id: int | None = None,
+                    source: dict | None = None) -> dict:
+    user_id = int(user_id if user_id is not None else request.state.demo_user_id or c.get("self_user_id", 1))
+    sub = source or student_submission(c, a, user_id)
+    sub = {"id": int(f"{a['id']}{sub['user_id']}"), "assignment_id": a["id"],
+           "attempt": sub.get("attempt", 1 if sub.get("submitted_at") else None),
            "submission_type": (a.get("submission_types") or [None])[0], "body": None, "attachments": [],
            "submission_comments": [], "rubric_assessment": {}, **sub}
     files = uploads.for_submission(c["course"]["id"], a["id"], sub["user_id"])
@@ -244,6 +343,13 @@ def submission_json(c: dict, a: dict, request: Request) -> dict:
         sub["attachments"] = [uploads.attachment_json(base(request), f) for f in files]
         sub["attempt"] = sub["attempt"] or 1
         sub["submitted_at"] = sub.get("submitted_at") or files[-1]["uploaded_at"]
+    if "online_quiz" in (a.get("submission_types") or []):
+        raw_responses = sub.pop("quiz_responses", None)
+        if raw_responses is None:
+            raw_responses = sub.pop("responses", {})
+        graded = sub.get("workflow_state") == "graded" and sub.get("score") is not None
+        sub["quiz_responses"] = quiz_responses_json(
+            a, raw_responses or {}, graded, instructor_view=request.state.demo_role == "teacher")
     includes = request.query_params.getlist("include[]")
     if "submission_comments" not in includes:
         sub.pop("submission_comments")
@@ -254,66 +360,24 @@ def submission_json(c: dict, a: dict, request: Request) -> dict:
     return sub
 
 
-def quiz_submission_json(a: dict, attempt: dict, request: Request) -> dict:
-    """A quiz attempt in Canvas's shape: per-question answers live in submission_history[].submission_data."""
-    sub = {"id": int(f"{a['id']}{attempt['user_id']}"), "assignment_id": a["id"], "user_id": attempt["user_id"],
-           "attempt": 1, "submission_type": "online_quiz", "workflow_state": attempt.get("workflow_state"),
-           "score": attempt.get("score"), "submitted_at": attempt.get("submitted_at"), "graded_at": None,
-           "late": False, "missing": False, "body": None, "attachments": [],
-           "submission_comments": [], "rubric_assessment": {}}
-    if "submission_history" in request.query_params.getlist("include[]"):
-        data = []
-        for qid, r in sorted(attempt.get("responses", {}).items(), key=lambda kv: int(kv[0])):
-            earned, possible = r.get("earned"), r.get("possible")
-            data.append({"question_id": int(qid), "answer_id": r.get("selected_index"), "text": r.get("text"),
-                         "points": earned, "correct": True if earned == possible else ("partial" if earned else False),
-                         "more_comments": r.get("feedback")})
-        sub["submission_history"] = [{"attempt": 1, "submission_data": data}]
-    return sub
-
-
-def synthetic_submit_time(a: dict, g: dict) -> str | None:
-    if g.get("missing") or not a.get("due_at"):
-        return None
-    due = datetime.fromisoformat(a["due_at"].replace("Z", "+00:00"))
-    return (due + timedelta(days=1) if g.get("late") else due).isoformat()
-
-
-def grade_submission_json(c: dict, a: dict, user_id: str, g: dict, request: Request) -> dict:
-    """Another student's submission, built from the gradebook (no comments or rubric in the fixture)."""
-    files = uploads.for_submission(c["course"]["id"], a["id"], user_id)
-    return {"id": int(f"{a['id']}{user_id}"), "assignment_id": a["id"], "user_id": int(user_id),
-            "attempt": 1 if files or not g.get("missing") else None,
-            "submission_type": (a.get("submission_types") or [None])[0],
-            "workflow_state": g.get("status"), "score": g.get("score"),
-            # The gradebook fixture has no submit time; mock it as the due date (synthetic) so the
-            # analytics have a real timestamp. A late submission is placed one day after the deadline.
-            "submitted_at": files[-1]["uploaded_at"] if files else synthetic_submit_time(a, g),
-            "graded_at": g.get("graded_at"), "late": g.get("late", False), "missing": g.get("missing", False),
-            "body": None, "attachments": [uploads.attachment_json(base(request), f) for f in files],
-            "submission_comments": [], "rubric_assessment": {}}
-
-
 @app.get("/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions")
 def list_submissions(course_id: str, assignment_id: str, request: Request):
     """Instructor view: every student's submission for one assignment."""
     c = course(course_id)
     a = assignment(c, assignment_id)
-    if ui.is_quiz(a):
-        attempts = c.get("quiz_results", {}).get(str(a["id"]), {}).values()
-        return paginate(request, [quiz_submission_json(a, att, request) for att in attempts])
-    subs = [submission_json(c, a, request)]  # the mock student's, with comments and rubric
-    for uid, grades in c.get("student_grades", {}).items():
-        g = next((g for g in grades if g["assignment_id"] == a["id"]), None)
-        if g and int(uid) != subs[0]["user_id"]:
-            subs.append(grade_submission_json(c, a, uid, g, request))
-    return paginate(request, subs)
+    if request.state.demo_role != "teacher":
+        raise HTTPException(403, "Only course staff can list all submissions")
+    people = [u for u in c.get("users", []) if u.get("role") == "Student"]
+    submissions = [submission_json(c, a, request, int(person["id"])) for person in people]
+    return paginate(request, submissions)
 
 
 @app.get("/api/v1/courses/{course_id}/quizzes/{quiz_id}/questions")
 def list_quiz_questions(course_id: str, quiz_id: str, request: Request):
     """Classic Quizzes question list (instructor only in Canvas): correct answers carry weight 100."""
     c = course(course_id)
+    if request.state.demo_role != "teacher":
+        raise HTTPException(403, "Only course staff can list quiz questions")
     a = assignment(c, quiz_id)
     if not ui.is_quiz(a):
         raise HTTPException(404, "quiz not found")
@@ -338,7 +402,9 @@ def list_quiz_questions(course_id: str, quiz_id: str, request: Request):
 @app.get("/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/self")
 def own_submission(course_id: str, assignment_id: str, request: Request):
     c = course(course_id)
-    return submission_json(c, assignment(c, assignment_id), request)
+    if request.state.demo_role != "student":
+        raise HTTPException(403, "Use a student demo token to read a self submission")
+    return submission_json(c, assignment(c, assignment_id), request, request.state.demo_user_id)
 
 
 # ---------------------------------------------------------------- analytics export (ingest.py)
@@ -439,6 +505,8 @@ def export_download(export_id: str):
         raise HTTPException(404, "export not found")
     return FileResponse(path, media_type="application/json", filename=f"{export_id}.json")
 
+
+app.include_router(tutor_host.router)
 
 # HTML pages last, so the API routes above win on any overlap.
 app.include_router(ui.router)

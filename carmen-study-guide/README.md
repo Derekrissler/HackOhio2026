@@ -1,31 +1,41 @@
-# Mock Canvas
+# Mock Canvas (Carmen)
 
-A local copy of Canvas (Carmen) to build on. It serves Canvas-styled pages and the Canvas REST API, with the
-same JSON shapes and Link-header pagination as osu.instructure.com. The course data is **VIBE 101** (course id
-1001), built from the markdown in `CourseContent/`.
+A local Canvas-style course for the Carmen Study Guide. It serves VIBE 101 (course ID `1001`), mock Canvas REST endpoints, seeded student grades, and a normalized analytics export.
 
-## Run it
-```bash
+## Run locally
+
+From this directory in PowerShell:
+
+```powershell
 cd mock-canvas
-python3.13 -m venv .venv                 # first time only; needs Python 3.10+ (macOS's python3 is 3.9)
-.venv/bin/pip install -r requirements.txt
-.venv/bin/uvicorn server:app --reload --port 8001
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m uvicorn server:app --reload --port 8001
 ```
-Open http://localhost:8001/courses/1001. The API is under http://localhost:8001/api/v1/, and you can try every
-endpoint at http://localhost:8001/docs. Any bearer token works.
 
-## What's in it
-| Page | URL |
-|---|---|
-| Dashboard | `/` |
-| Course home (modules) | `/courses/1001` |
-| Assignments, grouped and weighted | `/courses/1001/assignments` |
-| Assignment with rubric, grade and comments | `/courses/1001/assignments/2001` |
-| Grades | `/courses/1001/grades` |
-| Pages, Files, Syllabus | `/courses/1001/pages`, `/files`, `/assignments/syllabus` |
+Open [http://localhost:8001/courses/1001](http://localhost:8001/courses/1001). API documentation is at [http://localhost:8001/docs](http://localhost:8001/docs).
+If port 8001 is already occupied, change the run command to `--port 8002` and open [http://localhost:8002/courses/1001](http://localhost:8002/courses/1001).
 
-API endpoints include courses, modules (`include[]=items`), pages, files and downloads, assignments, and
-`submissions/self` (`include[]=submission_comments`, `rubric_assessment`, `assignment`).
+On macOS or Linux, use `python3 -m venv .venv`, `.venv/bin/pip install -r requirements.txt`, and `.venv/bin/uvicorn server:app --reload --port 8001`.
+
+## Demo API access
+
+The mock API requires a bearer token on `/api/v1/` routes:
+
+- `Bearer dev` or `Bearer mock`: instructor view, including the synthetic roster and class submissions.
+- `Bearer student-5001` through `Bearer student-5015`: student view. A student can only read their own `/submissions/self` response.
+
+Student quiz review includes their score and whether each answer was correct. Correct-answer values are only present in instructor responses. These fixture tokens are for the local demo only.
+
+## End-to-end checks
+
+With the server running, open a second PowerShell terminal in this directory:
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+```
+
+The integration checks launch a separate temporary local server, follow Canvas-style pagination, verify student/staff access, build instructor and student-only exports, and check the seeded quiz response data. They do not call the analytics export button or the optional Supabase storage writer.
 
 ## Export for analytics
 Every assignment, quiz and exam page has a button at the top right labeled with that assessment, e.g.
@@ -76,18 +86,62 @@ mappings are never changed, and the automatic chapter rule never overwrites Clau
 `mock-canvas/.env`; a click costs a few cents. From the terminal:
 `.venv/bin/python claude_mapper.py "VIBE 101" 2201 "FRQ 1 (a)"`.
 
-## Where things live
-| File | Job |
+
+## Study Tutor
+**Study Tutor** in the course navigation (`/courses/1001/tutor`) is the integrity-aware tutor from the pipeline spec
+(workstream F, §11). It answers from the course material stored in Supabase and cites the slides and pages it used.
+
+Each message goes through `tutor/service.py`:
+1. **Mode, decided in code** (`tutor/policy.py`). It comes from the assessment's `integrity_status` in Supabase:
+   `active_protected` gives concept help only, `guided_homework` gives hints but no answers, and `released` gives
+   independent study. A message that names or pastes text from an open assessment (`tutor/matcher.py`, plus a Haiku
+   check for paraphrases) gets the strictest mode that applies.
+2. **Retrieval**: `search_resource_chunks` with the authenticated student's JWT and `p_student_safe=true`.
+   A validated, current schema 1.1 analytics result can boost the student's weaker outcomes.
+3. **Reply**: Claude Opus 5.5 returns a fixed schema (message, move, hint level, cited chunk ids, next step).
+4. **Verification** (`tutor/verifier.py`, plus a Haiku paraphrase check). It rejects moves the mode doesn't allow,
+   hint jumps, citations to anything that wasn't retrieved, answer-key text, and other students' ids. A rejected draft
+   gets one stricter retry, then a rule-based fallback. Answer keys are only ever compared on the server.
+5. **Log**: `tutor_sessions` and `tutor_turns`, including the mode, the reason and any rejected drafts.
+
+Setup: add the Supabase service key and either `ANTHROPIC_API_KEY` (Claude) or `TUTOR_LLM=ollama` (free, local:
+install Ollama, then `ollama pull qwen2.5:7b` and `ollama pull qwen2.5:3b`) to `mock-canvas/.env`, install `requirements.txt`, and
+export the course once (the **Export for analytics** button). To give every mode something to show, run
+`.venv/bin/python -m tutor.demo_setup --apply` once. It makes Assignment 2 guided homework, releases Quiz 1, and adds a
+fictional Quiz 2 answer key. Without the keys, the page loads and explains what's missing.
+
+Sign in on the tutor page with an existing Supabase course account. Course enrollment and
+`learner_identities` must already map that account to its learner; the demo picker does not
+authorize shared records. The page stores an HttpOnly, SameSite cookie, expiring within an
+hour; sign in again after expiry. The browser receives no service key or JWT JSON response.
+Read/retrieval clients are per user request, while writes and private verification stay server-side.
+Missing Supabase values can reuse `apps/api/.env` server-side when the project URLs agree;
+Carmen's `.env` still supplies its model-provider settings and optional local overrides.
+See [the integration guide](../docs/analytics-error-integration.md) for the complete boundaries.
+
+Tests: `.venv/bin/pip install -r requirements-dev.txt`, then `.venv/bin/python -m pytest tutor` from `mock-canvas/`.
+Shared-database tests additionally require an explicit private `TUTOR_TEST_ACCESS_TOKEN`
+and service key; they write/delete sessions and should be invoked deliberately.
+`tutor_host.py` is the only mock-canvas-specific part (who the student is, and the page); the `tutor/` package
+doesn't import mock-canvas.
+
+## Main files
+
+| File | Purpose |
 |---|---|
-| `mock-canvas/server.py` | JSON API |
-| `mock-canvas/ui.py`, `static/` | Canvas-styled pages |
-| `mock-canvas/fixtures/*.json` | Course data, one course per file. Edits show up on the next request |
-| `mock-canvas/ingest.py` | Canvas → analytics bundle exporter (the button) |
-| `mock-canvas/build_course.py` | Rebuilds `fixtures/vibe101.json` from `CourseContent/` |
-| `mock-canvas/snapshot.py` | Copies a real Canvas course's materials into `fixtures/local/` (gitignored) |
+| `server.py` | Mock Canvas JSON API, demo token roles and course pages |
+| `ui.py`, `static/` | Canvas-style dashboard, assignments, grades and people views |
+| `fixtures/vibe101.json` | Generated synthetic course, roster, grades and quiz attempts |
+| `build_course.py` | Rebuilds the course fixture from `CourseContent/` |
+| `ingest.py` | Canvas API adapter and local analytics bundle exporter |
+| `db_store.py` | Optional server-side Supabase storage for a completed export |
+| `sync.py` | Background sync of the whole course into Supabase on every page load |
+| `ocr.py`, `uploads.py`, `make_sample_scans.py` | Submitted files and scans, their OCR, and fictional test scans |
+| `outcome_mapper.py`, `mappings/` | Automatic chapter-rule outcome mappings (marked for review) |
+| `claude_mapper.py` | The **Analyze goals** button: Claude proposes outcome weights for one question |
+| `ler_builder.py`, `analytics_bridge.py` | Learning Evidence Records, and loading them into the analytics pipeline |
+| `INGEST_CONTRACT.md` | Bundle contract, access rules and known limits |
+| `tutor/` | Study tutor: policy, retrieval, model calls, verification, API (see Study Tutor above) |
+| `tutor_host.py`, `static/tutor.*` | Mounts the tutor in Mock Canvas: who the student is, and the chat page |
 
-After editing the markdown in `CourseContent/`, run `.venv/bin/python build_course.py` from `mock-canvas/`.
-Answer keys and the TA comment bank are left out on purpose, because the course is the student's view.
-
-To mock a real course, put `CANVAS_BASE_URL` and a real `CANVAS_TOKEN` in `mock-canvas/.env`, then run
-`.venv/bin/python snapshot.py <COURSE_ID>`.
+After editing `CourseContent/`, run `python build_course.py` from this directory.
