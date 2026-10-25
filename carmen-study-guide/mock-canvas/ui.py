@@ -56,6 +56,8 @@ ICONS = {
     "bell": svg('<path d="M8 19V13a6 6 0 0 1 12 0v6l2 2H6z"/><path d="M12 23h4"/>', 18),
     "export": svg('<path d="M14 4v13M9 9l5-5 5 5M5 17v6h18v-6"/>', 18),
     "check": svg('<path d="M6 14l5 5 11-11"/>', 18),
+    "expand": svg('<path d="M16 5h7v7M12 23H5v-7M23 5l-7 7M5 23l7-7"/>', 18),
+    "shrink": svg('<path d="M23 12h-7V5M5 16h7v7M16 12l7-7M12 16l-7 7"/>', 18),
     "target": svg('<circle cx="14" cy="14" r="9"/><circle cx="14" cy="14" r="4.5"/><circle cx="14" cy="14" r="0.8"/>', 16),
 }
 ITEM_ICON = {"Assignment": "assignment", "Page": "page", "File": "file", "ExternalUrl": "link",
@@ -176,7 +178,7 @@ COURSE_NAV = [("home", "Home", ""), ("announcements", "Announcements", "/announc
               ("grades", "Grades", "/grades"), ("people", "People", "/users"), ("pages", "Pages", "/pages"),
               ("textbook", "Textbook", "/textbook"),
               ("files", "Files", "/files"), ("syllabus", "Syllabus", "/assignments/syllabus"),
-              ("modules", "Modules", "/modules"), ("scans", "Scanned Work", "/scans"), ("tutor", "Study Tutor", "/tutor")]
+              ("modules", "Modules", "/modules"), ("scans", "Scanned Work", "/scans"), ("tutor", "Hue", "/tutor")]
 
 
 def shell(title: str, body: str, *, active_global="courses", head="", scripts="") -> HTMLResponse:
@@ -210,17 +212,57 @@ def export_button(cid: str, a: dict) -> str:
   </div>"""
 
 
-def goal_button(cid, aid, code: str, label: str = "Analyze goals") -> str:
-    """Ask Claude which learning outcomes this question assesses, and how much (claude_mapper.py)."""
-    what = "this assignment" if code == "WHOLE" else code
-    return f"""<span class="goal-wrap">
-  <button type="button" class="goal-btn" data-goals="/analytics/outcomes/{cid}/assignments/{aid}/questions/{quote(code)}"
-          title="Ask Claude which learning outcomes {esc(what)} assesses, and how much">{ICONS["target"]}<span>{esc(label)}</span></button>
-  <div class="goal-panel" role="status" hidden></div></span>"""
+def goal_button(cid, aid, code: str, title: str) -> str:
+    """Target icon: Hue says which learning outcomes this question assesses, and how much (claude_mapper.py, hue.js)."""
+    what = "Whole assignment" if code == "WHOLE" else code
+    tip = esc(f"Ask Hue which learning goals {'the whole assignment' if code == 'WHOLE' else code} assesses, and how much")
+    return f"""<button type="button" class="goal-btn" data-goals="/analytics/outcomes/{cid}/assignments/{aid}/questions/{quote(code)}"
+  data-goal="{esc(what)}" data-goal-title="{esc(title)}" title="{tip}" aria-label="{tip}">{ICONS["target"]}</button>"""
+
+
+def hue_dock(cid: str, open_as: str = "") -> str:
+    """Hue, the course assistant (hue.js): a chat box at the side of every course page that shows "Analyze goals"
+    answers and opens into the study tutor window. open_as='expanded' starts it open as that window (the Hue page)."""
+    return f"""
+<aside class="hue" id="hue" data-course="{esc(cid)}" data-open="{esc(open_as)}" aria-label="Hue, course assistant">
+  <button type="button" class="hue-launcher" id="hue-launcher" aria-controls="hue-box" aria-expanded="false">
+    <span class="hue-avatar" aria-hidden="true"></span>Ask Hue</button>
+  <section class="hue-box" id="hue-box" aria-labelledby="hue-title" hidden>
+    <header class="hue-head">
+      <h2 id="hue-title"><span class="hue-avatar small" aria-hidden="true"></span>Hue</h2>
+      <button type="button" class="hue-icon-btn" id="hue-expand" aria-pressed="false" title="Open as tutor window"
+              aria-label="Open as tutor window"><span class="ic-expand">{ICONS["expand"]}</span><span class="ic-shrink">{ICONS["shrink"]}</span></button>
+      <button type="button" class="hue-icon-btn" id="hue-close" title="Close Hue" aria-label="Close Hue">{ICONS["close"]}</button>
+    </header>
+    <div class="hue-log" id="hue-log" aria-live="polite">
+      <div class="hue-msg hue-bot"><p>Hi, I'm Hue. Click the target icon on a question to see which learning goals it assesses, or sign in and ask me about the course material.</p></div>
+    </div>
+    <div class="hue-tutor">
+      <p class="hue-status" id="hue-status" role="status"></p>
+      <button type="button" class="btn hue-when-out hue-when-compact" id="hue-signin">Sign in to chat with Hue</button>
+      <form class="hue-login hue-when-out hue-when-expanded" id="hue-login">
+        <label>Email <input name="email" type="email" autocomplete="username" required></label>
+        <label>Password <input name="password" type="password" autocomplete="current-password" required></label>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </form>
+      <div class="hue-context hue-when-in hue-when-expanded">
+        <label for="hue-assessment">Working on</label>
+        <select id="hue-assessment"><option value="">General study (no assignment)</option></select>
+        <button type="button" class="hue-link" id="hue-signout">Sign out</button>
+      </div>
+      <form class="hue-form hue-when-in" id="hue-form">
+        <textarea id="hue-input" rows="2" maxlength="4000" placeholder="Ask Hue about the course…" aria-label="Message Hue"
+                  required></textarea>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </form>
+    </div>
+  </section>
+</aside>"""
 
 
 def course_page(c: dict, section: str, crumbs: list[str], main: str, right: str = "",
-                export_for: dict | None = None, **kw) -> HTMLResponse:
+                export_for: dict | None = None, hue: str = "", head: str = "", scripts: str = "",
+                **kw) -> HTMLResponse:
     cid = str(c["course"]["id"])
     nav = "".join(f'<li><a class="{"active" if key == section else ""}" href="/courses/{cid}{path}">{label}</a></li>'
                   for key, label, path in COURSE_NAV)
@@ -235,8 +277,10 @@ def course_page(c: dict, section: str, crumbs: list[str], main: str, right: str 
   <nav class="course-nav" aria-label="Course"><div class="term muted small">{esc(c["course"].get("term", "Autumn 2026"))}</div><ul>{nav}</ul></nav>
   <main class="content">{main}</main>
   {f'<aside class="right-side">{right}</aside>' if right else ''}
-</div>"""
-    return shell(f"{crumbs[-1] if crumbs else 'Home'}: {c['course']['name']}", body, **kw)
+</div>{hue_dock(cid, hue)}"""
+    return shell(f"{crumbs[-1] if crumbs else 'Home'}: {c['course']['name']}", body,
+                 head='<link rel="stylesheet" href="/static/hue.css">' + head,
+                 scripts=scripts + '<script src="/static/hue.js"></script>', **kw)
 
 
 # ---------------------------------------------------------------- sidebar widgets
@@ -482,7 +526,7 @@ def quiz_attempt(c: dict, a: dict) -> str:
               <b>Review note</b><p>{esc(response.get("feedback", "Review the key ideas in your response."))}</p></div>'''
         cards.append(f"""
 <section class="quiz-question-card quiz-review-card" id="question-{number}">
-  <header class="quiz-question-head"><h2>Question {number}</h2>{goal_button(cid, a["id"], f"Q{number}")}<span class="quiz-question-result {"is-correct" if is_correct else "is-incorrect" if correct is not None else "is-reviewed"}">{status} · {fmt_score(earned)} / {fmt_score(possible)} pts</span></header>
+  <header class="quiz-question-head"><h2>Question {number}</h2>{goal_button(cid, a["id"], f"Q{number}", a["name"])}<span class="quiz-question-result {"is-correct" if is_correct else "is-incorrect" if correct is not None else "is-reviewed"}">{status} · {fmt_score(earned)} / {fmt_score(possible)} pts</span></header>
   <div class="quiz-question-body"><div class="quiz-question-stem">{question['stem']}</div>{answer_review}</div>
 </section>""")
         nav.append(f'<a class="quiz-number" href="#question-{number}" aria-label="Go to question {number}">{number}</a>')
@@ -511,7 +555,7 @@ def assignment_page(course_id: str, assignment_id: str, upload: str | None = Non
     assessed = s.get("rubric_assessment", {})
 
     rubric_rows = "".join(f"""
-<tr><td>{esc(r["description"])}{goal_button(course_id, a["id"], r["description"].split(":")[0].strip()[:60])
+<tr><td>{esc(r["description"])}{goal_button(course_id, a["id"], r["description"].split(":")[0].strip()[:60], a["name"])
                                    if QUESTION_PART.match(r["description"] or "") else ""}</td>
 <td class="rating">{f'<div>{rich(assessed[r["id"]].get("comments", ""))}</div>' if assessed.get(r["id"], {}).get("comments") else '<span class="muted">-</span>'}</td>
 <td class="pts">{f'{fmt_score(assessed[r["id"]].get("points"))} / ' if r["id"] in assessed else ''}{fmt_score(r["points"])} pts</td></tr>"""
@@ -525,13 +569,12 @@ def assignment_page(course_id: str, assignment_id: str, upload: str | None = Non
 </table></div>""" if a.get("rubric") else ""
 
     main = f"""
-<div class="assignment-title"><h1>{esc(a["name"])}</h1>
+<div class="assignment-title"><div class="title-goal"><h1>{esc(a["name"])}</h1>{goal_button(course_id, a["id"], "WHOLE", a["name"])}</div>
 <button class="btn btn-primary"{" disabled" if graded else ""}>{"Submitted" if s else "Start Assignment"}</button></div>
 <ul class="details">
   <li><b>Due</b> {fmt_due(a.get("due_at"))}</li>
   <li><b>Points</b> {fmt_score(a.get("points_possible"))}</li>
   <li><b>Submitting</b> {SUBMITTING.get((a.get("submission_types") or ["online_upload"])[0], "a file upload")}</li>
-  <li>{goal_button(course_id, a["id"], "WHOLE", "Analyze goals for the whole assignment")}</li>
 </ul>
 <div class="user-content">{a.get("description", "")}</div>
 {rubric}"""

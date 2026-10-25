@@ -47,8 +47,8 @@ npm run dev
 - Web: <http://localhost:5173>
 - API: <http://127.0.0.1:8000> (interactive docs at <http://127.0.0.1:8000/docs>), reached by
   the web app through Vite's `/api` proxy.
-- Carmen mock Canvas: <http://localhost:8001/courses/1001>, with the Study Tutor at
-  <http://localhost:8001/courses/1001/tutor>.
+- Carmen mock Canvas: <http://localhost:8001/courses/1001>, with Hue, the study tutor, docked on every course page
+  and opened as a full window at <http://localhost:8001/courses/1001/tutor>.
 
 One `Ctrl+C` stops all three. To run only Carmen and the tutor, use `npm run carmen`.
 

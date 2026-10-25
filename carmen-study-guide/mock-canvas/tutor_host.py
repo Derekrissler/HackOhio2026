@@ -2,15 +2,14 @@
 Mounts the study tutor (tutor/) in Mock Canvas.
 
 This file is the only mock-canvas-specific part: it decides who the learner is (the mock's single signed-in student,
-mapped to the same pseudonym the analytics export uses) and renders the tutor page. Needs a Supabase service key in
-mock-canvas/.env plus either ANTHROPIC_API_KEY or a local Ollama (TUTOR_LLM=ollama); without them the page loads and
-the API answers 503 with what's missing.
+mapped to the same pseudonym the analytics export uses) and renders the Hue page. Students meet the tutor as Hue, the
+chat dock on every course page (ui.hue_dock, static/hue.js). Needs a Supabase service key in mock-canvas/.env plus
+either ANTHROPIC_API_KEY or a local Ollama (TUTOR_LLM=ollama); without them the page loads and the API answers 503.
 """
 
 import logging
 import os
 from functools import lru_cache
-from html import escape
 
 from fastapi import APIRouter, Request, Response
 from fastapi.responses import HTMLResponse
@@ -24,12 +23,6 @@ from tutor.router import create_router
 from tutor.service import TutorService
 
 log = logging.getLogger(__name__)
-
-MODE_LABELS = {
-    "protected_assessment": "Protected: concept help only",
-    "guided_homework": "Guided: hints, not answers",
-    "independent_study": "Independent study",
-}
 
 
 def backend(request):
@@ -90,36 +83,13 @@ def context(course_id: str, request: Request, response: Response):
 
 
 @router.get("/courses/{course_id}/tutor", response_class=HTMLResponse)
-def tutor_page(course_id: str, assignment: str | None = None):
+def tutor_page(course_id: str):
+    """The Hue page: opens the Hue dock (on every course page) straight into its tutor window."""
     c = course(course_id)
-    assessments, problem = [], "Sign in with your Supabase course account to use the tutor."
-
-    options = ['<option value="">General study (no assignment)</option>'] + [
-        f'<option value="{escape(a.id)}"'
-        f'{" selected" if assignment and a.canvas_id == assignment else ""}>'
-        f'{escape(a.title)} ({escape(MODE_LABELS[mode_for(a)])})</option>'
-        for a in assessments]
-    notice = f'<div class="tutor-notice" role="alert">{escape(problem)}</div>' if problem else ""
-    main = f"""
-<div class="content padded tutor" data-course="{escape(str(c['course']['id']))}">
-  <h1>Study Tutor</h1>
-  <p class="muted">Ask about the course material. On open, graded work the tutor explains concepts and points you to
-  the slides, but won't give answers.</p>
-  {notice}
-  <form id="tutor-login-form" class="tutor-form">
-    <label>Email <input name="email" type="email" autocomplete="username" required></label>
-    <label>Password <input name="password" type="password" autocomplete="current-password" required></label>
-    <button type="submit">Sign in</button>
-  </form>
-  <button id="tutor-signout" type="button" hidden>Sign out</button>
-  <label class="tutor-label" for="tutor-assessment">What are you working on?</label>
-  <select id="tutor-assessment">{''.join(options)}</select>
-  <div id="tutor-log" class="tutor-log" aria-live="polite"></div>
-  <form id="tutor-form" class="tutor-form">
-    <textarea id="tutor-input" rows="3" maxlength="4000" placeholder="Ask a question about the course…" required></textarea>
-    <button class="btn btn-primary" type="submit" {"disabled" if problem else ""}>Send</button>
-  </form>
-</div>"""
-    return ui.course_page(c, "tutor", ["Study Tutor"], main,
-                          head='<link rel="stylesheet" href="/static/tutor.css">',
-                          scripts='<script src="/static/tutor.js"></script>')
+    main = """
+<h1>Hue</h1>
+<p>Hue is this course's study assistant. Sign in with your Supabase course account in the window on the right, pick
+what you're working on, and ask about the course material. On open, graded work Hue explains concepts and points you to
+the slides, but won't give answers.</p>
+<p class="muted">Hue is on every course page too: use <b>Ask Hue</b> in the corner, or the target icon on a question.</p>"""
+    return ui.course_page(c, "tutor", ["Hue"], main, hue="expanded")

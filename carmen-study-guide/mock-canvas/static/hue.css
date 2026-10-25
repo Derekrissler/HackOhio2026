@@ -1,0 +1,86 @@
+/* Hue, the course assistant docked on every course page (ui.hue_dock, hue.js) */
+.hue-avatar { flex: none; width: 28px; height: 28px; border-radius: 50%;
+  background: conic-gradient(from 200deg, #e0061f, #f5a300, #2f9e44, #0374b5, #8f3e97, #e0061f); }
+.hue-avatar.small { width: 22px; height: 22px; }
+
+.hue-launcher { position: fixed; right: 20px; bottom: 20px; z-index: 55; display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px 8px 8px; font: inherit; font-weight: 700; color: var(--text); background: #fff;
+  border: 1px solid var(--border); border-radius: 999px; box-shadow: 0 4px 14px rgba(0,0,0,.18); cursor: pointer; }
+.hue-launcher:hover { border-color: var(--link); }
+.hue-launcher[hidden], .hue-box[hidden] { display: none; }
+
+/* Chat box: bottom-right corner. Tutor window (.is-expanded): full height on the right. */
+.hue-box { position: fixed; right: 20px; bottom: 20px; z-index: 55; display: flex; flex-direction: column;
+  width: 370px; height: min(560px, calc(100vh - 40px)); background: #fff; border: 1px solid var(--border);
+  border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.2); overflow: hidden; color: var(--text); }
+.hue.is-expanded .hue-box { top: 0; right: 0; bottom: 0; width: min(460px, calc(100vw - var(--gnav-w))); height: auto;
+  border-width: 0 0 0 1px; border-radius: 0; box-shadow: -6px 0 20px rgba(0,0,0,.12); }
+/* Only screens wide enough to keep the page usable push it aside; narrower ones overlay it. */
+@media (min-width: 1500px) { body.hue-docked #wrapper { margin-right: 460px; } }
+
+.hue-head { display: flex; align-items: center; gap: 4px; padding: 10px 10px 10px 14px; border-bottom: 1px solid var(--border-light); }
+.hue-head h2 { display: flex; align-items: center; gap: 8px; margin: 0 auto 0 0; font-size: 1.05rem; }
+.hue-icon-btn { display: grid; place-items: center; width: 34px; height: 34px; padding: 0; color: var(--muted);
+  background: none; border: 0; border-radius: 6px; cursor: pointer; }
+.hue-icon-btn:hover { color: var(--text); background: var(--panel); }
+.hue:not(.is-expanded) .ic-shrink, .hue.is-expanded .ic-expand { display: none; }
+.hue-launcher:focus-visible, .hue-icon-btn:focus-visible, .hue-link:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+
+.hue-log { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 14px; overflow-y: auto; background: #f7f8f9; }
+.hue-msg { max-width: 92%; padding: 10px 12px; border-radius: 10px; font-size: .93rem; line-height: 1.45; }
+.hue-msg p { margin: 0; }
+.hue-msg > * + * { margin-top: 6px; }
+.hue-bot { align-self: flex-start; background: #fff; border: 1px solid var(--border-light); }
+.hue-me { align-self: flex-end; background: var(--primary); color: #fff; white-space: pre-wrap; }
+.hue-error { align-self: flex-start; background: #fdf2f3; border: 1px solid #f3c6cb; color: #a3000f; }
+.hue-divider { align-self: center; padding: 2px 10px; color: var(--muted); font-size: .8rem; }
+.hue-text { white-space: pre-wrap; }
+.hue-title { font-weight: 700; }
+.hue-next { font-weight: 700; }
+.hue-note { color: var(--muted); font-size: .82rem; }
+.hue-cites { margin: 0; padding-left: 18px; font-size: .88rem; }
+.hue-bot.is-thinking { color: var(--muted); animation: hue-pulse 1.4s ease-in-out infinite; }
+.hue-msg.is-flash { animation: hue-flash 1.2s ease-out; }
+@keyframes hue-pulse { 50% { opacity: .55; } }
+@keyframes hue-flash { from { box-shadow: 0 0 0 3px #9cc9e6; } to { box-shadow: 0 0 0 3px transparent; } }
+
+.hue-mode { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: .75rem; font-weight: 700; }
+.hue-mode-protected_assessment { background: #fdecea; color: #a3000f; }
+.hue-mode-guided_homework { background: #fff4e0; color: #8a5300; }
+.hue-mode-independent_study { background: #e6f4ea; color: #1e6b34; }
+
+/* "Analyze goals" answers */
+.hue-goals { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.hue-goals p { margin-top: 3px; }
+.hue-goal-head { display: flex; justify-content: space-between; align-items: baseline; }
+.hue-goal-pct { color: var(--muted); font-variant-numeric: tabular-nums; }
+.hue-goal-bar { height: 6px; margin: 3px 0 4px; background: var(--border-light); border-radius: 3px; overflow: hidden; }
+.hue-goal-bar i { display: block; height: 100%; background: var(--primary); }
+
+/* Tutor controls. In the chat box: just the message field (or a sign-in button); the tutor window adds the rest. */
+.hue-tutor { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 10px 12px 12px;
+  border-top: 1px solid var(--border-light); }  /* minmax: a long assignment name must not widen the box */
+.hue-status { margin: 0; color: #a3000f; font-size: .82rem; }
+.hue-status:empty { display: none; }
+.hue-login { display: grid; gap: 8px; }
+.hue-login label { display: grid; gap: 2px; font-size: .85rem; font-weight: 700; }
+.hue-login input, .hue-context select, .hue-form textarea { padding: 7px 9px; font: inherit; font-weight: 400;
+  border: 1px solid var(--btn-border); border-radius: 4px; }
+.hue-login input:focus, .hue-context select:focus, .hue-form textarea:focus { outline: 2px solid var(--link);
+  outline-offset: -1px; border-color: var(--link); }
+.hue-context { display: flex; align-items: center; gap: 8px; font-size: .85rem; }
+.hue-context label { font-weight: 700; white-space: nowrap; }
+.hue-context select { flex: 1; min-width: 0; }
+.hue-form { display: flex; align-items: flex-end; gap: 8px; }
+.hue-form textarea { flex: 1; resize: none; }
+.hue-link { padding: 0; font: inherit; font-size: .85rem; color: var(--link); background: none; border: 0; cursor: pointer; }
+.hue-link:hover { text-decoration: underline; }
+.hue.is-signed-in .hue-when-out, .hue:not(.is-signed-in) .hue-when-in,
+.hue.is-expanded .hue-when-compact, .hue:not(.is-expanded) .hue-when-expanded { display: none; }
+
+@media (max-width: 640px) {  /* a sheet beside the global nav, which stays usable */
+  .hue-launcher { right: 12px; bottom: 12px; }
+  .hue-box { right: 0; bottom: 0; left: var(--gnav-w); width: auto; height: 75vh; border-radius: 12px 12px 0 0; }
+  .hue.is-expanded .hue-box { left: var(--gnav-w); width: auto; border-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .hue-bot.is-thinking, .hue-msg.is-flash { animation: none; } }

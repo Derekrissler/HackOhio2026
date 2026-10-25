@@ -401,21 +401,17 @@ details.ocr summary { cursor: pointer; }
 .ocr-line.low { background: #fff3cd; }
 .flag { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 999px; background: #fff3cd; color: #7a5a00; font-size: .75rem; }
 
-/* ---------- "Analyze goals" (Claude outcome weights per question) ---------- */
-.goal-wrap { position: relative; display: inline-block; margin-left: 8px; vertical-align: middle; }
-.goal-btn { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; font: inherit; font-size: .8rem;
-  color: var(--link); background: #fff; border: 1px solid var(--btn-border); border-radius: 12px; cursor: pointer; }
-.quiz-question-head .goal-btn span { color: var(--link); }
+/* ---------- "Analyze goals" target icon (the answer appears in Hue: hue.js) ---------- */
+.goal-btn { display: inline-grid; place-items: center; width: 26px; height: 26px; margin-left: 8px; padding: 0;
+  vertical-align: middle; color: var(--link); background: #fff; border: 1px solid var(--btn-border); border-radius: 50%;
+  cursor: pointer; }
 .goal-btn:hover:not(:disabled) { background: #eef6fb; border-color: var(--link); }
 .goal-btn:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
 .goal-btn:disabled { color: var(--muted); cursor: progress; }
-.goal-panel { position: absolute; z-index: 60; top: calc(100% + 6px); left: 0; width: min(380px, 80vw);
-  padding: 12px 14px; background: #fff; border: 1px solid var(--border); border-radius: 6px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.14); text-align: left; white-space: normal; font-size: .9rem; color: var(--text); }
-.goal-list { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 12px; }
-.goal-list p { margin: 4px 0 0; }
-.goal-head { display: flex; justify-content: space-between; align-items: baseline; }
-.goal-pct { font-variant-numeric: tabular-nums; color: var(--muted); }
-.goal-bar { height: 6px; margin: 3px 0 4px; background: var(--border-light); border-radius: 3px; overflow: hidden; }
-.goal-bar i { display: block; height: 100%; background: var(--primary); }
-.goal-panel .err { color: #b00020; }
+.goal-btn.is-busy .ic { animation: goal-pulse 1.2s ease-in-out infinite; }
+.goal-btn.is-done { background: #eef6fb; border-color: var(--link); }
+@keyframes goal-pulse { 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .goal-btn.is-busy .ic { animation: none; } }
+.quiz-question-head .goal-btn { margin-right: auto; }  /* keep the icon next to "Question N", the result on the right */
+.title-goal { display: flex; align-items: center; margin-bottom: 1rem; }
+.title-goal h1 { margin: 0; }

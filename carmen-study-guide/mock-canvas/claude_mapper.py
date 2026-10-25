@@ -125,18 +125,19 @@ def _ask_claude(system: str, prompt: str) -> dict:
                     {"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
             messages=[{"role": "user", "content": prompt}],
         )
+    # These messages are shown in the app, where the assistant is called Hue.
     except anthropic.AuthenticationError:
-        raise MappingError("Claude rejected the API key in mock-canvas/.env (ANTHROPIC_API_KEY).")
+        raise MappingError("The API key in mock-canvas/.env (ANTHROPIC_API_KEY) was rejected.")
     except anthropic.RateLimitError:
-        raise MappingError("Claude is rate limiting requests. Wait a minute and try again.")
+        raise MappingError("Hue is getting too many requests right now. Wait a minute and try again.")
     except anthropic.APIStatusError as e:
-        raise MappingError(f"Claude API error {e.status_code}: {e.message}")
+        raise MappingError(f"Hue's AI service returned an error ({e.status_code}): {e.message}")
     except anthropic.APIConnectionError:
-        raise MappingError("Could not reach the Claude API. Check the internet connection.")
+        raise MappingError("Hue couldn't reach its AI service. Check the internet connection.")
     if response.stop_reason == "refusal":
-        raise MappingError("Claude declined to map this question.")
+        raise MappingError("Hue declined to map this question.")
     if response.stop_reason == "max_tokens":
-        raise MappingError("Claude's answer was cut off. Try again.")
+        raise MappingError("Hue's answer was cut off. Try again.")
     text = next((b.text for b in response.content if b.type == "text"), "")
     return {"answer": json.loads(text), "model": response.model,
             "usage": {"input": response.usage.input_tokens, "output": response.usage.output_tokens,
@@ -176,7 +177,7 @@ def map_question(course_code: str, assessment_canvas_id: str, code: str) -> dict
     picks = [p for p in reply["answer"]["outcomes"] if p["outcome_code"] in outcomes and p["share"] > 0]
     total = sum(p["share"] for p in picks)
     if not total:
-        raise MappingError("Claude did not name any of this course's outcomes. Try again.")
+        raise MappingError("Hue did not name any of this course's outcomes. Try again.")
     confidence = max(0.0, min(1.0, float(reply["answer"]["confidence"])))
     rows = [{"question_id": question["id"], "outcome_id": outcomes[p["outcome_code"]]["id"],
              "weight": round(p["share"] / total, 4), "provenance": "ai", "confidence": round(confidence, 3),

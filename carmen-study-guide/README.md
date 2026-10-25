@@ -77,8 +77,9 @@ responses, evidence and feedback, and logs an `ingestion_jobs` row. To store an 
 `.venv/bin/python db_store.py exports/<export_id>/bundle.json`. To run the same export against real Canvas:
 `CANVAS_BASE_URL=https://osu.instructure.com CANVAS_TOKEN=<token> .venv/bin/python ingest.py <course_id>`.
 
-**Analyze goals (Claude).** Every quiz question, exam part (FRQ / Part rows of the rubric) and assignment has an
-**Analyze goals** button. It sends Claude (`claude-opus-5-5`) the syllabus outcomes, all released course material
+**Analyze goals (Hue).** Every quiz question (on the quiz review page), exam part (FRQ / Part rows of the rubric)
+and assignment title has a small target icon. The answer appears in Hue, the chat box at the side of the page (the app
+calls the assistant Hue; it runs on Claude). Clicking it sends Claude (`claude-opus-5-5`) the syllabus outcomes, all released course material
 in Supabase and the question, and gets back which outcomes the question assesses with a share for each (adding to
 100%), a reason and the material it relied on. The shares are saved as `question_outcomes` weights (provenance `ai`,
 `needs_review` true) and the LERs are rebuilt, so the analytics use them right away. Instructor-stated or reviewed
@@ -87,8 +88,10 @@ mappings are never changed, and the automatic chapter rule never overwrites Clau
 `.venv/bin/python claude_mapper.py "VIBE 101" 2201 "FRQ 1 (a)"`.
 
 
-## Study Tutor
-**Study Tutor** in the course navigation (`/courses/1001/tutor`) is the integrity-aware tutor from the pipeline spec
+## Study Tutor (Hue)
+Students meet the tutor as **Hue**. **Ask Hue** in the corner of every course page opens a chat box that expands into
+the tutor window, and **Hue** in the course navigation (`/courses/1001/tutor`) opens that window directly
+(`ui.hue_dock`, `static/hue.js`, `static/hue.css`). It is the integrity-aware tutor from the pipeline spec
 (workstream F, §11). It answers from the course material stored in Supabase and cites the slides and pages it used.
 
 Each message goes through `tutor/service.py`:

@@ -16,7 +16,7 @@ Read this before scanning the tree. Setup, run, seed and test commands are in [R
 |---|---|---|
 | `apps/web` | React + Vite Canvas-style LMS frontend (`src/pages`, `src/shell`, `src/api`) | 5173 |
 | `apps/api` | FastAPI mock LMS on SQLite (`app/routers`, `app/ingest`), plus the Supabase analytics pipeline in `app/analytics/` | 8000 |
-| `carmen-study-guide/mock-canvas` | Mock Canvas "Carmen" (FastAPI, server-rendered HTML) and the Study Tutor (`tutor/`) | 8001 |
+| `carmen-study-guide/mock-canvas` | Mock Canvas "Carmen" (FastAPI, server-rendered HTML) and the Study Tutor (`tutor/`), shown in the UI as "Hue" | 8001 |
 
 Shared: `supabase/migrations/` (team Supabase schema), `docs/` (plans and analytics specs;
 `docs/project-state-2026-10-24.md` is the latest state audit), `scripts/` (Python launchers behind the npm
@@ -32,6 +32,8 @@ scripts, e2e click-through).
   `OLLAMA_TUTOR_MODEL`, `OLLAMA_CHECK_MODEL`).
 - `tutor_host.py`, `_llm()`: picks the tutor backend from `TUTOR_LLM` and `ANTHROPIC_API_KEY`.
 - Settings live in `mock-canvas/.env` (template: `.env.example`).
+- User-facing text calls the assistant **Hue**, never Claude. Both features reach users through the Hue dock on every
+  course page (`ui.hue_dock`, `static/hue.js`, `static/hue.css`).
 
 `apps/api` makes no LLM calls; `app/analytics/embeddings.py` runs a local MiniLM ONNX embedding model offline.
 
