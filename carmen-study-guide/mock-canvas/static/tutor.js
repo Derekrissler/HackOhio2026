@@ -45,16 +45,23 @@
     const values = new FormData(loginForm);
     const button = loginForm.querySelector("button");
     button.disabled = true;
-    const body = JSON.stringify({ email: values.get("email"), password: values.get("password") });
+    const body = JSON.stringify({ email: String(values.get("email")).trim(), password: values.get("password") });
     loginForm.reset();
     try {
       const res = await fetch(`/courses/${encodeURIComponent(course)}/tutor/auth/login`, {
         method: "POST", headers: { "Content-Type": "application/json", "X-Tutor-Request": "1" }, body,
       });
-      if (!res.ok) throw new Error("Sign-in failed. Check your course account and configuration.");
+      if (!res.ok) {
+        const reasons = {
+          401: "Wrong email or password.",
+          429: "Too many sign-in attempts. Wait a minute and try again.",
+          503: "The tutor server isn't set up for sign-in yet (check SUPABASE_PUBLISHABLE_KEY in mock-canvas/.env, then restart).",
+        };
+        throw new Error(reasons[res.status] || `Sign-in failed (${res.status}).`);
+      }
       await loadContext();
       if (!signedIn) notice.textContent = "This account needs a course enrollment and learner identity mapping.";
-    } catch { notice.textContent = "Sign-in failed. Check your course account and configuration."; }
+    } catch (err) { notice.textContent = err.message || "Sign-in failed. Is the tutor server running?"; }
     finally { button.disabled = false; }
   });
   signout.addEventListener("click", async () => {
