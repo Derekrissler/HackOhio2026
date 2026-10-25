@@ -191,7 +191,7 @@ def document_from_row(row):
 
 def generate_arrs(
     statistics: StatisticsResult, *, records: list[AnalyticalInput], run_id: UUID,
-    input_snapshot: str, computed_at, clustering: ClusteringResult | None = None,
+    input_snapshot: str, computed_at, clustering: ClusteringResult | None = None, approved_clusters=None,
 ) -> list[ARRDocument]:
     documents = []
     provenance = {"method": METHOD, "input_snapshot": input_snapshot,
@@ -247,6 +247,8 @@ def generate_arrs(
             raise ValueError("clustering belongs to a different run/configuration")
         for partition in clustering.partitions:
             for group in partition.groups:
+                if approved_clusters is not None and group.cluster_id not in approved_clusters:
+                    continue
                 if (statistics.config.suppress_small_cohorts
                         and group.unique_student_count < statistics.config.class_min_students):
                     # Detailed assignments stay in restricted run metadata, not published ARRs.

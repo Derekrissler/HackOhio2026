@@ -1,0 +1,1282 @@
+[
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-000000002710",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e20",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007530",
+      "attempt_id": "00000000-0000-0000-0000-000000009c40",
+      "response_id": "00000000-0000-0000-0000-00000000c350",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c350",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007530",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c40",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "inequality_direction",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea60"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea60"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-000000002711",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e20",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007531",
+      "attempt_id": "00000000-0000-0000-0000-000000009c40",
+      "response_id": "00000000-0000-0000-0000-00000000c351",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c351",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007531",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c40",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "inequality_direction",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea61"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea61"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-000000002712",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e21",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007530",
+      "attempt_id": "00000000-0000-0000-0000-000000009c41",
+      "response_id": "00000000-0000-0000-0000-00000000c352",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c352",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007530",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c41",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "inequality_direction",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea62"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea62"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-000000002713",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e21",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007531",
+      "attempt_id": "00000000-0000-0000-0000-000000009c41",
+      "response_id": "00000000-0000-0000-0000-00000000c353",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c353",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007531",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c41",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "inequality_direction",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea63"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea63"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-000000002714",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e22",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007530",
+      "attempt_id": "00000000-0000-0000-0000-000000009c42",
+      "response_id": "00000000-0000-0000-0000-00000000c354",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c354",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007530",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c42",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "inequality_direction",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea64"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea64"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-000000002715",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e22",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007531",
+      "attempt_id": "00000000-0000-0000-0000-000000009c42",
+      "response_id": "00000000-0000-0000-0000-00000000c355",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c355",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007531",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c42",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "inequality_direction",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea65"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea65"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-000000002716",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e23",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007530",
+      "attempt_id": "00000000-0000-0000-0000-000000009c43",
+      "response_id": "00000000-0000-0000-0000-00000000c356",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c356",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007530",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c43",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "inequality_direction",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea66"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea66"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-000000002717",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e23",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007531",
+      "attempt_id": "00000000-0000-0000-0000-000000009c43",
+      "response_id": "00000000-0000-0000-0000-00000000c357",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c357",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007531",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c43",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "inequality_direction",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea67"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea67"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-000000002718",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e24",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007530",
+      "attempt_id": "00000000-0000-0000-0000-000000009c44",
+      "response_id": "00000000-0000-0000-0000-00000000c358",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c358",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007530",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c44",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "inequality_direction",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea68"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea68"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-000000002719",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e24",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007531",
+      "attempt_id": "00000000-0000-0000-0000-000000009c44",
+      "response_id": "00000000-0000-0000-0000-00000000c359",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c359",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007531",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c44",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "inequality_direction",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea69"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea69"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-00000000271a",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e25",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007530",
+      "attempt_id": "00000000-0000-0000-0000-000000009c45",
+      "response_id": "00000000-0000-0000-0000-00000000c35a",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c35a",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007530",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c45",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "unit_conversion_error",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea6a"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea6a"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-00000000271b",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e25",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007531",
+      "attempt_id": "00000000-0000-0000-0000-000000009c45",
+      "response_id": "00000000-0000-0000-0000-00000000c35b",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c35b",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007531",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c45",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea6b"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-00000000271c",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e26",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007530",
+      "attempt_id": "00000000-0000-0000-0000-000000009c46",
+      "response_id": "00000000-0000-0000-0000-00000000c35c",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c35c",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007530",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c46",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "unit_conversion_error",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea6c"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea6c"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-00000000271d",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e26",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007531",
+      "attempt_id": "00000000-0000-0000-0000-000000009c46",
+      "response_id": "00000000-0000-0000-0000-00000000c35d",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c35d",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007531",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c46",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea6d"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-00000000271e",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e27",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007530",
+      "attempt_id": "00000000-0000-0000-0000-000000009c47",
+      "response_id": "00000000-0000-0000-0000-00000000c35e",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c35e",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007530",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c47",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "unit_conversion_error",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea6e"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea6e"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-00000000271f",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e27",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007531",
+      "attempt_id": "00000000-0000-0000-0000-000000009c47",
+      "response_id": "00000000-0000-0000-0000-00000000c35f",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c35f",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007531",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c47",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": null,
+    "errors": [],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea6f"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-000000002720",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e28",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007530",
+      "attempt_id": "00000000-0000-0000-0000-000000009c48",
+      "response_id": "00000000-0000-0000-0000-00000000c360",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c360",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007530",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c48",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "unit_conversion_error",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea70"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea70"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-000000002721",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e28",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007531",
+      "attempt_id": "00000000-0000-0000-0000-000000009c48",
+      "response_id": "00000000-0000-0000-0000-00000000c361",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c361",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007531",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c48",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": null,
+    "errors": [],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea71"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-000000002722",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e29",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007530",
+      "attempt_id": "00000000-0000-0000-0000-000000009c49",
+      "response_id": "00000000-0000-0000-0000-00000000c362",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "analyzed"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c362",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007530",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c49",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": true,
+    "errors": [
+      {
+        "code": "unit_conversion_error",
+        "instructor_status": "confirmed",
+        "evidence_ref_ids": [
+          "00000000-0000-0000-0000-00000000ea72"
+        ],
+        "outcome_ids": [
+          "00000000-0000-4000-8000-000000000008",
+          "00000000-0000-4000-8000-000000000009"
+        ]
+      }
+    ],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea72"
+    ]
+  },
+  {
+    "ler": {
+      "id": "00000000-0000-0000-0000-000000002723",
+      "schema_version": "1.0",
+      "course_id": "00000000-0000-4000-8000-000000000002",
+      "learner_id": "00000000-0000-0000-0000-000000004e29",
+      "assessment_id": "00000000-0000-4000-8000-000000000004",
+      "question_id": "00000000-0000-0000-0000-000000007531",
+      "attempt_id": "00000000-0000-0000-0000-000000009c49",
+      "response_id": "00000000-0000-0000-0000-00000000c363",
+      "revision": 1,
+      "is_current": true,
+      "assessment_origin": "graded_canvas",
+      "assistance_level": "independent",
+      "hints_used": 0,
+      "analysis_status": "insufficient"
+    },
+    "response": {
+      "id": "00000000-0000-0000-0000-00000000c363",
+      "points_earned": "6"
+    },
+    "question": {
+      "id": "00000000-0000-0000-0000-000000007531",
+      "points_possible": "10",
+      "question_type": "rubric_question_part"
+    },
+    "assessment": {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "assessment_type": "exam"
+    },
+    "attempt": {
+      "id": "00000000-0000-0000-0000-000000009c49",
+      "attempt_number": 1,
+      "submitted_at": "2026-10-24T15:00:00Z"
+    },
+    "outcome_mappings": [
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000008",
+        "weight": "3",
+        "provenance": "instructor",
+        "needs_review": false
+      },
+      {
+        "outcome_id": "00000000-0000-4000-8000-000000000009",
+        "weight": "1",
+        "provenance": "instructor",
+        "needs_review": false
+      }
+    ],
+    "errors_analyzed": null,
+    "errors": [],
+    "evidence_ref_ids": [
+      "00000000-0000-0000-0000-00000000ea73"
+    ]
+  }
+]

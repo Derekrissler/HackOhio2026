@@ -116,7 +116,7 @@ function ConnectedResults({ token, cacheScope, canvasCourseId }: { token: string
     {courseId && <>
       <button type="button" onClick={() => void results.refetch()} disabled={results.isFetching}>Refresh results</button>
       {results.isFetching ? <Spinner renderTitle="Checking current analytics" /> :
-        results.error ? <AnalyticsError error={results.error} /> : results.data ? <Dashboard data={results.data} /> : null}
+        results.error ? <AnalyticsError error={results.error} /> : results.data ? <Dashboard data={results.data} token={token} cacheScope={cacheScope} /> : null}
     </>}
   </>
 }
@@ -137,7 +137,7 @@ const statuses = {
 }
 const percentage = (ratio: number | null) => ratio === null ? 'Unavailable' : `${(ratio * 100).toFixed(1)}%`
 
-export function Dashboard({ data }: { data: AnalyticsDashboard }) {
+export function Dashboard({ data, token, cacheScope }: { data: AnalyticsDashboard; token?: string; cacheScope?: string }) {
   if (data.status === 'stale' || data.status === 'incomplete' || data.status === 'no_results') {
     return <Alert variant="info">{statuses[data.status]}</Alert>
   }
@@ -147,14 +147,44 @@ export function Dashboard({ data }: { data: AnalyticsDashboard }) {
     {data.computed_at && <p>Computed {new Date(data.computed_at).toLocaleString()}</p>}
     <PerformanceTable title="Class outcomes" rows={data.performance.filter(row => row.scope === 'class_outcome')} />
     <PerformanceTable title="Assessment questions" rows={data.performance.filter(row => row.scope === 'assessment_question')} />
+    <Heading level="h2" margin="medium 0">Classified error patterns</Heading>
+    {!data.performance.some(row => row.errors?.length) ? <p>No publishable classified error summaries are available. This does not establish that no mistakes occurred.</p> :
+      data.performance.filter(row => row.errors?.length && !row.suppressed).map(row => <div key={row.id}>
+        <strong>{row.label}</strong>
+        <ul>{row.errors.map(error => <li key={error.code}>
+          {error.code}: {error.affected_students !== null && error.assessed_students !== null ?
+            `${error.affected_students} of ${error.assessed_students} eligible classified students (${percentage(error.prevalence)})` :
+            `${error.occurrence_count ?? 'Unavailable'} occurrences`}
+        </li>)}</ul>
+      </div>)}
     <Heading level="h2" margin="medium 0">Related mistake groups</Heading>
     {!data.clusters.length ? <p>No publishable mistake groups are available.</p> : data.clusters.map(group =>
       <View as="div" key={group.id} borderWidth="small" padding="small" margin="small 0">
         <strong>{group.error_code}</strong>
+        {group.representative_text && <blockquote>{group.representative_text}</blockquote>}
         <p>{group.unique_students} students · {group.evidence_count} evidence observations · {group.assessment_origin} · {group.assistance}</p>
         <p>{group.interpretation_limit}</p>
+        {token && cacheScope && <ClusterEvidence courseId={data.course_id} arrId={group.id} token={token} cacheScope={cacheScope} />}
       </View>)}
   </section>
+}
+
+function ClusterEvidence({ courseId, arrId, token, cacheScope }: { courseId: string; arrId: string; token: string; cacheScope: string }) {
+  const [open, setOpen] = useState(false)
+  const query = useQuery({
+    queryKey: ['supabase-analytics', cacheScope, 'evidence', courseId, arrId],
+    queryFn: ({ signal }) => analyticsGet<{ evidence: { id: string; source_type: string; page: number | null; excerpt: string | null }[] }>(
+      `/courses/${courseId}/clusters/${arrId}/evidence`, token, signal),
+    enabled: open, staleTime: 0,
+  })
+  return <>
+    <button type="button" aria-expanded={open} onClick={() => setOpen(value => !value)}>View supporting evidence</button>
+    {open && (query.isFetching ? <Spinner renderTitle="Loading evidence" /> : query.error ? <AnalyticsError error={query.error} /> :
+      <ul>{query.data?.evidence.map(ref => <li key={ref.id}>
+        {ref.source_type}{ref.page !== null ? ` · page ${ref.page}` : ''}
+        <blockquote>{ref.excerpt ?? 'No excerpt available.'}</blockquote>
+      </li>)}</ul>)}
+  </>
 }
 
 function PerformanceTable({ title, rows }: { title: string; rows: AnalyticsPerformance[] }) {

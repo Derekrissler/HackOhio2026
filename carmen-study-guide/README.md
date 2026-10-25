@@ -52,7 +52,8 @@ Each message goes through `tutor/service.py`:
    `active_protected` gives concept help only, `guided_homework` gives hints but no answers, and `released` gives
    independent study. A message that names or pastes text from an open assessment (`tutor/matcher.py`, plus a Haiku
    check for paraphrases) gets the strictest mode that applies.
-2. **Retrieval**: `search_resource_chunks` with `p_student_safe=true`, filtered to the student's course.
+2. **Retrieval**: `search_resource_chunks` with the authenticated student's JWT and `p_student_safe=true`.
+   A validated, current schema 1.1 analytics result can boost the student's weaker outcomes.
 3. **Reply**: Claude Opus 5.5 returns a fixed schema (message, move, hint level, cited chunk ids, next step).
 4. **Verification** (`tutor/verifier.py`, plus a Haiku paraphrase check). It rejects moves the mode doesn't allow,
    hint jumps, citations to anything that wasn't retrieved, answer-key text, and other students' ids. A rejected draft
@@ -65,8 +66,18 @@ export the course once (the **Export for analytics** button). To give every mode
 `.venv/bin/python -m tutor.demo_setup --apply` once. It makes Assignment 2 guided homework, releases Quiz 1, and adds a
 fictional Quiz 2 answer key. Without the keys, the page loads and explains what's missing.
 
+Sign in on the tutor page with an existing Supabase course account. Course enrollment and
+`learner_identities` must already map that account to its learner; the demo picker does not
+authorize shared records. The page stores an HttpOnly, SameSite cookie, expiring within an
+hour; sign in again after expiry. The browser receives no service key or JWT JSON response.
+Read/retrieval clients are per user request, while writes and private verification stay server-side.
+Missing Supabase values can reuse `apps/api/.env` server-side when the project URLs agree;
+Carmen's `.env` still supplies its model-provider settings and optional local overrides.
+See [the integration guide](../docs/analytics-error-integration.md) for the complete boundaries.
+
 Tests: `.venv/bin/pip install -r requirements-dev.txt`, then `.venv/bin/python -m pytest tutor` from `mock-canvas/`.
-The tests that use Supabase run only when a service key is set, and they delete the sessions they create.
+Shared-database tests additionally require an explicit private `TUTOR_TEST_ACCESS_TOKEN`
+and service key; they write/delete sessions and should be invoked deliberately.
 `tutor_host.py` is the only mock-canvas-specific part (who the student is, and the page); the `tutor/` package
 doesn't import mock-canvas.
 

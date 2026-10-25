@@ -10,25 +10,27 @@ import pytest
 from tutor.models import Mode
 
 pytestmark = pytest.mark.skipif(
-    not any(os.environ.get(k, "") not in ("", "REPLACE_ME") for k in ("SUPABASE_SERVICE_ROLE_KEY", "SUPABASE_SECRET_KEY")),
-    reason="no Supabase service key",
+    not os.environ.get("TUTOR_TEST_ACCESS_TOKEN") or not any(os.environ.get(k, "") not in ("", "REPLACE_ME", "YOUR-SECRET-KEY") for k in ("SUPABASE_SERVICE_ROLE_KEY", "SUPABASE_SECRET_KEY")),
+    reason="explicit live-test user token and service key required",
 )
 
 
 @pytest.fixture(scope="module")
 def repo():
-    from supabase_client import service_client
+    from supabase_client import service_client, user_client
+    from tutor.models import Learner
     from tutor.repo import SupabaseTutorRepo
 
-    return SupabaseTutorRepo(service_client())
+    reader = user_client(os.environ["TUTOR_TEST_ACCESS_TOKEN"])
+    uid = reader.auth.get_user(os.environ["TUTOR_TEST_ACCESS_TOKEN"]).user.id
+    mapping = reader.table("learner_identities").select("learner_id,course_id").eq("user_id", str(uid)).limit(1).execute().data[0]
+    person = reader.table("learners").select("pseudonym").eq("id", mapping["learner_id"]).execute().data[0]
+    return SupabaseTutorRepo(service_client(), reader, Learner(mapping["course_id"], mapping["learner_id"], person["pseudonym"]))
 
 
 @pytest.fixture(scope="module")
 def learner(repo):
-    row = repo.db.table("learners").select("pseudonym,courses!inner(canvas_id)").limit(1).execute().data[0]
-    found = repo.learner(row["courses"]["canvas_id"], row["pseudonym"])
-    assert found is not None
-    return found
+    return repo.identity
 
 
 def test_unknown_learner_or_course_is_none(repo, learner):

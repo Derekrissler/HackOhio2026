@@ -12,12 +12,12 @@ import os
 from functools import lru_cache
 from html import escape
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Response
 from fastapi.responses import HTMLResponse
 
-import ingest
 import ui
-from data import course, self_user
+from data import course
+from tutor.auth import LoginBody, identity, login, logout
 from tutor.models import Learner
 from tutor.policy import mode_for
 from tutor.router import create_router
@@ -32,16 +32,17 @@ MODE_LABELS = {
 }
 
 
-@lru_cache(maxsize=1)
-def backend():
+def backend(request):
     """Built on first use so the server starts without keys. Raises RuntimeError when not configured."""
     from supabase_client import service_client
     from tutor.repo import SupabaseTutorRepo
 
-    repo = SupabaseTutorRepo(service_client())
+    reader, learner = identity(request, request.path_params["course_id"])
+    repo = SupabaseTutorRepo(service_client(), reader, learner)
     return TutorService(repo, _llm()), repo
 
 
+@lru_cache(maxsize=1)
 def _llm():
     """TUTOR_LLM=anthropic|ollama. Unset: Claude when ANTHROPIC_API_KEY is set, otherwise local Ollama."""
     has_key = os.environ.get("ANTHROPIC_API_KEY", "") not in ("", "REPLACE_ME")
@@ -62,28 +63,36 @@ def _llm():
 
 
 def current_learner(request: Request, course_id: str) -> Learner | None:
-    """Mock Canvas has one signed-in student. Same pseudonym as ingest.py, so it matches the stored learner."""
-    c = course(course_id)
-    _, repo = backend()
-    return repo.learner(str(c["course"]["id"]), ingest.pseudonym("S", self_user(c)["id"]))
+    return identity(request, course_id)[1]
 
 
 router = create_router(current_learner, backend)
 
 
+@router.post("/courses/{course_id}/tutor/auth/login")
+def sign_in(course_id: str, body: LoginBody, request: Request, response: Response):
+    return login(body, request, response)
+
+
+@router.post("/courses/{course_id}/tutor/auth/logout")
+def sign_out(course_id: str, request: Request, response: Response):
+    return logout(request, response)
+
+
+@router.get("/courses/{course_id}/tutor/context")
+def context(course_id: str, request: Request, response: Response):
+    from supabase_client import service_client
+    from tutor.repo import SupabaseTutorRepo
+    reader, learner = identity(request, course_id)
+    repo = SupabaseTutorRepo(service_client(), reader, learner)
+    response.headers["Cache-Control"] = "no-store"
+    return {"assessments": [{"id": a.id, "title": a.title, "mode": mode_for(a)} for a in repo.assessments(learner.course_id)]}
+
+
 @router.get("/courses/{course_id}/tutor", response_class=HTMLResponse)
 def tutor_page(course_id: str, assignment: str | None = None):
     c = course(course_id)
-    try:
-        _, repo = backend()
-        learner = current_learner(None, course_id)
-        assessments = repo.assessments(learner.course_id) if learner else []
-        problem = None if learner else "This course hasn't been exported to the analytics database yet."
-    except RuntimeError as e:
-        assessments, problem = [], str(e)
-    except Exception:
-        log.exception("tutor page could not load course data")
-        assessments, problem = [], "The tutor is unavailable right now. Try again in a minute."
+    assessments, problem = [], "Sign in with your Supabase course account to use the tutor."
 
     options = ['<option value="">General study (no assignment)</option>'] + [
         f'<option value="{escape(a.id)}"'
@@ -97,6 +106,12 @@ def tutor_page(course_id: str, assignment: str | None = None):
   <p class="muted">Ask about the course material. On open, graded work the tutor explains concepts and points you to
   the slides, but won't give answers.</p>
   {notice}
+  <form id="tutor-login-form" class="tutor-form">
+    <label>Email <input name="email" type="email" autocomplete="username" required></label>
+    <label>Password <input name="password" type="password" autocomplete="current-password" required></label>
+    <button type="submit">Sign in</button>
+  </form>
+  <button id="tutor-signout" type="button" hidden>Sign out</button>
   <label class="tutor-label" for="tutor-assessment">What are you working on?</label>
   <select id="tutor-assessment">{''.join(options)}</select>
   <div id="tutor-log" class="tutor-log" aria-live="polite"></div>

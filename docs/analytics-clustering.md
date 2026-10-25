@@ -1,5 +1,8 @@
 # Phase 5: optional semantic grouping
 
+This describes the original engine. The current input/review, publication and UI
+workflow is in [analytics-error-integration.md](analytics-error-integration.md).
+
 The statistical engine is unchanged. Clustering is a separate optional CPU path:
 
 ```
@@ -163,5 +166,6 @@ python -m pytest --confcutdir tests/analytics tests/analytics/test_clustering_mo
 ```
 
 When `ANALYTICS_MODEL_CACHE` is unset this test is skipped. Statistical analytics
-continue to function even when semantic analysis is unavailable. Phase 6 will map
-these internal results to versioned ARRs and Supabase persistence after review.
+continue to function even when semantic analysis is unavailable. Phase 6 maps
+internal results to versioned ARRs; the integration guide describes the required
+text and cluster interpretation reviews for new live ML publication.

@@ -17,6 +17,15 @@ class AnalyticsCourseOut(BaseModel):
     role: Literal["student", "instructor", "ta"]
 
 
+class ErrorPatternOut(BaseModel):
+    code: str
+    occurrence_count: int | None = None
+    affected_students: int | None = None
+    assessed_students: int | None = None
+    prevalence: float | None = None
+    recurring: bool | None = None
+
+
 class PerformanceOut(BaseModel):
     id: UUID
     scope: Literal["class_outcome", "assessment_question", "student_outcome"]
@@ -34,6 +43,8 @@ class PerformanceOut(BaseModel):
     evidence_count: int | None = None
     insufficient_evidence: bool
     suppressed: bool
+    errors: list[ErrorPatternOut] = Field(default_factory=list)
+    error_classification_observations: int | None = None
 
 
 class ClusterOut(BaseModel):
@@ -44,6 +55,7 @@ class ClusterOut(BaseModel):
     assessment_origin: str
     assistance: str
     interpretation_limit: str
+    representative_text: str | None = None
 
 
 class AnalyticsDashboardOut(BaseModel):
@@ -125,12 +137,16 @@ def load_dashboard(user_client, control_factory, course_id, *, learner_id=None, 
         elif doc.scope == "student_outcome":
             continue  # Instructor summary does not enumerate individual learners.
         if doc.scope == "misconception_cluster":
+            approved = doc.provenance.get("cluster_review", {}).get("approved") is True
+            if not approved:
+                continue
             result.clusters.append(ClusterOut(
                 id=doc.id, error_code=metric.group.representative_error_code,
                 unique_students=metric.group.unique_student_count,
                 evidence_count=metric.group.evidence_observation_count,
                 assessment_origin=metric.assessment_origin, assistance=metric.assistance,
                 interpretation_limit=metric.group.interpretation_limit,
+                representative_text=metric.group.representative_text,
             ))
             continue
         student = doc.scope == "student_outcome"
@@ -149,6 +165,11 @@ def load_dashboard(user_client, control_factory, course_id, *, learner_id=None, 
             score_observations=metric.scored_observation_count if student else None,
             evidence_count=None if suppressed else len(doc.evidence_ler_ids),
             insufficient_evidence=doc.interpretation_limits.insufficient_evidence, suppressed=suppressed,
+            error_classification_observations=metric.error_assessed_observation_count if student else None,
+            errors=[] if suppressed else (
+                [ErrorPatternOut(code=e.code, occurrence_count=e.occurrence_count, recurring=e.recurring) for e in metric.errors] if student else
+                [ErrorPatternOut(code=e.code, affected_students=e.numerator, assessed_students=e.denominator, prevalence=e.prevalence)
+                 for e in metric.error_prevalence if not e.suppressed]),
         ))
     result.performance.sort(key=lambda row: (row.scope, row.label, str(row.id)))
     result.status = "ready" if result.clusters or any(

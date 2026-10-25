@@ -112,6 +112,7 @@ def check_readiness(source: EvidenceSource, course_id, config=None, period=None)
 def analyze_course(
     source: EvidenceSource, course_id, *, config=None, period=None, run_id=None,
     started_at=None, computed_at=None, cluster=False, approved_excerpts=(), embedder=None,
+    reviewed_export=None, cluster_review=None,
 ) -> AnalysisBundle:
     config = config or AnalyticsConfig()
     course_id, run_id = UUID(str(course_id)), UUID(str(run_id)) if run_id else uuid4()
@@ -121,6 +122,14 @@ def analyze_course(
     if batch.course_id != course_id:
         raise ValueError("source returned a different course")
     records, features, report = _adapt(batch, config, period)
+    if (reviewed_export is not None or cluster_review is not None) and not cluster:
+        raise ValueError("text/group review requires clustering")
+    if reviewed_export is not None:
+        if approved_excerpts:
+            raise ValueError("provide one excerpt input")
+        from .reviewed_excerpts import ReviewedExcerptExport
+        reviewed_export = ReviewedExcerptExport.model_validate(reviewed_export)
+        approved_excerpts = reviewed_export.approved_inputs(records, batch, live=getattr(source, "source_kind", "offline_fixture") == "supabase")
     statistics = analyze_statistics(records, config, period)
     timestamp = computed_at or datetime.now(timezone.utc)
     clustering, prepared = None, None
@@ -150,8 +159,25 @@ def analyze_course(
                               for part in clustering.partitions] if clustering else [],
     })
     snapshot = content_hash(manifest)
+    approved_clusters = None
+    if cluster:
+        from .cluster_review import ClusterReview, approved_ids, template
+        manifest["cluster_review_template"] = template(clustering, batch.fingerprint(), reviewed_export.digest() if reviewed_export else None).model_dump(mode="json")
+        if reviewed_export is not None:
+            manifest["excerpt_review"] = reviewed_export.audit()
+        if cluster_review is not None:
+            if reviewed_export is None:
+                raise ValueError("group review requires a reviewed excerpt export")
+            cluster_review = ClusterReview.model_validate(cluster_review)
+            approved_clusters = approved_ids(cluster_review, clustering, batch.fingerprint(), reviewed_export.digest())
+            manifest["cluster_review"] = cluster_review.model_dump(mode="json")
+        snapshot = content_hash(manifest)
     documents = generate_arrs(statistics, records=records, run_id=run_id, input_snapshot=snapshot,
-                              computed_at=computed_at, clustering=clustering)
+                              computed_at=computed_at, clustering=clustering, approved_clusters=approved_clusters)
+    if cluster_review is not None:
+        for doc in documents:
+            if doc.scope == "misconception_cluster":
+                doc.provenance["cluster_review"] = {"approved": True, "binding": cluster_review.binding}
     return AnalysisBundle(
         run_id=run_id, course_id=course_id, started_at=started_at, computed_at=computed_at,
         source_kind=getattr(source, "source_kind", "offline_fixture"),
@@ -185,6 +211,29 @@ def persist_analysis(repository, bundle: AnalysisBundle, *, exclusive_course_acc
             raise ValueError("run ID already belongs to different analytical content")
         if previous["params"].get("status") == "complete":
             return "already_completed"
+    if bundle.manifest.get("cluster_requested"):
+        from .cluster_review import ClusterReview, approved_ids
+        from .clustering import ClusteringResult, clustering_snapshot
+        from .text_preparation import PreparedTexts
+        audit, review = bundle.manifest.get("excerpt_review"), bundle.manifest.get("cluster_review")
+        if not audit or not review or not bundle.clustering_report:
+            raise ValueError("live clustering publication requires excerpt and group review")
+        result = ClusteringResult.model_validate(bundle.clustering_report)
+        prepared = PreparedTexts.model_validate(bundle.manifest["prepared_texts"])
+        if (result.run_id != bundle.run_id or result.config.model_dump(mode='json') != bundle.manifest['configuration']
+                or (result.model.model_dump(mode='json') if result.model else None) != bundle.manifest['clustering_model']
+                or result.package_versions != bundle.manifest['clustering_runtime']
+                or result.input_snapshot != clustering_snapshot(prepared, result.config, result.model, result.package_versions)):
+            raise ValueError("cluster report differs from frozen inputs")
+        accepted = approved_ids(ClusterReview.model_validate(review), result, bundle.source_fingerprint, audit["digest"])
+        groups = {g.cluster_id: g for part in result.partitions for g in part.groups}
+        for doc in bundle.documents:
+            if doc.scope == "misconception_cluster":
+                group = doc.metrics.group
+                if group.cluster_id not in accepted or group != groups[group.cluster_id]:
+                    raise ValueError("unapproved cluster document")
+                if doc.provenance.get("cluster_review") != {"approved": True, "binding": review["binding"]}:
+                    raise ValueError("cluster review provenance mismatch")
     if repository.load_course(bundle.course_id).fingerprint() != bundle.source_fingerprint:
         raise RepositoryError("source_changed_before_publication")
     params = {

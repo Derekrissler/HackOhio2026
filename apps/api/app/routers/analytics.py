@@ -61,3 +61,30 @@ def get_live_summary(course_id: UUID, session: Session, response: Response, run_
 def get_my_results(course_id: UUID, session: Session, response: Response, run_id: UUID | None = None):
     response.headers["Cache-Control"] = "no-store"
     return dashboard_for(session, course_id, run_id, own=True)
+
+
+@router.get("/api/analytics/courses/{course_id}/clusters/{arr_id}/evidence")
+def cluster_evidence(course_id: UUID, arr_id: UUID, session: Session, response: Response):
+    response.headers["Cache-Control"] = "no-store"
+    try:
+        course_membership(session, course_id, staff=True)
+        rows = read_pages(session.client, "analytics_results", "run_id", filters={"id": str(arr_id), "course_id": str(course_id),
+                          "schema_version": "1.1", "scope": "misconception_cluster", "is_stale": False})
+        if not rows:
+            raise HTTPException(404, "Cluster not found")
+        summary = load_dashboard(session.client, control_repository, course_id, run_id=UUID(rows[0]["run_id"]))
+        if summary.status != "ready" or not any(item.id == arr_id for item in summary.clusters):
+            raise HTTPException(409, "Cluster is stale or unavailable")
+        from app.analytics.repository import SupabaseARRReader
+        documents = SupabaseARRReader(session.client).read_published(course_id, UUID(rows[0]["run_id"]), scope="misconception_cluster")
+        document = next((doc for doc in documents if doc.id == arr_id), None)
+        if document is None:
+            raise HTTPException(409, "Cluster is stale or unavailable")
+        refs = sorted(map(str, document.metrics.group.evidence_ref_ids))
+        evidence = []
+        for start in range(0, len(refs), 100):
+            evidence.extend(read_pages(session.client, "evidence_refs", "id,source_type,document_id,canvas_ref,page,bbox_norm,excerpt",
+                                       filters={"course_id": str(course_id)}, in_filter=("id", refs[start:start+100])))
+        return {"arr_id": str(arr_id), "evidence": evidence}
+    except (RepositoryError, RuntimeError, ImportError, ValueError, KeyError):
+        raise unavailable() from None

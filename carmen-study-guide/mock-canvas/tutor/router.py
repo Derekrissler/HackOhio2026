@@ -6,7 +6,7 @@ from collections import defaultdict, deque
 from collections.abc import Callable
 from uuid import UUID
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Request, Response
 from pydantic import BaseModel, Field
 
 from tutor import prompts
@@ -28,10 +28,10 @@ def _s(value: UUID | None) -> str | None:
 
 
 def create_router(resolve_learner: Callable[[Request, str], Learner | None],
-                  get_backend: Callable[[], tuple[TutorService, object]],
+                  get_backend: Callable[[Request], tuple[TutorService, object]],
                   turns_per_minute: int = 20) -> APIRouter:
     """resolve_learner(request, course_id) identifies the student server-side.
-    get_backend() returns (service, repo); it may raise RuntimeError when keys are missing."""
+    get_backend(request) returns a request-scoped (service, repo)."""
     router = APIRouter()
     recent: dict[str, deque] = defaultdict(deque)
 
@@ -41,13 +41,15 @@ def create_router(resolve_learner: Callable[[Request, str], Learner | None],
             raise HTTPException(404, "Not found")
         return learner
 
-    def backend():
+    def backend(request):
         try:
-            return get_backend()
-        except RuntimeError as e:
-            raise HTTPException(503, f"Tutor is not configured: {e}")
+            return get_backend(request)
+        except HTTPException:
+            raise
+        except RuntimeError:
+            raise HTTPException(503, "Tutor is not configured") from None
         except Exception:
-            log.exception("tutor backend unavailable")
+            log.warning("tutor backend unavailable")
             raise HTTPException(503, "Tutor is unavailable right now.")
 
     def rate_limit(learner: Learner):
@@ -59,8 +61,9 @@ def create_router(resolve_learner: Callable[[Request, str], Learner | None],
         window.append(now)
 
     @router.post("/courses/{course_id}/tutor/turn")
-    def tutor_turn(course_id: str, body: TurnBody, request: Request):
-        service, _ = backend()
+    def tutor_turn(course_id: str, body: TurnBody, request: Request, response: Response):
+        response.headers["Cache-Control"] = "no-store"
+        service, _ = backend(request)
         learner = learner_for(request, course_id)
         rate_limit(learner)
         try:
@@ -77,12 +80,13 @@ def create_router(resolve_learner: Callable[[Request, str], Learner | None],
         }
 
     @router.get("/courses/{course_id}/tutor/sessions/{session_id}")
-    def tutor_session(course_id: str, session_id: str, request: Request):
+    def tutor_session(course_id: str, session_id: str, request: Request, response: Response):
+        response.headers["Cache-Control"] = "no-store"
         try:
             UUID(session_id)
         except ValueError:
             raise HTTPException(404, "Not found")
-        _, repo = backend()
+        _, repo = backend(request)
         learner = learner_for(request, course_id)
         s = repo.get_session(session_id)
         if s is None or s.learner_id != learner.learner_id or s.course_id != learner.course_id:

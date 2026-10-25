@@ -11,7 +11,7 @@ def make(learner=ME, llm=None, repo=None, limit=20):
     service = TutorService(repo, llm or FakeLLM(*[good() for _ in range(10)]))
     who = {"who": learner}
     app = FastAPI()
-    app.include_router(create_router(lambda request, course_id: who["who"], lambda: (service, repo),
+    app.include_router(create_router(lambda request, course_id: who["who"], lambda request: (service, repo),
                                      turns_per_minute=limit))
     return TestClient(app), repo, who
 
@@ -61,7 +61,7 @@ def test_malformed_ids_are_rejected_before_reaching_the_database():
 def test_backend_failure_is_503():
     app = FastAPI()
 
-    def broken():
+    def broken(request):
         raise ConnectionError("supabase unreachable")
 
     app.include_router(create_router(lambda r, c: ME, broken))
@@ -77,7 +77,7 @@ def test_rate_limit_per_learner():
 def test_missing_configuration_is_503_not_a_crash():
     app = FastAPI()
 
-    def unconfigured():
+    def unconfigured(request):
         raise RuntimeError("ANTHROPIC_API_KEY is not set")
 
     app.include_router(create_router(lambda r, c: ME, unconfigured))

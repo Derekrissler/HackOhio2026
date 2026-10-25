@@ -7,6 +7,11 @@
   const form = document.getElementById("tutor-form");
   const input = document.getElementById("tutor-input");
   const select = document.getElementById("tutor-assessment");
+  const loginForm = document.getElementById("tutor-login-form");
+  const signout = document.getElementById("tutor-signout");
+  const notice = root.querySelector(".tutor-notice");
+  let signedIn = false;
+  let authGeneration = 0;
   const MODES = {
     protected_assessment: "Protected: concept help only",
     guided_homework: "Guided: hints, not answers",
@@ -14,6 +19,59 @@
   };
   let sessionId = null;
   let generation = 0; // bumped on context switch so late replies from the old context are dropped
+
+  function setSignedIn(value) {
+    signedIn = value;
+    generation++; sessionId = null; log.replaceChildren();
+    loginForm.hidden = value; signout.hidden = !value;
+    form.querySelector("button").disabled = !value;
+    select.disabled = !value;
+    notice.textContent = value ? "Signed in to your course account." : "Sign in with your Supabase course account to use the tutor.";
+  }
+  async function loadContext() {
+    const requested = ++authGeneration;
+    const res = await fetch(`/courses/${encodeURIComponent(course)}/tutor/context`, { cache: "no-store" });
+    if (requested !== authGeneration) return;
+    if (!res.ok) { setSignedIn(false); return; }
+    const data = await res.json();
+    if (requested !== authGeneration) return;
+    setSignedIn(true);
+    select.replaceChildren(new Option("General study (no assignment)", ""));
+    for (const a of data.assessments) select.add(new Option(`${a.title} (${MODES[a.mode]})`, a.id));
+  }
+  loginForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    authGeneration++;
+    const values = new FormData(loginForm);
+    const button = loginForm.querySelector("button");
+    button.disabled = true;
+    const body = JSON.stringify({ email: values.get("email"), password: values.get("password") });
+    loginForm.reset();
+    try {
+      const res = await fetch(`/courses/${encodeURIComponent(course)}/tutor/auth/login`, {
+        method: "POST", headers: { "Content-Type": "application/json", "X-Tutor-Request": "1" }, body,
+      });
+      if (!res.ok) throw new Error("Sign-in failed. Check your course account and configuration.");
+      await loadContext();
+      if (!signedIn) notice.textContent = "This account needs a course enrollment and learner identity mapping.";
+    } catch { notice.textContent = "Sign-in failed. Check your course account and configuration."; }
+    finally { button.disabled = false; }
+  });
+  signout.addEventListener("click", async () => {
+    authGeneration++;
+    setSignedIn(false);
+    try {
+      const res = await fetch(`/courses/${encodeURIComponent(course)}/tutor/auth/logout`, {
+        method: "POST", headers: { "X-Tutor-Request": "1" },
+      });
+      if (!res.ok) throw new Error();
+    } catch {
+      signout.hidden = false;
+      notice.textContent = "Sign-out failed. Retry signing out before leaving this browser.";
+    }
+  });
+  setSignedIn(false);
+  loadContext().catch(() => setSignedIn(false));
 
   select.addEventListener("change", () => { generation++; sessionId = null; log.replaceChildren(); });
 
@@ -81,11 +139,12 @@
     try {
       const res = await fetch(`/courses/${encodeURIComponent(course)}/tutor/turn`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "X-Tutor-Request": "1" },
         body: JSON.stringify({ message, session_id: sessionId, assessment_id: select.value || null }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
+        if (res.status === 401) setSignedIn(false);
         const detail = Array.isArray(data.detail) ? data.detail.map((d) => d.msg).join("; ") : data.detail;
         throw new Error(detail || `Request failed (${res.status})`);
       }
@@ -95,7 +154,7 @@
     } catch (err) {
       if (sent === generation) log.append(el("div", "tutor-msg tutor-error", err.message));
     } finally {
-      button.disabled = false;
+      button.disabled = !signedIn;
       input.focus();
     }
   });

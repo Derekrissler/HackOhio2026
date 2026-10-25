@@ -141,11 +141,28 @@ const dashboard: AnalyticsDashboard = {
     id: 'fictional-arr', scope: 'class_outcome', outcome_id: 'fictional-outcome', assessment_id: null, question_id: null,
     label: 'LO-1', mean_student_ratio: .6, pooled_score_ratio: .75, observed_score_ratio: null,
     eligible_students: 10, assessed_students: 12, evidence_coverage_ratio: null, score_observations: null,
-    evidence_count: 24, insufficient_evidence: false, suppressed: false,
+    evidence_count: 24, insufficient_evidence: false, suppressed: false, errors: [], error_classification_observations: null,
   }],
 }
 
 describe('published analytics display', () => {
+  it('does not interpret unavailable error summaries as no mistakes', () => {
+    render(<Dashboard data={dashboard} />)
+    expect(screen.getByText(/does not establish that no mistakes occurred/)).toBeInTheDocument()
+  })
+  it('renders a classified error with its eligible denominator', () => {
+    const errors = [{ code: 'inequality_direction', occurrence_count: null, affected_students: 5,
+      assessed_students: 10, prevalence: .5, recurring: null }]
+    render(<Dashboard data={{ ...dashboard, performance: dashboard.performance.map(row => ({ ...row, errors })) }} />)
+    expect(screen.getByText(/5 of 10 eligible classified students \(50.0%\)/)).toBeInTheDocument()
+  })
+  it('renders the reviewed group exemplar and interpretation limit', () => {
+    render(<Dashboard data={{ ...dashboard, clusters: [{ id: 'group', error_code: 'inequality_direction',
+      unique_students: 5, evidence_count: 10, assessment_origin: 'graded_canvas', assistance: 'independent',
+      representative_text: 'The inequality is reversed.', interpretation_limit: 'Similarity is a hypothesis.' }] }} />)
+    expect(screen.getByText('The inequality is reversed.')).toBeInTheDocument()
+    expect(screen.getByText('Similarity is a hypothesis.')).toBeInTheDocument()
+  })
   it.each(['stale', 'incomplete', 'no_results'] as const)('hides metrics when status is %s', status => {
     render(<Dashboard data={{ ...dashboard, status }} />)
     expect(screen.queryByText('60.0%')).toBeNull()

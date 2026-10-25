@@ -103,7 +103,7 @@ class TutorService:
             try:
                 draft = self.llm.reply(prompts.SYSTEM, messages)
             except Exception:
-                log.exception("tutor model call failed")
+                log.warning("tutor model call failed")
                 all_violations.append("model call failed")
                 break
             violations = check_reply(draft, mode=decision.mode, retrieved_ids={c.id for c in chunks},

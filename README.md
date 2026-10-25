@@ -5,9 +5,13 @@ The architecture and roadmap are in [docs/PHASE1_PLAN.md](docs/PHASE1_PLAN.md).
 
 **Current state:** Every Canvas tab (Home, Syllabus, Assignments, Quizzes, Grades,
 Files) shows seeded course data for students and the teacher. Instructor Analytics
-now has authenticated Supabase ARR retrieval; live-data
-acceptance is pending local credentials and an inspected course run. Learning
-Insights remains a placeholder. See [analytics setup and verification](docs/analytics-dashboard.md).
+now has authenticated Supabase ARR retrieval. The first live VIBE 101 score run
+was published and verified; user-session dashboard acceptance awaits Supabase
+enrollments. Learning Insights remains a placeholder. See
+[analytics setup and verification](docs/analytics-dashboard.md) and the
+[next integration roadmap](docs/analytics-roadmap.md).
+The [error/ML integration guide](docs/analytics-error-integration.md) covers the
+implemented handoff, two review stages, authenticated tutor bridge and offline demo.
 
 | Part | Stack | Folder |
 |---|---|---|

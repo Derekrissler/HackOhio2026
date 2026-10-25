@@ -1,0 +1,190 @@
+{
+  "schema_version": "1.0",
+  "course_id": "00000000-0000-4000-8000-000000000002",
+  "extraction_version": "fictional-fixture-v1",
+  "reviewer_ref": "fictional-reviewer",
+  "reviewed_at": "2026-10-24T18:00:00Z",
+  "review_revision": "fictional-review-v1",
+  "entries": [
+    {
+      "ler_error_id": "00000000-0000-0000-0000-000000011170",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-000000002710",
+      "error_code": "inequality_direction",
+      "text": "The inequality sign is reversed in this constraint.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea60"
+      ],
+      "privacy_reviewed": true
+    },
+    {
+      "ler_error_id": "00000000-0000-0000-0000-000000011171",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-000000002711",
+      "error_code": "inequality_direction",
+      "text": "The inequality sign is reversed in this constraint.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea61"
+      ],
+      "privacy_reviewed": true
+    },
+    {
+      "ler_error_id": "00000000-0000-0000-0000-000000011172",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-000000002712",
+      "error_code": "inequality_direction",
+      "text": "The inequality sign is reversed in this constraint.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea62"
+      ],
+      "privacy_reviewed": true
+    },
+    {
+      "ler_error_id": "00000000-0000-0000-0000-000000011173",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-000000002713",
+      "error_code": "inequality_direction",
+      "text": "The inequality sign is reversed in this constraint.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea63"
+      ],
+      "privacy_reviewed": true
+    },
+    {
+      "ler_error_id": "00000000-0000-0000-0000-000000011174",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-000000002714",
+      "error_code": "inequality_direction",
+      "text": "The inequality sign is reversed in this constraint.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea64"
+      ],
+      "privacy_reviewed": true
+    },
+    {
+      "ler_error_id": "00000000-0000-0000-0000-000000011175",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-000000002715",
+      "error_code": "inequality_direction",
+      "text": "The inequality sign is reversed in this constraint.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea65"
+      ],
+      "privacy_reviewed": true
+    },
+    {
+      "ler_error_id": "00000000-0000-0000-0000-000000011176",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-000000002716",
+      "error_code": "inequality_direction",
+      "text": "The inequality sign is reversed in this constraint.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea66"
+      ],
+      "privacy_reviewed": true
+    },
+    {
+      "ler_error_id": "00000000-0000-0000-0000-000000011177",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-000000002717",
+      "error_code": "inequality_direction",
+      "text": "The inequality sign is reversed in this constraint.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea67"
+      ],
+      "privacy_reviewed": true
+    },
+    {
+      "ler_error_id": "00000000-0000-0000-0000-000000011178",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-000000002718",
+      "error_code": "inequality_direction",
+      "text": "The inequality sign is reversed in this constraint.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea68"
+      ],
+      "privacy_reviewed": true
+    },
+    {
+      "ler_error_id": "00000000-0000-0000-0000-000000011179",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-000000002719",
+      "error_code": "inequality_direction",
+      "text": "The inequality sign is reversed in this constraint.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea69"
+      ],
+      "privacy_reviewed": true
+    },
+    {
+      "ler_error_id": "00000000-0000-0000-0000-00000001117a",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-00000000271a",
+      "error_code": "unit_conversion_error",
+      "text": "The answer uses an incorrect conversion from meters to centimeters.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea6a"
+      ],
+      "privacy_reviewed": true
+    },
+    {
+      "ler_error_id": "00000000-0000-0000-0000-00000001117c",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-00000000271c",
+      "error_code": "unit_conversion_error",
+      "text": "The answer uses an incorrect conversion from meters to centimeters.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea6c"
+      ],
+      "privacy_reviewed": true
+    },
+    {
+      "ler_error_id": "00000000-0000-0000-0000-00000001117e",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-00000000271e",
+      "error_code": "unit_conversion_error",
+      "text": "The answer uses an incorrect conversion from meters to centimeters.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea6e"
+      ],
+      "privacy_reviewed": true
+    },
+    {
+      "ler_error_id": "00000000-0000-0000-0000-000000011180",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-000000002720",
+      "error_code": "unit_conversion_error",
+      "text": "The answer uses an incorrect conversion from meters to centimeters.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea70"
+      ],
+      "privacy_reviewed": true
+    },
+    {
+      "ler_error_id": "00000000-0000-0000-0000-000000011182",
+      "ler_revision": 1,
+      "ler_id": "00000000-0000-0000-0000-000000002722",
+      "error_code": "unit_conversion_error",
+      "text": "The answer uses an incorrect conversion from meters to centimeters.",
+      "source_kind": "instructor_feedback",
+      "evidence_ref_ids": [
+        "00000000-0000-0000-0000-00000000ea72"
+      ],
+      "privacy_reviewed": true
+    }
+  ]
+}

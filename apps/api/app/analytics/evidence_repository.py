@@ -141,6 +141,13 @@ class SupabaseEvidenceRepository:
             if not isinstance(metadata, dict) or metadata.get("schema_version") != "1.0":
                 metadata = {}
                 batch.issues.append(LoadIssue(ler_id=ler["id"], code="missing_analytics_metadata"))
+            else:
+                from .error_handoff import completion_metadata
+                try:
+                    metadata = completion_metadata(metadata)
+                except ValueError:
+                    metadata = {}
+                    batch.issues.append(LoadIssue(ler_id=ler["id"], code="invalid_analytics_metadata"))
             envelope = {"ler": ler}
             bad = ler["learner_id"] not in learner_ids
             if bad:
@@ -182,10 +189,14 @@ class SupabaseEvidenceRepository:
                                  "provenance": mapping.get("provenance", "question_mapping"),
                                  "needs_review": mapping["needs_review"]})
             errors, all_refs = [], {r["evidence_ref_id"] for r in children["ler_evidence"].get(ler["id"], [])}
+            grounded_errors = True
             error_outcomes = metadata.get("error_outcomes", {})
             error_outcomes = error_outcomes if isinstance(error_outcomes, dict) else {}
             for error in children["ler_errors"].get(ler["id"], []):
                 error_refs = [r["evidence_ref_id"] for r in children["ler_error_evidence"].get(error["id"], [])]
+                if not error_refs and error["instructor_status"] != "rejected":
+                    grounded_errors = False
+                    batch.issues.append(LoadIssue(ler_id=ler["id"], code="missing_error_evidence"))
                 all_refs.update(error_refs)
                 associated = error_outcomes.get(error["id"], [])
                 if (not isinstance(associated, list) or not all(isinstance(oid, str) for oid in associated)
@@ -200,7 +211,7 @@ class SupabaseEvidenceRepository:
             if bad:
                 continue
             analyzed = metadata.get("errors_analyzed")
-            if not isinstance(analyzed, bool):
+            if not isinstance(analyzed, bool) or not grounded_errors:
                 analyzed = None
             envelope.update(outcome_mappings=mappings, errors=errors, errors_analyzed=analyzed,
                             evidence_ref_ids=sorted(all_refs))

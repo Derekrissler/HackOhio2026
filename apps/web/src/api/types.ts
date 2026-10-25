@@ -57,6 +57,9 @@ export interface AnalyticsPerformance {
   evidence_count: number | null
   insufficient_evidence: boolean
   suppressed: boolean
+  errors: { code: string; occurrence_count: number | null; affected_students: number | null;
+    assessed_students: number | null; prevalence: number | null; recurring: boolean | null }[]
+  error_classification_observations: number | null
 }
 
 export interface AnalyticsDashboard {
@@ -73,6 +76,7 @@ export interface AnalyticsDashboard {
     assessment_origin: string
     assistance: string
     interpretation_limit: string
+    representative_text: string | null
   }[]
   interpretation: string
 }
