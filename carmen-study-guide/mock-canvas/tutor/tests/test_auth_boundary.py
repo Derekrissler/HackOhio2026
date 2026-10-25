@@ -135,3 +135,26 @@ def test_shared_api_settings_fallback_does_not_mix_project_urls(monkeypatch):
     assert supabase_client._env('SUPABASE_SECRET_KEY')=='fictional-server-key'
     monkeypatch.setenv('SUPABASE_URL','https://different.invalid')
     with pytest.raises(RuntimeError): supabase_client._env('SUPABASE_SECRET_KEY')
+
+
+@pytest.mark.parametrize('placeholder',['REPLACE_ME','YOUR-SECRET-KEY'])
+def test_ingestion_preflight_rejects_both_placeholder_forms(monkeypatch,placeholder):
+    import db_store
+    import supabase_client
+    monkeypatch.setattr(supabase_client,'_shared_settings',{})
+    monkeypatch.setenv('SUPABASE_URL','https://fictional.invalid')
+    for key in supabase_client.SERVICE_KEY_NAMES:
+        monkeypatch.setenv(key,placeholder)
+    assert db_store.configured() is not None
+
+
+def test_ingestion_preflight_uses_project_safe_api_fallback(monkeypatch):
+    import db_store
+    import supabase_client
+    monkeypatch.setattr(supabase_client,'_shared_settings',{
+        'SUPABASE_URL':'https://fictional-shared.invalid','SUPABASE_SECRET_KEY':'fictional-key'})
+    for key in ('SUPABASE_URL',*supabase_client.SERVICE_KEY_NAMES):
+        monkeypatch.delenv(key,raising=False)
+    assert db_store.configured() is None
+    monkeypatch.setenv('SUPABASE_URL','https://different.invalid')
+    assert db_store.configured() is not None

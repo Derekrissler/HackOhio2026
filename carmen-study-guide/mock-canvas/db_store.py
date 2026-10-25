@@ -26,7 +26,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from supabase_client import SERVICE_KEY_NAMES, service_client
+from supabase_client import pipeline_configuration_error, service_client
 
 BUCKET = "course-materials"
 WHOLE = "WHOLE"
@@ -38,9 +38,7 @@ BATCH = 500
 
 def configured() -> str | None:
     """None when the service key is set, else the reason storing is skipped."""
-    if any(os.environ.get(n, "") not in ("", "REPLACE_ME") for n in SERVICE_KEY_NAMES):
-        return None
-    return "SUPABASE_SERVICE_ROLE_KEY (or SUPABASE_SECRET_KEY) is not set in mock-canvas/.env"
+    return pipeline_configuration_error()
 
 
 def _hex(h: str | None) -> str | None:

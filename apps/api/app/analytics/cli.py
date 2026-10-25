@@ -29,6 +29,13 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("courses", help="read-only discovery of course UUIDs and Canvas IDs")
+    repair = commands.add_parser('repair-plan', help='private source-grounded evidence repair preview; no database writes')
+    repair.add_argument('--course', type=UUID, required=True)
+    repair.add_argument('--review', type=Path, help='completed private review packet or decisions object')
+    repair.add_argument('--output', type=Path, required=True)
+    apply = commands.add_parser('repair-apply', help='apply the exact reviewed repair plan; creates LER revisions')
+    apply.add_argument('--plan', type=Path, required=True)
+    apply.add_argument('--exclusive-course-access', action='store_true')
     for name in ("readiness", "analyze"):
         command = commands.add_parser(name)
         command.add_argument("--course", type=UUID, required=True)
@@ -48,6 +55,46 @@ def main(argv=None):
                          help="attest that ingestion and metadata writers are paused/serialized for this course")
     args = parser.parse_args(argv)
     try:
+        if args.command in ('repair-plan', 'repair-apply'):
+            from .source_repairs import RepairPlan, apply_plan, build_plan, read_source, review_packet
+            from .supabase_clients import create_pipeline_client
+            client = create_pipeline_client()
+            if args.command == 'repair-apply':
+                plan = RepairPlan.model_validate_json(args.plan.read_text(encoding='utf-8'))
+                result = apply_plan(client, plan, exclusive_course_access=args.exclusive_course_access)
+                if plan.reviewed_excerpts:
+                    from .reviewed_excerpts import ReviewedExcerptExport
+                    export = ReviewedExcerptExport(schema_version='1.0',course_id=plan.course_id,
+                        extraction_version=plan.method,reviewer_ref=plan.review.reviewer_ref,
+                        reviewed_at=plan.review.reviewed_at,review_revision=str(plan.id),entries=plan.reviewed_excerpts)
+                    private_root = Path(__file__).resolve().parents[4] / 'data' / 'analytics-runs'
+                    private_root.mkdir(parents=True,exist_ok=True)
+                    path = private_root / (str(plan.id)+'.reviewed-excerpts.json')
+                    if path.exists() and path.read_text(encoding='utf-8') != export.model_dump_json(indent=2):
+                        raise ValueError('reviewed excerpt export conflict')
+                    if not path.exists():
+                        with path.open('x',encoding='utf-8') as handle:
+                            handle.write(export.model_dump_json(indent=2))
+                    result['private_reviewed_excerpts'] = str(path)
+                print(json.dumps(result,indent=2))
+            else:
+                review = json.loads(args.review.read_text(encoding='utf-8')) if args.review else None
+                if review and 'decisions' in review:
+                    review = review['decisions']
+                plan = build_plan(read_source(client, args.course), review)
+                # Private source/feedback text must stay in the ignored operator area.
+                private_root = Path(__file__).resolve().parents[4] / 'data' / 'analytics-runs'
+                output = args.output.resolve()
+                if not output.is_relative_to(private_root.resolve()):
+                    raise ValueError('repair exports belong under data/analytics-runs')
+                output.parent.mkdir(parents=True, exist_ok=True)
+                with output.open('x',encoding='utf-8') as handle:
+                    handle.write(plan.model_dump_json(indent=2))
+                packet_path = output.with_name(output.stem + '.review.json')
+                with packet_path.open('x',encoding='utf-8') as handle:
+                    handle.write(json.dumps(review_packet(plan),indent=2,ensure_ascii=False))
+                print(json.dumps(plan.summary() | {'private_plan':str(output),'private_review_packet':str(packet_path)},indent=2))
+            return 0
         if args.command == "courses":
             from .evidence_repository import read_pages
             from .supabase_clients import create_pipeline_client

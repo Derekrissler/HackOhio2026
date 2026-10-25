@@ -43,6 +43,16 @@ def _env(name: str, *aliases: str) -> str:
 SERVICE_KEY_NAMES = ("SUPABASE_SERVICE_ROLE_KEY", "SUPABASE_SECRET_KEY")
 
 
+def pipeline_configuration_error() -> str | None:
+    """Use the same placeholder/project checks as client creation, without connecting."""
+    try:
+        _env("SUPABASE_URL")
+        _env(*SERVICE_KEY_NAMES)
+    except RuntimeError:
+        return "Supabase server settings are missing; configure the course project URL and secret key locally"
+    return None
+
+
 def user_client(access_token: str | None = None) -> Client:
     """Publishable key, optionally acting as a logged-in user (their JWT). RLS applies."""
     client = create_client(_env("SUPABASE_URL"), _env("SUPABASE_PUBLISHABLE_KEY"),
