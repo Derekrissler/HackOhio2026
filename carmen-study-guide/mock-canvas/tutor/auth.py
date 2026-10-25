@@ -1,5 +1,6 @@
 """Real Supabase identity; demo cookies/pseudonyms cannot authorize tutor data."""
 from collections import defaultdict, deque
+import logging
 import time
 from uuid import UUID
 
@@ -8,6 +9,7 @@ from pydantic import BaseModel, Field, SecretStr
 
 from tutor.models import Learner
 
+log = logging.getLogger(__name__)
 COOKIE = "tutor_access_token"
 _logins = defaultdict(deque)
 
@@ -23,6 +25,21 @@ def same_origin(request):
 class LoginBody(BaseModel):
     email: str = Field(min_length=1, max_length=320)
     password: SecretStr
+
+
+def _sign_in_error(e: Exception) -> HTTPException:
+    """Only Supabase's own 'wrong credentials' answer is the user's fault; anything else is server setup."""
+    code, status = getattr(e, "code", None), getattr(e, "status", None)
+    log.warning("tutor sign-in failed: %s code=%s status=%s", type(e).__name__, code, status)
+    if code == "invalid_credentials":
+        return HTTPException(401, "Wrong email or password")
+    if code == "email_not_confirmed":
+        return HTTPException(401, "This account's email isn't confirmed yet")
+    if status in (401, 403) or "api key" in str(e).lower():
+        return HTTPException(503, "Supabase rejected the server's key: check SUPABASE_PUBLISHABLE_KEY in "
+                                  "mock-canvas/.env, then restart the server")
+    return HTTPException(503, "The server couldn't reach Supabase: check SUPABASE_URL in mock-canvas/.env and "
+                              "your internet connection, then restart the server")
 
 
 def login(body: LoginBody, request: Request, response: Response):
@@ -42,8 +59,8 @@ def login(body: LoginBody, request: Request, response: Response):
             raise ValueError()
     except RuntimeError:
         raise HTTPException(503, "Tutor sign-in is not configured") from None
-    except Exception:
-        raise HTTPException(401, "Course account sign-in failed") from None
+    except Exception as e:
+        raise _sign_in_error(e) from None
     response.set_cookie(COOKIE, token, httponly=True, secure=request.url.scheme == "https",
                         samesite="strict", path="/courses", max_age=min(result.session.expires_in or 3600, 3600))
     response.headers["Cache-Control"] = "no-store"

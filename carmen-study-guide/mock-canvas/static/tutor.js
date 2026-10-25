@@ -52,12 +52,10 @@
         method: "POST", headers: { "Content-Type": "application/json", "X-Tutor-Request": "1" }, body,
       });
       if (!res.ok) {
-        const reasons = {
-          401: "Wrong email or password.",
-          429: "Too many sign-in attempts. Wait a minute and try again.",
-          503: "The tutor server isn't set up for sign-in yet (check SUPABASE_PUBLISHABLE_KEY in mock-canvas/.env, then restart).",
-        };
-        throw new Error(reasons[res.status] || `Sign-in failed (${res.status}).`);
+        // The server says which part failed: credentials (401), rate limit (429) or its own setup (503).
+        const detail = await res.json().then((d) => (typeof d.detail === "string" ? d.detail : ""), () => "");
+        const fallback = { 401: "Wrong email or password.", 429: "Too many sign-in attempts. Wait a minute and try again." };
+        throw new Error(detail ? `${detail}.` : fallback[res.status] || `Sign-in failed (${res.status}).`);
       }
       await loadContext();
       if (!signedIn) notice.textContent = "This account needs a course enrollment and learner identity mapping.";
