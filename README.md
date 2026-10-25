@@ -12,6 +12,9 @@ enrollments. Learning Insights remains a placeholder. See
 [next integration roadmap](docs/analytics-roadmap.md).
 The [error/ML integration guide](docs/analytics-error-integration.md) covers the
 implemented handoff, two review stages, authenticated tutor bridge and offline demo.
+The [comprehensive project-state audit](docs/project-state-2026-10-24.md) compares
+the implementation with the pipeline specification and documents live data,
+remaining work, debugging procedures and technical improvements.
 
 | Part | Stack | Folder |
 |---|---|---|
