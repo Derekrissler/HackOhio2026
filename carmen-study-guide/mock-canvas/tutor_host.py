@@ -18,19 +18,13 @@ from fastapi.responses import HTMLResponse
 
 import ui
 from data import course
-from tutor.auth import LoginBody, identity, login, logout
+from tutor.auth import LoginBody, demo_enabled, demo_login, identity, login, logout
 from tutor.models import Learner
 from tutor.policy import mode_for
 from tutor.router import create_router
 from tutor.service import TutorService
 
 log = logging.getLogger(__name__)
-
-MODE_LABELS = {
-    "protected_assessment": "Protected: concept help only",
-    "guided_homework": "Guided: hints, not answers",
-    "independent_study": "Independent study",
-}
 
 
 def backend(request):
@@ -92,6 +86,11 @@ def sign_out(course_id: str, request: Request, response: Response):
     return logout(request, response)
 
 
+@router.post("/courses/{course_id}/tutor/auth/demo")
+def demo_sign_in(course_id: str, request: Request, response: Response):
+    return demo_login(request, response)
+
+
 @router.get("/courses/{course_id}/tutor/context")
 def context(course_id: str, request: Request, response: Response):
     from supabase_client import service_client
@@ -101,39 +100,67 @@ def context(course_id: str, request: Request, response: Response):
     response.headers["Cache-Control"] = "no-store"
     # Warm the slow analytics lookup while the student reads the page, so the first message is fast.
     threading.Thread(target=repo.weak_outcomes, args=(learner.course_id, learner.learner_id), daemon=True).start()
-    return {"assessments": [{"id": a.id, "title": a.title, "mode": mode_for(a)} for a in repo.assessments(learner.course_id)]}
+    return {"user": _signed_in_user(request, reader),
+            "assessments": [{"id": a.id, "title": a.title, "mode": mode_for(a), "canvas_id": a.canvas_id}
+                            for a in repo.assessments(learner.course_id)]}
+
+
+def _signed_in_user(request: Request, reader) -> dict:
+    """Name and email for the 'Signed in as' bar. Cosmetic: failures just leave it blank."""
+    from tutor.auth import COOKIE
+    try:
+        scheme, _, bearer = request.headers.get("authorization", "").partition(" ")
+        token = bearer if scheme.lower() == "bearer" else request.cookies.get(COOKIE, "")
+        user = reader.auth.get_user(token).user
+        rows = reader.table("profiles").select("display_name").eq("id", user.id).limit(1).execute().data
+        return {"name": rows[0]["display_name"] if rows else "", "email": user.email or ""}
+    except Exception:
+        return {"name": "", "email": ""}
 
 
 @router.get("/courses/{course_id}/tutor", response_class=HTMLResponse)
 def tutor_page(course_id: str, assignment: str | None = None):
     c = course(course_id)
-    assessments, problem = [], "Sign in with your Supabase course account to use the tutor."
-
-    options = ['<option value="">General study (no assignment)</option>'] + [
-        f'<option value="{escape(a.id)}"'
-        f'{" selected" if assignment and a.canvas_id == assignment else ""}>'
-        f'{escape(a.title)} ({escape(MODE_LABELS[mode_for(a)])})</option>'
-        for a in assessments]
-    notice = f'<div class="tutor-notice" role="alert">{escape(problem)}</div>' if problem else ""
+    # Assessments arrive after sign-in (/tutor/context); the page only carries the preselect hint.
     main = f"""
-<div class="content padded tutor" data-course="{escape(str(c['course']['id']))}">
+<div class="content padded tutor" data-course="{escape(str(c['course']['id']))}"
+     data-assignment="{escape(assignment or '')}" data-demo="{'1' if demo_enabled() else ''}">
   <h1>Study Tutor</h1>
-  <p class="muted">Ask about the course material. On open, graded work the tutor explains concepts and points you to
-  the slides, but won't give answers.</p>
-  {notice}
-  <form id="tutor-login-form" class="tutor-form">
-    <label>Email <input name="email" type="email" autocomplete="username" required></label>
-    <label>Password <input name="password" type="password" autocomplete="current-password" required></label>
-    <button type="submit">Sign in</button>
-  </form>
-  <button id="tutor-signout" type="button" hidden>Sign out</button>
-  <label class="tutor-label" for="tutor-assessment">What are you working on?</label>
-  <select id="tutor-assessment">{''.join(options)}</select>
-  <div id="tutor-log" class="tutor-log" aria-live="polite"></div>
-  <form id="tutor-form" class="tutor-form">
-    <textarea id="tutor-input" rows="3" maxlength="4000" placeholder="Ask a question about the course…" required></textarea>
-    <button class="btn btn-primary" type="submit" {"disabled" if problem else ""}>Send</button>
-  </form>
+  <p class="muted tutor-intro">Ask about the slides, notes and readings. On open, graded work the tutor explains the
+  ideas and points you to the material, but won't give answers.</p>
+
+  <p id="tutor-loading" class="tutor-loading" role="status">Connecting to the tutor…</p>
+
+  <section id="tutor-signin" class="tutor-card" aria-labelledby="tutor-signin-title" hidden>
+    <h2 id="tutor-signin-title">Sign in to start</h2>
+    <p class="muted small">Use your course account.</p>
+    <form id="tutor-login-form">
+      <label class="tutor-field">Email
+        <input name="email" type="email" autocomplete="username" required></label>
+      <label class="tutor-field">Password
+        <input name="password" type="password" autocomplete="current-password" required></label>
+      <button class="btn btn-primary tutor-wide" type="submit">Sign in</button>
+    </form>
+    <p id="tutor-signin-error" class="tutor-alert" role="alert" hidden></p>
+  </section>
+
+  <section id="tutor-chat" hidden>
+    <div class="tutor-userbar" role="status">
+      <span class="tutor-avatar" aria-hidden="true"></span>
+      <span class="tutor-who"></span>
+      <button id="tutor-signout" class="btn tutor-signout" type="button">Sign out</button>
+    </div>
+    <label class="tutor-label" for="tutor-assessment">What are you working on?</label>
+    <select id="tutor-assessment"></select>
+    <p id="tutor-mode-banner" class="tutor-banner"></p>
+    <div id="tutor-log" class="tutor-log" aria-live="polite"></div>
+    <form id="tutor-form" class="tutor-compose">
+      <textarea id="tutor-input" rows="2" maxlength="4000" placeholder="Ask a question about the course…"
+                required></textarea>
+      <button class="btn btn-primary" type="submit">Send</button>
+    </form>
+    <p class="muted small tutor-hint">Enter to send · Shift+Enter for a new line</p>
+  </section>
 </div>"""
     return ui.course_page(c, "tutor", ["Study Tutor"], main,
                           head='<link rel="stylesheet" href="/static/tutor.css">',

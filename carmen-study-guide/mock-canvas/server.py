@@ -18,6 +18,7 @@ from fastapi.staticfiles import StaticFiles
 
 import db_store
 import ingest
+import carmen_session
 import tutor_host
 import ui
 from data import assignment, course, load_courses, self_user, submission
@@ -382,6 +383,8 @@ def export_download(export_id: str):
 
 
 app.include_router(tutor_host.router)
+app.include_router(carmen_session.router)
+app.middleware("http")(carmen_session.require_login)
 
 # HTML pages last, so the API routes above win on any overlap.
 app.include_router(ui.router)

@@ -135,7 +135,7 @@ def trays() -> str:
   <div class="tray-profile">
     <div class="avatar-lg">{esc(initials(user["name"]))}</div>
     <h2>{esc(user["name"])}</h2>
-    <button class="btn">Logout</button>
+    <form method="post" action="/logout"><button class="btn" type="submit">Logout</button></form>
   </div>
   <hr>
   <ul class="tray-links">

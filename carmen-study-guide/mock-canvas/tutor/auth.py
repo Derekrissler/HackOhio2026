@@ -1,6 +1,7 @@
 """Real Supabase identity; demo cookies/pseudonyms cannot authorize tutor data."""
 from collections import defaultdict, deque
 import logging
+import os
 import time
 from uuid import UUID
 
@@ -42,8 +43,7 @@ def _sign_in_error(e: Exception) -> HTTPException:
                               "your internet connection, then restart the server")
 
 
-def login(body: LoginBody, request: Request, response: Response):
-    same_origin(request)
+def _rate_limit(request: Request):
     now = time.monotonic()
     attempts = _logins[request.client.host if request.client else "unknown"]
     while attempts and attempts[0] < now - 60:
@@ -51,9 +51,36 @@ def login(body: LoginBody, request: Request, response: Response):
     if len(attempts) >= 10:
         raise HTTPException(429, "Wait before trying to sign in again")
     attempts.append(now)
+
+
+def login(body: LoginBody, request: Request, response: Response):
+    same_origin(request)
+    _rate_limit(request)
+    return _start_session(body.email, body.password.get_secret_value(), request, response)
+
+
+def demo_enabled() -> bool:
+    return os.environ.get("TUTOR_DEMO_AUTO_SIGNIN", "").strip().lower() in ("1", "true", "yes")
+
+
+def demo_login(request: Request, response: Response):
+    """Temporary demo convenience: the server signs in as the demo student (a real Supabase session, so RLS
+    still applies). Off unless TUTOR_DEMO_AUTO_SIGNIN=1; the password stays server-side in DEMO_ACCOUNT_PASSWORD."""
+    same_origin(request)
+    if not demo_enabled():
+        raise HTTPException(404, "Not found")
+    password = os.environ.get("DEMO_ACCOUNT_PASSWORD", "")
+    if not password:
+        raise HTTPException(503, "Demo sign-in needs DEMO_ACCOUNT_PASSWORD in mock-canvas/.env")
+    _rate_limit(request)
+    email = os.environ.get("TUTOR_DEMO_EMAIL", "").strip() or "student1@demo.test"
+    return _start_session(email, password, request, response)
+
+
+def _start_session(email: str, password: str, request: Request, response: Response):
     try:
         from supabase_client import user_client
-        result = user_client().auth.sign_in_with_password({"email": body.email, "password": body.password.get_secret_value()})
+        result = user_client().auth.sign_in_with_password({"email": email, "password": password})
         token = result.session.access_token
         if not token:
             raise ValueError()
