@@ -378,7 +378,22 @@ def modules_html(c: dict) -> str:
 @router.get("/courses/{course_id}", response_class=HTMLResponse)
 def course_home(course_id: str):
     c = course(course_id)
-    return course_page(c, "home", [], modules_html(c), course_buttons(course_id) + todo_and_feedback(c))
+    main = f"""
+{modules_html(c)}
+<section class="home-analytics">
+  <h2>Your Progress</h2>
+  <div id="home-analytics" class="condensed-analytics">
+    <p class="muted" style="text-align:center; padding: 1rem;">Loading...</p>
+  </div>
+  <p class="muted small" style="text-align:center; margin-top: 1rem;">
+    <a href="/courses/{course_id}/tutor" style="color: var(--link);">View full analytics →</a>
+  </p>
+</section>
+"""
+    scripts = '<script src="/static/hue-analytics.js"></script><script>window.loadCondensedAnalytics(document.getElementById("home-analytics"));</script>'
+    head = '<link rel="stylesheet" href="/static/hue-analytics.css">'
+    return course_page(c, "home", [], main, course_buttons(course_id) + todo_and_feedback(c),
+                      head=head, scripts=scripts)
 
 
 @router.get("/courses/{course_id}/modules", response_class=HTMLResponse)

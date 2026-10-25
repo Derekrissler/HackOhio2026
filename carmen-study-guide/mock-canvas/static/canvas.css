@@ -415,3 +415,33 @@ details.ocr summary { cursor: pointer; }
 .quiz-question-head .goal-btn { margin-right: auto; }  /* keep the icon next to "Question N", the result on the right */
 .title-goal { display: flex; align-items: center; margin-bottom: 1rem; }
 .title-goal h1 { margin: 0; }
+
+/* ---------- Home page analytics widget ---------- */
+.home-analytics {
+  background: var(--panel);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0 1rem;
+}
+
+.home-analytics h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.15rem;
+}
+
+.condensed-analytics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .home-analytics {
+    padding: 1rem;
+  }
+
+  .home-analytics h2 {
+    font-size: 1rem;
+  }
+}

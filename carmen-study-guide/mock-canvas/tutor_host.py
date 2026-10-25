@@ -13,7 +13,7 @@ import threading
 from functools import lru_cache
 
 from fastapi import APIRouter, Request, Response
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 
 import ui
 from data import course
@@ -104,6 +104,84 @@ def context(course_id: str, request: Request, response: Response):
                             for a in repo.assessments(learner.course_id)]}
 
 
+@router.get("/courses/{course_id}/tutor/analytics")
+def analytics(course_id: str, request: Request, response: Response):
+    """Hue analytics dashboard: performance on learning outcomes, assessments, and errors."""
+    from uuid import UUID
+    from supabase_client import service_client
+    from tutor.repo import SupabaseTutorRepo
+
+    try:
+        reader, learner = identity(request, course_id)
+        service = service_client()
+        repo = SupabaseTutorRepo(service, reader, learner)
+        response.headers["Cache-Control"] = "no-store"
+
+        # Load the analytics dashboard for this learner
+        from app.analytics.dashboard import load_dashboard
+        from app.analytics.repository import SupabaseAnalysisRepository
+
+        dashboard = load_dashboard(
+            reader,
+            lambda: SupabaseAnalysisRepository(service),
+            UUID(learner.course_id),
+            learner_id=UUID(learner.learner_id)
+        )
+
+        # Convert to JSON-serializable format
+        data = {
+            "status": dashboard.status,
+            "run_id": str(dashboard.run_id) if dashboard.run_id else None,
+            "computed_at": dashboard.computed_at.isoformat() if dashboard.computed_at else None,
+            "interpretation": dashboard.interpretation,
+            "performance": [
+                {
+                    "id": str(p.id),
+                    "scope": p.scope,
+                    "outcome_id": str(p.outcome_id) if p.outcome_id else None,
+                    "assessment_id": str(p.assessment_id) if p.assessment_id else None,
+                    "question_id": str(p.question_id) if p.question_id else None,
+                    "label": p.label,
+                    "mean_student_ratio": p.mean_student_ratio,
+                    "pooled_score_ratio": p.pooled_score_ratio,
+                    "observed_score_ratio": p.observed_score_ratio,
+                    "eligible_students": p.eligible_students,
+                    "assessed_students": p.assessed_students,
+                    "evidence_coverage_ratio": p.evidence_coverage_ratio,
+                    "score_observations": p.score_observations,
+                    "evidence_count": p.evidence_count,
+                    "insufficient_evidence": p.insufficient_evidence,
+                    "suppressed": p.suppressed,
+                }
+                for p in dashboard.performance
+            ],
+            "clusters": [
+                {
+                    "id": str(c.id),
+                    "error_code": c.error_code,
+                    "unique_students": c.unique_students,
+                    "evidence_count": c.evidence_count,
+                    "assessment_origin": c.assessment_origin,
+                    "assistance": c.assistance,
+                    "interpretation_limit": c.interpretation_limit,
+                    "representative_text": c.representative_text,
+                }
+                for c in dashboard.clusters
+            ],
+        }
+        return JSONResponse(data)
+    except Exception as e:
+        log.warning(f"Analytics unavailable: {e}")
+        return JSONResponse({
+            "status": "unavailable",
+            "run_id": None,
+            "computed_at": None,
+            "interpretation": "Learning analytics are not yet available.",
+            "performance": [],
+            "clusters": [],
+        }, status_code=503)
+
+
 def _signed_in_user(request: Request, reader) -> dict:
     """Name and email for the 'Signed in as' bar. Cosmetic: failures just leave it blank."""
     from tutor.auth import COOKIE
@@ -120,12 +198,21 @@ def _signed_in_user(request: Request, reader) -> dict:
 @router.get("/courses/{course_id}/tutor", response_class=HTMLResponse)
 def tutor_page(course_id: str, assignment: str | None = None):
     """The Hue page: opens the Hue dock (on every course page) straight into its tutor window. ?assignment=<canvas
-    id> preselects what the student is working on."""
+    id> preselects what the student is working on. Includes full analytics dashboard."""
     c = course(course_id)
     main = """
 <h1>Hue</h1>
 <p>Hue is this course's study assistant. Pick what you're working on in the window on the right and ask about the
 slides, notes and readings. On open, graded work Hue explains the ideas and points you to the material, but won't give
 answers.</p>
-<p class="muted">Hue is on every course page too: use <b>Ask Hue</b> in the corner, or the target icon on a question.</p>"""
-    return ui.course_page(c, "tutor", ["Hue"], main, hue="expanded", hue_assignment=assignment or "")
+<p class="muted">Hue is on every course page too: use <b>Ask Hue</b> in the corner, or the target icon on a question.</p>
+
+<h2>Your Learning Progress</h2>
+<div id="hue-analytics" class="hue-analytics-full">
+  <p class="muted" style="text-align:center; padding: 2rem;">Loading analytics...</p>
+</div>
+"""
+    scripts = '<script src="/static/hue-analytics.js"></script>'
+    head = '<link rel="stylesheet" href="/static/hue-analytics.css">'
+    return ui.course_page(c, "tutor", ["Hue"], main, hue="expanded", hue_assignment=assignment or "",
+                         head=head, scripts=scripts)
