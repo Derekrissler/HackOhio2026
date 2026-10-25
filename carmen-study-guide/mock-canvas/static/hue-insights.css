@@ -1,0 +1,160 @@
+/* Hue Learning Insights Dashboard Styles */
+
+.hue-insights-full {
+  max-width: 900px;
+  margin: 2rem 0;
+}
+
+.insights-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.insights-section {
+  background: #f7f8f9;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.insights-section h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+.insights-subtitle {
+  margin: 0 0 1rem 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Topic Bars */
+.topic-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.topic-item {
+  background: #fff;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.topic-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.topic-bar {
+  height: 10px;
+  background: var(--border-light);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.topic-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0374b5, #8f3e97);
+  transition: width 0.3s ease;
+}
+
+.topic-stat {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Focus Badges */
+.focus-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.focus-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #0374b5, #2f9e44);
+  color: #fff;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.insights-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0;
+  font-style: italic;
+}
+
+.insights-empty {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--muted);
+}
+
+/* Condensed Version for Home Page */
+.insights-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.focus-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.focus-item {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background: linear-gradient(135deg, #0374b5, #2f9e44);
+  color: #fff;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .insights-section {
+    padding: 1rem;
+  }
+
+  .insights-section h3 {
+    font-size: 1rem;
+  }
+
+  .focus-badges {
+    gap: 0.5rem;
+  }
+
+  .focus-badge {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .insights-section {
+    background: #1a1a1a;
+    border-color: var(--border);
+  }
+
+  .topic-item {
+    background: #2a2a2a;
+    border-color: var(--border);
+  }
+}

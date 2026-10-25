@@ -445,3 +445,34 @@ details.ocr summary { cursor: pointer; }
     font-size: 1rem;
   }
 }
+
+/* ---------- Home page insights widget ---------- */
+.home-insights {
+  background: linear-gradient(135deg, #f1f5ff 0%, #f5f1ff 100%);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+}
+
+.home-insights h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.condensed-insights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .home-insights {
+    padding: 1rem;
+  }
+
+  .home-insights h2 {
+    font-size: 0.95rem;
+  }
+}

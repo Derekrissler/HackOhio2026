@@ -380,6 +380,16 @@ def course_home(course_id: str):
     c = course(course_id)
     main = f"""
 {modules_html(c)}
+<section class="home-insights">
+  <h2>Your Focus Areas</h2>
+  <div id="home-insights" class="condensed-insights">
+    <p class="muted" style="text-align:center; padding: 0.5rem;">Loading...</p>
+  </div>
+  <p class="muted small" style="text-align:center; margin-top: 0.5rem;">
+    <a href="/courses/{course_id}/tutor" style="color: var(--link);">View more →</a>
+  </p>
+</section>
+
 <section class="home-analytics">
   <h2>Your Progress</h2>
   <div id="home-analytics" class="condensed-analytics">
@@ -390,8 +400,8 @@ def course_home(course_id: str):
   </p>
 </section>
 """
-    scripts = '<script src="/static/hue-analytics.js"></script><script>window.loadCondensedAnalytics(document.getElementById("home-analytics"));</script>'
-    head = '<link rel="stylesheet" href="/static/hue-analytics.css">'
+    scripts = '<script src="/static/hue-analytics.js"></script><script src="/static/hue-insights.js"></script><script>window.loadCondensedAnalytics(document.getElementById("home-analytics"));window.loadCondensedInsights(document.getElementById("home-insights"));</script>'
+    head = '<link rel="stylesheet" href="/static/hue-analytics.css"><link rel="stylesheet" href="/static/hue-insights.css">'
     return course_page(c, "home", [], main, course_buttons(course_id) + todo_and_feedback(c),
                       head=head, scripts=scripts)
 
